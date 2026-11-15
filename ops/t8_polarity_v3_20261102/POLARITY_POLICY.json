@@ -1,0 +1,17 @@
+{
+  "version": "ppg-polarity-backend-20261102-v1",
+  "canonical_convention": "blood_volume_positive_v1",
+  "source_convention": "raw_device",
+  "raw_to_canonical_sign": {"UBFC2": 1, "MCD": -1},
+  "MCD_scope": "Every camera and every partition, including future D3 when separately authorized. No camera, recording, fold or split-specific sign decision.",
+  "decision_evidence": "Development60 only: POS/contact sign contrast and raw PPG mean-cycle morphology; no D3 access or evidence.",
+  "channels": ["ppg", "ppg_frame"],
+  "stage": "Dataset/backend waveform boundary before interpolation, differencing, target normalization or waveform scoring. Existing raw caches use an explicit in-memory adapter before loader transformations.",
+  "preserved": ["raw files", "image arrays", "image preprocessing", "timestamps", "validity masks", "HR scalar labels", "historical frozen snapshots"],
+  "exactly_once": "Canonical inputs require a matching provenance receipt; raw-device declarations with a receipt are refused. No downstream target sign multiplier.",
+  "unverified_waveform_datasets": ["UBFC1", "PURE", "future_organizer"],
+  "no_waveform_or_unsupported": {"AiPEX": "No PPG in supported export", "Pilot": "Schema unsupported"},
+  "morphology_contract": "On an adequate set of valid cycles after the adapter, align trough-to-trough, normalize positive scale only, form recording means and a dataset mean, and require mean rise duration shorter than fall duration. Insufficient or near-symmetric evidence is unresolved, never automatically flipped. Do not assert every noisy individual beat.",
+  "round2_round3": "All supported waveform datasets and future organizer adapters must pass the same post-adapter morphology contract before waveform training/evaluation. A new dataset requires an explicit versioned convention decision using authorized data; never infer sign from held-out HR outcomes.",
+  "limits": "Polarity harmonization does not prove hardware synchronization, physiological mechanism, or that all HR degradation is explained by polarity. Existing current MCD source adapter retains dev60 access gating; global helper itself is partition-independent."
+}

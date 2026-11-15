@@ -1,0 +1,21 @@
+{
+  "run_name": "efficientphys36_ubfc_v1",
+  "seed": 2027,
+  "epochs": 30,
+  "batch_size": 2,
+  "learning_rate_max": 0.009,
+  "optimizer": "AdamW",
+  "weight_decay": 0.0,
+  "scheduler": "OneCycleLR",
+  "frames": 300,
+  "fps": 30,
+  "crop_size": 36,
+  "frame_depth": 10,
+  "selection": "validation subject-macro HR MAE",
+  "loss": "MSE on per-clip std-normalized forward differences of contact PPG",
+  "input_normalization": "per-clip scalar mean and standard deviation over all frames/channels/pixels",
+  "test_access": false,
+  "source_commit": "b7500b848f84ad7f86e277b4612563b69f4f88f9",
+  "source_url": "https://github.com/ubicomplab/rPPG-Toolbox/blob/b7500b848f84ad7f86e277b4612563b69f4f88f9/neural_methods/model/EfficientPhys.py",
+  "deviations": ["clip-boundary diff fix", "36x36 inner-face crop", "300 outputs from 301 actual frames", "timestamp resampling and duplicate averaging", "per-clip normalization", "batch size 2", "explicit fixed subject split", "checkpoint selection by validation HR MAE", "shared 45-180bpm HR evaluator"]
+}

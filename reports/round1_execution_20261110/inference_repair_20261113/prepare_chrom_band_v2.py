@@ -1,0 +1,20 @@
+from pathlib import Path
+p=Path(__file__).resolve().parent
+s=(p/'classical_repair.py').read_text()
+s=s.replace('def functions():','def functions(low=.7):')
+s=s.replace("exec(compile(ast.Module(body=[node],type_ignores=[]),str(p),'exec'),ns)","\n  if name=='chrom':\n   assert low in [.7,.6]\n   class Band(ast.NodeTransformer):\n    def visit_Constant(self,n):\n     return ast.copy_location(ast.Constant(value=low),n) if isinstance(n.value,float) and n.value==.7 else n\n   node=ast.fix_missing_locations(Band().visit(node))\n  exec(compile(ast.Module(body=[node],type_ignores=[]),str(p),'exec'),ns)")
+s=s.replace('ns=functions();mean=', 'func={low:functions(low) for low in [.7,.6]};mean=')
+s=s.replace("y=ns[method.lower()](x,30);waves.append(y);keys.append([method,str(w['start'])])", "y=func[.7][method.lower()](x,30);waves.append(y);keys.append([method,'0.7',str(w['start'])])")
+s=s.replace("try:ans[str(low)]=waveform_decode(y,low)","try:\n      z=func[low][method.lower()](x,30) if method=='CHROM' and low==.6 else y\n      if low==.6:waves.append(z);keys.append([method,'0.6',str(w['start'])])\n      ans[str(low)]=waveform_decode(z,low)")
+(p/'classical_repair_v2.py').write_text(s)
+s=(p/'classical_original.py').read_text().replace('from classical_repair import run','from classical_repair_v2 import run').replace("'classical_original'","'classical_original_v2'").replace('CLASSICAL_ORIGINAL_','CLASSICAL_ORIGINAL_V2_').replace('classical_original.lock','classical_original_v2.lock')
+(p/'classical_original_v2.py').write_text(s)
+s=(p/'infer_spatial_v2.py').read_text().replace('from infer_spatial import *','from infer_spatial import *\nfrom classical_repair_v2 import run as classical')
+(p/'infer_spatial_v3.py').write_text(s)
+s=(p/'report_repair.py').read_text().replace("P/'classical_original'", "P/'classical_original_v2'").replace("'CLASSICAL_ORIGINAL_COMPLETE.json'", "'CLASSICAL_ORIGINAL_V2_COMPLETE.json'")
+(p/'report_repair.py').write_text(s)
+s=(p/'report_controller.py').read_text().replace('CLASSICAL_ORIGINAL_', 'CLASSICAL_ORIGINAL_V2_')
+(p/'report_controller_v2.py').write_text(s)
+for f in ['classical_repair_v2.py','classical_original_v2.py','infer_spatial_v3.py','report_repair.py','report_controller_v2.py']:
+ compile((p/f).read_text(),f,'exec')
+print('COMPILED_5_VERSIONED_FILES')

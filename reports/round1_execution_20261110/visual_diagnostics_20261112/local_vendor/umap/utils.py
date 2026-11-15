@@ -1,0 +1,297 @@
+# Author: Leland McInnes <leland.mcinnes@gmail.com>
+#
+# License: BSD 3 clause
+
+import time
+from warnings import warn
+
+import numpy as np
+import numba
+from sklearn.utils.validation import check_is_fitted
+import scipy.sparse
+
+# All fastmath flags except nnan/ninf: LLVM 20+ (numba>=0.62) folds away inf/nan checks under those.
+FASTMATH_FLAGS = {"nsz", "arcp", "contract", "afn", "reassoc"}
+# Legacy (compatibility) layout kernels must reproduce umap-learn 0.5.x
+# bit-for-bit. FMA contraction ("contract", which also depends on the CPU) and
+# reciprocal approximation ("arcp", used by the densMAP gradient) both change
+# rounding, so they are excluded there. The remaining flags were verified not
+# to alter seeded compatibility results.
+COMPATIBILITY_FASTMATH_FLAGS = FASTMATH_FLAGS - {"contract", "arcp"}
+
+
+@numba.njit(parallel=True)
+def fast_knn_indices(X, n_neighbors):
+    """A fast computation of knn indices.
+
+    Parameters
+    ----------
+    X: array of shape (n_samples, n_features)
+        The input data to compute the k-neighbor indices of.
+
+    n_neighbors: int
+        The number of nearest neighbors to compute for each sample in ``X``.
+
+    Returns
+    -------
+    knn_indices: array of shape (n_samples, n_neighbors)
+        The indices on the ``n_neighbors`` closest points in the dataset.
+    """
+    knn_indices = np.empty((X.shape[0], n_neighbors), dtype=np.int32)
+    for row in numba.prange(X.shape[0]):
+        # v = np.argsort(X[row])  # Need to call argsort this way for numba
+        v = X[row].argsort(kind="mergesort")
+        v = v[:n_neighbors]
+        knn_indices[row] = v
+    return knn_indices
+
+
+@numba.njit("i4(i8[:])")
+def tau_rand_int(state):
+    """A fast (pseudo)-random number generator.
+
+    Parameters
+    ----------
+    state: array of int64, shape (3,)
+        The internal state of the rng
+
+    Returns
+    -------
+    A (pseudo)-random int32 value
+    """
+    state[0] = (((state[0] & 4294967294) << 12) & 0xFFFFFFFF) ^ (
+        (((state[0] << 13) & 0xFFFFFFFF) ^ state[0]) >> 19
+    )
+    state[1] = (((state[1] & 4294967288) << 4) & 0xFFFFFFFF) ^ (
+        (((state[1] << 2) & 0xFFFFFFFF) ^ state[1]) >> 25
+    )
+    state[2] = (((state[2] & 4294967280) << 17) & 0xFFFFFFFF) ^ (
+        (((state[2] << 3) & 0xFFFFFFFF) ^ state[2]) >> 11
+    )
+
+    return state[0] ^ state[1] ^ state[2]
+
+
+@numba.njit("f4(i8[:])")
+def tau_rand(state):
+    """A fast (pseudo)-random number generator for floats in the range [0,1]
+
+    Parameters
+    ----------
+    state: array of int64, shape (3,)
+        The internal state of the rng
+
+    Returns
+    -------
+    A (pseudo)-random float32 in the interval [0, 1]
+    """
+    integer = tau_rand_int(state)
+    return abs(float(integer) / 0x7FFFFFFF)
+
+
+@numba.njit()
+def norm(vec):
+    """Compute the (standard l2) norm of a vector.
+
+    Parameters
+    ----------
+    vec: array of shape (dim,)
+
+    Returns
+    -------
+    The l2 norm of vec.
+    """
+    result = 0.0
+    for i in range(vec.shape[0]):
+        result += vec[i] ** 2
+    return np.sqrt(result)
+
+
+@numba.njit(parallel=True)
+def submatrix(dmat, indices_col, n_neighbors):
+    """Return a submatrix given an orginal matrix and the indices to keep.
+
+    Parameters
+    ----------
+    dmat: array, shape (n_samples, n_samples)
+        Original matrix.
+
+    indices_col: array, shape (n_samples, n_neighbors)
+        Indices to keep. Each row consists of the indices of the columns.
+
+    n_neighbors: int
+        Number of neighbors.
+
+    Returns
+    -------
+    submat: array, shape (n_samples, n_neighbors)
+        The corresponding submatrix.
+    """
+    n_samples_transform, n_samples_fit = dmat.shape
+    submat = np.zeros((n_samples_transform, n_neighbors), dtype=dmat.dtype)
+    for i in numba.prange(n_samples_transform):
+        for j in numba.prange(n_neighbors):
+            submat[i, j] = dmat[i, indices_col[i, j]]
+    return submat
+
+
+# Generates a timestamp for use in logging messages when verbose=True
+def ts():
+    return time.ctime(time.time())
+
+
+# I'm not enough of a numba ninja to numba this successfully.
+# np.arrays of lists, which are objects...
+def csr_unique(matrix, return_index=True, return_inverse=True, return_counts=True):
+    """Find the unique elements of a sparse csr matrix.
+    We don't explicitly construct the unique matrix leaving that to the user
+    who may not want to duplicate a massive array in memory.
+    Returns the indices of the input array that give the unique values.
+    Returns the indices of the unique array that reconstructs the input array.
+    Returns the number of times each unique row appears in the input matrix.
+
+    matrix: a csr matrix
+    return_index = bool, optional
+        If true, return the row indices of 'matrix'
+    return_inverse: bool, optional
+        If true, return the indices of the unique array that can be
+           used to reconstruct 'matrix'.
+    return_counts = bool, optional
+        If true, returns the number of times each unique item appears in 'matrix'
+
+    The unique matrix can computed via
+    unique_matrix = matrix[index]
+    and the original matrix reconstructed via
+    unique_matrix[inverse]
+    """
+    lil_matrix = matrix.tolil()
+    # Fill a 1D object array element by element: np.asarray would build a 2D
+    # array when every row has the same number of non-zeros, and np.unique
+    # would then compare individual values instead of whole rows.
+    rows = np.empty(lil_matrix.shape[0], dtype=object)
+    for i, (x, y) in enumerate(zip(lil_matrix.rows, lil_matrix.data)):
+        rows[i] = tuple(x + y)
+    return_values = return_counts + return_inverse + return_index
+    return np.unique(
+        rows,
+        return_index=return_index,
+        return_inverse=return_inverse,
+        return_counts=return_counts,
+    )[1 : (return_values + 1)]
+
+
+def disconnected_vertices(model):
+    """
+    Returns a boolean vector indicating which vertices are disconnected from the umap graph.
+    These vertices will often be scattered across the space and make it difficult to focus on the main
+    manifold.  They can either be filtered and have UMAP re-run or simply filtered from the interactive plotting tool
+    via the subset_points parameter.
+    Use ~disconnected_vertices(model) to only plot the connected points.
+    Parameters
+    ----------
+    model: a trained UMAP model
+
+    Returns
+    -------
+    A boolean vector indicating which points are disconnected
+    """
+    check_is_fitted(model, "graph_")
+    if model.unique:
+        vertices_disconnected = (
+            np.array(model.graph_[model._unique_inverse_].sum(axis=1)).flatten() == 0
+        )
+    else:
+        vertices_disconnected = np.array(model.graph_.sum(axis=1)).flatten() == 0
+    return vertices_disconnected
+
+
+def average_nn_distance(dist_matrix):
+    """Calculate the average distance to each points nearest neighbors.
+
+    Parameters
+    ----------
+    dist_matrix: a csr_matrix
+        A distance matrix (usually umap_model.graph_)
+
+    Returns
+    -------
+    An array with the average distance to each points nearest neighbors
+
+    """
+    row_idx, col_idx, val = scipy.sparse.find(dist_matrix)
+
+    # Count/sum is done per row
+    count_non_zero_elems = np.bincount(row_idx)
+    sum_non_zero_elems = np.bincount(row_idx, weights=val)
+    averages = sum_non_zero_elems / count_non_zero_elems
+
+    if any(np.isnan(averages)):
+        warn(
+            "Embedding contains disconnected vertices which will be ignored."
+            "Use umap.utils.disconnected_vertices() to identify them."
+        )
+
+    return averages
+
+
+@numba.njit(parallel=True, cache=True)
+def make_epochs_per_sample(weights, n_epochs):
+    result = np.full(weights.shape[0], -1.0, dtype=np.float64)
+    if weights.shape[0] == 0:
+        return result
+    max_weight = weights.max()
+    typed_n_epochs = weights.dtype.type(n_epochs)
+    for edge in numba.prange(weights.shape[0]):
+        n_samples = typed_n_epochs * (weights[edge] / max_weight)
+        if n_samples > 0.0:
+            result[edge] = float(n_epochs) / np.float64(n_samples)
+    return result
+
+
+@numba.njit(fastmath=FASTMATH_FLAGS, parallel=True, cache=True)
+def adaptive_bucket_sort(values, target_bucket_size=1000, sample_fraction=0.01):
+
+    n_values = values.shape[0]
+    n_buckets = max(1, (n_values + target_bucket_size - 1) // target_bucket_size)
+
+    if n_values <= 1024:
+        return np.argsort(values).astype(np.int32)
+
+    # Estimate bucket boundaries via sampling
+    sample_size = max(min(int(n_values * sample_fraction), 10_000), n_buckets * 10)
+    sample_indices = np.empty(sample_size, dtype=np.int32)
+    sample_values = np.empty(sample_size, dtype=np.float32)
+    step = n_values // sample_size
+    for i in numba.prange(sample_size):
+        sample_indices[i] = (i * step + (i * 17) % step) % n_values
+    for i in numba.prange(sample_size):
+        sample_values[i] = values[sample_indices[i]]
+    boundaries = np.quantile(sample_values, np.linspace(0, 1, n_buckets + 1)[1:-1])
+
+    # Parallel bucket assignment
+    bucket_assignments = np.empty(n_values, dtype=np.int32)
+    for i in numba.prange(n_values):
+        bucket = 0
+        for j in range(n_buckets - 1):
+            if values[i] <= boundaries[j]:
+                break
+            bucket += 1
+        bucket_assignments[i] = bucket
+
+    # Count bucket sizes
+    bucket_counts = np.zeros(n_buckets, dtype=np.int32)
+    for i in range(n_values):
+        bucket_counts[bucket_assignments[i]] += 1
+
+    # Create result by concatenating buckets
+    result = np.empty(n_values, dtype=np.int32)
+    bucket_starts = np.zeros(n_buckets, dtype=np.int32)
+    for i in range(1, n_buckets):
+        bucket_starts[i] = bucket_starts[i - 1] + bucket_counts[i - 1]
+
+    for i in range(n_values):
+        bucket = bucket_assignments[i]
+        result[bucket_starts[bucket]] = i
+        bucket_starts[bucket] += 1
+
+    return result

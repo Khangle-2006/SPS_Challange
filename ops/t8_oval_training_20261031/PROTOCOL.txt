@@ -1,0 +1,83 @@
+T8 protocol v2 — unified oval, user-approved 31 October 2026; frozen before training.
+Gate evidence: T7b POS large face oval4.6025bpm on all1860windows, versus
+small-region control9.9480; paired change-5.3455 CI95[-6.4249,-4.2389].
+Together with raw/sync reference comparison, this resolves the concern sufficiently
+for the user's operational T8 permission. It does not certify every waveform label.
+No label/offset changes. T7b frontend result is not a learned D2 model score.
+
+Data: existing UBFC35development +MCDdev60FullHD119recordings. Exclude all4952,
+7412_after; keep9401. D3 and original7UBFCtest stay closed. Frozen fold file:
+folds_frozen.json,5fold MCD48train/12val paired with existingUBFC28train/7val.
+Seeds2027,2028,2029; two arms =>30runs. Train+validation namespace-qualified IDs.
+
+T1 integration: separate rawPPG timestamps ppg_t; duplicate timestamps merged
+byexistingT1rule. Canonical10s stride10 windows from original T1 source support,
+maxgap0.2s,301samples at30Hz for300forward-difference targets. No shift pervariant.
+Video resampled on its own retained source clock; PPG on its own sensor clock.
+Training target: normalized diff PPG perclip, MSE only. No spectralKL sweep.
+Crop frontend v2, user decision 31 October 2026: SAME large oval for BOTH UBFC2
+and MCD, BOTH arms, ALL variants, training and inference. No dataset-dependent
+crop selection. The fixed T7b 36 landmark indices define the convex hull, rounded
+to source pixel coordinates. FaceMesh0.10.21,oneface,refine=False,detection/tracking
+confidence .5, causal stream reset per video, run on each variant's own fullframe.
+No native-ROI fallback, expansion grid, smoothing, hair mask or threshold tuning.
+Use tight clipped integer oval bounding rectangle (maxvertex+1 exclusive);
+set pixels outside the oval to zero inside this rectangle, then INTER_AREA resize
+to36x36 uint8. No face or <16mask pixels => zero crop with invalid flag, no fallback.
+This representation is fixed once, not selected using learned-model outcomes.
+POS used masked mean at source resolution; it does not validate neural-network
+performance or zero-mask edge effects after resizing. Preserve these limitations.
+Use the SAME oval_crop.py entry point for preparation and inference. Export the
+actual polygon/box/validity; never relabel Haar placeholders as anatomical oval.
+
+Evidence/decision provenance: one POS diagnostic on MCDdev60 found Haarcrop7.1315
+versus oval4.6025; matched1855windows benefit2.5414 CI95[1.4728,3.7369]. Five missing
+Haar windows remain reported. User explicitly chose oval for bothdatasets despite
+result between earlier thresholds. D3 untouched. No more frontend experiments
+before19November2026. Prior39runs with oldcrop are HISTORICAL REFERENCES ONLY,
+not a matched comparator for T8. Retrain UBFC-only control with oval and matched
+steps. Existing finalepoch/folds/seeds/loss/augmentation/sampling remain locked.
+Both dataset caches must be rebuilt; no neural training has started. Additional
+preparation delay is accepted by user; exact finish time is not guaranteed.
+
+Cache: native plus9full-frame H264 variants, fps10/15/30 x bitrate caps300/500/800.
+Use existing tested T5simulation implementation in isolated T8code directory,
+90%encoderheadroom,veryfast,yuv420p,GOP2s,one thread. Native sourcealready MPEG4
+forMCD. Encode BEFORE face cropping. Retain source-frame index/time mappings.
+Only10fps with measured whole-file bitrate<=500kbps is primary C5evaluation;
+15/30fps and800kbps are trainingstress settings, not compliant C5claims.
+Do not reuse oldT5 .75Hz evaluation scores. Preserve compression/source receipts.
+Keep encoded derivatives initially; no raw deletion. T8cache+derivatives cap60GB,
+wholeproject500GB. Estimate size at firstrecords; stop ifcap/diskguard crossed.
+
+Eligibility: training windows need original T1 reference support and usable image
+support in ALL10variants; record exclusion reasons and per-dataset coverage.
+Botharms use identical eligibleUBFCwindows. Validation never intersects away
+model failures: all canonical originalreference-validwindows remain denominator,
+missing predictions=>abstain pluscoverage, no135penalty. Invalidreferences separate.
+
+Training plan: EfficientPhys_fixed,frame_depth10,img36,batch2,AdamW weight_decay0,
+OneCycle maxlr0.009,30epochs,finalepoch only. No outer-validation checkpointselection.
+Perfold steps/epoch=ceil((eligibleUBFCtrainwindows+eligibleMCDtrainwindows)/2),
+same in botharms. Jointbatch:1UBFC+1MCD; controlbatch:2UBFC. Sample windows uniformly
+within eachdataset with replacement, deterministically fromseed/fold/epoch/step.
+For each input, probability0.5native, else uniformlychoose9H264variants. Same
+condition distribution/totalupdates/initseed across arms. Report that replacing
+halfUBFCdraws withMCD changes UBFCexposure as part of the dataset intervention.
+No claim that equal30epochs alone matches compute; above steps count does.
+
+Validation: final models output native andC5_10fps_500k on heldoutUBFCfold7 and
+MCDfold12. Store waveforms/abstention and canonicalpredictions. Decode/ref0.7-3Hz,
+lambda100/HannFFT4096 argmax per frozen score_round1.py. S uses D1native,D1C5,D2native
+OOF; never mix oldexternalD2 with newMCD-trainedOOF. Development score, not test.
+Report all3seeds,folds,coverage,per-personMAE,P95,>20,before/after andmatchedcontrol.
+
+Resources: CPU1 single preprocessingworker onP100 initially. T5CPU3 untouched.
+GPU training only after full cache readiness/loader tests/one smoke: useP100GPU0
+only when free memory>=6GB and no active contention; cap own memory at35%ofGPU.
+GPU1 currently busy with otherproject, do not stop or alter it. One trainingworker,
+at most2CPUthreads, no training started just because preprocessing is running.
+No newdatasetdownload,email,rawdeletion or submission. Freeze code hashes and
+tests before fullrun. Failpreservingpartial on mismatch; version corrections.
+
+Storage amendment: keep old Haar partials/receipts unchanged and count their bytes in T8cap60GB. Reuse only completed, source-verified old encoded derivatives by reference (no duplicate video copy); all face crops regenerated. P100 preparation quota50GB includes old+new local T8; A100 quota6GB includes old+new. Final relay includes both servers, prepared replica and1GB training reserve under60GB. Stop rather than delete or enlarge cap.
