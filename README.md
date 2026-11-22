@@ -267,6 +267,7 @@ reports/claude_research_20261119_constraints/   PIPELINE ĐÃ CHỐT (19–22/11
   logs/              READER_V4_DEFINITION, P4M_DEFINITION, DEVIATIONS, z08_split_lossless.json
   out/*.csv          bảng kết quả tổng hợp (không có dữ liệu cá nhân)
 reports/claude_research_20261118/code/         reader_v3 (a11), lib_btc.py dùng chung, reader công khai 18/11
+reports/reader_*_2026111{6,8}/, w2_btc_20261116/   vòng reader BTC 16–18/11 (v1, v2, w2b, ứng viên, v3, kiểm nhãn); chỉ code
 reports/round1_*/                               thí nghiệm trước 15/11 (V4, Bayes, padding-fixed, V5, …)
 ops/                                            frontend T8 oval, huấn luyện CNN, adapter dữ liệu, kiểm thử
 docs/PIPELINE.md                                giải thích pipeline chi tiết, kèm hình

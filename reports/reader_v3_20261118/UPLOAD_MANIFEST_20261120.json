@@ -1,0 +1,14 @@
+{
+  "evaluate_conditions.py": "b736d96acd80cbde023b75cd70fd77428b2b98ff3a05676965493cabe4970f9d",
+  "evaluate_public.py": "1b030bbf42f90c63c7de1b737aed12bb62bdf3f048a8f814ed82f7923f38a662",
+  "public_readout.py": "e0c2c789647635f3662fda8a1da8ef65e9c7f72d45afcca1661243f266802bad",
+  "reader_v3.py": "8b2a653cdcc3a45154c2061e1e980a57abce9547294490a1ecc6b35daa544092",
+  "FOLD_MODELS.json": "30d014ab9b1d71d996e1369ce1386e681fc232e1422ea616230e7a8edbde3a23",
+  "reader_model_dev218_v3.json": "4570483ec06b44c9908fffeb82a19b9e05936fad305a5357d07359d54d1f55ae",
+  "source/lib_btc.py": "101ca5a42b4aa5be2ccd03f1358da822cf6ec4f884d6cb0ad9f54cb935b878e8",
+  "source/reader_models.py": "ea9b490e0d3be857a3f55f8ef7af8c5084317d3bc2511fd9c6cce06c328fd1db",
+  "source/b04_public_final.py": "316b96aef80934e4eafe839077ea3fa01a0fe56c7dadad27aad54e4fa936db29",
+  "reproduction/reader_v3/OOF_PREDICTIONS.csv": "d275f494d64d715c16d59ea86a8e2398c97ad14b253ccd8211b0562124f03fac",
+  "CAP_APPROVAL_120GB_20261120.json": "aa87dc1f24cffba2091008354a2e169c89a0eee72a1ab2793e8d2742b054c159",
+  "PREFLIGHT_120GB_20261120.json": "f63a818d9eb254e725ff004042ec5acfb3954e1981d2c604ebf42e6a7ee064af"
+}
