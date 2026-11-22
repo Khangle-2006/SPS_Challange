@@ -33,6 +33,30 @@ holdout hay thay checkpoint.
 kiểm cài đặt/tensor tổng hợp với kiểm đầy đủ raw video → pipeline. Các snapshot
 nghiên cứu giữ nguyên hash; relocation chỉ thực hiện trên bản làm việc riêng.
 
+## Tải checkpoint, cấu hình reader và tìm dataset
+
+**[Tải gói checkpoint + reader tại đây](https://github.com/Khangle-2006/SPS_Challange/releases/tag/inference-assets-20261123).**
+Gói gồm 5 checkpoint padding-fixed, 5 cấu hình reader_v4 theo fold và tham số P4m
+(fold + deploy), kèm SHA256 và mã nạp. [Cách tải, kiểm hash và sử dụng](docs/INFERENCE_ASSETS.md).
+Ba expert có sẵn trong `open-rppg==0.1.1`, không cần tải lại từ đội.
+
+Dataset đã có trên **P100**:
+
+| Bộ dữ liệu | Vị trí trên server |
+|---|---|
+| BTC | `/mnt/samsung_t5/khangle/facevitals/datasets/FaceVitals_BTC_20261107` |
+| UBFC-rPPG | `/data_pool/khangle/facevitals/datasets/UBFC-rPPG` |
+| MCD-rPPG | `/mnt/samsung_t5/khangle/facevitals/datasets/MCD-rPPG` |
+| AiPEX | `/data_pool/khangle/facevitals/datasets/AiPEX` |
+
+Đây là đường dẫn server, không phải link tải công khai. Cần tài khoản/quyền truy
+cập; `/data_pool` yêu cầu quyền nhóm phù hợp. [Chi tiết quyền và manifest dev](docs/SERVER_DATASETS.md).
+Chỉ chạy dev theo split đã khóa, không quét cả root dataset để chấm holdout.
+
+**Phạm vi gói:** reader_v4 hiện có 5 fit train-fold, chưa có bản deploy fit toàn
+dev được chốt. Gói này cung cấp tài sản nghiên cứu; cổng tích hợp frontend mới
+còn chưa đạt, nên không gọi là pipeline nộp bài đã kiểm end-to-end.
+
 ## Mục lục
 
 1. [Pipeline trong một trang](#pipeline-trong-một-trang)
