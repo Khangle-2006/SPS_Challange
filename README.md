@@ -17,8 +17,6 @@ Python 3.12 tách riêng, cấu hình đường dẫn và kiểm SHA256 tài s�
 ```bash
 git clone https://github.com/Khangle-2006/SPS_Challange.git
 cd SPS_Challange
-# Khi PR setup chưa merge:
-git checkout codex/reproducible-setup
 python3.12 tools/setup_env.py core
 .venv/core/bin/python tools/pos_trace.py --make-demo output/demo_rgb.csv
 .venv/core/bin/python tools/pos_trace.py --input output/demo_rgb.csv --output output/demo_predictions.csv

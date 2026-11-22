@@ -16,8 +16,6 @@ Lệnh cài hệ thống do người quản trị thực hiện, không có tron
 ```bash
 git clone https://github.com/Khangle-2006/SPS_Challange.git
 cd SPS_Challange
-# Khi PR setup chưa merge:
-git checkout codex/reproducible-setup
 python3.12 tools/setup_env.py core
 .venv/core/bin/python -m pip check
 .venv/core/bin/python tools/smoke_environment.py core
@@ -25,9 +23,6 @@ python3.12 tools/setup_env.py core
 .venv/core/bin/python -m unittest discover -s tools -p 'test_*.py'
 .venv/core/bin/python -m unittest test_score_round1
 ```
-
-Trước khi PR này được merge, checkout nhánh `codex/reproducible-setup` sau clone.
-Các lệnh từ checkout `main` chưa có PR này sẽ chưa tìm thấy bootstrap.
 
 `setup_env.py` tạo venv không dùng site-packages của Python hệ thống, cài từ
 requirements theo profile rồi chạy `pip check`. Không ghi đè venv đã có; nếu cài
