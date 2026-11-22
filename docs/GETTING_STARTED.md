@@ -1,5 +1,10 @@
 # Cài mới và chạy lại
 
+**Chỉ muốn chọn video để lấy PR?** Dùng [RUN_VIDEO.md](RUN_VIDEO.md):
+`python3.12 tools/bootstrap_video.py`, rồi `python3.12 predict.py --video ...
+--activity Resting --output output/run1`. Phần dưới dành cho tái lập nghiên cứu
+và các profile bổ sung, không phải các bước bắt buộc cho lệnh video.
+
 Hướng dẫn này dành cho một checkout mới. Không cần tài khoản máy chủ của đội để
 chạy demo và kiểm mã. Muốn lặp bảng BTC/public cần thêm bundle dữ liệu được cấp
 quyền: xem [ASSETS.md](ASSETS.md). Việc cài môi trường thành công **không** chứng

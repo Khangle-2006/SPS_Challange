@@ -1,5 +1,9 @@
 # Kiểm trên môi trường mới — 22/11/2026
 
+Cập nhật 23/11: kiểm từ video thật của CLI mới nằm ở
+[VIDEO_CLI_VALIDATION.md](VIDEO_CLI_VALIDATION.md). Trang này giữ bằng chứng
+cài đặt/demo của lần trước, không thay cho kiểm video mới.
+
 Đã tạo **bốn venv mới**, không dùng `site-packages` hệ thống hay môi trường thí
 nghiệm cũ, trên Linux x86_64/Python 3.12.3. Chạy CPU, nice 19; không đọc video,
 nhãn người tham gia hoặc holdout. Đây là kiểm cài đặt và chức năng, **chưa phải
