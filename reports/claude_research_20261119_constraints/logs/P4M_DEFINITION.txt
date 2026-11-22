@@ -1,0 +1,15 @@
+P4m public reader, frozen 2026-11-22 17:57:21 (team decision 22 Nov 2026: P4m, documented deviation from the z13 rule)
+  channels: CNN (team padding-fixed EfficientPhys+TSM, out-of-fold checkpoint) on crops pre-filtered by a centred moving average of k = ceil(fps/10)
+            frames weighted by the valid flags (x13 nat_ma3, x20 under conditions; C5 split keeps its binned 10 fps stream); POS and CHROM from the
+            UNFILTERED 6x6 block means; experts = mean of the standardised log spectra of FacePhys.rlap, ME-chunk.pure, ME-flow.pure (y12/y13).
+  fusion  : E = w . Z (Z = per-window standardised log spectra on the 42-180 bpm grid), w fitted on the training folds over {0,.5,1,2}^4 (normalised).
+  readout : forward-backward with quality weight (y07 marg/point, y02 qscale), (gamma, sigma, tau, estimator) per data set per fold.
+  pooled  : training windows = native + c4_qvga, c6_us1, aidtrack_c1_g25gv01, c2_vit, track_c1_g25p, track_c7_blue on the common recordings.
+  fold 0 : w (CNN, POS, CHROM, experts) = (1.0, 0.0, 0.25, 1.0); UBFC2 (gamma, sigma, tau, est, ref, const) = 2.0, 15.0, 1.6, median, 4.466619, 96.680; MCD (gamma, sigma, tau, est, ref, const) = 4.0, 6.0, 1.6, median, 3.896736, 83.496
+  fold 1 : w (CNN, POS, CHROM, experts) = (1.0, 0.0, 0.25, 1.0); UBFC2 (gamma, sigma, tau, est, ref, const) = 2.0, 15.0, 1.6, median, 4.486958, 93.604; MCD (gamma, sigma, tau, est, ref, const) = 1.0, 4.0, 1.6, median, 3.737691, 84.375
+  fold 2 : w (CNN, POS, CHROM, experts) = (1.0, 0.0, 0.25, 1.0); UBFC2 (gamma, sigma, tau, est, ref, const) = 2.0, 15.0, 1.6, median, 4.471573, 95.361; MCD (gamma, sigma, tau, est, ref, const) = 4.0, 6.0, 1.6, median, 3.811100, 86.572
+  fold 3 : w (CNN, POS, CHROM, experts) = (1.0, 0.0, 0.25, 1.0); UBFC2 (gamma, sigma, tau, est, ref, const) = 2.0, 15.0, 1.6, median, 4.486926, 97.119; MCD (gamma, sigma, tau, est, ref, const) = 4.0, 6.0, 1.6, median, 3.759945, 87.012
+  fold 4 : w (CNN, POS, CHROM, experts) = (1.0, 0.0, 0.25, 1.0); UBFC2 (gamma, sigma, tau, est, ref, const) = 1.0, 15.0, 1.6, median, 4.511067, 97.119; MCD (gamma, sigma, tau, est, ref, const) = 4.0, 6.0, 1.6, median, 3.757086, 82.617
+  deploy : w (CNN, POS, CHROM, experts) = (1.0, 0.0, 0.25, 1.0); UBFC2 (gamma, sigma, tau, est, ref, const) = 2.0, 15.0, 1.6, median, 4.484460, 96.680; MCD (gamma, sigma, tau, est, ref, const) = 4.0, 6.0, 1.6, median, 3.790827, 84.814
+  check   : max |MAE - z13 P4m| over conditions x data sets = 0.00e+00
+  sha256  : 1acb07a3a43c84a8d2eeacf1d96e08cb806b5ae97914e7493df6a4e821f58b70  out/z14_p4m_frozen.npz

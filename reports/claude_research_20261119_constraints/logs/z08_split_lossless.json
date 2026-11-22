@@ -1,0 +1,4482 @@
+{
+"BTC_S_AB12_Resting": {
+"fps_sent": 9.992,
+"k": 3,
+"box36_bytes": 2206.5620915032678,
+"lossless": true,
+"btc_stream_kbps": [
+211.6430569121653,
+215.2
+]
+},
+"BTC_S_AB13_Resting": {
+"fps_sent": 9.989,
+"k": 3,
+"box36_bytes": 2350.119496855346,
+"lossless": true,
+"btc_stream_kbps": [
+223.05501423456394,
+225.728
+]
+},
+"BTC_S_AB14_Resting": {
+"fps_sent": 9.989,
+"k": 3,
+"box36_bytes": 2335.9056603773583,
+"lossless": true,
+"btc_stream_kbps": [
+221.91910174443325,
+224.096
+]
+},
+"BTC_S_AB16_Resting": {
+"fps_sent": 9.989,
+"k": 3,
+"box36_bytes": 2406.653721682848,
+"lossless": true,
+"btc_stream_kbps": [
+227.56601662968248,
+229.408
+]
+},
+"BTC_S_AB17_Resting": {
+"fps_sent": 9.989,
+"k": 3,
+"box36_bytes": 2299.0062893081763,
+"lossless": true,
+"btc_stream_kbps": [
+218.9702528154082,
+220.416
+]
+},
+"BTC_S_AB18_Resting": {
+"fps_sent": 9.989,
+"k": 3,
+"box36_bytes": 2245.7088607594937,
+"lossless": true,
+"btc_stream_kbps": [
+214.70950530709595,
+218.144
+]
+},
+"BTC_S_AB1_Resting": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2257.3865814696487,
+"lossless": true,
+"btc_stream_kbps": [
+215.68657671176507,
+218.912
+]
+},
+"BTC_S_AB20_Resting": {
+"fps_sent": 9.992,
+"k": 3,
+"box36_bytes": 2099.3901639344263,
+"lossless": true,
+"btc_stream_kbps": [
+203.07534610650728,
+206.416
+]
+},
+"BTC_S_AB21_Resting": {
+"fps_sent": 9.989,
+"k": 3,
+"box36_bytes": 2281.2967741935486,
+"lossless": true,
+"btc_stream_kbps": [
+217.54906352336658,
+219.68
+]
+},
+"BTC_S_AB22_Resting": {
+"fps_sent": 9.99,
+"k": 3,
+"box36_bytes": 2207.575163398693,
+"lossless": true,
+"btc_stream_kbps": [
+211.66624798746858,
+214.752
+]
+},
+"BTC_S_AB24_Resting": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2297.44375,
+"lossless": true,
+"btc_stream_kbps": [
+218.88109379215007,
+220.72
+]
+},
+"BTC_S_AB25_Resting": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2065.448717948718,
+"lossless": true,
+"btc_stream_kbps": [
+200.34411041363373,
+203.168
+]
+},
+"BTC_S_AB27_Resting": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2003.6077170418007,
+"lossless": true,
+"btc_stream_kbps": [
+195.40052878588813,
+197.808
+]
+},
+"BTC_S_AB2_Resting": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2095.771986970684,
+"lossless": true,
+"btc_stream_kbps": [
+202.7650551757471,
+206.192
+]
+},
+"BTC_S_AB30_Resting": {
+"fps_sent": 9.993,
+"k": 3,
+"box36_bytes": 2126.2018927444797,
+"lossless": true,
+"btc_stream_kbps": [
+205.22461642035154,
+209.44
+]
+},
+"BTC_S_AB31_Resting": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2075.3571428571427,
+"lossless": true,
+"btc_stream_kbps": [
+201.13386013709663,
+204.24
+]
+},
+"BTC_S_AB32_Resting": {
+"fps_sent": 9.993,
+"k": 3,
+"box36_bytes": 2165.0833333333335,
+"lossless": true,
+"btc_stream_kbps": [
+208.33036530288496,
+210.016
+]
+},
+"BTC_S_AB34_Resting": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2256.785714285714,
+"lossless": true,
+"btc_stream_kbps": [
+215.62975586894464,
+217.648
+]
+},
+"BTC_S_AB36_Resting": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2116.560260586319,
+"lossless": true,
+"btc_stream_kbps": [
+204.42666901740594,
+205.936
+]
+},
+"BTC_S_AB37_Task1": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2068.5211726384364,
+"lossless": true,
+"btc_stream_kbps": [
+200.58688823759022,
+203.072
+]
+},
+"BTC_S_AB38_Resting": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2297.6893203883496,
+"lossless": true,
+"btc_stream_kbps": [
+218.90561459131774,
+224.528
+]
+},
+"BTC_S_AB39_Resting": {
+"fps_sent": 9.992,
+"k": 3,
+"box36_bytes": 2095.6190476190477,
+"lossless": true,
+"btc_stream_kbps": [
+202.75732859673118,
+204.32
+]
+},
+"BTC_S_AB3_Resting": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2205.607843137255,
+"lossless": true,
+"btc_stream_kbps": [
+211.5436689257593,
+216.768
+]
+},
+"BTC_S_AB40_Resting": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2355.9256198347107,
+"lossless": true,
+"btc_stream_kbps": [
+183.20761326554958,
+228.896
+]
+},
+"BTC_S_AB41_Resting": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2305.1757188498405,
+"lossless": true,
+"btc_stream_kbps": [
+219.50644281854358,
+222.048
+]
+},
+"BTC_S_AB42_Resting": {
+"fps_sent": 9.992,
+"k": 3,
+"box36_bytes": 1987.5080906148867,
+"lossless": true,
+"btc_stream_kbps": [
+194.13357845743292,
+196.224
+]
+},
+"BTC_S_AB44_Resting": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2280.807570977918,
+"lossless": true,
+"btc_stream_kbps": [
+217.54954772457265,
+219.472
+]
+},
+"BTC_S_AB45_Resting": {
+"fps_sent": 9.992,
+"k": 3,
+"box36_bytes": 2149.556270096463,
+"lossless": true,
+"btc_stream_kbps": [
+207.08863067160542,
+210.416
+]
+},
+"BTC_S_AB46_Resting": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2310.1753246753246,
+"lossless": true,
+"btc_stream_kbps": [
+219.90301119879348,
+220.832
+]
+},
+"BTC_S_AB47_Resting": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2370.475884244373,
+"lossless": true,
+"btc_stream_kbps": [
+224.7247567044841,
+226.848
+]
+},
+"BTC_S_AB48_Resting": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2180.6997084548107,
+"lossless": true,
+"btc_stream_kbps": [
+208.54276898727517,
+215.776
+]
+},
+"BTC_S_AB4_Resting": {
+"fps_sent": 9.99,
+"k": 3,
+"box36_bytes": 2210.7290322580643,
+"lossless": true,
+"btc_stream_kbps": [
+211.93256281092582,
+213.728
+]
+},
+"BTC_S_AB50_Resting": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2121.632258064516,
+"lossless": true,
+"btc_stream_kbps": [
+204.8338070809727,
+206.048
+]
+},
+"BTC_S_AB51_Resting": {
+"fps_sent": 9.999,
+"k": 3,
+"box36_bytes": 2218.512987012987,
+"lossless": true,
+"btc_stream_kbps": [
+212.73794268862918,
+213.568
+]
+},
+"BTC_S_AB52_Vitiligo _Resting": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2236.8608414239484,
+"lossless": true,
+"btc_stream_kbps": [
+214.04354591005927,
+217.792
+]
+},
+"BTC_S_AB55_Resting": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2087.2038834951454,
+"lossless": true,
+"btc_stream_kbps": [
+202.0813462880057,
+205.936
+]
+},
+"BTC_S_AB56_Resting": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2225.2948717948716,
+"lossless": true,
+"btc_stream_kbps": [
+213.12084718308068,
+214.64
+]
+},
+"BTC_S_AB57_Resting": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2157.074918566775,
+"lossless": true,
+"btc_stream_kbps": [
+207.6650195286175,
+210.48
+]
+},
+"BTC_S_AB58_Resting": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2515.183800623053,
+"lossless": true,
+"btc_stream_kbps": [
+232.6005355801306,
+238.384
+]
+},
+"BTC_S_AB59_Resting": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2306.710691823899,
+"lossless": true,
+"btc_stream_kbps": [
+219.04320791822192,
+224.336
+]
+},
+"BTC_S_AB5_Resting": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2125.2899022801303,
+"lossless": true,
+"btc_stream_kbps": [
+205.12443227275625,
+206.944
+]
+},
+"BTC_S_AB60_Resting": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2142.906752411576,
+"lossless": true,
+"btc_stream_kbps": [
+206.53487356475344,
+208.672
+]
+},
+"BTC_S_AB61_Resting": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2351.1437308868503,
+"lossless": true,
+"btc_stream_kbps": [
+223.17753254979058,
+226.112
+]
+},
+"BTC_S_AB62_Resting": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2260.9126213592235,
+"lossless": true,
+"btc_stream_kbps": [
+215.38367018862039,
+218.56
+]
+},
+"BTC_S_AB63_Resting": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2154.7066666666665,
+"lossless": true,
+"btc_stream_kbps": [
+207.47149512729453,
+210.752
+]
+},
+"BTC_S_AB64_Resting": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2304.549019607843,
+"lossless": true,
+"btc_stream_kbps": [
+219.45204852672376,
+221.328
+]
+},
+"BTC_S_AB65_Resting": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2256.026058631922,
+"lossless": true,
+"btc_stream_kbps": [
+215.57421809989785,
+217.632
+]
+},
+"BTC_S_AB66_Resting": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2089.844155844156,
+"lossless": true,
+"btc_stream_kbps": [
+202.29181533920513,
+207.664
+]
+},
+"BTC_S_AB67_Resting": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2100.3601286173634,
+"lossless": true,
+"btc_stream_kbps": [
+203.1340691209617,
+205.696
+]
+},
+"BTC_S_AB69_Resting": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2241.339805825243,
+"lossless": true,
+"btc_stream_kbps": [
+214.4015530953573,
+216.864
+]
+},
+"BTC_S_AB6_Resting": {
+"fps_sent": 9.989,
+"k": 3,
+"box36_bytes": 2245.667731629393,
+"lossless": true,
+"btc_stream_kbps": [
+214.70403617017004,
+215.52
+]
+},
+"BTC_S_AB70_Resting": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2298.3102310231025,
+"lossless": true,
+"btc_stream_kbps": [
+213.08841400482802,
+220.448
+]
+},
+"BTC_S_AB71_Resting": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2466.900662251656,
+"lossless": true,
+"btc_stream_kbps": [
+132.55025141201673,
+233.728
+]
+},
+"BTC_S_AB72_Resting": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2327.048231511254,
+"lossless": true,
+"btc_stream_kbps": [
+221.25353052417492,
+222.896
+]
+},
+"BTC_S_AB73_Resting": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2173.3440514469453,
+"lossless": true,
+"btc_stream_kbps": [
+208.96776465188557,
+211.472
+]
+},
+"BTC_S_AB76_Resting": {
+"fps_sent": 9.994,
+"k": 2,
+"box36_bytes": 2148.742474916388,
+"lossless": true,
+"btc_stream_kbps": [
+207.05108885043182,
+209.968
+]
+},
+"BTC_S_AB77_Resting": {
+"fps_sent": 10.002,
+"k": 3,
+"box36_bytes": 2134.385852090032,
+"lossless": true,
+"btc_stream_kbps": [
+206.06410431305954,
+228.44
+]
+},
+"BTC_S_AB78_Resting": {
+"fps_sent": 10.002,
+"k": 3,
+"box36_bytes": 2186.4240506329115,
+"lossless": true,
+"btc_stream_kbps": [
+210.2272934622936,
+230.776
+]
+},
+"BTC_S_AB79_Resting": {
+"fps_sent": 9.994,
+"k": 2,
+"box36_bytes": 2099.2987012987014,
+"lossless": true,
+"btc_stream_kbps": [
+203.0977571808939,
+204.656
+]
+},
+"BTC_S_AB80_Resting": {
+"fps_sent": 9.994,
+"k": 2,
+"box36_bytes": 2021.0389610389611,
+"lossless": true,
+"btc_stream_kbps": [
+196.84150473913033,
+200.096
+]
+},
+"BTC_S_AB82_Resting": {
+"fps_sent": 10.002,
+"k": 3,
+"box36_bytes": 2273.9102564102564,
+"lossless": true,
+"btc_stream_kbps": [
+217.22774458751303,
+240.696
+]
+},
+"BTC_S_AB83_Resting": {
+"fps_sent": 10.002,
+"k": 3,
+"box36_bytes": 2374.759493670886,
+"lossless": true,
+"btc_stream_kbps": [
+225.29652084618616,
+247.56
+]
+},
+"BTC_S_AB85_Resting": {
+"fps_sent": 10.002,
+"k": 3,
+"box36_bytes": 2349.430420711974,
+"lossless": true,
+"btc_stream_kbps": [
+223.2706788970386,
+244.664
+]
+},
+"BTC_S_AB86_Resting": {
+"fps_sent": 10.002,
+"k": 3,
+"box36_bytes": 2271.3440514469453,
+"lossless": true,
+"btc_stream_kbps": [
+217.02252774926356,
+238.04
+]
+},
+"BTC_S_AB87_Resting": {
+"fps_sent": 10.002,
+"k": 3,
+"box36_bytes": 2120.0387096774193,
+"lossless": true,
+"btc_stream_kbps": [
+204.9162547442169,
+225.272
+]
+},
+"BTC_S_AB89_Resting": {
+"fps_sent": 10.002,
+"k": 3,
+"box36_bytes": 2156.640776699029,
+"lossless": true,
+"btc_stream_kbps": [
+207.84500320787163,
+232.616
+]
+},
+"BTC_S_AB8_Resting": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2296.1100323624596,
+"lossless": true,
+"btc_stream_kbps": [
+218.77938084390053,
+220.816
+]
+},
+"BTC_S_AB90_Resting": {
+"fps_sent": 10.002,
+"k": 3,
+"box36_bytes": 2130.512987012987,
+"lossless": true,
+"btc_stream_kbps": [
+205.75454947398262,
+225.224
+]
+},
+"BTC_S_AB91_Resting": {
+"fps_sent": 10.002,
+"k": 3,
+"box36_bytes": 2263.980582524272,
+"lossless": true,
+"btc_stream_kbps": [
+216.4335819236826,
+237.064
+]
+},
+"BTC_S_AB92_Resting": {
+"fps_sent": 10.002,
+"k": 3,
+"box36_bytes": 2426.097087378641,
+"lossless": true,
+"btc_stream_kbps": [
+229.40500806302876,
+252.584
+]
+},
+"BTC_S_AB93_Resting": {
+"fps_sent": 10.002,
+"k": 3,
+"box36_bytes": 2069.1103896103896,
+"lossless": true,
+"btc_stream_kbps": [
+200.84154151761254,
+219.336
+]
+},
+"BTC_S_AB94_Resting": {
+"fps_sent": 9.994,
+"k": 2,
+"box36_bytes": 2320.2578616352203,
+"lossless": true,
+"btc_stream_kbps": [
+220.76459754646828,
+222.576
+]
+},
+"BTC_S_AB95_Resting": {
+"fps_sent": 9.994,
+"k": 2,
+"box36_bytes": 2331.061889250814,
+"lossless": true,
+"btc_stream_kbps": [
+218.64119719706326,
+225.088
+]
+},
+"BTC_S_AB96_Resting": {
+"fps_sent": 9.994,
+"k": 2,
+"box36_bytes": 2213.6012658227846,
+"lossless": true,
+"btc_stream_kbps": [
+212.23873670249932,
+214.256
+]
+},
+"BTC_S_AB97_Resting": {
+"fps_sent": 9.994,
+"k": 2,
+"box36_bytes": 2087.8376623376626,
+"lossless": true,
+"btc_stream_kbps": [
+202.18341767107054,
+204.144
+]
+},
+"BTC_S_AB99_Resting": {
+"fps_sent": 9.994,
+"k": 2,
+"box36_bytes": 2092.0,
+"lossless": true,
+"btc_stream_kbps": [
+202.51431455353023,
+208.208
+]
+},
+"BTC_S_AB9_Resting": {
+"fps_sent": 9.99,
+"k": 3,
+"box36_bytes": 2172.504918032787,
+"lossless": true,
+"btc_stream_kbps": [
+208.8628257090135,
+210.8
+]
+},
+"BTC_S_N100_Resting": {
+"fps_sent": 9.994,
+"k": 2,
+"box36_bytes": 2089.796178343949,
+"lossless": true,
+"btc_stream_kbps": [
+202.33849651473636,
+204.608
+]
+},
+"BTC_S_N101_Resting": {
+"fps_sent": 9.991,
+"k": 2,
+"box36_bytes": 2137.2655737704918,
+"lossless": true,
+"btc_stream_kbps": [
+201.71913971354275,
+210.0
+]
+},
+"BTC_S_N103_Resting": {
+"fps_sent": 9.869,
+"k": 3,
+"box36_bytes": 1873.0,
+"lossless": true,
+"btc_stream_kbps": [
+182.69664639253875,
+189.872
+]
+},
+"BTC_S_N10_Resting": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2198.768729641694,
+"lossless": true,
+"btc_stream_kbps": [
+210.9976201511861,
+212.544
+]
+},
+"BTC_S_N11_Resting": {
+"fps_sent": 9.994,
+"k": 2,
+"box36_bytes": 2144.958466453674,
+"lossless": true,
+"btc_stream_kbps": [
+206.7507713978145,
+208.752
+]
+},
+"BTC_S_N12_Resting": {
+"fps_sent": 9.994,
+"k": 2,
+"box36_bytes": 2024.7721518987341,
+"lossless": true,
+"btc_stream_kbps": [
+197.13973326939862,
+200.192
+]
+},
+"BTC_S_N12_Task1": {
+"fps_sent": 9.994,
+"k": 2,
+"box36_bytes": 2020.6889632107022,
+"lossless": true,
+"btc_stream_kbps": [
+196.81381238262696,
+200.384
+]
+},
+"BTC_S_N13_Resting": {
+"fps_sent": 9.994,
+"k": 2,
+"box36_bytes": 2007.7320261437908,
+"lossless": true,
+"btc_stream_kbps": [
+195.77703269609228,
+200.624
+]
+},
+"BTC_S_N15_Resting": {
+"fps_sent": 9.994,
+"k": 2,
+"box36_bytes": 2070.206451612903,
+"lossless": true,
+"btc_stream_kbps": [
+200.77306343630443,
+203.072
+]
+},
+"BTC_S_N16_Resting": {
+"fps_sent": 9.994,
+"k": 2,
+"box36_bytes": 1956.8039215686274,
+"lossless": true,
+"btc_stream_kbps": [
+191.70531186747098,
+193.664
+]
+},
+"BTC_S_N17_Resting": {
+"fps_sent": 9.994,
+"k": 2,
+"box36_bytes": 2177.856209150327,
+"lossless": true,
+"btc_stream_kbps": [
+209.38058235854788,
+211.728
+]
+},
+"BTC_S_N18_Resting": {
+"fps_sent": 9.994,
+"k": 2,
+"box36_bytes": 2086.1042345276874,
+"lossless": true,
+"btc_stream_kbps": [
+202.04288729624673,
+204.496
+]
+},
+"BTC_S_N19_Resting": {
+"fps_sent": 9.994,
+"k": 2,
+"box36_bytes": 2043.461254612546,
+"lossless": true,
+"btc_stream_kbps": [
+183.83320187057947,
+205.104
+]
+},
+"BTC_S_N1_Resting": {
+"fps_sent": 9.989,
+"k": 3,
+"box36_bytes": 2235.3376623376626,
+"lossless": true,
+"btc_stream_kbps": [
+213.87479511907478,
+216.752
+]
+},
+"BTC_S_N1_Task1": {
+"fps_sent": 9.99,
+"k": 3,
+"box36_bytes": 2174.806557377049,
+"lossless": true,
+"btc_stream_kbps": [
+209.0467652508482,
+210.608
+]
+},
+"BTC_S_N20_Resting": {
+"fps_sent": 9.994,
+"k": 2,
+"box36_bytes": 2003.820788530466,
+"lossless": true,
+"btc_stream_kbps": [
+195.46519886473405,
+199.328
+]
+},
+"BTC_S_N21_Resting": {
+"fps_sent": 9.994,
+"k": 2,
+"box36_bytes": 2049.640522875817,
+"lossless": true,
+"btc_stream_kbps": [
+199.12763253607176,
+201.328
+]
+},
+"BTC_S_N24_Resting": {
+"fps_sent": 9.994,
+"k": 2,
+"box36_bytes": 2137.9333333333334,
+"lossless": true,
+"btc_stream_kbps": [
+206.18707731399195,
+211.584
+]
+},
+"BTC_S_N25_Resting": {
+"fps_sent": 9.994,
+"k": 2,
+"box36_bytes": 2120.8295454545455,
+"lossless": true,
+"btc_stream_kbps": [
+204.81917677956002,
+207.056
+]
+},
+"BTC_S_N26_Resting": {
+"fps_sent": 9.994,
+"k": 2,
+"box36_bytes": 2071.324324324324,
+"lossless": true,
+"btc_stream_kbps": [
+200.86156837748658,
+202.048
+]
+},
+"BTC_S_N27_Resting": {
+"fps_sent": 9.994,
+"k": 2,
+"box36_bytes": 1978.5754716981132,
+"lossless": true,
+"btc_stream_kbps": [
+193.44623858894658,
+195.216
+]
+},
+"BTC_S_N28_Resting": {
+"fps_sent": 9.994,
+"k": 2,
+"box36_bytes": 2081.2448979591836,
+"lossless": true,
+"btc_stream_kbps": [
+201.65446265734218,
+203.136
+]
+},
+"BTC_S_N29_Resting": {
+"fps_sent": 9.994,
+"k": 2,
+"box36_bytes": 2125.6602316602316,
+"lossless": true,
+"btc_stream_kbps": [
+205.20555927125494,
+209.472
+]
+},
+"BTC_S_N2_Resting": {
+"fps_sent": 9.989,
+"k": 3,
+"box36_bytes": 2316.188311688312,
+"lossless": true,
+"btc_stream_kbps": [
+220.33583189647848,
+221.136
+]
+},
+"BTC_S_N30_Resting": {
+"fps_sent": 9.994,
+"k": 2,
+"box36_bytes": 2228.442996742671,
+"lossless": true,
+"btc_stream_kbps": [
+213.42361926868887,
+216.784
+]
+},
+"BTC_S_N31_Resting": {
+"fps_sent": 9.994,
+"k": 2,
+"box36_bytes": 2267.0597014925374,
+"lossless": true,
+"btc_stream_kbps": [
+216.51178760566765,
+220.592
+]
+},
+"BTC_S_N32_Resting": {
+"fps_sent": 9.994,
+"k": 2,
+"box36_bytes": 1981.0584415584415,
+"lossless": true,
+"btc_stream_kbps": [
+193.6462987745417,
+197.104
+]
+},
+"BTC_S_N33_Resting": {
+"fps_sent": 9.994,
+"k": 2,
+"box36_bytes": 2152.742268041237,
+"lossless": true,
+"btc_stream_kbps": [
+207.3718746020605,
+209.632
+]
+},
+"BTC_S_N34_Resting": {
+"fps_sent": 9.994,
+"k": 2,
+"box36_bytes": 2101.593442622951,
+"lossless": true,
+"btc_stream_kbps": [
+203.28131394436934,
+205.248
+]
+},
+"BTC_S_N36_Resting": {
+"fps_sent": 9.994,
+"k": 2,
+"box36_bytes": 2081.691588785047,
+"lossless": true,
+"btc_stream_kbps": [
+201.69222855955144,
+203.92
+]
+},
+"BTC_S_N37_Resting": {
+"fps_sent": 9.994,
+"k": 2,
+"box36_bytes": 2129.0679611650485,
+"lossless": true,
+"btc_stream_kbps": [
+205.47746953449428,
+207.456
+]
+},
+"BTC_S_N38_Resting": {
+"fps_sent": 9.994,
+"k": 2,
+"box36_bytes": 2145.3490566037735,
+"lossless": true,
+"btc_stream_kbps": [
+205.97456226939977,
+210.576
+]
+},
+"BTC_S_N3_Resting": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2144.1428571428573,
+"lossless": true,
+"btc_stream_kbps": [
+206.63194147099838,
+212.56
+]
+},
+"BTC_S_N42_Bright_Task1": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2325.269230769231,
+"lossless": true,
+"btc_stream_kbps": [
+221.11194385681728,
+225.232
+]
+},
+"BTC_S_N42_Bright_Task2": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2299.11821086262,
+"lossless": true,
+"btc_stream_kbps": [
+219.02225601960976,
+221.984
+]
+},
+"BTC_S_N42_Bright_Task3": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2315.232258064516,
+"lossless": true,
+"btc_stream_kbps": [
+220.30845231189912,
+222.912
+]
+},
+"BTC_S_N42_Dim_Task1": {
+"fps_sent": 9.993,
+"k": 3,
+"box36_bytes": 2129.547770700637,
+"lossless": true,
+"btc_stream_kbps": [
+205.49063593693543,
+208.176
+]
+},
+"BTC_S_N42_Dim_Task2": {
+"fps_sent": 9.979,
+"k": 3,
+"box36_bytes": 2129.4901960784314,
+"lossless": true,
+"btc_stream_kbps": [
+204.64958650032847,
+208.288
+]
+},
+"BTC_S_N42_Dim_Task3": {
+"fps_sent": 9.992,
+"k": 3,
+"box36_bytes": 2108.3518518518517,
+"lossless": true,
+"btc_stream_kbps": [
+203.79041562831196,
+207.856
+]
+},
+"BTC_S_N43_Bright_Task1": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2194.6278317152105,
+"lossless": true,
+"btc_stream_kbps": [
+210.6678278694962,
+212.224
+]
+},
+"BTC_S_N43_Bright_Task2": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2203.313915857605,
+"lossless": true,
+"btc_stream_kbps": [
+211.3621134802909,
+213.072
+]
+},
+"BTC_S_N43_Bright_Task3": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2228.5928338762214,
+"lossless": true,
+"btc_stream_kbps": [
+213.38147103401715,
+215.328
+]
+},
+"BTC_S_N44_Bright_Task1": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2222.569579288026,
+"lossless": true,
+"btc_stream_kbps": [
+212.90123396621814,
+215.904
+]
+},
+"BTC_S_N44_Bright_Task2": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2191.7785016286643,
+"lossless": true,
+"btc_stream_kbps": [
+210.43888882805857,
+212.752
+]
+},
+"BTC_S_N44_Bright_Task3": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2180.0967741935483,
+"lossless": true,
+"btc_stream_kbps": [
+209.50693541617179,
+211.024
+]
+},
+"BTC_S_N44_Dim_Task1": {
+"fps_sent": 9.992,
+"k": 3,
+"box36_bytes": 1970.2467532467533,
+"lossless": true,
+"btc_stream_kbps": [
+192.75324151757968,
+194.592
+]
+},
+"BTC_S_N44_Dim_Task2": {
+"fps_sent": 8.209,
+"k": 3,
+"box36_bytes": 1956.139534883721,
+"lossless": true,
+"btc_stream_kbps": [
+157.42713472887195,
+193.424
+]
+},
+"BTC_S_N44_Dim_Task3": {
+"fps_sent": 7.999,
+"k": 3,
+"box36_bytes": 1976.1138211382113,
+"lossless": true,
+"btc_stream_kbps": [
+154.67845048670765,
+155.568
+]
+},
+"BTC_S_N45_Bright_Task1": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2234.2555910543133,
+"lossless": true,
+"btc_stream_kbps": [
+213.83767775381105,
+216.592
+]
+},
+"BTC_S_N45_Bright_Task2": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2280.577049180328,
+"lossless": true,
+"btc_stream_kbps": [
+217.5353410745435,
+221.504
+]
+},
+"BTC_S_N45_Bright_Task3": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2249.7272727272725,
+"lossless": true,
+"btc_stream_kbps": [
+215.07136396597073,
+217.744
+]
+},
+"BTC_S_N45_Dim_Task1": {
+"fps_sent": 9.992,
+"k": 3,
+"box36_bytes": 1990.483870967742,
+"lossless": true,
+"btc_stream_kbps": [
+194.3719368488597,
+196.8
+]
+},
+"BTC_S_N45_Dim_Task2": {
+"fps_sent": 9.993,
+"k": 3,
+"box36_bytes": 1976.5303514376997,
+"lossless": true,
+"btc_stream_kbps": [
+193.25789969919285,
+194.576
+]
+},
+"BTC_S_N45_Dim_Task3": {
+"fps_sent": 9.992,
+"k": 3,
+"box36_bytes": 1991.2597402597403,
+"lossless": true,
+"btc_stream_kbps": [
+194.43300380456515,
+195.872
+]
+},
+"BTC_S_N48_Bright_Task1": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2209.5620915032678,
+"lossless": true,
+"btc_stream_kbps": [
+211.8597324518911,
+215.184
+]
+},
+"BTC_S_N48_Bright_Task2": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2227.567213114754,
+"lossless": true,
+"btc_stream_kbps": [
+213.29827096392393,
+215.376
+]
+},
+"BTC_S_N48_Bright_Task3": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2256.7128712871286,
+"lossless": true,
+"btc_stream_kbps": [
+215.62662853399294,
+217.456
+]
+},
+"BTC_S_N49_Dim_Task1": {
+"fps_sent": 9.993,
+"k": 3,
+"box36_bytes": 2030.6939890710382,
+"lossless": true,
+"btc_stream_kbps": [
+197.59115848394902,
+200.576
+]
+},
+"BTC_S_N49_Dim_Task2": {
+"fps_sent": 9.993,
+"k": 3,
+"box36_bytes": 2058.9756097560976,
+"lossless": true,
+"btc_stream_kbps": [
+199.85145846865262,
+201.248
+]
+},
+"BTC_S_N49_Dim_Task3": {
+"fps_sent": 9.992,
+"k": 3,
+"box36_bytes": 2069.5575757575757,
+"lossless": true,
+"btc_stream_kbps": [
+200.69210446147122,
+203.264
+]
+},
+"BTC_S_N49_Med_Task1": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 1996.5,
+"lossless": true,
+"btc_stream_kbps": [
+194.8285316022364,
+196.64
+]
+},
+"BTC_S_N49_Med_Task2": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 1974.0065573770491,
+"lossless": true,
+"btc_stream_kbps": [
+193.0311968623111,
+194.784
+]
+},
+"BTC_S_N49_Med_Task3": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 1988.1049180327868,
+"lossless": true,
+"btc_stream_kbps": [
+194.15807721088012,
+197.472
+]
+},
+"BTC_S_N4_Resting": {
+"fps_sent": 9.992,
+"k": 3,
+"box36_bytes": 2324.4142394822006,
+"lossless": true,
+"btc_stream_kbps": [
+221.0656675604855,
+225.44
+]
+},
+"BTC_S_N4_Task1": {
+"fps_sent": 7.206,
+"k": 3,
+"box36_bytes": 2219.339366515837,
+"lossless": true,
+"btc_stream_kbps": [
+153.35544191111063,
+171.936
+]
+},
+"BTC_S_N52_Dim_Task1": {
+"fps_sent": 9.992,
+"k": 3,
+"box36_bytes": 2136.119205298013,
+"lossless": true,
+"btc_stream_kbps": [
+206.00984115395252,
+209.28
+]
+},
+"BTC_S_N52_Dim_Task2": {
+"fps_sent": 9.993,
+"k": 3,
+"box36_bytes": 2104.949685534591,
+"lossless": true,
+"btc_stream_kbps": [
+203.5261680264089,
+204.896
+]
+},
+"BTC_S_N52_Dim_Task3": {
+"fps_sent": 9.993,
+"k": 3,
+"box36_bytes": 2074.90625,
+"lossless": true,
+"btc_stream_kbps": [
+201.12538844236596,
+203.408
+]
+},
+"BTC_S_N52_Med_Task1": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2089.491961414791,
+"lossless": true,
+"btc_stream_kbps": [
+202.26536302815518,
+204.448
+]
+},
+"BTC_S_N52_Med_Task2": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2082.390728476821,
+"lossless": true,
+"btc_stream_kbps": [
+201.69256938287214,
+204.032
+]
+},
+"BTC_S_N52_Med_Task3": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2010.872131147541,
+"lossless": true,
+"btc_stream_kbps": [
+195.97785794122046,
+198.432
+]
+},
+"BTC_S_N53_Dim_Task1": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2069.3071895424837,
+"lossless": true,
+"btc_stream_kbps": [
+200.64914202666344,
+201.84
+]
+},
+"BTC_S_N53_Dim_Task2": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2064.68501529052,
+"lossless": true,
+"btc_stream_kbps": [
+200.28073514750741,
+202.064
+]
+},
+"BTC_S_N53_Dim_Task3": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2081.0130718954247,
+"lossless": true,
+"btc_stream_kbps": [
+201.5847945478239,
+203.424
+]
+},
+"BTC_S_N53_Med_Task1": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2004.3293413173653,
+"lossless": true,
+"btc_stream_kbps": [
+195.46004191897208,
+198.048
+]
+},
+"BTC_S_N53_Med_Task2": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 1972.6688524590163,
+"lossless": true,
+"btc_stream_kbps": [
+192.9242742617957,
+194.832
+]
+},
+"BTC_S_N53_Med_Task3": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 1977.5728155339805,
+"lossless": true,
+"btc_stream_kbps": [
+193.3184478709855,
+196.432
+]
+},
+"BTC_S_N54_Med_Task1": {
+"fps_sent": 9.615,
+"k": 25,
+"box36_bytes": 1955.2491467576792,
+"lossless": true,
+"btc_stream_kbps": [
+184.31471869693576,
+193.296
+]
+},
+"BTC_S_N54_Med_Task2": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2047.9546925566342,
+"lossless": true,
+"btc_stream_kbps": [
+198.94412725383341,
+201.76
+]
+},
+"BTC_S_N54_Med_Task3": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2054.6686390532545,
+"lossless": true,
+"btc_stream_kbps": [
+199.4759161247428,
+204.832
+]
+},
+"BTC_S_N55_Med_Task1": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 1969.049275362319,
+"lossless": true,
+"btc_stream_kbps": [
+192.6359455648301,
+195.888
+]
+},
+"BTC_S_N55_Med_Task2": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 1978.8025889967637,
+"lossless": true,
+"btc_stream_kbps": [
+193.4167446415153,
+196.112
+]
+},
+"BTC_S_N55_Med_Task3": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2012.6233766233765,
+"lossless": true,
+"btc_stream_kbps": [
+196.11951445911834,
+198.576
+]
+},
+"BTC_S_N57_Med_Task1": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2017.2179487179487,
+"lossless": true,
+"btc_stream_kbps": [
+196.4889545164041,
+201.248
+]
+},
+"BTC_S_N57_Med_Task2": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2047.448717948718,
+"lossless": true,
+"btc_stream_kbps": [
+198.90534409792124,
+201.328
+]
+},
+"BTC_S_N57_Med_Task3": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2032.2315112540193,
+"lossless": true,
+"btc_stream_kbps": [
+197.6884641817946,
+200.624
+]
+},
+"BTC_S_N58_Med_Task1": {
+"fps_sent": 9.992,
+"k": 3,
+"box36_bytes": 2093.4886731391584,
+"lossless": true,
+"btc_stream_kbps": [
+202.60560694766158,
+204.608
+]
+},
+"BTC_S_N58_Med_Task2": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2089.8104575163397,
+"lossless": true,
+"btc_stream_kbps": [
+202.28797059108578,
+204.736
+]
+},
+"BTC_S_N58_Med_Task3": {
+"fps_sent": 9.992,
+"k": 3,
+"box36_bytes": 2129.843648208469,
+"lossless": true,
+"btc_stream_kbps": [
+205.51078652393363,
+206.896
+]
+},
+"BTC_S_N59_Med_Task1": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 1949.8511326860842,
+"lossless": true,
+"btc_stream_kbps": [
+191.1026317226741,
+193.472
+]
+},
+"BTC_S_N59_Med_Task2": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 1953.6102236421725,
+"lossless": true,
+"btc_stream_kbps": [
+191.4052216399164,
+193.344
+]
+},
+"BTC_S_N59_Med_Task3": {
+"fps_sent": 9.992,
+"k": 3,
+"box36_bytes": 1958.0822784810127,
+"lossless": true,
+"btc_stream_kbps": [
+191.7642401517468,
+197.2
+]
+},
+"BTC_S_N5_Resting": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2007.1986970684038,
+"lossless": true,
+"btc_stream_kbps": [
+195.68536172817798,
+197.92
+]
+},
+"BTC_S_N5_Task1": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 1910.5974025974026,
+"lossless": true,
+"btc_stream_kbps": [
+187.9645202253541,
+190.976
+]
+},
+"BTC_S_N60_Med_Task1": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 1996.4119601328903,
+"lossless": true,
+"btc_stream_kbps": [
+194.81978150684978,
+197.44
+]
+},
+"BTC_S_N60_Med_Task2": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2025.5228758169935,
+"lossless": true,
+"btc_stream_kbps": [
+197.14945680094925,
+199.088
+]
+},
+"BTC_S_N60_Med_Task3": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 1987.3766233766235,
+"lossless": true,
+"btc_stream_kbps": [
+194.10152708762675,
+196.032
+]
+},
+"BTC_S_N61_Med_Task1": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2006.0927152317881,
+"lossless": true,
+"btc_stream_kbps": [
+194.54036416548064,
+202.16
+]
+},
+"BTC_S_N61_Med_Task2": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2013.8295081967212,
+"lossless": true,
+"btc_stream_kbps": [
+196.2142407492226,
+197.728
+]
+},
+"BTC_S_N61_Med_Task3": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 1983.202614379085,
+"lossless": true,
+"btc_stream_kbps": [
+193.7667934427616,
+196.432
+]
+},
+"BTC_S_N62_Dim_Task1": {
+"fps_sent": 9.993,
+"k": 3,
+"box36_bytes": 2167.522292993631,
+"lossless": true,
+"btc_stream_kbps": [
+208.52633471846855,
+212.496
+]
+},
+"BTC_S_N62_Dim_Task2": {
+"fps_sent": 9.992,
+"k": 3,
+"box36_bytes": 2227.2524590163935,
+"lossless": true,
+"btc_stream_kbps": [
+213.29648465300858,
+216.944
+]
+},
+"BTC_S_N62_Dim_Task3": {
+"fps_sent": 9.992,
+"k": 3,
+"box36_bytes": 2206.169934640523,
+"lossless": true,
+"btc_stream_kbps": [
+211.61170834531328,
+216.448
+]
+},
+"BTC_S_N63_Resting": {
+"fps_sent": 9.999,
+"k": 3,
+"box36_bytes": 2386.156862745098,
+"lossless": true,
+"btc_stream_kbps": [
+226.1478358806901,
+228.848
+]
+},
+"BTC_S_N64_Resting": {
+"fps_sent": 9.999,
+"k": 3,
+"box36_bytes": 2300.71661237785,
+"lossless": true,
+"btc_stream_kbps": [
+219.31344102621034,
+221.664
+]
+},
+"BTC_S_N65_Resting": {
+"fps_sent": 9.999,
+"k": 3,
+"box36_bytes": 2330.903846153846,
+"lossless": true,
+"btc_stream_kbps": [
+221.7344511063176,
+222.896
+]
+},
+"BTC_S_N67_Resting": {
+"fps_sent": 9.999,
+"k": 3,
+"box36_bytes": 2203.4689655172415,
+"lossless": true,
+"btc_stream_kbps": [
+211.53312139730954,
+215.12
+]
+},
+"BTC_S_N68_Resting": {
+"fps_sent": 9.999,
+"k": 3,
+"box36_bytes": 2206.6819672131146,
+"lossless": true,
+"btc_stream_kbps": [
+211.79133696500625,
+213.488
+]
+},
+"BTC_S_N69_Resting": {
+"fps_sent": 9.999,
+"k": 3,
+"box36_bytes": 2319.711475409836,
+"lossless": true,
+"btc_stream_kbps": [
+220.8327063416607,
+221.408
+]
+},
+"BTC_S_N70_Resting": {
+"fps_sent": 10.0,
+"k": 3,
+"box36_bytes": 2269.072847682119,
+"lossless": true,
+"btc_stream_kbps": [
+216.80798869153324,
+236.952
+]
+},
+"BTC_S_N71_Resting": {
+"fps_sent": 9.994,
+"k": 2,
+"box36_bytes": 2119.032258064516,
+"lossless": true,
+"btc_stream_kbps": [
+204.6780516040559,
+207.088
+]
+},
+"BTC_S_N72_Resting": {
+"fps_sent": 9.994,
+"k": 2,
+"box36_bytes": 2141.552715654952,
+"lossless": true,
+"btc_stream_kbps": [
+206.47715438815726,
+209.248
+]
+},
+"BTC_S_N75_Resting": {
+"fps_sent": 9.983,
+"k": 3,
+"box36_bytes": 2166.871287128713,
+"lossless": true,
+"btc_stream_kbps": [
+208.28394126541133,
+230.088
+]
+},
+"BTC_S_N76_Dim_Task1": {
+"fps_sent": 7.5,
+"k": 4,
+"box36_bytes": 1989.4266666666667,
+"lossless": true,
+"btc_stream_kbps": [
+145.8255975532618,
+157.024
+]
+},
+"BTC_S_N76_Dim_Task2": {
+"fps_sent": 7.504,
+"k": 4,
+"box36_bytes": 1998.2251655629138,
+"lossless": true,
+"btc_stream_kbps": [
+146.4325835288804,
+157.568
+]
+},
+"BTC_S_N76_Dim_Task3": {
+"fps_sent": 7.506,
+"k": 4,
+"box36_bytes": 2015.1184210526317,
+"lossless": true,
+"btc_stream_kbps": [
+147.4852888389825,
+158.32
+]
+},
+"BTC_S_N77_Dim_Task1": {
+"fps_sent": 7.5,
+"k": 4,
+"box36_bytes": 2197.936507936508,
+"lossless": true,
+"btc_stream_kbps": [
+158.3361873094667,
+170.592
+]
+},
+"BTC_S_N77_Dim_Task2": {
+"fps_sent": 7.5,
+"k": 4,
+"box36_bytes": 2170.0421052631577,
+"lossless": true,
+"btc_stream_kbps": [
+156.6625304823461,
+169.824
+]
+},
+"BTC_S_N77_Dim_Task3": {
+"fps_sent": 7.5,
+"k": 4,
+"box36_bytes": 2194.204379562044,
+"lossless": true,
+"btc_stream_kbps": [
+158.11226568019813,
+172.08
+]
+},
+"BTC_S_N78_Dim_Task1": {
+"fps_sent": 7.5,
+"k": 4,
+"box36_bytes": 2037.8793103448277,
+"lossless": true,
+"btc_stream_kbps": [
+148.73276185401053,
+160.112
+]
+},
+"BTC_S_N78_Dim_Task2": {
+"fps_sent": 7.51,
+"k": 4,
+"box36_bytes": 2091.464566929134,
+"lossless": true,
+"btc_stream_kbps": [
+152.1546685125425,
+164.048
+]
+},
+"BTC_S_N78_Dim_Task3": {
+"fps_sent": 7.5,
+"k": 4,
+"box36_bytes": 2062.8943089430895,
+"lossless": true,
+"btc_stream_kbps": [
+150.23365545802682,
+161.312
+]
+},
+"BTC_S_N7_Resting": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2029.5755627009646,
+"lossless": true,
+"btc_stream_kbps": [
+197.47617091769453,
+201.12
+]
+},
+"BTC_S_N80_Resting": {
+"fps_sent": 10.001,
+"k": 3,
+"box36_bytes": 2034.2692307692307,
+"lossless": true,
+"btc_stream_kbps": [
+198.03748669778605,
+216.824
+]
+},
+"BTC_S_N81_Resting": {
+"fps_sent": 10.001,
+"k": 3,
+"box36_bytes": 2118.4326923076924,
+"lossless": true,
+"btc_stream_kbps": [
+204.77110588865,
+226.776
+]
+},
+"BTC_S_N82_Resting": {
+"fps_sent": 10.001,
+"k": 3,
+"box36_bytes": 2005.0104166666667,
+"lossless": true,
+"btc_stream_kbps": [
+186.26078560147732,
+218.216
+]
+},
+"BTC_S_N83_Resting": {
+"fps_sent": 10.001,
+"k": 3,
+"box36_bytes": 2180.743961352657,
+"lossless": true,
+"btc_stream_kbps": [
+209.75649089220852,
+229.4
+]
+},
+"BTC_S_N84_Resting": {
+"fps_sent": 10.001,
+"k": 3,
+"box36_bytes": 2014.0878048780487,
+"lossless": true,
+"btc_stream_kbps": [
+196.423075236637,
+217.064
+]
+},
+"BTC_S_N86_Resting": {
+"fps_sent": 10.001,
+"k": 3,
+"box36_bytes": 2180.5170731707317,
+"lossless": true,
+"btc_stream_kbps": [
+209.7385047795148,
+230.232
+]
+},
+"BTC_S_N88_Resting": {
+"fps_sent": 10.001,
+"k": 3,
+"box36_bytes": 1991.8461538461538,
+"lossless": true,
+"btc_stream_kbps": [
+194.6444176811085,
+214.088
+]
+},
+"BTC_S_N89_Resting": {
+"fps_sent": 10.001,
+"k": 3,
+"box36_bytes": 1784.0392156862745,
+"lossless": true,
+"btc_stream_kbps": [
+178.01775575730824,
+192.632
+]
+},
+"BTC_S_N8_Resting": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2246.1368078175897,
+"lossless": true,
+"btc_stream_kbps": [
+214.78376688973236,
+216.592
+]
+},
+"BTC_S_N90_Resting": {
+"fps_sent": 10.001,
+"k": 3,
+"box36_bytes": 1674.4150943396226,
+"lossless": true,
+"btc_stream_kbps": [
+169.2465788290138,
+185.0
+]
+},
+"BTC_S_N91_Resting": {
+"fps_sent": 10.001,
+"k": 3,
+"box36_bytes": 1947.5211267605634,
+"lossless": true,
+"btc_stream_kbps": [
+191.0967164722771,
+211.256
+]
+},
+"BTC_S_N93_Resting": {
+"fps_sent": 10.001,
+"k": 3,
+"box36_bytes": 1972.5192307692307,
+"lossless": true,
+"btc_stream_kbps": [
+193.0970888406253,
+209.384
+]
+},
+"BTC_S_N94_Resting": {
+"fps_sent": 10.001,
+"k": 3,
+"box36_bytes": 2034.9920634920634,
+"lossless": true,
+"btc_stream_kbps": [
+198.10567130257033,
+211.144
+]
+},
+"BTC_S_N96_Resting": {
+"fps_sent": 10.0,
+"k": 3,
+"box36_bytes": 1976.3,
+"lossless": true,
+"btc_stream_kbps": [
+193.384,
+196.912
+]
+},
+"BTC_S_N97_Resting": {
+"fps_sent": 9.994,
+"k": 2,
+"box36_bytes": 2585.173076923077,
+"lossless": true,
+"btc_stream_kbps": [
+241.9442381225433,
+244.816
+]
+},
+"BTC_S_N98_Resting": {
+"fps_sent": 10.0,
+"k": 6,
+"box36_bytes": 1743.5030303030303,
+"lossless": true,
+"btc_stream_kbps": [
+174.76024242424242,
+179.04
+]
+},
+"BTC_S_N99_Resting": {
+"fps_sent": 10.001,
+"k": 6,
+"box36_bytes": 1740.55900621118,
+"lossless": true,
+"btc_stream_kbps": [
+174.54290568588056,
+192.968
+]
+},
+"BTC_S_N9_Resting": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2382.173076923077,
+"lossless": true,
+"btc_stream_kbps": [
+225.6603514724084,
+227.088
+]
+},
+"MCD_1115_FullHDwebcam_after": {
+"fps_sent": 9.979,
+"k": 3,
+"box36_bytes": 2109.131358300727,
+"lossless": true,
+"btc_stream_kbps": [
+203.59109733970632,
+226.168
+],
+"masked36_bytes": 1939.7741755170487,
+"public_stream_kbps": [
+323.9650529537164,
+362.824
+]
+},
+"MCD_1115_FullHDwebcam_before": {
+"fps_sent": 9.996,
+"k": 3,
+"box36_bytes": 2275.188340807175,
+"lossless": true,
+"btc_stream_kbps": [
+217.21205766055303,
+223.712
+],
+"masked36_bytes": 1975.0706278026905,
+"public_stream_kbps": [
+340.6105500055204,
+355.072
+]
+},
+"MCD_1399_FullHDwebcam_after": {
+"fps_sent": 9.995,
+"k": 3,
+"box36_bytes": 1973.6107083100949,
+"lossless": true,
+"btc_stream_kbps": [
+193.06499803863056,
+214.36
+],
+"masked36_bytes": 1885.798103736754,
+"public_stream_kbps": [
+309.30631473640085,
+343.24
+]
+},
+"MCD_1399_FullHDwebcam_before": {
+"fps_sent": 9.995,
+"k": 3,
+"box36_bytes": 1944.0411568409343,
+"lossless": true,
+"btc_stream_kbps": [
+190.70541620266965,
+211.0
+],
+"masked36_bytes": 1905.5895439377086,
+"public_stream_kbps": [
+308.5321071520054,
+342.584
+]
+},
+"MCD_1474_FullHDwebcam_after": {
+"fps_sent": 9.948,
+"k": 3,
+"box36_bytes": 1973.939393939394,
+"lossless": true,
+"btc_stream_kbps": [
+192.1985325181753,
+224.168
+],
+"masked36_bytes": 1851.9854096520762,
+"public_stream_kbps": [
+305.2113528884402,
+360.072
+]
+},
+"MCD_1474_FullHDwebcam_before": {
+"fps_sent": 9.947,
+"k": 3,
+"box36_bytes": 1861.4164337618781,
+"lossless": true,
+"btc_stream_kbps": [
+183.20942068154142,
+213.928
+],
+"masked36_bytes": 1760.4169927333705,
+"public_stream_kbps": [
+288.9151062792351,
+340.376
+]
+},
+"MCD_1563_FullHDwebcam_after": {
+"fps_sent": 9.978,
+"k": 3,
+"box36_bytes": 1911.8416062465142,
+"lossless": true,
+"btc_stream_kbps": [
+187.80867236626435,
+210.616
+],
+"masked36_bytes": 1854.9224762967094,
+"public_stream_kbps": [
+301.3892807862784,
+338.68
+]
+},
+"MCD_1563_FullHDwebcam_before": {
+"fps_sent": 9.997,
+"k": 3,
+"box36_bytes": 1910.8200557103064,
+"lossless": true,
+"btc_stream_kbps": [
+188.0855502293848,
+211.368
+],
+"masked36_bytes": 1868.31643454039,
+"public_stream_kbps": [
+302.9541883456821,
+341.288
+]
+},
+"MCD_1981_FullHDwebcam_after": {
+"fps_sent": 9.995,
+"k": 3,
+"box36_bytes": 2095.6190476190477,
+"lossless": true,
+"btc_stream_kbps": [
+202.8202828042878,
+234.216
+],
+"masked36_bytes": 1914.1109243697479,
+"public_stream_kbps": [
+321.32532876700407,
+374.488
+]
+},
+"MCD_1981_FullHDwebcam_before": {
+"fps_sent": 9.994,
+"k": 3,
+"box36_bytes": 2133.170403587444,
+"lossless": true,
+"btc_stream_kbps": [
+205.8165350298643,
+220.952
+],
+"masked36_bytes": 1974.536995515695,
+"public_stream_kbps": [
+329.14932571457115,
+351.528
+]
+},
+"MCD_2091_FullHDwebcam_after": {
+"fps_sent": 9.972,
+"k": 3,
+"box36_bytes": 2061.2197309417043,
+"lossless": true,
+"btc_stream_kbps": [
+199.61908502772656,
+216.888
+],
+"masked36_bytes": 1898.0313901345291,
+"public_stream_kbps": [
+316.57437920184907,
+344.536
+]
+},
+"MCD_2091_FullHDwebcam_before": {
+"fps_sent": 9.996,
+"k": 3,
+"box36_bytes": 2092.8004484304934,
+"lossless": true,
+"btc_stream_kbps": [
+202.6277089825808,
+230.264
+],
+"masked36_bytes": 1897.6771300448431,
+"public_stream_kbps": [
+319.8377280877209,
+365.864
+]
+},
+"MCD_2253_FullHDwebcam_after": {
+"fps_sent": 9.838,
+"k": 3,
+"box36_bytes": 2009.8905982905983,
+"lossless": true,
+"btc_stream_kbps": [
+192.894981255397,
+216.52
+],
+"masked36_bytes": 1946.9390313390313,
+"public_stream_kbps": [
+312.12679692967754,
+351.416
+]
+},
+"MCD_2253_FullHDwebcam_before": {
+"fps_sent": 9.898,
+"k": 3,
+"box36_bytes": 2038.3357746478873,
+"lossless": true,
+"btc_stream_kbps": [
+196.3197608426053,
+222.52
+],
+"masked36_bytes": 1955.1966197183099,
+"public_stream_kbps": [
+316.93012719842164,
+360.168
+]
+},
+"MCD_2284_FullHDwebcam_after": {
+"fps_sent": 9.996,
+"k": 3,
+"box36_bytes": 2120.989977728285,
+"lossless": true,
+"btc_stream_kbps": [
+204.88110142315654,
+226.2
+],
+"masked36_bytes": 1995.56570155902,
+"public_stream_kbps": [
+329.9186955853836,
+362.584
+]
+},
+"MCD_2284_FullHDwebcam_before": {
+"fps_sent": 9.972,
+"k": 3,
+"box36_bytes": 2125.2152040245946,
+"lossless": true,
+"btc_stream_kbps": [
+204.72913076965963,
+227.656
+],
+"masked36_bytes": 1988.5835662381219,
+"public_stream_kbps": [
+328.91123365272455,
+368.712
+]
+},
+"MCD_2285_FullHDwebcam_after": {
+"fps_sent": 9.908,
+"k": 3,
+"box36_bytes": 1857.2522522522522,
+"lossless": true,
+"btc_stream_kbps": [
+182.16253821349073,
+205.56
+],
+"masked36_bytes": 1774.8344594594594,
+"public_stream_kbps": [
+288.5973881286634,
+327.016
+]
+},
+"MCD_2285_FullHDwebcam_before": {
+"fps_sent": 9.969,
+"k": 3,
+"box36_bytes": 2021.227932960894,
+"lossless": true,
+"btc_stream_kbps": [
+196.36500067957869,
+219.56
+],
+"masked36_bytes": 1927.154189944134,
+"public_stream_kbps": [
+315.6049579533141,
+353.688
+]
+},
+"MCD_2751_FullHDwebcam_after": {
+"fps_sent": 9.885,
+"k": 3,
+"box36_bytes": 1905.6823063877898,
+"lossless": true,
+"btc_stream_kbps": [
+185.5683116805154,
+214.984
+],
+"masked36_bytes": 1797.0107405313736,
+"public_stream_kbps": [
+293.50910019572,
+342.216
+]
+},
+"MCD_2751_FullHDwebcam_before": {
+"fps_sent": 9.877,
+"k": 3,
+"box36_bytes": 2058.3557312252965,
+"lossless": true,
+"btc_stream_kbps": [
+197.49381126516175,
+225.752
+],
+"masked36_bytes": 1967.7097684923772,
+"public_stream_kbps": [
+318.842353766557,
+364.248
+]
+},
+"MCD_2801_FullHDwebcam_after": {
+"fps_sent": 9.995,
+"k": 3,
+"box36_bytes": 1931.3707234997196,
+"lossless": true,
+"btc_stream_kbps": [
+188.6621649481102,
+209.304
+],
+"masked36_bytes": 1870.6281547952888,
+"public_stream_kbps": [
+302.6948157041892,
+340.056
+]
+},
+"MCD_2801_FullHDwebcam_before": {
+"fps_sent": 9.989,
+"k": 3,
+"box36_bytes": 1960.556919642857,
+"lossless": true,
+"btc_stream_kbps": [
+191.91276160517072,
+212.696
+],
+"masked36_bytes": 1916.302455357143,
+"public_stream_kbps": [
+310.52605822746636,
+344.872
+]
+},
+"MCD_2802_FullHDwebcam_after": {
+"fps_sent": 9.997,
+"k": 3,
+"box36_bytes": 2005.3647058823528,
+"lossless": true,
+"btc_stream_kbps": [
+195.6545971730383,
+217.944
+],
+"masked36_bytes": 1933.7983193277312,
+"public_stream_kbps": [
+315.76495704566133,
+353.016
+]
+},
+"MCD_2802_FullHDwebcam_before": {
+"fps_sent": 9.995,
+"k": 3,
+"box36_bytes": 2007.1926091825308,
+"lossless": true,
+"btc_stream_kbps": [
+195.75278382978013,
+219.4
+],
+"masked36_bytes": 1931.6763717805152,
+"public_stream_kbps": [
+315.6640291781614,
+356.024
+]
+},
+"MCD_2842_FullHDwebcam_after": {
+"fps_sent": 9.994,
+"k": 3,
+"box36_bytes": 2010.592841163311,
+"lossless": true,
+"btc_stream_kbps": [
+196.0179424420798,
+215.8
+],
+"masked36_bytes": 1923.572706935123,
+"public_stream_kbps": [
+315.2771473586069,
+346.552
+]
+},
+"MCD_2842_FullHDwebcam_before": {
+"fps_sent": 9.996,
+"k": 3,
+"box36_bytes": 2006.9910714285713,
+"lossless": true,
+"btc_stream_kbps": [
+195.76441538954572,
+215.208
+],
+"masked36_bytes": 1910.0848214285713,
+"public_stream_kbps": [
+313.9659947745007,
+345.736
+]
+},
+"MCD_2851_FullHDwebcam_after": {
+"fps_sent": 9.996,
+"k": 3,
+"box36_bytes": 1915.752232142857,
+"lossless": true,
+"btc_stream_kbps": [
+188.46880456172337,
+190.896
+],
+"masked36_bytes": 1873.1049107142858,
+"public_stream_kbps": [
+303.7135536982915,
+308.336
+]
+},
+"MCD_2851_FullHDwebcam_before": {
+"fps_sent": 9.996,
+"k": 3,
+"box36_bytes": 1911.8508625486922,
+"lossless": true,
+"btc_stream_kbps": [
+188.16052293821951,
+192.704
+],
+"masked36_bytes": 1864.160267111853,
+"public_stream_kbps": [
+302.6922295926737,
+310.96
+]
+},
+"MCD_2874_FullHDwebcam_after": {
+"fps_sent": 9.994,
+"k": 3,
+"box36_bytes": 1977.8061281337048,
+"lossless": true,
+"btc_stream_kbps": [
+193.3927913607163,
+215.096
+],
+"masked36_bytes": 1925.5543175487464,
+"public_stream_kbps": [
+312.80816540000166,
+345.976
+]
+},
+"MCD_2874_FullHDwebcam_before": {
+"fps_sent": 9.995,
+"k": 3,
+"box36_bytes": 2024.8813370473538,
+"lossless": true,
+"btc_stream_kbps": [
+197.17249003510207,
+218.168
+],
+"masked36_bytes": 1974.6128133704735,
+"public_stream_kbps": [
+320.52019740552754,
+353.704
+]
+},
+"MCD_3016_FullHDwebcam_after": {
+"fps_sent": 9.996,
+"k": 3,
+"box36_bytes": 2109.338521400778,
+"lossless": true,
+"btc_stream_kbps": [
+203.9458606700529,
+229.272
+],
+"masked36_bytes": 1967.4296831573097,
+"public_stream_kbps": [
+326.7313362460047,
+369.208
+]
+},
+"MCD_3016_FullHDwebcam_before": {
+"fps_sent": 9.996,
+"k": 3,
+"box36_bytes": 2188.728285077951,
+"lossless": true,
+"btc_stream_kbps": [
+210.29813277397383,
+216.512
+],
+"masked36_bytes": 2087.324053452116,
+"public_stream_kbps": [
+342.67361793422367,
+355.168
+]
+},
+"MCD_3142_FullHDwebcam_after": {
+"fps_sent": 9.985,
+"k": 3,
+"box36_bytes": 1955.346003353829,
+"lossless": true,
+"btc_stream_kbps": [
+190.9856585931096,
+215.624
+],
+"masked36_bytes": 1815.614309670207,
+"public_stream_kbps": [
+301.10505376583905,
+342.648
+]
+},
+"MCD_3142_FullHDwebcam_before": {
+"fps_sent": 9.98,
+"k": 3,
+"box36_bytes": 1982.4556113902847,
+"lossless": true,
+"btc_stream_kbps": [
+193.48732320462818,
+217.544
+],
+"masked36_bytes": 1845.6192071468454,
+"public_stream_kbps": [
+306.3498799339345,
+344.648
+]
+},
+"MCD_3363_FullHDwebcam_after": {
+"fps_sent": 9.997,
+"k": 3,
+"box36_bytes": 1942.8771539744303,
+"lossless": true,
+"btc_stream_kbps": [
+190.65037723412246,
+218.072
+],
+"masked36_bytes": 1879.6420233463034,
+"public_stream_kbps": [
+306.4254277189183,
+352.648
+]
+},
+"MCD_3363_FullHDwebcam_before": {
+"fps_sent": 9.997,
+"k": 3,
+"box36_bytes": 1982.953125,
+"lossless": true,
+"btc_stream_kbps": [
+193.85972868613882,
+216.792
+],
+"masked36_bytes": 1941.9486607142858,
+"public_stream_kbps": [
+314.6204128252227,
+352.888
+]
+},
+"MCD_3401_FullHDwebcam_after": {
+"fps_sent": 9.996,
+"k": 3,
+"box36_bytes": 1926.8828125,
+"lossless": true,
+"btc_stream_kbps": [
+189.35801450105032,
+193.136
+],
+"masked36_bytes": 1916.0904017857142,
+"public_stream_kbps": [
+308.0397374050249,
+315.008
+]
+},
+"MCD_3401_FullHDwebcam_before": {
+"fps_sent": 9.995,
+"k": 3,
+"box36_bytes": 1910.860322760156,
+"lossless": true,
+"btc_stream_kbps": [
+188.04752620993668,
+207.72
+],
+"masked36_bytes": 1899.8942682248191,
+"public_stream_kbps": [
+305.4158423493355,
+336.76
+]
+},
+"MCD_3554_FullHDwebcam_after": {
+"fps_sent": 9.997,
+"k": 3,
+"box36_bytes": 1969.7764182424917,
+"lossless": true,
+"btc_stream_kbps": [
+192.7957914925507,
+214.104
+],
+"masked36_bytes": 1902.2447163515017,
+"public_stream_kbps": [
+310.3749214491042,
+345.496
+]
+},
+"MCD_3554_FullHDwebcam_before": {
+"fps_sent": 9.997,
+"k": 3,
+"box36_bytes": 1990.6726057906458,
+"lossless": true,
+"btc_stream_kbps": [
+194.4777165393482,
+217.096
+],
+"masked36_bytes": 1917.326280623608,
+"public_stream_kbps": [
+313.2695566430204,
+350.216
+]
+},
+"MCD_3658_FullHDwebcam_after": {
+"fps_sent": 9.997,
+"k": 3,
+"box36_bytes": 2002.4586129753916,
+"lossless": true,
+"btc_stream_kbps": [
+195.41969253900987,
+214.904
+],
+"masked36_bytes": 1964.1778523489934,
+"public_stream_kbps": [
+317.9581809059238,
+349.864
+]
+},
+"MCD_3658_FullHDwebcam_before": {
+"fps_sent": 9.994,
+"k": 3,
+"box36_bytes": 2026.9339305711087,
+"lossless": true,
+"btc_stream_kbps": [
+197.31516687892332,
+215.736
+],
+"masked36_bytes": 1977.5587905935051,
+"public_stream_kbps": [
+320.8850027280428,
+350.12
+]
+},
+"MCD_3700_FullHDwebcam_after": {
+"fps_sent": 9.997,
+"k": 3,
+"box36_bytes": 2028.664437012263,
+"lossless": true,
+"btc_stream_kbps": [
+197.50648853492066,
+220.232
+],
+"masked36_bytes": 1956.607580824972,
+"public_stream_kbps": [
+319.4339395560593,
+357.72
+]
+},
+"MCD_3700_FullHDwebcam_before": {
+"fps_sent": 9.997,
+"k": 3,
+"box36_bytes": 2030.324414715719,
+"lossless": true,
+"btc_stream_kbps": [
+197.64036369281354,
+221.16
+],
+"masked36_bytes": 1945.0758082497214,
+"public_stream_kbps": [
+318.64627099360484,
+357.976
+]
+},
+"MCD_4073_FullHDwebcam_after": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2008.020134228188,
+"lossless": true,
+"btc_stream_kbps": [
+195.7401627838875,
+222.904
+],
+"masked36_bytes": 1782.8635346756153,
+"public_stream_kbps": [
+303.7091600496263,
+347.768
+]
+},
+"MCD_4073_FullHDwebcam_before": {
+"fps_sent": 9.996,
+"k": 3,
+"box36_bytes": 2103.2957589285716,
+"lossless": true,
+"btc_stream_kbps": [
+203.46864883296163,
+226.104
+],
+"masked36_bytes": 2011.7935267857142,
+"public_stream_kbps": [
+329.8055549108578,
+368.264
+]
+},
+"MCD_4488_FullHDwebcam_after": {
+"fps_sent": 9.996,
+"k": 3,
+"box36_bytes": 1948.8530066815144,
+"lossless": true,
+"btc_stream_kbps": [
+191.11545908297802,
+205.576
+],
+"masked36_bytes": 1896.2249443207127,
+"public_stream_kbps": [
+308.2088625903233,
+329.576
+]
+},
+"MCD_4488_FullHDwebcam_before": {
+"fps_sent": 9.996,
+"k": 3,
+"box36_bytes": 1955.2600896860986,
+"lossless": true,
+"btc_stream_kbps": [
+191.62691098016967,
+207.464
+],
+"masked36_bytes": 1958.6076233183855,
+"public_stream_kbps": [
+313.7084431120186,
+341.688
+]
+},
+"MCD_4551_FullHDwebcam_after": {
+"fps_sent": 9.963,
+"k": 3,
+"box36_bytes": 2022.109375,
+"lossless": true,
+"btc_stream_kbps": [
+196.32528311041136,
+217.368
+],
+"masked36_bytes": 1946.279017857143,
+"public_stream_kbps": [
+317.0228290279406,
+351.496
+]
+},
+"MCD_4551_FullHDwebcam_before": {
+"fps_sent": 9.996,
+"k": 3,
+"box36_bytes": 2033.760712298275,
+"lossless": true,
+"btc_stream_kbps": [
+197.91040925299595,
+222.36
+],
+"masked36_bytes": 1935.1819699499165,
+"public_stream_kbps": [
+318.12217654674487,
+359.576
+]
+},
+"MCD_4902_FullHDwebcam_after": {
+"fps_sent": 9.987,
+"k": 3,
+"box36_bytes": 1962.3028953229398,
+"lossless": true,
+"btc_stream_kbps": [
+192.02089461804263,
+214.792
+],
+"masked36_bytes": 1724.052338530067,
+"public_stream_kbps": [
+295.2542600089412,
+332.024
+]
+},
+"MCD_4902_FullHDwebcam_before": {
+"fps_sent": 9.995,
+"k": 3,
+"box36_bytes": 2000.7388392857142,
+"lossless": true,
+"btc_stream_kbps": [
+195.24642450456273,
+220.52
+],
+"masked36_bytes": 1738.611607142857,
+"public_stream_kbps": [
+299.7257571859527,
+338.392
+]
+},
+"MCD_5031_FullHDwebcam_after": {
+"fps_sent": 9.996,
+"k": 3,
+"box36_bytes": 2063.324791086351,
+"lossless": true,
+"btc_stream_kbps": [
+200.2651069936991,
+228.136
+],
+"masked36_bytes": 1975.0128133704736,
+"public_stream_kbps": [
+323.65630100421737,
+370.792
+]
+},
+"MCD_5031_FullHDwebcam_before": {
+"fps_sent": 9.979,
+"k": 3,
+"box36_bytes": 2076.9662542182227,
+"lossless": true,
+"btc_stream_kbps": [
+200.72545712529623,
+223.464
+],
+"masked36_bytes": 1988.7097862767155,
+"public_stream_kbps": [
+324.72739845721645,
+361.992
+]
+},
+"MCD_5156_FullHDwebcam_after": {
+"fps_sent": 9.996,
+"k": 3,
+"box36_bytes": 1974.5752508361204,
+"lossless": true,
+"btc_stream_kbps": [
+193.16422853652307,
+195.744
+],
+"masked36_bytes": 1889.8483835005575,
+"public_stream_kbps": [
+309.74273637834204,
+314.784
+]
+},
+"MCD_5156_FullHDwebcam_before": {
+"fps_sent": 9.996,
+"k": 3,
+"box36_bytes": 1987.9481981981983,
+"lossless": true,
+"btc_stream_kbps": [
+194.2413251858027,
+215.832
+],
+"masked36_bytes": 1876.918918918919,
+"public_stream_kbps": [
+309.7905023173056,
+345.736
+]
+},
+"MCD_5292_FullHDwebcam_after": {
+"fps_sent": 9.996,
+"k": 3,
+"box36_bytes": 1931.8373259052926,
+"lossless": true,
+"btc_stream_kbps": [
+189.75089004241167,
+210.904
+],
+"masked36_bytes": 1843.2,
+"public_stream_kbps": [
+302.60163337168245,
+336.264
+]
+},
+"MCD_5292_FullHDwebcam_before": {
+"fps_sent": 9.945,
+"k": 3,
+"box36_bytes": 1945.0206819452208,
+"lossless": true,
+"btc_stream_kbps": [
+189.82890042045037,
+213.784
+],
+"masked36_bytes": 1860.36444941308,
+"public_stream_kbps": [
+303.46783694915393,
+342.568
+]
+},
+"MCD_5507_FullHDwebcam_after": {
+"fps_sent": 9.997,
+"k": 3,
+"box36_bytes": 2136.807585052984,
+"lossless": true,
+"btc_stream_kbps": [
+206.16550564246214,
+233.528
+],
+"masked36_bytes": 2046.4896820970441,
+"public_stream_kbps": [
+335.2876649510412,
+382.632
+]
+},
+"MCD_5507_FullHDwebcam_before": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2065.081473214286,
+"lossless": true,
+"btc_stream_kbps": [
+200.30477622260503,
+230.616
+],
+"masked36_bytes": 1924.5770089285713,
+"public_stream_kbps": [
+319.60269489122084,
+371.64
+]
+},
+"MCD_5637_FullHDwebcam_after": {
+"fps_sent": 9.997,
+"k": 3,
+"box36_bytes": 1966.4160177975527,
+"lossless": true,
+"btc_stream_kbps": [
+192.52891869558096,
+212.872
+],
+"masked36_bytes": 1830.6040044493882,
+"public_stream_kbps": [
+304.37984710565945,
+336.872
+]
+},
+"MCD_5637_FullHDwebcam_before": {
+"fps_sent": 9.996,
+"k": 3,
+"box36_bytes": 1958.1950947603123,
+"lossless": true,
+"btc_stream_kbps": [
+191.85423484880167,
+194.4
+],
+"masked36_bytes": 1797.9598662207359,
+"public_stream_kbps": [
+301.0846953229349,
+307.104
+]
+},
+"MCD_5646_FullHDwebcam_after": {
+"fps_sent": 9.995,
+"k": 3,
+"box36_bytes": 2036.0680423870608,
+"lossless": true,
+"btc_stream_kbps": [
+198.05791187076596,
+219.0
+],
+"masked36_bytes": 1888.8867819297268,
+"public_stream_kbps": [
+314.5456097957121,
+347.592
+]
+},
+"MCD_5646_FullHDwebcam_before": {
+"fps_sent": 9.994,
+"k": 3,
+"box36_bytes": 2075.2488839285716,
+"lossless": true,
+"btc_stream_kbps": [
+201.18553151620884,
+223.96
+],
+"masked36_bytes": 1914.497767857143,
+"public_stream_kbps": [
+319.71796417933604,
+355.368
+]
+},
+"MCD_5904_FullHDwebcam_after": {
+"fps_sent": 9.997,
+"k": 3,
+"box36_bytes": 2002.3804226918799,
+"lossless": true,
+"btc_stream_kbps": [
+195.32116056689983,
+216.872
+],
+"masked36_bytes": 1937.765294771969,
+"public_stream_kbps": [
+315.65910605081433,
+351.112
+]
+},
+"MCD_5904_FullHDwebcam_before": {
+"fps_sent": 9.997,
+"k": 3,
+"box36_bytes": 1989.9510839355198,
+"lossless": true,
+"btc_stream_kbps": [
+194.41489900458092,
+218.536
+],
+"masked36_bytes": 1936.1145080600334,
+"public_stream_kbps": [
+314.7062006717487,
+356.376
+]
+},
+"MCD_6401_FullHDwebcam_after": {
+"fps_sent": 9.997,
+"k": 3,
+"box36_bytes": 1945.1520891364903,
+"lossless": true,
+"btc_stream_kbps": [
+190.8323059936851,
+208.472
+],
+"masked36_bytes": 1882.5559888579387,
+"public_stream_kbps": [
+306.8403951624207,
+334.952
+]
+},
+"MCD_6401_FullHDwebcam_before": {
+"fps_sent": 9.997,
+"k": 3,
+"box36_bytes": 1919.2525027808676,
+"lossless": true,
+"btc_stream_kbps": [
+188.75711942085726,
+209.672
+],
+"masked36_bytes": 1862.7519466073416,
+"public_stream_kbps": [
+303.17903645269763,
+338.088
+]
+},
+"MCD_6631_FullHDwebcam_after": {
+"fps_sent": 9.997,
+"k": 3,
+"box36_bytes": 2052.5172798216277,
+"lossless": true,
+"btc_stream_kbps": [
+199.41479808493966,
+204.752
+],
+"masked36_bytes": 1948.4871794871794,
+"public_stream_kbps": [
+320.6932777421844,
+326.464
+]
+},
+"MCD_6631_FullHDwebcam_before": {
+"fps_sent": 9.996,
+"k": 3,
+"box36_bytes": 2015.0028105677347,
+"lossless": true,
+"btc_stream_kbps": [
+194.52627894440923,
+217.448
+],
+"masked36_bytes": 1929.0938729623383,
+"public_stream_kbps": [
+312.44888059439126,
+353.16
+]
+},
+"MCD_6678_FullHDwebcam_after": {
+"fps_sent": 9.996,
+"k": 3,
+"box36_bytes": 1909.1439732142858,
+"lossless": true,
+"btc_stream_kbps": [
+187.9388376797259,
+215.352
+],
+"masked36_bytes": 1803.7589285714287,
+"public_stream_kbps": [
+297.63712916775705,
+342.632
+]
+},
+"MCD_6678_FullHDwebcam_before": {
+"fps_sent": 9.996,
+"k": 3,
+"box36_bytes": 2023.5770089285713,
+"lossless": true,
+"btc_stream_kbps": [
+197.09119343086147,
+223.992
+],
+"masked36_bytes": 1895.7957589285713,
+"public_stream_kbps": [
+314.1503285364373,
+358.728
+]
+},
+"MCD_6782_FullHDwebcam_after": {
+"fps_sent": 9.996,
+"k": 3,
+"box36_bytes": 1971.1284046692606,
+"lossless": true,
+"btc_stream_kbps": [
+192.89259716379422,
+213.72
+],
+"masked36_bytes": 1862.8671484157865,
+"public_stream_kbps": [
+307.31589234161356,
+341.656
+]
+},
+"MCD_6782_FullHDwebcam_before": {
+"fps_sent": 9.997,
+"k": 3,
+"box36_bytes": 1945.337041156841,
+"lossless": true,
+"btc_stream_kbps": [
+190.8439147077701,
+210.152
+],
+"masked36_bytes": 1850.4304783092325,
+"public_stream_kbps": [
+304.2808771119241,
+336.056
+]
+},
+"MCD_6968_FullHDwebcam_after": {
+"fps_sent": 9.898,
+"k": 3,
+"box36_bytes": 1781.908371040724,
+"lossless": true,
+"btc_stream_kbps": [
+176.01180711845873,
+206.936
+],
+"masked36_bytes": 1761.2488687782804,
+"public_stream_kbps": [
+281.2628820398667,
+333.448
+]
+},
+"MCD_6968_FullHDwebcam_before": {
+"fps_sent": 9.887,
+"k": 3,
+"box36_bytes": 1944.9966063348415,
+"lossless": true,
+"btc_stream_kbps": [
+188.7221093230999,
+219.352
+],
+"masked36_bytes": 1858.9276018099547,
+"public_stream_kbps": [
+301.58596929253673,
+353.512
+]
+},
+"MCD_6974_FullHDwebcam_after": {
+"fps_sent": 9.997,
+"k": 3,
+"box36_bytes": 2105.9106644332774,
+"lossless": true,
+"btc_stream_kbps": [
+203.6890973292702,
+221.896
+],
+"masked36_bytes": 1994.2367392518147,
+"public_stream_kbps": [
+328.62892960392554,
+357.432
+]
+},
+"MCD_6974_FullHDwebcam_before": {
+"fps_sent": 9.983,
+"k": 3,
+"box36_bytes": 2029.5616285554936,
+"lossless": true,
+"btc_stream_kbps": [
+197.30971846948725,
+219.944
+],
+"masked36_bytes": 1950.7473508087005,
+"public_stream_kbps": [
+318.6034391970911,
+354.504
+]
+},
+"MCD_7248_FullHDwebcam_after": {
+"fps_sent": 9.908,
+"k": 3,
+"box36_bytes": 2132.6203028603477,
+"lossless": true,
+"btc_stream_kbps": [
+203.99367019720592,
+225.24
+],
+"masked36_bytes": 2060.831183398766,
+"public_stream_kbps": [
+333.1002252177281,
+368.264
+]
+},
+"MCD_7248_FullHDwebcam_before": {
+"fps_sent": 9.996,
+"k": 3,
+"box36_bytes": 2119.010596765198,
+"lossless": true,
+"btc_stream_kbps": [
+204.7284627486305,
+227.832
+],
+"masked36_bytes": 2039.1411042944785,
+"public_stream_kbps": [
+333.25430874243244,
+370.44
+]
+},
+"MCD_7412_FullHDwebcam_before": {
+"fps_sent": 9.996,
+"k": 3,
+"box36_bytes": 2047.033482142857,
+"lossless": true,
+"btc_stream_kbps": [
+198.96834595262519,
+220.92
+],
+"masked36_bytes": 1962.658482142857,
+"public_stream_kbps": [
+321.3752944909622,
+358.328
+]
+},
+"MCD_7445_FullHDwebcam_after": {
+"fps_sent": 9.995,
+"k": 3,
+"box36_bytes": 2032.0066926938093,
+"lossless": true,
+"btc_stream_kbps": [
+197.73342392595484,
+218.632
+],
+"masked36_bytes": 1959.1098717233688,
+"public_stream_kbps": [
+319.8360710959333,
+352.376
+]
+},
+"MCD_7445_FullHDwebcam_before": {
+"fps_sent": 9.997,
+"k": 3,
+"box36_bytes": 2030.4416017797553,
+"lossless": true,
+"btc_stream_kbps": [
+197.64979024365218,
+219.96
+],
+"masked36_bytes": 1958.4649610678532,
+"public_stream_kbps": [
+319.7265082013329,
+355.112
+]
+},
+"MCD_7695_FullHDwebcam_after": {
+"fps_sent": 9.996,
+"k": 3,
+"box36_bytes": 2007.9832962138084,
+"lossless": true,
+"btc_stream_kbps": [
+195.8445308141481,
+224.2
+],
+"masked36_bytes": 1842.7438752783964,
+"public_stream_kbps": [
+308.66133637585887,
+355.016
+]
+},
+"MCD_7695_FullHDwebcam_before": {
+"fps_sent": 9.997,
+"k": 3,
+"box36_bytes": 1994.6316964285713,
+"lossless": true,
+"btc_stream_kbps": [
+194.79285919098646,
+224.424
+],
+"masked36_bytes": 1812.84375,
+"public_stream_kbps": [
+305.2276603774358,
+355.56
+]
+},
+"MCD_8432_FullHDwebcam_after": {
+"fps_sent": 9.997,
+"k": 3,
+"box36_bytes": 1898.1439732142858,
+"lossless": true,
+"btc_stream_kbps": [
+187.0780528089406,
+207.8
+],
+"masked36_bytes": 1862.599330357143,
+"public_stream_kbps": [
+301.4933004968481,
+335.464
+]
+},
+"MCD_8432_FullHDwebcam_before": {
+"fps_sent": 9.997,
+"k": 3,
+"box36_bytes": 1902.8573033707864,
+"lossless": true,
+"btc_stream_kbps": [
+187.45037982036055,
+210.824
+],
+"masked36_bytes": 1860.7629213483146,
+"public_stream_kbps": [
+301.71593339942217,
+340.408
+]
+},
+"MCD_8550_FullHDwebcam_after": {
+"fps_sent": 9.986,
+"k": 3,
+"box36_bytes": 1964.6277128547579,
+"lossless": true,
+"btc_stream_kbps": [
+192.17592762255234,
+212.808
+],
+"masked36_bytes": 1920.7000556483026,
+"public_stream_kbps": [
+311.1021906586778,
+346.968
+]
+},
+"MCD_8550_FullHDwebcam_before": {
+"fps_sent": 9.995,
+"k": 3,
+"box36_bytes": 1960.8984375,
+"lossless": true,
+"btc_stream_kbps": [
+192.06181398758167,
+212.024
+],
+"masked36_bytes": 1907.6395089285713,
+"public_stream_kbps": [
+310.0576444738845,
+344.152
+]
+},
+"MCD_8603_FullHDwebcam_after": {
+"fps_sent": 9.996,
+"k": 3,
+"box36_bytes": 2033.3549107142858,
+"lossless": true,
+"btc_stream_kbps": [
+197.87430765572373,
+219.096
+],
+"masked36_bytes": 1982.1328125,
+"public_stream_kbps": [
+321.8385197902358,
+356.072
+]
+},
+"MCD_8603_FullHDwebcam_before": {
+"fps_sent": 9.996,
+"k": 3,
+"box36_bytes": 2049.3422818791946,
+"lossless": true,
+"btc_stream_kbps": [
+199.1517739719732,
+221.464
+],
+"masked36_bytes": 1986.5346756152126,
+"public_stream_kbps": [
+323.4673512331448,
+361.848
+]
+},
+"MCD_8718_FullHDwebcam_after": {
+"fps_sent": 9.984,
+"k": 3,
+"box36_bytes": 2035.3960784313726,
+"lossless": true,
+"btc_stream_kbps": [
+197.79241893192165,
+219.496
+],
+"masked36_bytes": 1981.055462184874,
+"public_stream_kbps": [
+321.5171451959569,
+358.136
+]
+},
+"MCD_8718_FullHDwebcam_before": {
+"fps_sent": 9.982,
+"k": 3,
+"box36_bytes": 2044.8541202672607,
+"lossless": true,
+"btc_stream_kbps": [
+198.50946873799583,
+223.064
+],
+"masked36_bytes": 1975.8396436525613,
+"public_stream_kbps": [
+321.79376968690985,
+363.496
+]
+},
+"MCD_8772_FullHDwebcam_after": {
+"fps_sent": 9.972,
+"k": 3,
+"box36_bytes": 1784.3230855226384,
+"lossless": true,
+"btc_stream_kbps": [
+177.5334061097431,
+205.384
+],
+"masked36_bytes": 1713.3549468977083,
+"public_stream_kbps": [
+279.75825140895614,
+324.904
+]
+},
+"MCD_8772_FullHDwebcam_before": {
+"fps_sent": 9.313,
+"k": 2,
+"box36_bytes": 1753.743961352657,
+"lossless": true,
+"btc_stream_kbps": [
+163.5212964452013,
+294.768
+],
+"masked36_bytes": 1689.5169082125603,
+"public_stream_kbps": [
+257.2136809573087,
+469.312
+]
+},
+"MCD_8817_FullHDwebcam_after": {
+"fps_sent": 9.997,
+"k": 3,
+"box36_bytes": 1906.925905292479,
+"lossless": true,
+"btc_stream_kbps": [
+187.77510329550216,
+207.096
+],
+"masked36_bytes": 1896.766573816156,
+"public_stream_kbps": [
+304.9196409839115,
+337.608
+]
+},
+"MCD_8817_FullHDwebcam_before": {
+"fps_sent": 9.997,
+"k": 3,
+"box36_bytes": 1949.0061281337048,
+"lossless": true,
+"btc_stream_kbps": [
+191.1410447465125,
+212.76
+],
+"masked36_bytes": 1905.7392757660168,
+"public_stream_kbps": [
+309.00353118032405,
+344.968
+]
+},
+"MCD_8844_FullHDwebcam_after": {
+"fps_sent": 9.986,
+"k": 3,
+"box36_bytes": 1910.351366424986,
+"lossless": true,
+"btc_stream_kbps": [
+187.83982226606625,
+211.88
+],
+"masked36_bytes": 1806.680423870608,
+"public_stream_kbps": [
+297.65740639220854,
+338.2
+]
+},
+"MCD_8844_FullHDwebcam_before": {
+"fps_sent": 9.996,
+"k": 3,
+"box36_bytes": 1916.4902723735408,
+"lossless": true,
+"btc_stream_kbps": [
+188.52426190107587,
+196.032
+],
+"masked36_bytes": 1829.520844913841,
+"public_stream_kbps": [
+300.2814932526561,
+313.92
+]
+},
+"MCD_9028_FullHDwebcam_after": {
+"fps_sent": 9.995,
+"k": 3,
+"box36_bytes": 1972.047857540345,
+"lossless": true,
+"btc_stream_kbps": [
+192.94141817754027,
+218.824
+],
+"masked36_bytes": 1852.0122426265998,
+"public_stream_kbps": [
+306.4821318710998,
+348.264
+]
+},
+"MCD_9028_FullHDwebcam_before": {
+"fps_sent": 9.872,
+"k": 3,
+"box36_bytes": 1954.7632183908047,
+"lossless": true,
+"btc_stream_kbps": [
+186.16815758642628,
+212.296
+],
+"masked36_bytes": 1826.8333333333333,
+"public_stream_kbps": [
+293.48420842053787,
+336.808
+]
+},
+"MCD_9105_FullHDwebcam_after": {
+"fps_sent": 9.996,
+"k": 3,
+"box36_bytes": 1851.6999442275517,
+"lossless": true,
+"btc_stream_kbps": [
+183.35073311347395,
+205.4
+],
+"masked36_bytes": 1840.6034578918016,
+"public_stream_kbps": [
+295.99891340452865,
+332.872
+]
+},
+"MCD_9105_FullHDwebcam_before": {
+"fps_sent": 9.997,
+"k": 3,
+"box36_bytes": 1861.618464961068,
+"lossless": true,
+"btc_stream_kbps": [
+184.14797976471158,
+202.248
+],
+"masked36_bytes": 1829.9310344827586,
+"public_stream_kbps": [
+295.9451271287434,
+327.144
+]
+},
+"MCD_9118_FullHDwebcam_after": {
+"fps_sent": 9.996,
+"k": 3,
+"box36_bytes": 1907.4234835837508,
+"lossless": true,
+"btc_stream_kbps": [
+187.80693847975803,
+215.544
+],
+"masked36_bytes": 1816.7390094602115,
+"public_stream_kbps": [
+298.54658819717264,
+345.032
+]
+},
+"MCD_9118_FullHDwebcam_before": {
+"fps_sent": 9.996,
+"k": 3,
+"box36_bytes": 1829.1205357142858,
+"lossless": true,
+"btc_stream_kbps": [
+181.53962491928385,
+209.064
+],
+"masked36_bytes": 1734.5714285714287,
+"public_stream_kbps": [
+285.7051636443141,
+332.872
+]
+},
+"MCD_9141_FullHDwebcam_after": {
+"fps_sent": 9.932,
+"k": 3,
+"box36_bytes": 2140.536036036036,
+"lossless": true,
+"btc_stream_kbps": [
+205.11333250621945,
+227.16
+],
+"masked36_bytes": 2008.4436936936936,
+"public_stream_kbps": [
+330.3680703863975,
+368.728
+]
+},
+"MCD_9141_FullHDwebcam_before": {
+"fps_sent": 9.914,
+"k": 3,
+"box36_bytes": 1995.4200785193493,
+"lossless": true,
+"btc_stream_kbps": [
+193.23911345583284,
+222.488
+],
+"masked36_bytes": 1778.9747616376892,
+"public_stream_kbps": [
+300.07135108228937,
+348.616
+]
+},
+"MCD_9163_FullHDwebcam_after": {
+"fps_sent": 9.941,
+"k": 3,
+"box36_bytes": 1981.570945945946,
+"lossless": true,
+"btc_stream_kbps": [
+192.6541562772814,
+219.88
+],
+"masked36_bytes": 1875.588963963964,
+"public_stream_kbps": [
+307.45509299662973,
+353.24
+]
+},
+"MCD_9163_FullHDwebcam_before": {
+"fps_sent": 9.924,
+"k": 3,
+"box36_bytes": 1874.643018018018,
+"lossless": true,
+"btc_stream_kbps": [
+183.83908909483665,
+211.768
+],
+"masked36_bytes": 1768.287162162162,
+"public_stream_kbps": [
+289.9270364811658,
+336.44
+]
+},
+"MCD_9401_FullHDwebcam_after": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2039.9609810479376,
+"lossless": true,
+"btc_stream_kbps": [
+198.30425755850752,
+220.44
+],
+"masked36_bytes": 1914.4749163879599,
+"public_stream_kbps": [
+316.79910285802924,
+353.896
+]
+},
+"MCD_9401_FullHDwebcam_before": {
+"fps_sent": 9.997,
+"k": 3,
+"box36_bytes": 2040.2647385984428,
+"lossless": true,
+"btc_stream_kbps": [
+198.43408473624172,
+225.96
+],
+"masked36_bytes": 1782.250278086763,
+"public_stream_kbps": [
+306.41759569700594,
+351.496
+]
+},
+"MCD_9715_FullHDwebcam_after": {
+"fps_sent": 9.878,
+"k": 3,
+"box36_bytes": 2054.11930219471,
+"lossless": true,
+"btc_stream_kbps": [
+197.17394524543695,
+224.808
+],
+"masked36_bytes": 1965.8390545863815,
+"public_stream_kbps": [
+318.38381985877004,
+363.016
+]
+},
+"MCD_9715_FullHDwebcam_before": {
+"fps_sent": 9.902,
+"k": 3,
+"box36_bytes": 2060.7525309336334,
+"lossless": true,
+"btc_stream_kbps": [
+198.18170771532996,
+225.096
+],
+"masked36_bytes": 1967.880764904387,
+"public_stream_kbps": [
+319.8498060073242,
+364.248
+]
+},
+"MCD_9720_FullHDwebcam_after": {
+"fps_sent": 9.996,
+"k": 3,
+"box36_bytes": 2061.991091314031,
+"lossless": true,
+"btc_stream_kbps": [
+200.1633099961349,
+202.736
+],
+"masked36_bytes": 1955.9532293986638,
+"public_stream_kbps": [
+322.0333093478284,
+326.096
+]
+},
+"MCD_9720_FullHDwebcam_before": {
+"fps_sent": 9.941,
+"k": 3,
+"box36_bytes": 2159.1247191011234,
+"lossless": true,
+"btc_stream_kbps": [
+206.7779598062221,
+235.288
+],
+"masked36_bytes": 1995.861797752809,
+"public_stream_kbps": [
+331.1458986141759,
+377.496
+]
+},
+"MCD_9869_FullHDwebcam_after": {
+"fps_sent": 9.997,
+"k": 3,
+"box36_bytes": 1905.6987215119511,
+"lossless": true,
+"btc_stream_kbps": [
+187.67667205703773,
+209.912
+],
+"masked36_bytes": 1854.5514174541413,
+"public_stream_kbps": [
+301.4448832937163,
+338.968
+]
+},
+"MCD_9869_FullHDwebcam_before": {
+"fps_sent": 9.996,
+"k": 3,
+"box36_bytes": 1879.5256124721604,
+"lossless": true,
+"btc_stream_kbps": [
+185.5712073186068,
+205.224
+],
+"masked36_bytes": 1838.099109131403,
+"public_stream_kbps": [
+298.0162102475553,
+327.912
+]
+},
+"MCD_9884_FullHDwebcam_after": {
+"fps_sent": 9.906,
+"k": 3,
+"box36_bytes": 1991.0666666666666,
+"lossless": true,
+"btc_stream_kbps": [
+192.73856505835505,
+220.344
+],
+"masked36_bytes": 1901.8282485875707,
+"public_stream_kbps": [
+309.22081095964757,
+355.672
+]
+},
+"MCD_9884_FullHDwebcam_before": {
+"fps_sent": 9.93,
+"k": 3,
+"box36_bytes": 2174.6315789473683,
+"lossless": true,
+"btc_stream_kbps": [
+207.78427013129902,
+234.584
+],
+"masked36_bytes": 2085.493840985442,
+"public_stream_kbps": [
+339.1368710407987,
+384.2
+]
+},
+"UBFC2_subject1": {
+"fps_sent": 9.782,
+"k": 3,
+"box36_bytes": 2089.8720930232557,
+"lossless": true,
+"btc_stream_kbps": [
+198.05111252361513,
+223.896
+],
+"masked36_bytes": 1879.2403100775193,
+"public_stream_kbps": [
+311.30359742398133,
+352.264
+]
+},
+"UBFC2_subject10": {
+"fps_sent": 9.953,
+"k": 3,
+"box36_bytes": 2090.3525925925924,
+"lossless": true,
+"btc_stream_kbps": [
+201.56319303058746,
+224.28
+],
+"masked36_bytes": 1835.8637037037038,
+"public_stream_kbps": [
+313.3481934790837,
+350.968
+]
+},
+"UBFC2_subject11": {
+"fps_sent": 9.898,
+"k": 3,
+"box36_bytes": 2087.261447562777,
+"lossless": true,
+"btc_stream_kbps": [
+200.19382571114085,
+223.752
+],
+"masked36_bytes": 1859.1166912850813,
+"public_stream_kbps": [
+313.1963597014439,
+351.624
+]
+},
+"UBFC2_subject12": {
+"fps_sent": 9.69,
+"k": 3,
+"box36_bytes": 2128.5580693815987,
+"lossless": true,
+"btc_stream_kbps": [
+199.20046161816506,
+227.064
+],
+"masked36_bytes": 1945.47209653092,
+"public_stream_kbps": [
+316.5297190759379,
+360.856
+]
+},
+"UBFC2_subject14": {
+"fps_sent": 9.784,
+"k": 3,
+"box36_bytes": 2282.9744360902255,
+"lossless": true,
+"btc_stream_kbps": [
+213.20434084563092,
+240.168
+],
+"masked36_bytes": 1970.0,
+"public_stream_kbps": [
+333.5829581615973,
+377.88
+]
+},
+"UBFC2_subject15": {
+"fps_sent": 9.858,
+"k": 3,
+"box36_bytes": 2127.139465875371,
+"lossless": true,
+"btc_stream_kbps": [
+202.53501419784968,
+226.6
+],
+"masked36_bytes": 1932.6023738872404,
+"public_stream_kbps": [
+320.8792580128887,
+360.376
+]
+},
+"UBFC2_subject16": {
+"fps_sent": 9.977,
+"k": 3,
+"box36_bytes": 2100.187134502924,
+"lossless": true,
+"btc_stream_kbps": [
+202.83465784711092,
+225.64
+],
+"masked36_bytes": 1916.3830409356726,
+"public_stream_kbps": [
+321.3164186486961,
+356.28
+]
+},
+"UBFC2_subject17": {
+"fps_sent": 9.99,
+"k": 3,
+"box36_bytes": 2111.551319648094,
+"lossless": true,
+"btc_stream_kbps": [
+204.00938295962465,
+224.68
+],
+"masked36_bytes": 1835.1378299120236,
+"public_stream_kbps": [
+316.15337030446,
+349.192
+]
+},
+"UBFC2_subject18": {
+"fps_sent": 9.912,
+"k": 3,
+"box36_bytes": 2011.2890855457226,
+"lossless": true,
+"btc_stream_kbps": [
+194.4653970440662,
+216.68
+],
+"masked36_bytes": 1679.6873156342183,
+"public_stream_kbps": [
+293.40642754971685,
+327.56
+]
+},
+"UBFC2_subject20": {
+"fps_sent": 9.832,
+"k": 3,
+"box36_bytes": 2034.2767857142858,
+"lossless": true,
+"btc_stream_kbps": [
+194.6969168261039,
+219.432
+],
+"masked36_bytes": 1789.3482142857142,
+"public_stream_kbps": [
+301.4613457198957,
+340.2
+]
+},
+"UBFC2_subject24": {
+"fps_sent": 9.783,
+"k": 3,
+"box36_bytes": 2104.644776119403,
+"lossless": true,
+"btc_stream_kbps": [
+199.2379696673254,
+204.928
+],
+"masked36_bytes": 1905.641791044776,
+"public_stream_kbps": [
+314.57432814867485,
+323.984
+]
+},
+"UBFC2_subject25": {
+"fps_sent": 7.726,
+"k": 3,
+"box36_bytes": 2163.6853002070393,
+"lossless": true,
+"btc_stream_kbps": [
+160.98973372013953,
+168.848
+],
+"masked36_bytes": 1865.3540372670807,
+"public_stream_kbps": [
+249.58211943674496,
+262.0
+]
+},
+"UBFC2_subject26": {
+"fps_sent": 7.784,
+"k": 3,
+"box36_bytes": 2172.7515151515154,
+"lossless": true,
+"btc_stream_kbps": [
+162.7571611237322,
+168.48
+],
+"masked36_bytes": 1939.70101010101,
+"public_stream_kbps": [
+256.6410421296124,
+265.68
+]
+},
+"UBFC2_subject27": {
+"fps_sent": 7.79,
+"k": 3,
+"box36_bytes": 2072.020964360587,
+"lossless": true,
+"btc_stream_kbps": [
+156.60372514253876,
+162.848
+],
+"masked36_bytes": 1845.9287211740043,
+"public_stream_kbps": [
+244.71540744130334,
+255.76
+]
+},
+"UBFC2_subject3": {
+"fps_sent": 9.848,
+"k": 3,
+"box36_bytes": 2022.5158069883528,
+"lossless": true,
+"btc_stream_kbps": [
+194.07631626227402,
+217.064
+],
+"masked36_bytes": 1847.8801996672214,
+"public_stream_kbps": [
+305.61966931915435,
+342.296
+]
+},
+"UBFC2_subject31": {
+"fps_sent": 9.865,
+"k": 3,
+"box36_bytes": 2141.355029585799,
+"lossless": true,
+"btc_stream_kbps": [
+203.79862562497536,
+228.472
+],
+"masked36_bytes": 1921.680473372781,
+"public_stream_kbps": [
+321.3637278729149,
+359.48
+]
+},
+"UBFC2_subject32": {
+"fps_sent": 9.947,
+"k": 3,
+"box36_bytes": 2240.899705014749,
+"lossless": true,
+"btc_stream_kbps": [
+213.41711434557567,
+236.552
+],
+"masked36_bytes": 1971.8407079646017,
+"public_stream_kbps": [
+335.95277808839506,
+372.024
+]
+},
+"UBFC2_subject34": {
+"fps_sent": 9.991,
+"k": 3,
+"box36_bytes": 2089.941089837997,
+"lossless": true,
+"btc_stream_kbps": [
+202.29328290595916,
+224.84
+],
+"masked36_bytes": 1933.79970544919,
+"public_stream_kbps": [
+322.3292623692209,
+358.232
+]
+},
+"UBFC2_subject35": {
+"fps_sent": 9.972,
+"k": 3,
+"box36_bytes": 2053.1403508771928,
+"lossless": true,
+"btc_stream_kbps": [
+198.96608282759047,
+220.312
+],
+"masked36_bytes": 1868.1900584795321,
+"public_stream_kbps": [
+313.5358623634939,
+347.352
+]
+},
+"UBFC2_subject37": {
+"fps_sent": 9.934,
+"k": 3,
+"box36_bytes": 2011.6578171091446,
+"lossless": true,
+"btc_stream_kbps": [
+194.9112973568366,
+216.136
+]
+},
+"UBFC2_subject38": {
+"fps_sent": 9.971,
+"k": 3,
+"box36_bytes": 2111.9122807017543,
+"lossless": true,
+"btc_stream_kbps": [
+203.63370902256,
+224.744
+],
+"masked36_bytes": 1960.5906432748538,
+"public_stream_kbps": [
+325.56213743752915,
+359.688
+]
+},
+"UBFC2_subject39": {
+"fps_sent": 9.904,
+"k": 3,
+"box36_bytes": 2093.3578792341677,
+"lossless": true,
+"btc_stream_kbps": [
+200.80279791644574,
+222.76
+],
+"masked36_bytes": 1861.378497790869,
+"public_stream_kbps": [
+314.05562775149076,
+348.184
+]
+},
+"UBFC2_subject4": {
+"fps_sent": 9.854,
+"k": 3,
+"box36_bytes": 2141.2061403508774,
+"lossless": true,
+"btc_stream_kbps": [
+203.55228583847003,
+228.136
+],
+"masked36_bytes": 1908.5087719298247,
+"public_stream_kbps": [
+319.9437430851904,
+359.112
+]
+},
+"UBFC2_subject40": {
+"fps_sent": 9.935,
+"k": 3,
+"box36_bytes": 2065.890532544379,
+"lossless": true,
+"btc_stream_kbps": [
+199.24654669776643,
+222.2
+],
+"masked36_bytes": 1850.8994082840236,
+"public_stream_kbps": [
+312.0200418073265,
+347.96
+]
+},
+"UBFC2_subject41": {
+"fps_sent": 9.917,
+"k": 3,
+"box36_bytes": 2102.733431516937,
+"lossless": true,
+"btc_stream_kbps": [
+201.81686729390574,
+225.208
+],
+"masked36_bytes": 1872.518409425626,
+"public_stream_kbps": [
+316.1059311822199,
+352.072
+]
+},
+"UBFC2_subject42": {
+"fps_sent": 9.979,
+"k": 3,
+"box36_bytes": 2155.588839941263,
+"lossless": true,
+"btc_stream_kbps": [
+207.30031243440666,
+228.744
+],
+"masked36_bytes": 1849.4419970631425,
+"public_stream_kbps": [
+320.46269083216856,
+354.232
+]
+},
+"UBFC2_subject43": {
+"fps_sent": 9.78,
+"k": 3,
+"box36_bytes": 2001.3194029850747,
+"lossless": true,
+"btc_stream_kbps": [
+191.09240011075713,
+216.12
+],
+"masked36_bytes": 1838.9492537313433,
+"public_stream_kbps": [
+301.1751801930656,
+340.888
+]
+},
+"UBFC2_subject44": {
+"fps_sent": 9.871,
+"k": 3,
+"box36_bytes": 2216.0,
+"lossless": true,
+"btc_stream_kbps": [
+209.82170189638205,
+235.16
+],
+"masked36_bytes": 2003.0282317979197,
+"public_stream_kbps": [
+333.88486234918724,
+374.376
+]
+},
+"UBFC2_subject45": {
+"fps_sent": 9.981,
+"k": 3,
+"box36_bytes": 2012.8053097345132,
+"lossless": true,
+"btc_stream_kbps": [
+195.93397354370057,
+216.92
+],
+"masked36_bytes": 1824.5221238938052,
+"public_stream_kbps": [
+307.12551424973424,
+339.72
+]
+},
+"UBFC2_subject46": {
+"fps_sent": 9.741,
+"k": 3,
+"box36_bytes": 2098.340361445783,
+"lossless": true,
+"btc_stream_kbps": [
+197.88521336274383,
+224.088
+]
+},
+"UBFC2_subject47": {
+"fps_sent": 9.926,
+"k": 3,
+"box36_bytes": 2077.6355555555556,
+"lossless": true,
+"btc_stream_kbps": [
+200.00122110623482,
+202.864
+],
+"masked36_bytes": 1874.237037037037,
+"public_stream_kbps": [
+314.5271865226247,
+318.736
+]
+},
+"UBFC2_subject48": {
+"fps_sent": 9.578,
+"k": 3,
+"box36_bytes": 2148.147239263804,
+"lossless": true,
+"btc_stream_kbps": [
+198.39741668019144,
+228.472
+],
+"masked36_bytes": 2006.377300613497,
+"public_stream_kbps": [
+319.036515370641,
+367.976
+]
+},
+"UBFC2_subject49": {
+"fps_sent": 9.917,
+"k": 3,
+"box36_bytes": 2169.551622418879,
+"lossless": true,
+"btc_stream_kbps": [
+207.10044803018383,
+230.424
+],
+"masked36_bytes": 1881.330383480826,
+"public_stream_kbps": [
+322.0788185726205,
+358.92
+]
+},
+"UBFC2_subject8": {
+"fps_sent": 9.959,
+"k": 3,
+"box36_bytes": 2086.6617210682493,
+"lossless": true,
+"btc_stream_kbps": [
+201.38406123727682,
+204.096
+],
+"masked36_bytes": 1844.3827893175073,
+"public_stream_kbps": [
+313.9115326800083,
+317.856
+]
+},
+"UBFC2_subject9": {
+"fps_sent": 9.838,
+"k": 3,
+"box36_bytes": 2119.747023809524,
+"lossless": true,
+"btc_stream_kbps": [
+201.54670650571856,
+225.56
+],
+"masked36_bytes": 1882.4494047619048,
+"public_stream_kbps": [
+315.7060895938804,
+353.496
+]
+}
+}
