@@ -6,7 +6,7 @@
 - POS, CHROM and PBV implementations implement published methods. Cite Wang et al., *Algorithmic Principles of Remote PPG* (POS); de Haan & Jeanne, *Robust Pulse Rate From Chrominance-Based rPPG* (CHROM); de Haan & van Leest, *Improved motion robustness ... blood volume pulse signature* (PBV), alongside implementation-specific notices.
 - README organization was informed by rPPG-Toolbox and https://github.com/ZitongYu/PhysFormer; their README prose has not been copied.
 
-No new blanket license is assigned to the team's original additions in this publication. Access to source does not override upstream licenses or dataset agreements. Third-party papers, organizer slide decks, original datasets, checkpoints, participant imagery and authentication helpers are not redistribution deliverables here.
+No new blanket license is assigned to the team's original additions in this publication. Access to source does not override upstream licenses or dataset agreements. Third-party papers, organizer slide decks, original datasets, participant imagery and authentication helpers are not redistribution deliverables here. The separately authorized inference-assets-20261123 Release contains model-only exports of the team-trained padding-fixed checkpoints and reader parameters; it does not redistribute open-rppg weights or dataset records. The upstream terms for the included model definition remain applicable.
 
 Vendored visualization dependencies (`local_vendor/umap`, `pynndescent`) retain their distribution license files under the adjacent `*.dist-info/licenses/` directories. They are archival dependencies, not algorithms authored by this team.
 

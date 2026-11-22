@@ -73,6 +73,11 @@ hợp. Kiểm expert còn so đúng SHA256 hai file weights. Không có ý nghĩ
 
 ## 4. Cấu hình đường dẫn, kiểm tài sản trước khi chạy
 
+Tải và kiểm [gói checkpoint/reader](INFERENCE_ASSETS.md). Nếu chạy trên P100,
+dùng các [đường dẫn dataset hiện có](SERVER_DATASETS.md); không cần tải lại.
+Gói công khai không chứa split/cache/manifest người tham gia, nên các stage
+tái lập bảng vẫn cần bundle nội bộ đúng phiên bản.
+
 ```bash
 python3.12 tools/repro.py init
 # Sửa configs/paths.local.json: workspace, assets_manifest, đường dẫn Python.
@@ -153,5 +158,5 @@ lượng trước khi chép video/cache lớn. Output mới không được thê
 Xem [receipt tổng hợp của môi trường mới](CLEAN_ENV_VALIDATION.md). Chưa có phép
 chạy đủ raw video → frontend → CNN/expert → reader_v4/P4m trên một máy mới với
 bundle riêng. README không coi demo tổng hợp hoặc unit test là bằng chứng cho
-phép chạy đầy đủ đó. Không có checkpoint riêng công khai thì không thể tự hứa
-"clone rồi tái lập mọi bảng".
+phép chạy đầy đủ đó. Checkpoint và tham số hiện có trong Release, nhưng còn cần đúng bundle dữ liệu,
+split/cache và hoàn tất kiểm tích hợp; chưa thể hứa "clone rồi tái lập mọi bảng".

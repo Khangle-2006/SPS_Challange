@@ -1,0 +1,11 @@
+{
+  "tag": "inference-assets-20261123",
+  "url": "https://github.com/Khangle-2006/SPS_Challange/releases/download/inference-assets-20261123/facevitals-inference-assets-20261123.zip",
+  "asset": "facevitals-inference-assets-20261123.zip",
+  "sha256": "3104eb79dd2fafac89d83615942fb6a63665e4e77e168d7b4993d458ce8e1e37",
+  "bytes": 8724154,
+  "files": 18,
+  "scope": "model-only checkpoints and reader parameters; no participant records",
+  "btc_all_dev_deploy_model_available": false,
+  "end_to_end_deployment_validated": false
+}
