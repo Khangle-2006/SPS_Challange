@@ -1,0 +1,70 @@
+{
+  "checks": [
+    {
+      "command": [
+        "python3.12",
+        "tools/bootstrap_video.py"
+      ],
+      "exit": 0
+    },
+    {
+      "command": [
+        ".venv/core/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools",
+        "-p",
+        "test_*.py"
+      ],
+      "exit": 0
+    },
+    {
+      "command": [
+        ".venv/core/bin/python",
+        "-m",
+        "unittest",
+        "test_score_round1"
+      ],
+      "exit": 0
+    },
+    {
+      "command": [
+        ".venv/core/bin/python",
+        "tools/verify_source.py"
+      ],
+      "exit": 0
+    }
+  ],
+  "raw_video_exit": 0,
+  "elapsed_seconds": 186.7625880241394,
+  "reader_sha256": "07b1df48bdf7b8469ac11e4cdb65ca9ba6e0fb5de86102706b97a64693d28f33",
+  "commit": "b1079ef6ea0b54c3a547e540e018e518bcdab129",
+  "holdout_reads": 0,
+  "frontend": "reference",
+  "negative_controls": [
+    {
+      "case": "static_face",
+      "passed": true,
+      "exit": 0
+    },
+    {
+      "case": "no_face",
+      "passed": true,
+      "exit": 0
+    },
+    {
+      "case": "short",
+      "passed": true,
+      "exit": 1
+    }
+  ],
+  "individual_predictions_published": false,
+  "raw_reference_videos": 3,
+  "reference_max_pr_delta_bpm": 0.0,
+  "guarded_videos": 3,
+  "guarded_max_pr_delta_bpm": 22.0,
+  "expert_state_probe_max_delta_before_reset": 0.005491503082199958,
+  "expert_state_probe_max_delta_after_reset": 0.0
+}

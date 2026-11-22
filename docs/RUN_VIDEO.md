@@ -8,6 +8,7 @@ dataset của đội, GPU hay đường dẫn `/mnt/...` cố định.
 
 Máy được hỗ trợ: Linux x86_64, Python 3.12, tối thiểu 15 GiB RAM **còn trống**.
 Cần Internet khi cài dependency; sau khi cài xong, suy luận không gọi dịch vụ từ xa.
+Lệnh apt dưới đây dành cho Ubuntu 24.04 (máy kiểm dùng Python 3.12.3).
 Người quản trị cài các gói hệ thống nếu máy chưa có:
 
 ```bash

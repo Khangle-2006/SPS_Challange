@@ -66,3 +66,16 @@ Lệnh sử dụng và giới hạn: [RUN_VIDEO.md](RUN_VIDEO.md).
 Không cần bảng nhãn, đường dẫn riêng của đội hoặc bundle private-assets khi
 chạy video mới. Cần cung cấp video và cờ hoạt động đã biết; cần ≥15 GiB RAM
 còn trống. P4m/public vẫn là pipeline nghiên cứu riêng, không phải nhánh CLI này.
+
+### Kiểm cuối từ clone GitHub riêng
+
+Commit code đã kiểm: `b1079ef6ea0b54c3a547e540e018e518bcdab129`.
+Từ clone riêng đã cài ba venv mới, chạy lại bootstrap, 16 test runtime/tools,
+10 test scorer và 1.097 hash archive: tất cả PASS. Chạy lệnh `predict.py` mặc định
+trên một video dev đã định trước: **exit 0, 186,76 giây**, xuất JSON/CSV,
+model deployment đúng SHA. Sau đó ảnh mặt lặp, không mặt và clip 1 s đều cho
+hành vi mong đợi trên cùng code/model cuối. Không cần nhãn hoặc cache riêng để
+chạy lệnh; chỉ truyền đường dẫn video và hoạt động.
+
+[Receipt tổng hợp, không có ID hay PR cá nhân](validation/video_cli_acceptance_20261123.json).
+Các commit sau kiểm này chỉ bổ sung tài liệu/receipt, không đổi code hoặc model.
