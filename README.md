@@ -2,31 +2,39 @@
 
 Ước lượng **nhịp mạch (bpm) từ video RGB khuôn mặt**, không tiếp xúc. Repo chứa code nghiên cứu, định nghĩa pipeline đã chốt và bảng kết quả trên tập phát triển (dev) **đến ngày 22/11/2026**.
 
-> **Trạng thái 22/11/2026**
+> **Trạng thái tích hợp 23/11/2026**
 > - Pipeline đã **chốt và đóng băng tham số** cho cả hai nhánh: BTC dùng **reader_v4**, bộ công khai dùng **P4m**.
-> - Gói nộp bài chạy một lệnh đang được tích hợp. Trong lúc chờ, phần [Cách chạy pipeline](#cách-chạy-pipeline) mô tả các script lịch sử và tài sản cần có; chưa kiểm trọn đường raw video → reader_v4/P4m trong môi trường mới.
-> - **Holdout BTC (72 video / 41 người) chưa mở.** 7 người test của UBFC2 cũng chưa được dùng. Mọi số dưới đây là kiểm chéo ngoài fold trên dev.
+> - Lệnh mới cho một video BTC: `predict.py`, xem [Chạy video → PR](docs/RUN_VIDEO.md). Nhánh P4m/public vẫn là mã nghiên cứu; không đánh đồng hai nhánh.
+> - Frontend có bộ gác mặt có thể khôi phục/loại frame khác bản lịch sử. Cổng khớp từng đầu ra ngày 22/11 chưa đạt; không đổi ngưỡng hoặc gán MAE lịch sử cho frontend mới.
+> - Kiểm video riêng ngày 23/11 phát hiện open-rppg giữ trạng thái giữa các video trong script cũ. CLI mới reset trạng thái; các bảng lịch sử có expert chưa reset bên dưới không phải cam kết hiệu năng của CLI độc lập.
+> - **Holdout BTC (72 video / 41 người) chưa mở.** 7 người test của UBFC2 cũng chưa được dùng. Các bảng hiệu năng là kiểm chéo ngoài fold trên dev; fit toàn-dev chỉ dùng triển khai.
 
 ![Pipeline](docs/figures/pipeline.png)
 
 ## Clone về chạy từ đâu?
 
-**Bắt đầu với [hướng dẫn cài mới](docs/GETTING_STARTED.md).** Có bốn môi trường
-Python 3.12 tách riêng, cấu hình đường dẫn và kiểm SHA256 tài sản đầu vào.
+**Muốn chọn video và lấy PR: dùng [hướng dẫn này](docs/RUN_VIDEO.md).** Trên
+Linux x86_64 có Python 3.12 và ffmpeg:
 
 ```bash
 git clone https://github.com/Khangle-2006/SPS_Challange.git
 cd SPS_Challange
-python3.12 tools/setup_env.py core
-.venv/core/bin/python tools/pos_trace.py --make-demo output/demo_rgb.csv
-.venv/core/bin/python tools/pos_trace.py --input output/demo_rgb.csv --output output/demo_predictions.csv
+python3.12 tools/bootstrap_video.py
+python3.12 predict.py --video /path/video.mp4 --activity Resting --output output/my_video
 ```
 
-Demo POS dùng tín hiệu tổng hợp 90 bpm, chạy được không cần dataset/checkpoint.
-Nó **không phải** pipeline reader_v4/P4m. Để lặp các bảng thật: chuẩn bị
+Đọc `output/my_video/result.json` hoặc `result.csv`. Cờ hoạt động bắt buộc là
+`Resting`, `Task` hoặc `Walking`. Lệnh chạy CPU, không cần nhãn PR hoặc manifest
+riêng của đội, không tải dataset và không chạm holdout. Cần ít nhất 15 GiB RAM
+còn trống. Khi thiếu tín hiệu, `abstain=true` và `pr_bpm=null`; prior dự phòng
+không phải số đo. Không ghi đè output cũ.
+
+Để tìm hiểu demo POS tổng hợp, môi trường nghiên cứu hoặc lặp các bảng thật,
+xem [hướng dẫn cài nghiên cứu](docs/GETTING_STARTED.md), chuẩn bị
 [bundle dev và checkpoint](docs/ASSETS.md), rồi chạy `tools/repro.py init`,
 `doctor`, `prepare`, `plan`. Cấu hình riêng ở `configs/paths.local.json`; không
-cần sửa hàng trăm file nguồn. Thiếu tài sản thì báo thiếu và dừng, không tự tải
+cần sửa hàng trăm file nguồn. Đường tái lập bảng cần tài sản riêng, khác với lệnh
+chạy một video ở trên. Thiếu tài sản thì báo thiếu và dừng, không tự tải
 holdout hay thay checkpoint.
 
 [Phạm vi kiểm trong môi trường sạch](docs/CLEAN_ENV_VALIDATION.md) phân biệt
@@ -53,9 +61,10 @@ Dataset đã có trên **P100**:
 cập; `/data_pool` yêu cầu quyền nhóm phù hợp. [Chi tiết quyền và manifest dev](docs/SERVER_DATASETS.md).
 Chỉ chạy dev theo split đã khóa, không quét cả root dataset để chấm holdout.
 
-**Phạm vi gói:** reader_v4 hiện có 5 fit train-fold, chưa có bản deploy fit toàn
-dev được chốt. Gói này cung cấp tài sản nghiên cứu; cổng tích hợp frontend mới
-còn chưa đạt, nên không gọi là pipeline nộp bài đã kiểm end-to-end.
+**Phạm vi Release lịch sử:** gói tải trên chứa 5 fit train-fold. Cấu hình triển
+khai BTC mới nằm ngay trong `models/btc_reader_v4_deploy.json`, kèm hash và
+nguồn gốc ở `models/MANIFEST.json` (bản reset trạng thái, khác ZIP lịch sử). Cổng khớp từng đầu ra frontend mới vẫn chưa
+đạt; có lệnh suy luận chạy được không đồng nghĩa đã qua mọi cổng của gói nộp bài.
 
 ## Mục lục
 
@@ -103,7 +112,21 @@ video ──► (1) Frontend ──► (2) Nguồn tín hiệu ──► (3) Rea
 - Khoảng tin cậy 95% bằng bootstrap ghép cặp theo người, 10.000 lần, seed 0.
 - Mốc so sánh "hằng số" là trung vị nhịp tim của fold train.
 
-### BTC — reader_v4 (218 video dev / 158 người, một số cho mỗi video)
+### BTC — CLI sau sửa trạng thái, 23/11
+
+**Reader_v4 reset: 9,130 bpm** trên 218 video / 158 người, kiểm OOF theo người.
+Hằng số 12,071; hiệu chỉnh cũ 11,374; reader_v3 9,587.
+Δ so hiệu chỉnh −2,244 [−3,238; −1,258]; Δ so v3 −0,457 [−1,276; +0,312].
+Chưa chứng minh tốt hơn v3. Đây là kết quả trên crop native lịch sử, không phải
+điểm holdout hay cam kết cho mọi video/frontend guarded.
+
+[Kiểm video thật, môi trường sạch và lỗi đã sửa](docs/VIDEO_CLI_VALIDATION.md).
+
+### BTC — số lịch sử trước sửa trạng thái (218 video dev / 158 người)
+
+Các số 8,35 và bảng constraint dưới đây lưu lại lượt chạy cũ, khi expert có thể
+mang trạng thái từ video trước. Không dùng chúng để khẳng định tái lập trên
+một video chạy riêng. Mã và kết quả gốc được giữ để kiểm toán.
 
 | Tập con | reader_v4 | Hằng số |
 |---|---:|---:|
@@ -111,7 +134,9 @@ video ──► (1) Frontend ──► (2) Nguồn tín hiệu ──► (3) Rea
 | File gốc từ camera | 7,79 | 13,82 |
 | File đã bị ứng dụng nhắn tin nén lại | 9,26 | 9,21 |
 
-Ở các file đã nén lại, reader ngang mốc hằng số. Đội đã đo trực tiếp trong bộ giải mã H.264: biên độ mạch (khoảng 0,3 mức xám) nằm dưới ngưỡng mà bộ nén làm tròn về 0, nên tín hiệu không còn trong file. Kể cả một bộ đọc hoàn hảo cũng chỉ xuống được khoảng 6 bpm.
+Ở các file đã nén lại, số lịch sử của reader gần mốc hằng số. Các phép kiểm codec
+là bằng chứng chẩn đoán trong điều kiện đã thử, không chứng minh mọi tín hiệu
+mạch đã mất hoặc xác lập một mức MAE tối ưu cho toàn bộ BTC.
 
 **Dưới các constraint** (bảng đầy đủ: [`out/y11_v4_conditions.csv`](reports/claude_research_20261119_constraints/out/y11_v4_conditions.csv)). Cổng: a = còn ≥ 90% đầu ra; b = không kém hằng số; c = tốt hơn hằng số.
 
@@ -126,6 +151,9 @@ video ──► (1) Frontend ──► (2) Nguồn tín hiệu ──► (3) Rea
 | C7 che nửa dưới mặt, giữ theo template | 197 | 9,96 | −2,73 [−4,01; −1,48] | abc |
 
 ### Bộ công khai — P4m (một số cho mỗi cửa sổ 10 s)
+
+Đây cũng là bảng nghiên cứu lịch sử. Chưa chấm lại P4m/public với expert reset
+trước từng bản ghi trong lượt đóng gói CLI BTC này.
 
 UBFC2 dev: 35 người. MCD: 60 người khi chạy native và C5, 34 người cho các constraint mô phỏng. Bảng đầy đủ, gồm cả P4 và hai reader fit trên native: [`out/z13_public_p4_prefilter.csv`](reports/claude_research_20261119_constraints/out/z13_public_p4_prefilter.csv).
 
@@ -143,11 +171,12 @@ UBFC2 dev: 35 người. MCD: 60 người khi chạy native và C5, 34 người c
 | C7 che xanh, giữ theo template | 1,71 | 3,22 | | có |
 | C7 che trắng | 1,21 | 3,71 | | không |
 
-Tất cả các dòng qua đủ cổng abc, trừ C1 tối + nhiễu Gauss mạnh (chỉ qua ab, ở cả hai nhánh). Ở điều kiện đó, tín hiệu mạch thấp hơn nhiễu ngay tại cảm biến.
+Các cổng ghi trong bảng áp dụng cho kết quả lịch sử. Không dùng bảng này để
+kết luận nguyên nhân nằm ở cảm biến hoặc xác nhận bản tích hợp mới đã qua cổng.
 
 **Lệch quy tắc đã ghi lại.** Trước khi chạy z13, đội đặt quy tắc: P4m chỉ thay P4 nếu không có dòng nào kém đi. Kết quả: P4m kém P4 ở UBFC2 native +0,043 [+0,006; +0,080] bpm, nhưng tốt hơn ở MCD native −0,25 [−0,51; −0,08] và ở các điều kiện C1/C7. Đội chọn P4m ngày 22/11 và ghi đây là một lệch quy tắc. Số của P4 vẫn được báo cáo đầy đủ.
 
-Kết quả lịch sử đến 15/11 (BTC 11,37; padding-fixed; V5…) vẫn giữ ở [docs/RESULTS.md](docs/RESULTS.md). Pipeline trên **thay thế** các ứng viên đó.
+Kết quả lịch sử đến 15/11 (BTC 11,37; padding-fixed; V5…) vẫn giữ ở [docs/RESULTS.md](docs/RESULTS.md). Việc chọn pipeline trước đây không thay thế yêu cầu kiểm lại sau khi phát hiện lỗi trạng thái.
 
 ---
 
@@ -308,7 +337,8 @@ Hình có mặt người từ dataset chỉ dùng nội bộ, **không đưa và
 launcher dev-only mới không thực hiện bước holdout. Thứ tự đã định:
 1. Tích hợp thành một gói.
 2. Kiểm tái lập mọi số ở trên.
-3. Fit reader_v4 một lần trên toàn bộ dev; P4m dùng bộ tham số `deploy`.
+3. Reader_v4 đã có fit cố định toàn dev trong `models/`; chỉ dùng cho video mới,
+   không dùng để chấm điểm OOF. P4m dùng bộ tham số `deploy` riêng.
 4. Ghi sha256 của code, trọng số và tham số vào `FROZEN_PIPELINE.json`.
 5. Chạy holdout **đúng một lần**, chỉ đọc video, không đọc nhãn.
 
@@ -317,6 +347,10 @@ launcher dev-only mới không thực hiện bước holdout. Thứ tự đã đ
 ## Cấu trúc repository
 
 ```text
+predict.py                                  chạy một video BTC → PR (CPU)
+runtime/                                    frontend, ba expert, reader cố định
+models/                                     reader deploy + 5 fold, SHA256
+tools/bootstrap_video.py                    cài/kiểm ba môi trường cho CLI
 reports/claude_research_20261119_constraints/   PIPELINE ĐÃ CHỐT (19–22/11)
   code/x01..x20      frontend, constraint (C1–C7), crop, CNN/POS/CHROM, C5 tách, chấm theo cổng
   code/y01..y14      ba mô hình open-rppg (y05, y11–y13), reader công khai (y02, y07)
@@ -356,17 +390,17 @@ Demo dùng tín hiệu **tổng hợp 90 bpm** và chỉ chạy POS cơ bản, k
 
 ## Những gì đã kiểm và chưa kiểm
 
-**Đã kiểm**
+**Đã kiểm trong lượt nghiên cứu lịch sử (chưa lặp sau sửa trạng thái expert)**
 - **Cổng viết trước.** Cổng và quy tắc được ghi trong [`PREREG.md`](reports/claude_research_20261119_constraints/PREREG.md) trước khi chạy. Mọi quyết định đưa ra sau khi xem số dev được ghi trong `DEVIATIONS.txt`.
-- **Chọn mô hình không do may.** Ba mô hình được chọn bằng chọn tiến lồng trong fold train. Đối chứng xáo nhãn không tạo ra cải thiện.
+- **Chọn mô hình.** Lượt cũ dùng chọn tiến lồng trong fold train và đối chứng xáo nhãn. Không suy rộng kết luận đối chứng đó sang pipeline reset khi chưa lặp lại.
 - **C5 không mất mát.** Luồng giải mã ra khớp từng bit với crop gốc. Băng thông ≤ 500 kbps được đo ở **mọi giây**, không chỉ trung bình.
 - **Crop điều kiện tái tạo đúng.** Crop hộp dưới mọi điều kiện tái tạo đúng các khối đã chấm điểm: 1.407/1.407 file, lệch 0,0.
 - **P4m đóng băng khớp.** Bản đóng băng tái tạo bảng z13 với lệch 0,00.
 
 **Chưa kiểm**
 - Holdout BTC chưa mở.
-- Gói nộp một lệnh đang tích hợp, chưa kiểm tái lập độc lập.
-- C1 tối + nhiễu Gauss mạnh chỉ qua cổng ab: ở mức đó tín hiệu mạch thấp hơn nhiễu ngay tại cảm biến.
+- CLI BTC mới có kiểm raw video riêng; gói nộp toàn bộ public/constraint chưa qua kiểm độc lập đầy đủ.
+- C1 tối + nhiễu Gauss mạnh chỉ qua cổng ab ở bảng lịch sử; không suy ra nguyên nhân tại cảm biến từ bảng này.
 - Các constraint C1, C2, C4, C6, C7 là mô phỏng theo mô tả hàm MATLAB của đề bài, chưa đối chiếu với video ban tổ chức tạo bằng MATLAB.
 - MCD chỉ có 34 người được chạy dưới các constraint mô phỏng, vì giới hạn tính toán.
 
@@ -380,7 +414,7 @@ Demo dùng tín hiệu **tổng hợp 90 bpm** và chỉ chạy POS cơ bản, k
   - FacePhys (arXiv 2512.06275), trọng số học trên RLAP;
   - ME-rPPG (arXiv 2504.01774), trọng số học trên PURE.
 
-  Dùng nguyên, không huấn luyện thêm, không dùng dữ liệu BTC để huấn luyện.
+  Trọng số CNN dùng nguyên, không huấn luyện thêm. Reader nhỏ được fit trên BTC dev theo người như mô tả ở trên.
 - MediaPipe FaceMesh: Apache 2.0 ([giấy phép](ops/deep_hr/assets/MEDIAPIPE_LICENSE)).
 
 Dữ liệu thuộc điều kiện sử dụng riêng của từng bộ. Repo **không** chứa video, nhãn, ảnh mặt người hay dữ liệu cá nhân, và không cấp quyền phân phối lại chúng.

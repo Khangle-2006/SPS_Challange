@@ -4,6 +4,10 @@ Gói này cung cấp trọng số và tham số đã có, không huấn luyện 
 Đây là **tài sản để suy luận/tái lập nghiên cứu**, chưa phải gói raw video →
 kết quả đã qua toàn bộ cổng tích hợp.
 
+> Bản ZIP này giữ nguyên để tái lập lịch sử. Reader bên trong fit từ expert có
+> thể mang trạng thái giữa video; không dùng thay cho `models/` của CLI mới.
+> `predict.py` dùng tham số đã tính lại với trạng thái reset, có sẵn trong repo.
+
 ## Tải về
 
 [GitHub Release inference-assets-20261123](https://github.com/Khangle-2006/SPS_Challange/releases/tag/inference-assets-20261123)
@@ -94,7 +98,12 @@ chấm OOF phải dùng đúng `foldN`.
 
 ## Phần chưa có và cách dùng đúng
 
-- **BTC chưa có một model `deploy` fit toàn dev được chốt.** Gói cung cấp đúng
+Đây là mô tả **Release lịch sử `inference-assets-20261123`**, không thay đổi
+bytes/hash của Release đó. Lệnh video mới dùng cấu hình reader trong `models/`
+của checkout, xem [RUN_VIDEO.md](RUN_VIDEO.md). Checkpoint CNN ở Release này
+phục vụ nhánh public/nghiên cứu, không cần cho nhánh BTC reader_v4.
+
+- **Release này không chứa model BTC `deploy` fit toàn dev.** Gói cung cấp đúng
   5 fit train-fold đã tồn tại; không lấy trung bình chúng rồi gọi là cấu hình
   triển khai đã kiểm. Việc xuất gói không fit hay mở holdout.
 - Cổng tích hợp frontend mới ngày 22/11 còn sai khác đầu ra vượt ngưỡng. Vì vậy
