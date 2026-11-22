@@ -1,0 +1,46 @@
+{
+  "source_simulate_sha256": "6f99cdd5e4dcb56b4aec155c4e768d311977e1fcf95154e9b086df187a21f7a2",
+  "source_protocol_sha256": "6d3c10c3c28d67ad60ce7070324c56c6640af03379ca6fb2119788672fa6ef49",
+  "conditions": [
+    [
+      "c1_050",
+      "c1",
+      0.5,
+      null
+    ],
+    [
+      "c1_025",
+      "c1",
+      0.25,
+      null
+    ],
+    [
+      "c1_0125",
+      "c1",
+      0.125,
+      null
+    ],
+    [
+      "c4_QVGA",
+      "c4",
+      null,
+      [
+        320,
+        240
+      ]
+    ],
+    [
+      "c4_VGA",
+      "c4",
+      null,
+      [
+        640,
+        480
+      ]
+    ]
+  ],
+  "frontend": "frozen OvalCrop on transformed full frames; no native ROI fallback",
+  "clock": "source timestamp per encoded frame, not CFR mux clock",
+  "temporary_storage": "/dev/shm managed ephemeral2000MB, existing files untouched",
+  "C1_limitation": "Synthetic illumination, not calibrated lux; fixed optional lossy storage encoding also affects C1. This is not a pure isolated noise-effect estimate."
+}
