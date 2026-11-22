@@ -1,0 +1,11 @@
+{
+  "btc_posterior_reader.py": "bf5b4af388772144269158fdea6cabae811af0e690aa51c304462bdb053b07ee",
+  "debug_octave.py": "0dfc2fb782bc0aeee1a1f55310e18827ccaf42133ede400e9c8a554b1981043e",
+  "evaluate_reader.py": "c67f990415dedd945c27891297e24be83c23c7b5d2d9f47c87cfcf1b9ce9b9e5",
+  "fuse_w2.py": "9897b9283891b4117e4fbca6e4e9e334c3f551db72870f180fc65f746edeb54f",
+  "preflight.py": "9a5a8bbb0ec33faf85dcad69de4ba366b781d2b41f371199926d520a6f22bb30",
+  "process_round1.m": "2f3d22b48a60b357f4a756c42b6d0f52b10e85ce02cb32ea37c85e6c45da36d9",
+  "reader_model.mat": "a65d4b17c4c4d0edc37cbfcafa99f7dfc699033bd7300cfab941d4c34cba402a",
+  "reader_v1.py": "72c266204ec89e874b5bdac1c96dc68d874a22f4f15e7efd06ca0cb0d868d234",
+  "verify_octave.py": "eeeb1974e04f733bc1b743dbcd2113c7b9227266c30e992860e3764cab80e8a5"
+}
