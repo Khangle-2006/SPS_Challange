@@ -4,10 +4,34 @@
 
 > **Trạng thái 22/11/2026**
 > - Pipeline đã **chốt và đóng băng tham số** cho cả hai nhánh: BTC dùng **reader_v4**, bộ công khai dùng **P4m**.
-> - Gói nộp bài chạy một lệnh đang được tích hợp. Trong lúc chờ, phần [Cách chạy pipeline](#cách-chạy-pipeline) bên dưới tái lập từng bước bằng chính các script đã tạo ra mọi con số trong README.
+> - Gói nộp bài chạy một lệnh đang được tích hợp. Trong lúc chờ, phần [Cách chạy pipeline](#cách-chạy-pipeline) mô tả các script lịch sử và tài sản cần có; chưa kiểm trọn đường raw video → reader_v4/P4m trong môi trường mới.
 > - **Holdout BTC (72 video / 41 người) chưa mở.** 7 người test của UBFC2 cũng chưa được dùng. Mọi số dưới đây là kiểm chéo ngoài fold trên dev.
 
 ![Pipeline](docs/figures/pipeline.png)
+
+## Clone về chạy từ đâu?
+
+**Bắt đầu với [hướng dẫn cài mới](docs/GETTING_STARTED.md).** Có bốn môi trường
+Python 3.12 tách riêng, cấu hình đường dẫn và kiểm SHA256 tài sản đầu vào.
+
+```bash
+git clone https://github.com/Khangle-2006/SPS_Challange.git
+cd SPS_Challange
+python3.12 tools/setup_env.py core
+.venv/core/bin/python tools/pos_trace.py --make-demo output/demo_rgb.csv
+.venv/core/bin/python tools/pos_trace.py --input output/demo_rgb.csv --output output/demo_predictions.csv
+```
+
+Demo POS dùng tín hiệu tổng hợp 90 bpm, chạy được không cần dataset/checkpoint.
+Nó **không phải** pipeline reader_v4/P4m. Để lặp các bảng thật: chuẩn bị
+[bundle dev và checkpoint](docs/ASSETS.md), rồi chạy `tools/repro.py init`,
+`doctor`, `prepare`, `plan`. Cấu hình riêng ở `configs/paths.local.json`; không
+cần sửa hàng trăm file nguồn. Thiếu tài sản thì báo thiếu và dừng, không tự tải
+holdout hay thay checkpoint.
+
+[Phạm vi kiểm trong môi trường sạch](docs/CLEAN_ENV_VALIDATION.md) phân biệt
+kiểm cài đặt/tensor tổng hợp với kiểm đầy đủ raw video → pipeline. Các snapshot
+nghiên cứu giữ nguyên hash; relocation chỉ thực hiện trên bản làm việc riêng.
 
 ## Mục lục
 
@@ -105,7 +129,12 @@ Kết quả lịch sử đến 15/11 (BTC 11,37; padding-fixed; V5…) vẫn gi�
 
 ## Cách chạy pipeline
 
-Phần này tái lập đúng các bảng ở trên. Mỗi bước là một script trong [`reports/claude_research_20261119_constraints/code/`](reports/claude_research_20261119_constraints/code/). Dòng đầu mỗi script có docstring mô tả đầu vào, đầu ra và tham số.
+Các lệnh bên dưới mô tả quy trình nghiên cứu lịch sử và cần đủ artifact riêng.
+Cài mới bắt đầu ở [GETTING_STARTED.md](docs/GETTING_STARTED.md); chưa có phép
+kiểm đầy đủ mọi bảng trên môi trường mới chỉ từ nội dung Git. Một số script
+fit reader trong train-fold khi chấm dev, không phải lệnh inference một video.
+
+Đây là các bước đã dùng để tạo các bảng ở trên; muốn tái lập cần đúng bundle đầu vào và kiểm lại số. Mỗi bước là một script trong [`reports/claude_research_20261119_constraints/code/`](reports/claude_research_20261119_constraints/code/). Dòng đầu mỗi script có docstring mô tả đầu vào, đầu ra và tham số.
 
 ### 0. Điều kiện trước
 
@@ -125,9 +154,16 @@ R   = W/../round1_execution_20261110/inference_repair_20261113                  
 T8  = /data_pool/khangle/facevitals/code/t8_oval_20261031                                # oval_crop.py của đội
 ```
 
-Trên máy khác, có hai cách: đặt bản sao repo và dữ liệu vào đúng layout trên, hoặc sửa các hằng `W`, `R`, `T8` ở đầu script và ghi lại rằng đó là cấu hình mới. Thư mục `reports/` của repo giữ đúng quan hệ thư mục mà code import.
+Trên máy khác, dùng `tools/repro.py prepare` để ánh xạ các prefix này sang workspace riêng theo `configs/paths.local.json`. Bản nguồn trong Git giữ nguyên byte; receipt relocation ghi hash của bản làm việc. Không đặt dữ liệu của bạn vào root sản xuất của đội và không sửa hash frozen để vượt assertion.
 
-**Ba môi trường Python** (đều Python 3.12, chỉ dùng CPU):
+**Các môi trường lịch sử của thí nghiệm** (Python 3.12, CPU):
+
+Để cài mới, dùng các profile có pin trong `environments/` theo
+[GETTING_STARTED.md](docs/GETTING_STARTED.md), không cài gộp bảng lịch sử này.
+`tools/repro.py` dùng các interpreter trong config; nếu chạy lệnh dưới đây bằng
+tay, đặt `AV=/đường/dẫn/checkout/.venv/frontend/bin/python` và
+`PY=/đường/dẫn/checkout/.venv/torch-cpu/bin/python`. Dùng workspace đã prepare
+làm `W`, không dùng root máy chủ đội.
 
 | Biến | Dùng cho | Gói chính (phiên bản đã chạy) |
 |---|---|---|
@@ -244,7 +280,8 @@ Hình có mặt người từ dataset chỉ dùng nội bộ, **không đưa và
 
 ### 6. Holdout
 
-**Chưa chạy.** Thứ tự đã định:
+**Chưa chạy. Chỉ mở sau xác nhận riêng của người dùng/maintainer.** Bootstrap và
+launcher dev-only mới không thực hiện bước holdout. Thứ tự đã định:
 1. Tích hợp thành một gói.
 2. Kiểm tái lập mọi số ở trên.
 3. Fit reader_v4 một lần trên toàn bộ dev; P4m dùng bộ tham số `deploy`.
@@ -272,7 +309,9 @@ reports/round1_*/                               thí nghiệm trước 15/11 (V4
 ops/                                            frontend T8 oval, huấn luyện CNN, adapter dữ liệu, kiểm thử
 docs/PIPELINE.md                                giải thích pipeline chi tiết, kèm hình
 docs/RESULTS.md, docs/*                         kết quả và giao thức đến 15/11 (lịch sử)
-tools/                                          demo POS trên CPU và kiểm bản phát hành
+environments/                                  profile cài đặt core, frontend, torch-cpu, experts
+configs/                                       mẫu path config và manifest tài sản riêng
+tools/                                          bootstrap, doctor/prepare/plan/run, demo POS và kiểm bản phát hành
 ```
 
 Các thư mục giữ tên ngày tháng vì code import theo đường dẫn tương đối và kiểm hash.

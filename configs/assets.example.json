@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "scope": "dev-only",
+  "complete_for": [],
+  "files": [
+    {
+      "source": "./received/MANIFEST.json",
+      "destination": "reports/round1_execution_20261110/inference_repair_20261113/MANIFEST.json",
+      "sha256": "REPLACE_WITH_SHA256_FROM_MAINTAINER",
+      "kind": "manifest",
+      "relocate_json_paths": true
+    }
+  ]
+}

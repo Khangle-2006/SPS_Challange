@@ -1,0 +1,7 @@
+-r core.txt
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch==2.5.1+cpu
+opencv-python-headless==4.10.0.84
+av==14.2.0
+matplotlib==3.10.1
+Pillow==11.1.0

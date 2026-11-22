@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "workspace": "../facevitals-reproduction",
+  "assets_manifest": "../private-assets/assets.json",
+  "python": {
+    "core": "../.venv/core/bin/python",
+    "frontend": "../.venv/frontend/bin/python",
+    "torch-cpu": "../.venv/torch-cpu/bin/python",
+    "experts": "../.venv/experts/bin/python"
+  },
+  "path_map": {},
+  "allow_dev_reproduction": false
+}

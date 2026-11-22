@@ -1,0 +1,78 @@
+{
+  "date": "2026-11-22",
+  "platform": "Linux x86_64",
+  "python": "3.12.3",
+  "system_site_packages": false,
+  "scope": "Fresh installation and synthetic functional checks; no participant data, no private CNN checkpoint, no real-video end-to-end reproduction.",
+  "profiles": {
+    "core": {
+      "profile": "core",
+      "python": "3.12.3",
+      "synthetic_only": true,
+      "pos_chrom_peaks": [
+        90.0,
+        90.0
+      ],
+      "static_abstains": true,
+      "passed": true
+    },
+    "experts": {
+      "profile": "experts",
+      "python": "3.12.3",
+      "synthetic_only": true,
+      "weights_sha256": {
+        "FacePhys.rlap.weights.h5": "6cd99510bcc5771f9cebcdb0f47a5cb3692d19f1e3d6e2444af5e8fac0ee3c07",
+        "ME.pure.weights.h5": "2135995cb4161d1d4c7c3aa45d333dc6b1f5818b0652d11da9fc0fb0b6e11bf0"
+      },
+      "models": {
+        "FacePhys.rlap": {
+          "samples": 360,
+          "finite": true
+        },
+        "ME-chunk.pure": {
+          "samples": 360,
+          "finite": true
+        },
+        "ME-flow.pure": {
+          "samples": 360,
+          "finite": true
+        }
+      },
+      "jax": "0.12.1",
+      "keras": "3.15.1",
+      "passed": true
+    },
+    "frontend": {
+      "profile": "frontend",
+      "python": "3.12.3",
+      "synthetic_only": true,
+      "blank_image_faces": 0,
+      "av_version": "14.2.0",
+      "opencv": "4.11.0",
+      "mediapipe": "0.10.21",
+      "passed": true
+    },
+    "torch-cpu": {
+      "profile": "torch-cpu",
+      "python": "3.12.3",
+      "synthetic_only": true,
+      "torch": "2.5.1+cpu",
+      "cuda_runtime": null,
+      "passed": true
+    }
+  },
+  "checks": {
+    "pip_check_profiles": 4,
+    "tools_unit_tests": 7,
+    "score_round1_unit_tests": 10,
+    "archived_source_hashes": 1020,
+    "fresh_core_install_from_resolved_lock": true,
+    "missing_private_manifest_expected_exit": 2
+  },
+  "lock_sha256": {
+    "core-linux-py312.txt": "279bfa92704886ac99ae4a6d2d86603dec4d4ad4f1d84e3de21e0abb2df4b2d3",
+    "experts-linux-py312.txt": "0e8b4c40348f8ec9e029c2d98f706def364b4eeb02d64b453152d4becb4920cd",
+    "frontend-linux-py312.txt": "d04ea8e30387a520ae7e405dc10518ac691282b7f559c0841613042f712fdd16",
+    "torch-cpu-linux-py312.txt": "f77abdda3d685755579e285f6d67b8d3f12d6c594c89d2f310bbd95fa6632785"
+  }
+}
