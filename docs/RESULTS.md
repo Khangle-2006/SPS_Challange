@@ -1,5 +1,7 @@
 # Kết quả nghiên cứu đã chạy
 
+> **Cập nhật 22/11/2026:** các kết quả dưới đây là bản lịch sử đến 15/11. Pipeline đã chốt (BTC reader_v4 8,35; công khai P4m UBFC2 0,75 / MCD 1,59) nằm ở [README](../README.md#kết-quả-chính) và [PIPELINE.md](PIPELINE.md).
+
 Ngày chốt bản công bố: 15/11/2026. Không có kết quả holdout/test ẩn. Các bảng không cùng cohort/protocol không được xếp hạng chung.
 
 ## BTC: tập ghép cặp cuối

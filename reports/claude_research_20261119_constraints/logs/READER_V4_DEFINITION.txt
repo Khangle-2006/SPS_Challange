@@ -1,0 +1,13 @@
+reader_v4 (defined 20 Nov 2026, 07:15 +07, on BTC dev only; holdout not opened)
+  evidence Z4 = (2 * Z_classical + zlog(S_FacePhys.rlap) + zlog(S_ME-chunk.pure) + zlog(S_ME-flow.pure)) / 5
+     Z_classical = mean of the standardised log CHROM and POS spectra (reader_v3 evidence)
+     S_model     = window-averaged spectrum of the model's BVP on the unmasked 72x72 face-box crop (code/y05_openrppg.py: video_spectrum)
+  reader       = reader_v3 unchanged (prior, beta per capture class, offset per (class, Task) cell), fitted on the evidence Z4
+  model set    = the open-rppg 0.1.1 models selected in >= 4 of the 5 folds by the forward selection nested in the training folds,
+                 among the 11 models that completed under the resource limits of the 02:3x prompt (logs/y05_eval.log):
+                 FacePhys.rlap 5/5, ME-chunk.pure 5/5, ME-flow.pure 4/5.  PhysMamba (> 60 s per video), PhysFormer and RhythmMamba (> 4 GB RSS) did not qualify.
+  dev estimates (201 videos with face-box crops, same videos for v3): nested selection 8.438 (v3 9.512; -1.07 [-2.11;-0.20]; RMSE 11.88 vs 13.82);
+                 fixed set 8.216 (-1.30 [-2.35;-0.38]; RMSE 11.14; r 0.71) - optimistic, the set was chosen on these videos.
+  to do before the holdout: 17 4K/HDR videos (crops being made), constraint conditions (out/x15 + code/y11_openrppg_conditions.py), terms of the weights.
+  weights sha256 6cd99510bcc5771f9cebcdb0f47a5cb3692d19f1e3d6e2444af5e8fac0ee3c07  venv_orppg/lib/python3.12/site-packages/rppg/weights/FacePhys.rlap.weights.h5
+  weights sha256 2135995cb4161d1d4c7c3aa45d333dc6b1f5818b0652d11da9fc0fb0b6e11bf0  venv_orppg/lib/python3.12/site-packages/rppg/weights/ME.pure.weights.h5

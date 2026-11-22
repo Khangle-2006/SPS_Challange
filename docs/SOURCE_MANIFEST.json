@@ -1,5 +1,5 @@
 {
-  "date": "2026-11-15",
+  "date": "2026-11-22",
   "files": [
     {
       "path": "ops/a100/audit_label_values.py",
@@ -4410,6 +4410,696 @@
       "path": "reports/round1_execution_20261110/final_priorities_20261111/sources/LQ-rPPG/setup/mamba/LICENSE",
       "sha256": "760939b000194d04548ede6a857bbe735d1695d8422ec85955c8e2bd7f4b95c5",
       "bytes": 11348
+    },
+    {
+      "path": "reports/claude_research_20261118/code/a01_probe_dev.py",
+      "sha256": "9d7631e34a216f901c7a77882849eda8e5efd38a5c44b20d131297b3d211f515",
+      "bytes": 2738
+    },
+    {
+      "path": "reports/claude_research_20261118/code/a05_native_traces.py",
+      "sha256": "45faf5cb473fa3b8acd63a7399c634170b7937cc74225736da366da4f6800a1d",
+      "bytes": 6496
+    },
+    {
+      "path": "reports/claude_research_20261118/code/a06_variant_spectra.py",
+      "sha256": "e7569864fe384b9984974f00c8dd47dcf9383c363b1fe38e8ec8c583f13d1898",
+      "bytes": 3144
+    },
+    {
+      "path": "reports/claude_research_20261118/code/a07_variant_eval.py",
+      "sha256": "db7cbd616ffdc9c57a0333ca3f2655e13f290d7e44e27f7ce5cd83f571739418",
+      "bytes": 3014
+    },
+    {
+      "path": "reports/claude_research_20261118/code/a08_cnn_evidence.py",
+      "sha256": "9cc1fae4e41e4b91e153967799533e4fa380e42ca9b1d3ad3e1a30259852507e",
+      "bytes": 2002
+    },
+    {
+      "path": "reports/claude_research_20261118/code/a09_evidence_combos.py",
+      "sha256": "6f27653b1f154ef8eb490c4c608313eaf4a1fe0fa5e456f87fa43737896af5e5",
+      "bytes": 4357
+    },
+    {
+      "path": "reports/claude_research_20261118/code/a10_presence_lowclass.py",
+      "sha256": "f640f73a820f30499cbf3986a66470a9d74ac11d4163d07ff2692e9a6e4c0789",
+      "bytes": 2492
+    },
+    {
+      "path": "reports/claude_research_20261118/code/a11_reader_v3.py",
+      "sha256": "ea9ebf9f264f6f4bf441061eb9c4c06cd38861d225dd0cf5e1eb6726e7fbd38c",
+      "bytes": 7035
+    },
+    {
+      "path": "reports/claude_research_20261118/code/a12_v3_decomposition.py",
+      "sha256": "c96911486eca4e3bc4baf44e7a1cdcc7ce36f81cd5c019a7e1783b91bfca592d",
+      "bytes": 2295
+    },
+    {
+      "path": "reports/claude_research_20261118/code/a13_three_classes.py",
+      "sha256": "edecb2e59af3b221fcf23c0e19cfd6858828edf9c7294925439ba3b9daf69645",
+      "bytes": 3818
+    },
+    {
+      "path": "reports/claude_research_20261118/code/b01_public_spectra.py",
+      "sha256": "de645cbf8ec65e07e6d0952ef43edcd830a98ece4fa3caf572a97485387482d8",
+      "bytes": 3797
+    },
+    {
+      "path": "reports/claude_research_20261118/code/b02_public_fusion.py",
+      "sha256": "3e7ff935d46d1e4be8ed51e867233d127a5e2a9e708cad1f62372f9dfe73230c",
+      "bytes": 4936
+    },
+    {
+      "path": "reports/claude_research_20261118/code/b03_public_weighted_fusion.py",
+      "sha256": "dff701ed42d0cc843bd7e27c2985c22ad20fc955df640248f101be6d32ec6d48",
+      "bytes": 3639
+    },
+    {
+      "path": "reports/claude_research_20261118/code/b04_public_final.py",
+      "sha256": "316b96aef80934e4eafe839077ea3fa01a0fe56c7dadad27aad54e4fa936db29",
+      "bytes": 6604
+    },
+    {
+      "path": "reports/claude_research_20261118/code/b05_tracking_control.py",
+      "sha256": "c2d125cc01996a048d07dda3647dff67fe802f5ca7aa1add39f23629e7763709",
+      "bytes": 1458
+    },
+    {
+      "path": "reports/claude_research_20261118/code/b06_public_segment_level.py",
+      "sha256": "ce9311a2043115cc71608f19393c6bb9fb15fd07a79e2f7ee41a4d2d5d29ace1",
+      "bytes": 2707
+    },
+    {
+      "path": "reports/claude_research_20261118/code/lib_btc.py",
+      "sha256": "101ca5a42b4aa5be2ccd03f1358da822cf6ec4f884d6cb0ad9f54cb935b878e8",
+      "bytes": 6243
+    },
+    {
+      "path": "reports/claude_research_20261118/code/reader_models.py",
+      "sha256": "ea9b490e0d3be857a3f55f8ef7af8c5084317d3bc2511fd9c6cce06c328fd1db",
+      "bytes": 3166
+    },
+    {
+      "path": "reports/claude_research_20261118/code/survey_server.sh",
+      "sha256": "76b3ce535162a369edec32cdffb125aac3ecf9560c3e63d332022ef743fa4295",
+      "bytes": 10395
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/PREREG.md",
+      "sha256": "cfb235608fa717b1893feb3d70e88e4a18bbd140bd53c271088e4610b7fe32f1",
+      "bytes": 6089
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/b01_cpu_cost.py",
+      "sha256": "2acc0831e68297db042e03313022bbaad336095071b54a95d9832760065adf8b",
+      "bytes": 3721
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/constraint_ops.py",
+      "sha256": "e78688561fe999e99cc3ecfcbd8c3a234ddc2f14994ae4f7975ada5904601a0e",
+      "bytes": 6962
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/cx_fs.py",
+      "sha256": "c0b6d5d07df9cc1502324de54f343252501bf0539a031bfb1a7be4e3a52723b3",
+      "bytes": 1919
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/f01_illustrations.py",
+      "sha256": "3b3136b9106291aee9a8260fcfe3f7fabb2cfbcf1ab0a8013a054d53d1203caa",
+      "bytes": 9166
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/f02_evidence.py",
+      "sha256": "c539641ca14b29d9edb07463c0dde343f102d670370e83aff9782f264df16336",
+      "bytes": 2496
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/f03a_waves.py",
+      "sha256": "9cd98d2e79a8abf807cece76a21b437f0a6755edd92eea49ca06c98ef44e7d7a",
+      "bytes": 2452
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/f03b_experts.py",
+      "sha256": "3ea5b0259bebb813a423c82a96e42752056fab6a74a939850067fd66f13152f8",
+      "bytes": 1090
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/f03c_plot.py",
+      "sha256": "14a50e27a375cbf93eddf85fff7f4f798cc765f94c328f68e8339bcb41719ad4",
+      "bytes": 3459
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/target_lock.py",
+      "sha256": "744bb9fc8d460e872dc0fa2d0dc7c8ece5ad3549f984147eea4ea266dc98035f",
+      "bytes": 10470
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/u01_btc_nested_all.py",
+      "sha256": "79ac3dfd79f9935ba235ab5abff0cc14659a235109118fecb2434db8eca818d3",
+      "bytes": 6091
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/u02_factorizephys_all.py",
+      "sha256": "2a39efc69bdec80f1550945cddedd19c8625b595430b3a691ea69230731912ed",
+      "bytes": 4280
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/u03_public_anatomy.py",
+      "sha256": "127908d0f36dd0be2209a512884c64520048ec0f162d7b87766d1beb6ab3e275",
+      "bytes": 4500
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/u04_bcg_pilot.py",
+      "sha256": "4d116af534da177669af0b06220005618d238f990ec6f9ab15be16aacd06e6d8",
+      "bytes": 13282
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/u05_public_learned_fusion.py",
+      "sha256": "125df6509c77a36af7d092f99bcef45c38da3bac2875cb1c94c52795bcb00651",
+      "bytes": 7909
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/u06_btc_motion_reader.py",
+      "sha256": "18cf8838da5fcb5c4da08edf734c090a8b0a9a4d90f3b34284182bcc9f1cb2f3",
+      "bytes": 4078
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/u07_btc_label_floor.py",
+      "sha256": "74b87148b6c022b58f39575260d8c9b61ca6e0ea950eef05095f056d3dcfec65",
+      "bytes": 3698
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/u08_btc_hard_diag.py",
+      "sha256": "1d4fe10c06aafe7c76e61b058659d331e808838ebccc288fccb5df1b5f41623e",
+      "bytes": 4177
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/u09_btc_keyframe_lines.py",
+      "sha256": "da22afb4ac57b3d4272748d9f2b96bcc2580ac54dd6a858f912bff48b6ce7afb",
+      "bytes": 3520
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/u10_btc_agreement.py",
+      "sha256": "48241c6638b008dbee990f17e2870dde760dece824cb6299286507eed4a85c33",
+      "bytes": 4494
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/u11_mmrphys_btc.py",
+      "sha256": "8a18c296d1cb7be638c8b5007ff8fbbefe590fc51c39d6ffb726ede0d0f1ff42",
+      "bytes": 3914
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/u11_u17_supervisor_20261122.py",
+      "sha256": "01d65bd6a1e30ef54f73efee78a589793b19a1283c590cd3401ca0e52660bcb3",
+      "bytes": 4132
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/u12_btc_signal_anatomy.py",
+      "sha256": "56a90213a171f2efbf6b8d2db6872354fd99c0ec714a4d8718f4fade61e7c729",
+      "bytes": 4863
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/u13_btc_where_pulse.py",
+      "sha256": "e9848e06138003707432f72a316bc12265538ba2382b0f58cb46eb8fb5bf21e1",
+      "bytes": 3532
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/u14_btc_background.py",
+      "sha256": "cf6ef159b7ca7ab9530127a524c3f238d47308bd95ffa7a1582e154636538953",
+      "bytes": 3823
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/u15_btc_bgref.py",
+      "sha256": "9275546274b45327f7154118196a0906b21eb481f82f7b19894736d8d9ea2fc1",
+      "bytes": 6263
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/u16_btc_irregular_pulse.py",
+      "sha256": "71127242c5d58d84d01071158cdba794530b32afd5e182889d923ee63caab966",
+      "bytes": 3225
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/u17_openrppg_bvp.py",
+      "sha256": "8613b218a847ec010fb28c00e86d3f6ff3cd3cb1de17cb65ab1bafd75b1b6070",
+      "bytes": 1882
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/u18_btc_beats.py",
+      "sha256": "f89e966604445463aac1e2308eaff76da6a4a9149e8769932b491e1d00144f6f",
+      "bytes": 4937
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/u18b_btc_beats_strict.py",
+      "sha256": "a364cbc6e34bdd145df7e96897cbf6848ee8d010277197e455b8881c20623d10",
+      "bytes": 2341
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/u19_btc_stability.py",
+      "sha256": "69606b55cbb9508ce1ce2ef0e2d3c6fe6636944f3912e4970f7ba5651d00e732",
+      "bytes": 2985
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/u20_btc_stability_reader.py",
+      "sha256": "3b4975cf5405a8e97ca50e6a6de1d1112a1d0604df4ef9f2afd207eb48c47442",
+      "bytes": 4456
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/u21_codec_static.py",
+      "sha256": "379d04f8e34e3d1a686f6e7a920de6b7a03d1704fe158cb7058973f4fab06763",
+      "bytes": 13796
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/u21b_codec_qp.py",
+      "sha256": "9db8e55adb621bb45b64a673d0a274ba4c527c38ea999ef533f6062a167e2142",
+      "bytes": 8739
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/u22_btc_task_recovery.py",
+      "sha256": "fe785469b8197948516a85de27c2ce052292ef4e3b8acfdb5a303584c62a4e45",
+      "bytes": 4320
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/u23_btc_phase_rate.py",
+      "sha256": "7d2accd895e37fe1ba55e38eb94cbd45ee8c734c37e3b867fd0d441f165a9624",
+      "bytes": 3197
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/u24_btc_headroom.py",
+      "sha256": "2d5c867340889a236836652fc384a4a552431a0ee80919b0d232db6a18900288",
+      "bytes": 1461
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/u25_btc_group_reader.py",
+      "sha256": "d94f8c381a2fe0acb811c128425ae6ee9700f08051be874a06f78360497682b6",
+      "bytes": 5493
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/u26_btc_hard_device.py",
+      "sha256": "7bad1c35a7f92e19204eed56a4757e8ba7de5dd5d02c90fba7fdff356b7990af",
+      "bytes": 3104
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/u27_colour_dirs.py",
+      "sha256": "84e1a7bfb3b57f4a272128e7291360d4f272d57e66b0ada141e0d20733f24341",
+      "bytes": 5731
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/u28_sch_frontend.py",
+      "sha256": "183d2c60e5043fc1326ba777c578608bdd5b34fa3fee81694d3aedc04a6265da",
+      "bytes": 13816
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/u28_sim_paired.py",
+      "sha256": "abd62f1cc8ea16b2100b0acf18b541de47cc3754165682a6dbebe2d09b612d77",
+      "bytes": 1382
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/u29_colour_geometry.py",
+      "sha256": "109efd0db1fba4176bdd3b9d9688d13f56f49c7821f2a25d0d66fcf353dac2c0",
+      "bytes": 2641
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/u29b_colour_geometry.py",
+      "sha256": "fb9f5358e8b9594203730b528e4b3900713caf152824de6d5911daa18e353daf",
+      "bytes": 3021
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/u30_sch_reader.py",
+      "sha256": "7c750e6f09017d6f6ad6e6921ac66a4c2780facc453743800a6c4eb1e287a5dd",
+      "bytes": 3414
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/u31_sch_frontend_v2.py",
+      "sha256": "ec4d0d22088b21b4b1d98d53738fe02cd6037a6145b5bdec66d8b28b6d985f1c",
+      "bytes": 13480
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/u32_sch_reader.py",
+      "sha256": "d8e43e348bc1b1c8e37c4ffff86d67140c8fdcc41d39718c661131d51833a6a5",
+      "bytes": 3708
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/u33_glrt_frontend.py",
+      "sha256": "4ed5766d7f02275235a399a83653728835bdd852d8457abfb06376bd8f5b16c5",
+      "bytes": 8348
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/u34_lock_trigger_diag.py",
+      "sha256": "8ecafbcb6c863bf76026475f2414bc0e84ef01eb376e1c0234f1e1b00f08ccda",
+      "bytes": 3480
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/x01_extract.py",
+      "sha256": "aff78938e667d6989c1086599c516ec3aa1cffea4ddbf408b8e636414ddfa0a7",
+      "bytes": 17325
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/x02_infer.py",
+      "sha256": "2290464be07fdad06f71f807b82dfbbef0cd55c680e9c1ced10daee0473c8d68",
+      "bytes": 7940
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/x03_btc_spectra.py",
+      "sha256": "16afa55400e730a97910493ee15aa9647974051bf1a92cf706bc8d5ba0570825",
+      "bytes": 3201
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/x04_btc_score.py",
+      "sha256": "f3f1c3bed99c62ac7448c1a46640f5614ca6147794acbfd9ee975de080ba939c",
+      "bytes": 6575
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/x05_public_score.py",
+      "sha256": "7b8a558963b26d025b004e111180955c9cdaceed8dda9487c11ddb3acb63ea8a",
+      "bytes": 12633
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/x06_c5.py",
+      "sha256": "09c39e6fc9aa60266f2b368b522600a8a3979b8488f9c46fbf1ddadbc7ecbef1",
+      "bytes": 7509
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/x07_c3.py",
+      "sha256": "36a25b9f463188ef3e6fcda7b65de3ca59bceded8f621ecdf9e840d60ac3413d",
+      "bytes": 9497
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/x08_strata.py",
+      "sha256": "eb445fc78adaadf6417d9ca2780c02b257d001c42e388a1720e6ddb92b3bb674",
+      "bytes": 8337
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/x09_followup.py",
+      "sha256": "c00c90a30a44b0d6a9afedcaa077b3106d3f702f4359f47d5bac49f8ee95457c",
+      "bytes": 12674
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/x10_boxcrop.py",
+      "sha256": "20d34039025377ad422bdf0d48b90ca64ca02550c09bf41924c7b8789996e53b",
+      "bytes": 2453
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/x11_split10.py",
+      "sha256": "087e65a7af713291517d5e676563347a3c993c35737473b227a3b52eb49e9425",
+      "bytes": 4039
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/x12_btcsim.py",
+      "sha256": "7fe022dbbd1c97a7d9a682c2080a848ecfd5bcec70ed713097a848167d66ac8a",
+      "bytes": 6541
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/x13_prefilter.py",
+      "sha256": "9078f634f9b904439beb20c7770aae75ca4a4f948fd8b3c21dfe67e1584fbb16",
+      "bytes": 3757
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/x14_btcsim_on_btc.py",
+      "sha256": "960b228dd81a7b6a730c44a2ea89a3c28e864d8cc7e638490b95c8c58cf5842b",
+      "bytes": 5556
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/x15_boxcrops_conditions.py",
+      "sha256": "4e135d1362bd517e5e33974f331cd5db3e7eeabd95b122d43639add4fc422cd6",
+      "bytes": 8148
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/x16_boxcrops_public.py",
+      "sha256": "c7b6ba48aca67fbdec8dfcb1b86f035b7ce436e4ed837ad35cdfe95789ee0806",
+      "bytes": 7522
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/x17_split_jpeg.py",
+      "sha256": "e0bd8122dd3fc573cd31bcd2908fef6efe0635dafbe63fab2f6ff315847c4ae1",
+      "bytes": 3117
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/x18_roi_smooth.py",
+      "sha256": "bcfe2cb07814460088ffec485ed6d5a2f2c128bb5947134a0ce31c7f058e131b",
+      "bytes": 6640
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/x19_stable_boxcrops.py",
+      "sha256": "1938259ae085af03552f241a0403f6912c02135338866e68161e8f3757dddf91",
+      "bytes": 5702
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/x20_driver.sh",
+      "sha256": "9ba2b87c5965233f0a93c478f90a4cb4565d69c7d7926d4b5307598b8ec9ab1d",
+      "bytes": 1424
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/x20_prefilter_conditions.py",
+      "sha256": "e885904ebbb6732eea40d3bd9edcc7ced0e8911a131c43785a11996875d25868",
+      "bytes": 8787
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/xcommon.py",
+      "sha256": "6e6ab4411da7fd5846b8b2419d062ad439015b95733252417cafe68159e6a65d",
+      "bytes": 1504
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/y01_btc_improve.py",
+      "sha256": "e2aba0c2ca1a74a33cf489f42eeb7fca2b0f8b5391a578026f8d5012aa6d4168",
+      "bytes": 10963
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/y02_public_improve.py",
+      "sha256": "6d7fec4d9b1318afeb8e68e065ec43418b5fe05e0f539d124c2f5da4863401cc",
+      "bytes": 6411
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/y03_btc_motion.py",
+      "sha256": "853f2a8f741a4102a6197c9108c2d1f0dbf466ffe1cd407db52525e36f7f90a9",
+      "bytes": 4775
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/y04_merppg_pilot.py",
+      "sha256": "dfc67b2eadb8b5331504c20fb09e39e0789c6bad0b66054d28438a1df497e915",
+      "bytes": 11146
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/y05_codex_runner.py",
+      "sha256": "88dc5f1cf6d5e45d10d4c213b557f09d6be0c60a060ca90c3e85164d39f95dbd",
+      "bytes": 6064
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/y05_openrppg.py",
+      "sha256": "145281f83c0191524a29b89acbc5eb1757dee9bade2a4c34f79c4cfe62a1e7d9",
+      "bytes": 8200
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/y05z09_audit_20261122.py",
+      "sha256": "ed48ca3f9b08fb2c0ac4a9a0c1eaedbd56738bdbd44956894ef157ec41c0ee52",
+      "bytes": 5157
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/y05z09_audit_attempt1_20261122.py",
+      "sha256": "771afc83e03a1a74419fc845221080f6444be4bf2363a2deb33d5cb9b04561d4",
+      "bytes": 3563
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/y05z09_codex_runner_20261122.py",
+      "sha256": "778875b9a2937b4723dc12c365eec45e8147e96fe3ff0567a3529f82458e847b",
+      "bytes": 9293
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/y06_reader_quality.py",
+      "sha256": "80e7b3a18d5d003d90f8b04e9a182bff4bf656a4ec536234d6f891cd40b076d2",
+      "bytes": 10674
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/y07_public_prior.py",
+      "sha256": "47cb309b48414a28d7645d398c05df2eec7cdde7ddf9fb7f9dda12bdfd61322b",
+      "bytes": 15531
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/y08_fps_sim.py",
+      "sha256": "722cde63b0cf9826225bd75bb95f69b2d9f6b78bb84a1fbf7e63a317ed12c4f4",
+      "bytes": 4555
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/y09_btc_single.py",
+      "sha256": "5b18cd22e68e93b7c82a24786ee1e486749b7cb27961238e4975ea2db99066f3",
+      "bytes": 5555
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/y10_btc_cnn_smooth.py",
+      "sha256": "91fba568ef76034639b1701506ab9299d728aa126c7c8cd569a733d9e17c5c5f",
+      "bytes": 10387
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/y11_openrppg_conditions.py",
+      "sha256": "687c98f0951b991baebc5b8205cc34801eeadebcb48cb6748f9521fc7ff07a40",
+      "bytes": 9030
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/y11_y12_audit.py",
+      "sha256": "706b3a2fdb40f2e9e8898a2fd40894a7ee5887224f76c3e54cd22a1246aa473f",
+      "bytes": 4447
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/y11_y12_codex_runner.py",
+      "sha256": "60ee3c5a8c3a4e1e700f6abeb2aed19cc6a5e93cecc08adbb61b11b4e0496f5e",
+      "bytes": 9247
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/y11_y12_status.py",
+      "sha256": "fcb36c9e50f3407ddc0d43b7699d6d1a8775d91f672b265c2864aff1a3506b3a",
+      "bytes": 955
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/y12_openrppg_public.py",
+      "sha256": "f70b06202a12065e5cd6a7dc5801489a4bb9dc8fdad17de99c87242ceb860e45",
+      "bytes": 10270
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/y13_openrppg_public_conditions.py",
+      "sha256": "ee0624cc5ea52539edff9fd87721cea0c789dccf403a474174a0a46ae63f6368",
+      "bytes": 14128
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/y13_resume21_audit.py",
+      "sha256": "0b291490354a5df8aefa4fb3bd1741560b7edda6046626ddb5a182265d7bd839",
+      "bytes": 4405
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/y13_resume21_codex_runner.py",
+      "sha256": "aeef2d37bb273b6ee1497be0f4f8ee60399349fed84059a47682f8589dd1dce6",
+      "bytes": 12159
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/y13_resume21b_audit.py",
+      "sha256": "4eafccf25a1b3011f00d00c6a8969e73c56b16fa0b1497b90d863206df32fd45",
+      "bytes": 4541
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/y13_resume21b_codex_runner.py",
+      "sha256": "6aaf812450fd3297fec37608cd6c71443548f03ac7352a486c01a5ebf4512a78",
+      "bytes": 13000
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/y13_y14_audit.py",
+      "sha256": "5b0a7d5d82492760faf82efc1bb406d16d57a9348ac2379c183edabe0f4a15d9",
+      "bytes": 4648
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/y13_y14_codex_runner.py",
+      "sha256": "778e9151a324c38358c6c45e21a7d92adc8f183386115b3c0d3d3b3eaf516aae",
+      "bytes": 11784
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/y14_btc_split_jpeg.py",
+      "sha256": "2d334d04c6a5df928d13382d2e94c9a119650b47d07110b7e61804de771afd91",
+      "bytes": 5371
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/z01_btc_reader_ext.py",
+      "sha256": "9203b482a17842735e49526135e8b65842d03d12e2a2decc501b3eee97bc0beb",
+      "bytes": 8579
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/z02_btc_window_time.py",
+      "sha256": "c04dca09faabe0d31885b69f617c781b085aa56f12d4a1f32aac2186c150ceb2",
+      "bytes": 6484
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/z03_public_prefilter_experts.py",
+      "sha256": "91c5e8294bea460537848a671954a243d278846f27c0b7ccbd4b0e3b6d9bc265",
+      "bytes": 5605
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/z04_public_classical_score.py",
+      "sha256": "f23b62fcb5d0b03018c77de2e28cababfaa72aedd3a966fc1c3d70a6cb3463fb",
+      "bytes": 4200
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/z05_expert_pilot.py",
+      "sha256": "c095a677e435ef04f3e1083d77950ce7f6e231401630ef251420df718d0af759",
+      "bytes": 2812
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/z06_btc_crop_variants_eval.py",
+      "sha256": "f5d655dd736bad3611a9349af93f963e2902cc2a34eb2672c35a84a30eda3253",
+      "bytes": 2775
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/z07_btc_patch_hybrid.py",
+      "sha256": "544749acac71ec1d1938310ce933cd33c2b18a3a1709e6b5ca2d297a5829b988",
+      "bytes": 5428
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/z08_split_lossless.py",
+      "sha256": "55ce6ed3b388fcfaedd863b67188908b9f349075c220a68d67e88c03fd5a14c6",
+      "bytes": 4074
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/z09_factorizephys_pilot.py",
+      "sha256": "3d6c71c506d871a927fc528a6dc0064e60336f28364625adb8b6baa073091c41",
+      "bytes": 4280
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/z09_recovery_runner_20261122.py",
+      "sha256": "0879c6f84800a3674942d0ffb78f0df079d6a4dfee9392185be8c06be5dddacc",
+      "bytes": 9593
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/z10_btc_lowclass_evidence.py",
+      "sha256": "db0b3b2ed13402b9eb319ca17e4721777ebef8a95cc251c04c78e7b0620dbd0f",
+      "bytes": 4679
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/z11_btc_roi_smooth_eval.py",
+      "sha256": "7a218a4083d930812285bf4d2abe3130945533d3873a9be5967e69b4aeb06873",
+      "bytes": 2285
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/z12_public_multiroi.py",
+      "sha256": "fe70483766d0a33f6911e2b1320b6c3a90e8737b774221702ffd19183a9c6e85",
+      "bytes": 4435
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/z13_public_p4_prefilter.py",
+      "sha256": "7c17564fb318254534dce1ea7f0bc97530c3778ed956cd5a35b8e47ab1472866",
+      "bytes": 10589
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/code/z14_p4m_freeze.py",
+      "sha256": "77cd1ab2673e225e80484cb001b495011213b71ff2c205ffb2fafb24bcfea8c6",
+      "bytes": 10967
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/logs/DEVIATIONS.txt",
+      "sha256": "f3e8508f04a6370aa454b3dcf2217c7c7de20e35f68e30721244adcc3e9f21ba",
+      "bytes": 7183
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/logs/P4M_DEFINITION.txt",
+      "sha256": "790f317ec3f1c19d6b2674e01f7868535d0ea7c886d3ac69d68597702394325f",
+      "bytes": 2567
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/logs/READER_V4_DEFINITION.txt",
+      "sha256": "40b384bd455419248a9b5295a0e46963ff187fc9351de48819af068b4991d1af",
+      "bytes": 1698
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/logs/z08_split_lossless.json",
+      "sha256": "abc155c7b19bc0451fb38a880bc49d1b600eb82bc2061d1fdf5e03e801864323",
+      "bytes": 73296
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/out/y11_v4_conditions.csv",
+      "sha256": "5f0d935d945742702f22470ab5178ed7efcffeac16519fd3ee156f2122107ec3",
+      "bytes": 2545
+    },
+    {
+      "path": "reports/claude_research_20261119_constraints/out/z13_public_p4_prefilter.csv",
+      "sha256": "a65e534101daa61569c6a52ecf8c8256a3a3a8dc55ca49a40745fbd5446b010d",
+      "bytes": 10242
     }
   ],
   "excluded_helpers": [
