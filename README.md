@@ -23,7 +23,8 @@ python3.12 tools/bootstrap_video.py
 python3.12 predict.py --video /path/video.mp4 --activity Resting --output output/my_video
 ```
 
-Đọc `output/my_video/result.json` hoặc `result.csv`. Cờ hoạt động bắt buộc là
+Đọc `output/my_video/result.json` hoặc `result.csv`. Mặc định dành cho video **một người** (`reference`); bộ gác nhiều mặt là tùy
+chọn thử nghiệm chưa qua cổng tương đương. Cờ hoạt động bắt buộc là
 `Resting`, `Task` hoặc `Walking`. Lệnh chạy CPU, không cần nhãn PR hoặc manifest
 riêng của đội, không tải dataset và không chạm holdout. Cần ít nhất 15 GiB RAM
 còn trống. Khi thiếu tín hiệu, `abstain=true` và `pr_bpm=null`; prior dự phòng

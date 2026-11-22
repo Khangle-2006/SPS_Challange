@@ -45,8 +45,9 @@ Ba video dev đã định trước, mỗi video chạy cả `reference` và `gua
   khi hai lượt cùng chạy CPU; không phải SLA trên mọi máy/video.
 - Reference: crop72, PTS, valid trùng cache; phổ cả ba expert và PR theo fold
   trùng kết quả state-isolated ở cả 3/3 video, sai khác PR **0 bpm**.
-- Guarded có thể phục hồi một frame mà reference bỏ. Không khẳng định hai frontend
-  tương đương trên mọi video, không hạ ngưỡng cổng 22/11 đã thất bại.
+- Guarded: 2/3 video cùng PR; 1/3 phục hồi một frame và đổi PR **+22 bpm**.
+  Vì vậy mặc định CLI là reference cho video một người. Guarded chỉ là tùy chọn
+  thử nghiệm; cổng tương đương 22/11 vẫn FAIL, không thay ngưỡng.
 - Video lặp một ảnh mặt thật: `abstain=true`, `pr_bpm=null`.
 - Video không mặt: `abstain=true`, không báo prior là mạch đo được.
 - Video 1 s: exit khác 0, báo lỗi, không đệm thành kết quả giả.

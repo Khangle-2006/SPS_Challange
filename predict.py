@@ -19,8 +19,8 @@ def main():
                    help='Known recording activity; never inferred from the filename.')
     p.add_argument('--output', required=True, type=Path,
                    help='A new directory for result.json, result.csv and processing evidence.')
-    p.add_argument('--frontend', choices=['guarded', 'reference'], default='guarded',
-                   help='guarded keeps target identity; reference is the historical single-face reproduction route.')
+    p.add_argument('--frontend', choices=['guarded', 'reference'], default='reference',
+                   help='reference (default) is the validated single-face route; guarded is experimental multi-face identity guarding.')
     p.add_argument('--fold', type=int, choices=range(5),
                    help='Research only: use the matching held-out dev fold instead of the deployment fit.')
     p.add_argument('--source-bitrate', type=float,

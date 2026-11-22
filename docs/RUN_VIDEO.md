@@ -55,13 +55,16 @@ thay bằng tổng bitrate file hay chọn loại nguồn tùy ý. Video HDR dù
 HLG/PQ → SDR đã lưu; xoay display metadata chỉ thực hiện một lần. Thời gian lấy
 từ PTS thật, không lấy chỉ số frame chia fps mặc định.
 
-Mặc định `guarded` giữ danh tính khuôn mặt, bỏ khung có người khác chồng vùng
-mục tiêu. Video nhiều người nên truyền hộp người cần đo, trong tọa độ pixel
+Mặc định `reference` dùng đường một mặt đã kiểm khớp. Chỉ dùng mặc định cho
+video một người. `guarded` là tùy chọn thử nghiệm giữ danh tính; nó chưa qua
+cổng tương đương từng video (một trong ba video kiểm lệch +22 bpm khi phục hồi
+một frame). Không xem nó là chế độ đã xác nhận cho kết quả nghiên cứu. Nếu
+chủ động thử video nhiều người, truyền hộp người cần đo trong tọa độ pixel
 của ảnh sau xoay display:
 
 ```bash
 python3.12 predict.py --video /path/group.mp4 --activity Resting \
-  --seed-box 100 60 340 380 --output output/target
+  --frontend guarded --seed-box 100 60 340 380 --output output/target
 ```
 
 Không tự chọn lại người khi mất dấu. Khi không đủ cửa sổ hợp lệ, kết quả gắn cờ
@@ -98,8 +101,8 @@ python3.12 predict.py --video /path/authorized_dev_video.mp4 --activity Resting 
 ```
 
 `reference` dùng FaceMesh một mặt và crop lịch sử, dành riêng cho tái lập.
-Nó không cung cấp bộ gác nhiều người. Không tự chuyển về reference khi guarded
-cho số khác. Bộ gác khôi phục/loại một số frame nên có thể đổi dự đoán; cổng
+Nó không cung cấp bộ gác nhiều người. Không chọn chế độ theo PR dự đoán hoặc nhãn; mặc định reference được
+đặt chung cho mọi video một mặt. Bộ gác khôi phục/loại một số frame nên có thể đổi dự đoán; cổng
 khớp từng video của lần tích hợp 22/11 còn chưa đạt. Không đổi ngưỡng đó trong
 bản đóng gói này. Số MAE lịch sử 8,350 còn dùng expert giữ trạng thái từ video
 trước; không phải kết quả của CLI đã reset trạng thái. Điểm dev sau sửa vẫn
