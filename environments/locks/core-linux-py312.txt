@@ -1,0 +1,3 @@
+# Fully resolved on Linux x86_64 / Python 3.12.3; fresh venv, 22 November 2026.
+numpy==1.26.4
+scipy==1.15.3

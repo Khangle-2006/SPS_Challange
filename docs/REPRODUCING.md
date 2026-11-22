@@ -1,5 +1,7 @@
 # Reproduction guide
 
+**Cài mới:** dùng [GETTING_STARTED.md](GETTING_STARTED.md), [ASSETS.md](ASSETS.md) và [kết quả kiểm môi trường mới](CLEAN_ENV_VALIDATION.md). Các phần dưới giữ bối cảnh snapshot lịch sử; requirements-research.txt không thay thế bốn profile mới.
+
 ## 1. Chọn mức tái lập
 
 | Mức | Có thể làm từ repo này? | Cần thêm |

@@ -1,4 +1,8 @@
 .venv/
+.venv-*/
+configs/paths.local.json
+configs/assets.local.json
+private-assets/
 __pycache__/
 *.py[cod]
 .env
