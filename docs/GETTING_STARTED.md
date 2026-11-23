@@ -1,3 +1,5 @@
+> **Chạy bản hiện hành:** xem [REPRODUCE_SERVER.md](REPRODUCE_SERVER.md) hoặc `tools/bootstrap_video.py` + `predict.py`. Tài liệu bên dưới dành cho workspace nghiên cứu lịch sử. Các stage y05/y11/y12/y13 trong archive giữ nguyên lỗi trạng thái đã ghi nhận; không dùng chúng để tái lập hoặc quảng bá số R1.
+
 # Cài mới và chạy lại
 
 **Chỉ muốn chọn video để lấy PR?** Dùng [RUN_VIDEO.md](RUN_VIDEO.md):

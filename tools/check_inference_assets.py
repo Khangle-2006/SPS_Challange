@@ -29,9 +29,10 @@ def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('bundle',type=Path);p.add_argument('--smoke',action='store_true')
     p.add_argument('--archive',type=Path,help='Also check ZIP against the hash pinned in the repository')
+    p.add_argument('--release-config',type=Path,default=Path(__file__).resolve().parents[1]/'configs/inference-assets-r1-20261124.json')
     a=p.parse_args()
     if a.archive:
-        release=json.loads((Path(__file__).resolve().parents[1]/'configs/inference-assets-20261123.json').read_text())
+        release=json.loads(a.release_config.read_text())
         if hashlib.sha256(a.archive.read_bytes()).hexdigest()!=release['sha256']:
             raise ValueError('ZIP differs from the pinned release hash')
         print('PASS: ZIP matches the release hash pinned in the repository')

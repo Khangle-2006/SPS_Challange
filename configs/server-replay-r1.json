@@ -1,0 +1,12 @@
+{
+  "schema": 1,
+  "server_relative_path": "reports/repo_ready_20261124/dev_replay",
+  "manifest_sha256": "7cbbb06d58ab690930f12810a56e901a013576dc4bff9cb4ec4abf4e74b91d2a",
+  "scope": "dev-only",
+  "contains_participant_data": false,
+  "expected_btc_native_mae": 8.33326843025463,
+  "expected_public_native_mae": {
+    "UBFC2": 0.7464425223214286,
+    "MCD": 1.5108697696470246
+  }
+}

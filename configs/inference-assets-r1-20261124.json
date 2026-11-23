@@ -1,0 +1,12 @@
+{
+  "tag": "inference-assets-r1-20261124",
+  "asset": "facevitals-inference-assets-r1-20261124.zip",
+  "root": "facevitals-inference-assets-r1-20261124",
+  "url": "https://github.com/Khangle-2006/SPS_Challange/releases/download/inference-assets-r1-20261124/facevitals-inference-assets-r1-20261124.zip",
+  "sha256": "6686cc7ed058bc5ce6a58f67513c2713d953aef3aa774ece55386f9505f77f06",
+  "bytes": 8723101,
+  "files": 18,
+  "expert_mode": "selfwarm",
+  "btc_all_dev_deploy_model_available": true,
+  "previous_release_unchanged": true
+}

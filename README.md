@@ -1,20 +1,10 @@
 # FaceVitals — SP Cup 2027, Round 1
 
-Ước lượng **nhịp mạch (bpm) từ video RGB khuôn mặt**, không tiếp xúc. Repo chứa code nghiên cứu, định nghĩa pipeline đã chốt và bảng kết quả trên tập phát triển (dev) **đến ngày 22/11/2026**.
+Ước lượng **nhịp mạch PR (bpm) từ video RGB khuôn mặt**. Bản R1 ngày 23/11/2026 dùng ba expert **self-warm, tách trạng thái giữa video**. BTC dùng reader_v4; bộ công khai dùng P4m. Các số dưới đây là kiểm chéo theo người trên **dev**, chưa phải holdout.
 
-> **Trạng thái tích hợp 23/11/2026**
-> - Pipeline đã **chốt và đóng băng tham số** cho cả hai nhánh: BTC dùng **reader_v4**, bộ công khai dùng **P4m**.
-> - Lệnh mới cho một video BTC: `predict.py`, xem [Chạy video → PR](docs/RUN_VIDEO.md). Nhánh P4m/public vẫn là mã nghiên cứu; không đánh đồng hai nhánh.
-> - Frontend có bộ gác mặt có thể khôi phục/loại frame khác bản lịch sử. Cổng khớp từng đầu ra ngày 22/11 chưa đạt; không đổi ngưỡng hoặc gán MAE lịch sử cho frontend mới.
-> - Kiểm video riêng ngày 23/11 phát hiện open-rppg giữ trạng thái giữa các video trong script cũ. CLI mới reset trạng thái; các bảng lịch sử có expert chưa reset bên dưới không phải cam kết hiệu năng của CLI độc lập.
-> - **Holdout BTC (72 video / 41 người) chưa mở.** 7 người test của UBFC2 cũng chưa được dùng. Các bảng hiệu năng là kiểm chéo ngoài fold trên dev; fit toàn-dev chỉ dùng triển khai.
+## Clone và chạy một video
 
-![Pipeline](docs/figures/pipeline.png)
-
-## Clone về chạy từ đâu?
-
-**Muốn chọn video và lấy PR: dùng [hướng dẫn này](docs/RUN_VIDEO.md).** Trên
-Linux x86_64 có Python 3.12 và ffmpeg:
+Trên Linux x86_64, Python 3.12, có `ffmpeg`/`ffprobe` và ít nhất **15 GiB RAM còn trống**:
 
 ```bash
 git clone https://github.com/Khangle-2006/SPS_Challange.git
@@ -23,399 +13,81 @@ python3.12 tools/bootstrap_video.py
 python3.12 predict.py --video /path/video.mp4 --activity Resting --output output/my_video
 ```
 
-Đọc `output/my_video/result.json` hoặc `result.csv`. Mặc định dành cho video **một người** (`reference`); bộ gác nhiều mặt là tùy
-chọn thử nghiệm chưa qua cổng tương đương. Cờ hoạt động bắt buộc là
-`Resting`, `Task` hoặc `Walking`. Lệnh chạy CPU, không cần nhãn PR hoặc manifest
-riêng của đội, không tải dataset và không chạm holdout. Cần ít nhất 15 GiB RAM
-còn trống. Khi thiếu tín hiệu, `abstain=true` và `pr_bpm=null`; prior dự phòng
-không phải số đo. Không ghi đè output cũ.
+Bootstrap tự cài ba môi trường đã khóa, tải đủ 5 checkpoint public và kiểm reader/weights bằng SHA256. Cần Internet khi cài lần đầu; không cần chép file từ thư mục riêng của tác giả.
 
-Để tìm hiểu demo POS tổng hợp, môi trường nghiên cứu hoặc lặp các bảng thật,
-xem [hướng dẫn cài nghiên cứu](docs/GETTING_STARTED.md), chuẩn bị
-[bundle dev và checkpoint](docs/ASSETS.md), rồi chạy `tools/repro.py init`,
-`doctor`, `prepare`, `plan`. Cấu hình riêng ở `configs/paths.local.json`; không
-cần sửa hàng trăm file nguồn. Đường tái lập bảng cần tài sản riêng, khác với lệnh
-chạy một video ở trên. Thiếu tài sản thì báo thiếu và dừng, không tự tải
-holdout hay thay checkpoint.
+Đọc `output/my_video/result.json` hoặc `result.csv`. `--activity` là `Resting`, `Task` hoặc `Walking`, lấy từ hoạt động lúc quay. Mặc định `reference` dành cho video một người. Nếu không đủ bằng chứng, `abstain=true`, `pr_bpm=null`; prior dự phòng **không phải số đo mạch**. Thư mục output phải mới.
 
-[Phạm vi kiểm trong môi trường sạch](docs/CLEAN_ENV_VALIDATION.md) phân biệt
-kiểm cài đặt/tensor tổng hợp với kiểm đầy đủ raw video → pipeline. Các snapshot
-nghiên cứu giữ nguyên hash; relocation chỉ thực hiện trên bản làm việc riêng.
+Cài gói hệ thống, xử lý bitrate nguồn, video HDR, tùy chọn fold và bộ gác nhiều mặt: **[RUN_VIDEO.md](docs/RUN_VIDEO.md)**. Lệnh này chạy CPU, không cần nhãn PR, dataset của đội hoặc checkpoint CNN của đội. Bootstrap tạo ba môi trường đã khóa phiên bản; ba expert nằm trong `open-rppg==0.1.1`, reader nhẹ có sẵn trong `models/`.
 
-## Tải checkpoint, cấu hình reader và tìm dataset
+## Lặp số trên server P100
 
-**[Tải gói checkpoint + reader tại đây](https://github.com/Khangle-2006/SPS_Challange/releases/tag/inference-assets-20261123).**
-Gói gồm 5 checkpoint padding-fixed, 5 cấu hình reader_v4 theo fold và tham số P4m
-(fold + deploy), kèm SHA256 và mã nạp. [Cách tải, kiểm hash và sử dụng](docs/INFERENCE_ASSETS.md).
-Ba expert có sẵn trong `open-rppg==0.1.1`, không cần tải lại từ đội.
+Sau bootstrap, chạy trong clone mới:
 
-Dataset đã có trên **P100**:
+```bash
+.venv/core/bin/python tools/reproduce_r1.py --output output/r1_replay
+```
 
-| Bộ dữ liệu | Vị trí trên server |
+Lệnh kiểm hash cache dev được cấp quyền, chạy lại reader từ bằng chứng phổ với đúng model fold, rồi đối chiếu từng dự đoán; không fit lại, không đọc holdout. Kỳ vọng BTC native **8,333268**, UBFC2 native **0,746443**, MCD native **1,510870 bpm**. Có đủ 24 hàng public native/constraint. Đây là replay readout từ cache, **không phải chạy lại CNN/frontend từ video gốc**. Chạy một video mới dùng lệnh `predict.py` ở trên; chấm dev phải thêm `--fold` đúng người. [Hướng dẫn từng bước và phạm vi](docs/REPRODUCE_SERVER.md).
+
+## Kết quả hiện hành
+
+MAE là sai số tuyệt đối: tính trong từng người rồi trung bình giữa người; thấp hơn là tốt hơn. CI95 bootstrap theo người, 10.000 lần, seed 0.
+
+| Nhánh / video gốc | Phạm vi dev | MAE mới [CI95], bpm | Hằng số train-fold |
+|---|---|---:|---:|
+| BTC reader_v4 self-warm | 218 video / 158 người | **8,333 [7,090; 9,659]** | 12,071 |
+| Public P4m — UBFC2 | 193 cửa sổ / 35 người | **0,746 [0,516; 1,051]** | 14,592 |
+| Public P4m — MCD | 1.959 cửa sổ / 60 người | **1,511 [1,247; 1,820]** | 11,684 |
+
+BTC reader_v3 đạt 9,587. Delta reader_v4 − v3 **−1,254 [−2,282; −0,283] bpm**. Bản reset một lượt đạt 9,130; self-warm giảm **−0,797 [−1,632; −0,076] bpm**. Việc chọn 3/17 expert được thực hiện trên phổ cũ và **không làm lại** trong R1; không gọi các CI này là kiểm định holdout độc lập.
+
+[Bảng đầy đủ: 9 hàng BTC, 24 hàng public, P4/P4m, cả số xấu, độ phủ và CI](docs/RESULTS.md). Trường hợp thiếu sáng kèm nhiễu mạnh `aidtrack_c1_g25gv01` không chứng minh thắng hằng số ở cả BTC, UBFC2 và MCD. C5 ở đây là **luồng crop tách ≤10 fps**, khác thử nghiệm nén video toàn khung trước đây.
+
+## Lỗi trạng thái 23/11
+
+`open-rppg 0.1.1` xóa bộ đệm khung nhưng giữ trạng thái hồi quy giữa các lời gọi. Các script cũ dùng chung model qua nhiều video, khiến kết quả phụ thuộc video chạy trước. **8,350 và public 0,75/1,59 cũ đã bị loại**, dù một số số mới gần chúng.
+
+Bản hiện hành sao chép trạng thái khởi tạo ngay sau khi tạo model. Trước mỗi video, khôi phục trạng thái đó, xử lý **chính video này hai lượt** và lấy lượt hai. Kiểm reset/self-warm so tham chiếu và A→B→A đều lệch **0,0** cho cả ba expert. Đã chạy lại đủ 63 lượt mô hình × điều kiện; số đầu ra khớp bản cũ ở mọi lượt. [Lịch sử được giữ nguyên](docs/history/R1_STATE_BUG_20261123.md).
+
+## Pipeline
+
+| Bước | Xử lý |
+|---|---|
+| Frontend | PTS thật, FaceMesh một mặt, oval 36×36 cho tín hiệu màu và crop hộp 72×72 cho expert. `guarded` là tùy chọn thử nghiệm, chưa đạt cổng tương đương toàn cohort. |
+| Tín hiệu | POS + CHROM; FacePhys.rlap, ME-chunk.pure, ME-flow.pure, trọng số giữ nguyên và self-warm riêng từng video. Nhánh public thêm CNN padding-fixed được lọc đầu vào 0,1 s. |
+| Phổ | Cửa sổ 10 s, bước 5 s, nội suy 30 Hz, detrend λ=100, Butterworth 0,7–3 Hz, Hann periodogram nfft=4096. Giữ toán tử BTC/public tương ứng đã khóa. |
+| BTC | Gộp bằng chứng hai phương pháp cổ điển và ba expert; prior + beta + offset theo lớp bitrate nguồn và cờ Task. |
+| Public | P4m gộp bốn kênh và readout theo thời gian; fit gộp native + 6 điều kiện trên fold train. Trọng số/readout theo fold, không dùng fit deploy để chấm dev. |
+
+[Chi tiết kiến trúc và tham số](docs/PIPELINE.md). [Kiểm CLI từ video gốc](docs/VIDEO_CLI_VALIDATION.md).
+
+## Dataset và checkpoint
+
+Dataset đã có trên **P100**, cần tài khoản và quyền truy cập:
+
+| Bộ | Đường dẫn |
 |---|---|
 | BTC | `/mnt/samsung_t5/khangle/facevitals/datasets/FaceVitals_BTC_20261107` |
 | UBFC-rPPG | `/data_pool/khangle/facevitals/datasets/UBFC-rPPG` |
 | MCD-rPPG | `/mnt/samsung_t5/khangle/facevitals/datasets/MCD-rPPG` |
 | AiPEX | `/data_pool/khangle/facevitals/datasets/AiPEX` |
 
-Đây là đường dẫn server, không phải link tải công khai. Cần tài khoản/quyền truy
-cập; `/data_pool` yêu cầu quyền nhóm phù hợp. [Chi tiết quyền và manifest dev](docs/SERVER_DATASETS.md).
-Chỉ chạy dev theo split đã khóa, không quét cả root dataset để chấm holdout.
+[Quyền, split và đường dữ liệu](docs/SERVER_DATASETS.md). Chỉ dùng manifest dev được cấp quyền; **holdout BTC 72 video/41 người và 7 người test UBFC2 vẫn khóa**. Không quét cả root để chấm.
 
-**Phạm vi Release lịch sử:** gói tải trên chứa 5 fit train-fold. Cấu hình triển
-khai BTC mới nằm ngay trong `models/btc_reader_v4_deploy.json`, kèm hash và
-nguồn gốc ở `models/MANIFEST.json` (bản reset trạng thái, khác ZIP lịch sử). Cổng khớp từng đầu ra frontend mới vẫn chưa
-đạt; có lệnh suy luận chạy được không đồng nghĩa đã qua mọi cổng của gói nộp bài.
+[Release R1 hiện hành: checkpoint + reader](https://github.com/Khangle-2006/SPS_Challange/releases/tag/inference-assets-r1-20261124) được bootstrap tự tải và kiểm. **CLI dùng `models/` đi cùng code**, gói tải phải trùng tham số đó. Release cũ được giữ riêng để tra cứu. [Chi tiết](docs/INFERENCE_ASSETS.md).
 
-## Mục lục
+## Cấu trúc code và tái lập
 
-1. [Pipeline trong một trang](#pipeline-trong-một-trang)
-2. [Kết quả chính](#kết-quả-chính)
-3. [Cách chạy pipeline](#cách-chạy-pipeline)
-4. [Cấu trúc repository](#cấu-trúc-repository)
-5. [Những gì đã kiểm và chưa kiểm](#những-gì-đã-kiểm-và-chưa-kiểm)
-6. [Nguồn và giấy phép](#nguồn-và-giấy-phép)
-
-Giải thích chi tiết từng khối, kèm hình trên dữ liệu thật: **[docs/PIPELINE.md](docs/PIPELINE.md)**.
-
----
-
-## Pipeline trong một trang
-
-```text
-video ──► (1) Frontend ──► (2) Nguồn tín hiệu ──► (3) Readout ──► (4) Reader ──► nhịp tim
-          FaceMesh 36 điểm   mỗi nguồn ra 1 sóng   mỗi sóng ra 1     gộp bằng chứng
-          oval có che 36×36   mạch (1 số/khung)     đường "bằng       + suy luận
-          hộp không che 72×72                        chứng" Z(f)       theo thời gian
-```
-
-| Khối | Nội dung |
+| Thư mục / file | Vai trò |
 |---|---|
-| **1. Frontend** | Giải mã theo timestamp thật của khung (PTS). MediaPipe FaceMesh tìm mặt; lấy 36 điểm viền mặt làm oval. Hai loại crop: **oval có che 36×36** (INTER_AREA, bỏ tóc và nền) cho POS/CHROM và CNN; **hộp chặt không che 72×72** cho ba mô hình huấn luyện sẵn. Ba trợ giúp cho constraint: khóa mục tiêu khi nhiều mặt (C3), giữ oval theo template khi mất mặt (C7), dò mặt trên bản sao tăng sáng khi tối (C1). |
-| **2. Nguồn tín hiệu** | Mỗi nguồn biến chuỗi crop thành **một sóng mạch**, mỗi khung một số. **POS** (Wang 2017) và **CHROM** (de Haan 2013): công thức vật lý màu da. **CNN của đội**: EfficientPhys + TSM đã sửa padding, checkpoint ngoài fold, chỉ dùng cho bộ công khai, đầu vào lọc trung bình trượt 0,1 s. **Ba mô hình huấn luyện sẵn** của open-rppg 0.1.1: FacePhys.rlap, ME-chunk.pure, ME-flow.pure, dùng nguyên, không huấn luyện lại. |
-| **3. Readout** | Áp cho mọi sóng như nhau: cửa sổ 10 s, bước 5 s → nội suy về 30 Hz theo timestamp → khử xu hướng (smoothness priors, λ = 100) → lọc Butterworth 0,7–3 Hz → periodogram Hann, nfft 4096 → log + chuẩn hóa z trên 42–180 bpm. Kết quả là đường **bằng chứng Z(f)**: mức nguồn đó ủng hộ mỗi giá trị nhịp tim. |
-| **4a. Reader công khai: P4m** | E = 1·Z_CNN + 0·Z_POS + 0,25·Z_CHROM + 1·mean(Z của 3 mô hình). Forward–backward trên HMM có trọng số chất lượng cửa sổ, lấy trung vị hậu nghiệm. Một nhịp cho mỗi cửa sổ 10 s. Fit gộp trên native + 6 điều kiện mô phỏng, áp nguyên cho mọi điều kiện. |
-| **4b. Reader BTC: reader_v4** | Z4 = (2·Z_cổ điển + Z_FacePhys + Z_ME-chunk + Z_ME-flow) / 5, trung bình qua cửa sổ. Bayes: hậu nghiệm ∝ prior KDE × exp(β·Z4). β riêng cho file gốc và file đã nén lại (bitrate < 4 Mb/s). Trung vị hậu nghiệm + hiệu chỉnh theo (loại file, Task). Một nhịp cho mỗi video. Fit trên native, áp nguyên cho mọi điều kiện. |
-| **C5 chế độ tách** | Thiết bị chạy frontend, giữ mỗi khung thứ ⌈fps/10⌉ và gửi mỗi khung: timestamp + cờ (9 B), crop hộp thu về 36×36 nén **WebP không mất mát**, cùng (BTC) trung bình 6×6 khối của oval (432 B) hoặc (công khai) crop oval 36×36 WebP không mất mát. Máy chủ nhận đúng từng bit. Đo trên dữ liệu thật: BTC trung bình 203 kbps (giây cao nhất 253); công khai 310 kbps (giây cao nhất 469). |
-
-Định nghĩa đóng băng, đầy đủ tham số và sha256:
-- [`reports/claude_research_20261119_constraints/logs/READER_V4_DEFINITION.txt`](reports/claude_research_20261119_constraints/logs/READER_V4_DEFINITION.txt)
-- [`reports/claude_research_20261119_constraints/logs/P4M_DEFINITION.txt`](reports/claude_research_20261119_constraints/logs/P4M_DEFINITION.txt)
-- Mọi quyết định đưa ra sau khi đã thấy số dev được ghi trong [`logs/DEVIATIONS.txt`](reports/claude_research_20261119_constraints/logs/DEVIATIONS.txt).
-
----
-
-## Kết quả chính
-
-Đơn vị bpm, thấp hơn là tốt hơn. Cách tính:
-- Kiểm chéo 5 fold **chia theo người** (một người không nằm ở cả train và test).
-- MAE tính trong từng người trước, rồi lấy trung bình giữa người.
-- Khoảng tin cậy 95% bằng bootstrap ghép cặp theo người, 10.000 lần, seed 0.
-- Mốc so sánh "hằng số" là trung vị nhịp tim của fold train.
-
-### BTC — CLI sau sửa trạng thái, 23/11
-
-**Reader_v4 reset: 9,130 bpm** trên 218 video / 158 người, kiểm OOF theo người.
-Hằng số 12,071; hiệu chỉnh cũ 11,374; reader_v3 9,587.
-Δ so hiệu chỉnh −2,244 [−3,238; −1,258]; Δ so v3 −0,457 [−1,276; +0,312].
-Chưa chứng minh tốt hơn v3. Đây là kết quả trên crop native lịch sử, không phải
-điểm holdout hay cam kết cho mọi video/frontend guarded.
-
-[Kiểm video thật, môi trường sạch và lỗi đã sửa](docs/VIDEO_CLI_VALIDATION.md).
-
-### BTC — số lịch sử trước sửa trạng thái (218 video dev / 158 người)
-
-Các số 8,35 và bảng constraint dưới đây lưu lại lượt chạy cũ, khi expert có thể
-mang trạng thái từ video trước. Không dùng chúng để khẳng định tái lập trên
-một video chạy riêng. Mã và kết quả gốc được giữ để kiểm toán.
-
-| Tập con | reader_v4 | Hằng số |
-|---|---:|---:|
-| Toàn bộ dev | **8,35** (RMSE 11,37; r 0,68) | 12,07 |
-| File gốc từ camera | 7,79 | 13,82 |
-| File đã bị ứng dụng nhắn tin nén lại | 9,26 | 9,21 |
-
-Ở các file đã nén lại, số lịch sử của reader gần mốc hằng số. Các phép kiểm codec
-là bằng chứng chẩn đoán trong điều kiện đã thử, không chứng minh mọi tín hiệu
-mạch đã mất hoặc xác lập một mức MAE tối ưu cho toàn bộ BTC.
-
-**Dưới các constraint** (bảng đầy đủ: [`out/y11_v4_conditions.csv`](reports/claude_research_20261119_constraints/out/y11_v4_conditions.csv)). Cổng: a = còn ≥ 90% đầu ra; b = không kém hằng số; c = tốt hơn hằng số.
-
-| Điều kiện | Video | MAE | Δ so hằng số [CI95] | Cổng |
-|---|---:|---:|---|:-:|
-| C5 tách, ≤ 10 fps | 218 | 9,82 | −2,26 [−3,67; −0,79] | abc |
-| C1 tối (gain 0,25 + Poisson), giữ theo template | 200 | 9,74 | −2,76 [−3,98; −1,59] | abc |
-| C1 tối + nhiễu Gauss mạnh | 197 | 12,27 | −0,34 [−1,64; +0,94] | ab |
-| C2 bạch biến | 199 | 9,14 | −3,28 [−4,84; −1,74] | abc |
-| C4 VGA / QVGA | 200 | 9,29 / 9,24 | −3,21 / −3,26 | abc |
-| C6 da lão hóa | 197 | 8,46 | −4,07 [−5,72; −2,47] | abc |
-| C7 che nửa dưới mặt, giữ theo template | 197 | 9,96 | −2,73 [−4,01; −1,48] | abc |
-
-### Bộ công khai — P4m (một số cho mỗi cửa sổ 10 s)
-
-Đây cũng là bảng nghiên cứu lịch sử. Chưa chấm lại P4m/public với expert reset
-trước từng bản ghi trong lượt đóng gói CLI BTC này.
-
-UBFC2 dev: 35 người. MCD: 60 người khi chạy native và C5, 34 người cho các constraint mô phỏng. Bảng đầy đủ, gồm cả P4 và hai reader fit trên native: [`out/z13_public_p4_prefilter.csv`](reports/claude_research_20261119_constraints/out/z13_public_p4_prefilter.csv).
-
-| Điều kiện | UBFC2 | MCD | Hằng số (UBFC2 / MCD) | Có trong fit gộp? |
-|---|---:|---:|---|:-:|
-| **Native** | **0,75** | **1,59** (RMSE 3,79; r 0,96) | 14,59 / 11,68 | có |
-| C5 tách, ≤ 10 fps | 0,65 | 1,77 | 14,66 / 11,69 | không |
-| C4 QVGA | 0,74 | 1,54 | | có |
-| C6 da lão hóa | 0,76 | 1,60 | | có |
-| C2 bạch biến | 0,75 | 1,74 | | có |
-| C1 gain 0,5 | 1,00 | 1,89 | | không |
-| C1 gain 0,25, giữ theo template | 1,62 | 2,53 | | có |
-| C1 gain 0,125 | 3,00 | 2,95 | | không |
-| C1 tối + nhiễu Gauss mạnh | 14,05 | 10,31 | 14,61 / 10,98 | có (cổng ab) |
-| C7 che xanh, giữ theo template | 1,71 | 3,22 | | có |
-| C7 che trắng | 1,21 | 3,71 | | không |
-
-Các cổng ghi trong bảng áp dụng cho kết quả lịch sử. Không dùng bảng này để
-kết luận nguyên nhân nằm ở cảm biến hoặc xác nhận bản tích hợp mới đã qua cổng.
-
-**Lệch quy tắc đã ghi lại.** Trước khi chạy z13, đội đặt quy tắc: P4m chỉ thay P4 nếu không có dòng nào kém đi. Kết quả: P4m kém P4 ở UBFC2 native +0,043 [+0,006; +0,080] bpm, nhưng tốt hơn ở MCD native −0,25 [−0,51; −0,08] và ở các điều kiện C1/C7. Đội chọn P4m ngày 22/11 và ghi đây là một lệch quy tắc. Số của P4 vẫn được báo cáo đầy đủ.
-
-Kết quả lịch sử đến 15/11 (BTC 11,37; padding-fixed; V5…) vẫn giữ ở [docs/RESULTS.md](docs/RESULTS.md). Việc chọn pipeline trước đây không thay thế yêu cầu kiểm lại sau khi phát hiện lỗi trạng thái.
-
----
-
-## Cách chạy pipeline
-
-Các lệnh bên dưới mô tả quy trình nghiên cứu lịch sử và cần đủ artifact riêng.
-Cài mới bắt đầu ở [GETTING_STARTED.md](docs/GETTING_STARTED.md); chưa có phép
-kiểm đầy đủ mọi bảng trên môi trường mới chỉ từ nội dung Git. Một số script
-fit reader trong train-fold khi chấm dev, không phải lệnh inference một video.
-
-Đây là các bước đã dùng để tạo các bảng ở trên; muốn tái lập cần đúng bundle đầu vào và kiểm lại số. Mỗi bước là một script trong [`reports/claude_research_20261119_constraints/code/`](reports/claude_research_20261119_constraints/code/). Dòng đầu mỗi script có docstring mô tả đầu vào, đầu ra và tham số.
-
-### 0. Điều kiện trước
-
-**Dữ liệu và tài sản.** Không có trong Git, xin maintainer theo đúng quyền sử dụng:
-- video UBFC2, MCD, BTC dev và nhãn;
-- `MANIFEST.json` (cửa sổ, fold theo người, nhãn từng cửa sổ) của `round1_execution_20261110/inference_repair_20261113`;
-- cache crop native của đội (`t8_oval_20261031/<dataset>/<rec>/native/crop/{rgb.npy, meta.npz}`). Tạo bằng [`ops/t8_oval_20261031/prepare_t8_cache.py`](ops/t8_oval_20261031/);
-- 5 checkpoint CNN padding-fixed theo fold (`FROZEN.json` → `padding_checkpoints`);
-- bảng nhân khẩu học BTC dev (chỉ cho phân tích nhóm).
-
-**Đường dẫn.** Các script dùng đường dẫn tuyệt đối của máy chủ đội:
-
-```text
-W   = /mnt/samsung_t5/khangle/facevitals/reports/claude_research_20261119_constraints   # code/, out/, logs/
-OLD = W/../claude_research_20261118/code                                                 # lib_btc.py, reader_v3
-R   = W/../round1_execution_20261110/inference_repair_20261113                           # MANIFEST, FROZEN, hàm của đội
-T8  = /data_pool/khangle/facevitals/code/t8_oval_20261031                                # oval_crop.py của đội
-```
-
-Trên máy khác, dùng `tools/repro.py prepare` để ánh xạ các prefix này sang workspace riêng theo `configs/paths.local.json`. Bản nguồn trong Git giữ nguyên byte; receipt relocation ghi hash của bản làm việc. Không đặt dữ liệu của bạn vào root sản xuất của đội và không sửa hash frozen để vượt assertion.
-
-**Các môi trường lịch sử của thí nghiệm** (Python 3.12, CPU):
-
-Để cài mới, dùng các profile có pin trong `environments/` theo
-[GETTING_STARTED.md](docs/GETTING_STARTED.md), không cài gộp bảng lịch sử này.
-`tools/repro.py` dùng các interpreter trong config; nếu chạy lệnh dưới đây bằng
-tay, đặt `AV=/đường/dẫn/checkout/.venv/frontend/bin/python` và
-`PY=/đường/dẫn/checkout/.venv/torch-cpu/bin/python`. Dùng workspace đã prepare
-làm `W`, không dùng root máy chủ đội.
-
-| Biến | Dùng cho | Gói chính (phiên bản đã chạy) |
-|---|---|---|
-| `$AV` | Giải mã video, FaceMesh, mô phỏng constraint, vẽ hình | numpy 1.26.4, scipy 1.17, opencv 4.11, mediapipe 0.10.21, av 14.2, matplotlib 3.11, Pillow 10.2 |
-| `$PY` | CNN, POS/CHROM, readout, reader, chấm điểm | numpy 2.5, scipy 1.18, torch 2.5.1, opencv 4.10 |
-| `venv_orppg` | Ba mô hình huấn luyện sẵn | open-rppg 0.1.1 (keras 3.15, backend JAX 0.12), numpy 2.5 |
-
-```bash
-python3.12 -m venv venv_orppg && venv_orppg/bin/pip install open-rppg==0.1.1
-# kiểm trọng số đúng bản đã dùng (sha256 trong READER_V4_DEFINITION.txt)
-sha256sum venv_orppg/lib/python3.12/site-packages/rppg/weights/{FacePhys.rlap,ME.pure}.weights.h5
-```
-
-Cần thêm `ffmpeg`/`ffprobe` (bản đã dùng: 6.1.1). Các ví dụ dưới đây chạy từ thư mục `W`. `<n>` là số tiến trình song song.
-
-> Giới hạn tài nguyên đã dùng: `nice -n 19`, 1–2 luồng BLAS mỗi tiến trình, chừa ≥ 15 GB RAM trống. `code/x20_driver.sh` là ví dụ tạm dừng worker khi thiếu RAM.
-
-### 1. Nhánh BTC → reader_v4
-
-```bash
-# 1.1 Frontend: crop oval có che + trung bình 6×6 khối, native và các constraint C1/C4/C6/C7
-nice -n 19 $AV code/x01_extract.py <n>                          # -> out/x01/<cond>/<key>.npz
-nice -n 19 $AV code/x09_followup.py <n> track:c1_g25p,aidtrack:c1_g25gv01,std:c2_vit,track:c7_blue BTC
-                                                                 # trợ giúp frontend (track/aid) + C2 bạch biến
-
-# 1.2 Crop hộp không che 72×72 cho ba mô hình
-X01_SKIP_HEAVY=0 nice -n 19 $AV code/x10_boxcrop.py <n> BTC      # native, gồm cả 17 file 4K/HDR -> out/x10/<key>.npz
-nice -n 19 $AV code/x15_boxcrops_conditions.py <n> track:c1_g25p,aidtrack:c1_g25gv01,std:c2_vit,std:c4_vga,std:c4_qvga,std:c6_us1,track:c7_blue
-
-# 1.3 Bằng chứng cổ điển (POS, CHROM), mỗi video một phổ
-$PY code/x03_btc_spectra.py <n> x01
-$PY code/x03_btc_spectra.py <n> x09
-
-# 1.4 Ba mô hình huấn luyện sẵn, zero-shot
-for m in FacePhys.rlap ME-chunk.pure ME-flow.pure; do
-  venv_orppg/bin/python code/y05_openrppg.py run $m              # native -> out/y05/<model>.npz
-  for c in heavy split10 track_c1_g25p aidtrack_c1_g25gv01 c2_vit c4_vga c4_qvga c6_us1 track_c7_blue; do
-    venv_orppg/bin/python code/y11_openrppg_conditions.py run $m $c
-  done
-done
-
-# 1.5 reader_v4: fit trên native, áp nguyên cho mọi điều kiện, chấm với cổng
-$PY code/y11_openrppg_conditions.py eval FacePhys.rlap,ME-chunk.pure,ME-flow.pure   # -> out/y11_v4_conditions.csv
-$PY code/z01_btc_reader_ext.py <n>                                                  # dự đoán native từng video -> out/z01_pred.npz (khóa "v4")
-
-# 1.6 Phân tích nhóm (da, tuổi, Patient/Normal)
-$PY code/x08_strata.py score out/<pred>.npz
-```
-
-Lựa chọn ba mô hình: `venv_orppg/bin/python code/y05_openrppg.py eval` chạy chọn tiến lồng trong fold train trên các mô hình open-rppg. Mô hình nào được chọn ở ≥ 4/5 fold thì giữ.
-
-### 2. Nhánh công khai → P4m
-
-```bash
-# 2.1 Native: tiền lọc 0,1 s trên crop oval, rồi CNN + POS + CHROM theo cửa sổ
-$PY code/x13_prefilter.py <n>                                    # -> out/x13/nat_ma3, out/x13c/nat_ma3
-for s in 0 1 2; do $PY code/x02_infer.py $s 3 x13 & done; wait  # -> out/x13_spec/...
-
-# 2.2 Constraint: crop có tiền lọc + CNN + chấm z13 (một lệnh, có bảo vệ RAM)
-bash code/x20_driver.sh <n>
-
-# 2.3 Crop hộp và ba mô hình trên bộ công khai
-nice -n 19 $AV code/x10_boxcrop.py <n> UBFC2,MCD
-nice -n 19 $AV code/x16_boxcrops_public.py <n> std:c4_qvga,std:c6_us1,aidtrack:c1_g25gv01,std:c2_vit,track:c1_g25p,track:c7_blue,std:c1_g50p,std:c1_g12p,std:c1_g25gv001,std:c7_white
-for m in FacePhys.rlap ME-chunk.pure ME-flow.pure; do
-  venv_orppg/bin/python code/y12_openrppg_public.py run $m                       # native
-  for c in c4_qvga c6_us1 aidtrack_c1_g25gv01 c2_vit track_c1_g25p track_c7_blue c1_g50p c1_g12p c1_g25gv001 c7_white c5_split10; do
-    venv_orppg/bin/python code/y13_openrppg_public_conditions.py run $m $c
-  done
-done
-
-# 2.4 C5 chế độ tách cho CNN
-$PY code/x11_split10.py <n>
-for s in 0 1 2; do $PY code/x02_infer.py $s 3 x11 & done; wait
-
-# 2.5 Chấm P4 / P4m / N4 / N4m và đóng băng P4m
-$PY code/z13_public_p4_prefilter.py                              # -> out/z13_public_p4_prefilter.csv
-$PY code/z14_p4m_freeze.py                                       # -> out/z14_p4m_frozen.npz, logs/P4M_DEFINITION.txt
-```
-
-`z14` in ra độ lệch giữa MAE tái tạo và cột P4m của z13. Bản đã đóng băng lệch 0,00 trên cả 24 dòng.
-
-### 3. C5 chế độ tách: băng thông và kiểm không mất mát
-
-```bash
-nice -n 19 $AV code/z08_split_lossless.py <n>                    # -> logs/z08_split_lossless.json
-```
-
-Script mã hóa crop bằng `cv2.imencode('.webp', img, [cv2.IMWRITE_WEBP_QUALITY, 101])`, giải mã lại và kiểm khớp từng bit. Nó cũng đo kbps theo **từng giây** của luồng.
-
-### 4. C3 nhiều người
-
-```bash
-nice -n 19 $AV code/x07_c3.py <n>                                # ghép người thứ hai vào khung; so first / largest / lock
-for s in 0 1 2; do $PY code/x02_infer.py $s 3 x07 & done; wait
-$PY code/x05_public_score.py <n> x07
-```
-
-Cấu hình được chọn là `lock0`: `target_lock.TargetLock`, gồm Kalman, gán Hungarian và chữ ký ngoại hình, hạt giống là hộp mặt hợp lệ đầu tiên.
-
-### 5. Hình minh họa
-
-Các script này chỉ vẽ, không tính lại kết quả.
-
-```bash
-$AV code/f01_illustrations.py [key]     # frontend, constraint, readout, C5
-$AV code/f02_evidence.py [key]          # bằng chứng từng kênh và bản gộp
-$PY code/f03a_waves.py [key]            # sóng của CNN, POS, CHROM, PPG
-venv_orppg/bin/python code/f03b_experts.py <key> <start_s>
-$AV code/f03c_plot.py                   # hình sóng của 6 nguồn
-```
-
-Hình có mặt người từ dataset chỉ dùng nội bộ, **không đưa vào repo**. Trong [`docs/figures/`](docs/figures/) chỉ có hình tín hiệu và phổ.
-
-### 6. Holdout
-
-**Chưa chạy. Chỉ mở sau xác nhận riêng của người dùng/maintainer.** Bootstrap và
-launcher dev-only mới không thực hiện bước holdout. Thứ tự đã định:
-1. Tích hợp thành một gói.
-2. Kiểm tái lập mọi số ở trên.
-3. Reader_v4 đã có fit cố định toàn dev trong `models/`; chỉ dùng cho video mới,
-   không dùng để chấm điểm OOF. P4m dùng bộ tham số `deploy` riêng.
-4. Ghi sha256 của code, trọng số và tham số vào `FROZEN_PIPELINE.json`.
-5. Chạy holdout **đúng một lần**, chỉ đọc video, không đọc nhãn.
-
----
-
-## Cấu trúc repository
-
-```text
-predict.py                                  chạy một video BTC → PR (CPU)
-runtime/                                    frontend, ba expert, reader cố định
-models/                                     reader deploy + 5 fold, SHA256
-tools/bootstrap_video.py                    cài/kiểm ba môi trường cho CLI
-reports/claude_research_20261119_constraints/   PIPELINE ĐÃ CHỐT (19–22/11)
-  code/x01..x20      frontend, constraint (C1–C7), crop, CNN/POS/CHROM, C5 tách, chấm theo cổng
-  code/y01..y14      ba mô hình open-rppg (y05, y11–y13), reader công khai (y02, y07)
-  code/z01..z14      mở rộng reader BTC, tiền lọc, C5 không mất mát (z08), P4m (z13, z14)
-  code/u01..u34      nghiên cứu thêm 22/11 về giới hạn của BTC (không thuộc pipeline nộp)
-  code/f01..f03      hình minh họa
-  code/constraint_ops.py, target_lock.py, xcommon.py
-  PREREG.md          cổng và quy tắc viết trước khi chạy
-  logs/              READER_V4_DEFINITION, P4M_DEFINITION, DEVIATIONS, z08_split_lossless.json
-  out/*.csv          bảng kết quả tổng hợp (không có dữ liệu cá nhân)
-reports/claude_research_20261118/code/         reader_v3 (a11), lib_btc.py dùng chung, reader công khai 18/11
-reports/reader_*_2026111{6,8}/, w2_btc_20261116/   vòng reader BTC 16–18/11 (v1, v2, w2b, ứng viên, v3, kiểm nhãn); chỉ code
-reports/round1_*/                               thí nghiệm trước 15/11 (V4, Bayes, padding-fixed, V5, …)
-ops/                                            frontend T8 oval, huấn luyện CNN, adapter dữ liệu, kiểm thử
-docs/PIPELINE.md                                giải thích pipeline chi tiết, kèm hình
-docs/RESULTS.md, docs/*                         kết quả và giao thức đến 15/11 (lịch sử)
-environments/                                  profile cài đặt core, frontend, torch-cpu, experts
-configs/                                       mẫu path config và manifest tài sản riêng
-tools/                                          bootstrap, doctor/prepare/plan/run, demo POS và kiểm bản phát hành
-```
-
-Các thư mục giữ tên ngày tháng vì code import theo đường dẫn tương đối và kiểm hash.
-
-### Chạy thử không cần dữ liệu
-
-```bash
-python -m venv .venv && source .venv/bin/activate      # Windows: .venv\Scripts\Activate.ps1
-python -m pip install -r requirements.txt
-python tools/pos_trace.py --make-demo output/demo_rgb.csv
-python tools/pos_trace.py --input output/demo_rgb.csv --output output/demo_predictions.csv
-python -m unittest test_score_round1
-```
-
-Demo dùng tín hiệu **tổng hợp 90 bpm** và chỉ chạy POS cơ bản, không phải pipeline ở trên.
-
----
-
-## Những gì đã kiểm và chưa kiểm
-
-**Đã kiểm trong lượt nghiên cứu lịch sử (chưa lặp sau sửa trạng thái expert)**
-- **Cổng viết trước.** Cổng và quy tắc được ghi trong [`PREREG.md`](reports/claude_research_20261119_constraints/PREREG.md) trước khi chạy. Mọi quyết định đưa ra sau khi xem số dev được ghi trong `DEVIATIONS.txt`.
-- **Chọn mô hình.** Lượt cũ dùng chọn tiến lồng trong fold train và đối chứng xáo nhãn. Không suy rộng kết luận đối chứng đó sang pipeline reset khi chưa lặp lại.
-- **C5 không mất mát.** Luồng giải mã ra khớp từng bit với crop gốc. Băng thông ≤ 500 kbps được đo ở **mọi giây**, không chỉ trung bình.
-- **Crop điều kiện tái tạo đúng.** Crop hộp dưới mọi điều kiện tái tạo đúng các khối đã chấm điểm: 1.407/1.407 file, lệch 0,0.
-- **P4m đóng băng khớp.** Bản đóng băng tái tạo bảng z13 với lệch 0,00.
-
-**Chưa kiểm**
-- Holdout BTC chưa mở.
-- CLI BTC mới có kiểm raw video riêng; gói nộp toàn bộ public/constraint chưa qua kiểm độc lập đầy đủ.
-- C1 tối + nhiễu Gauss mạnh chỉ qua cổng ab ở bảng lịch sử; không suy ra nguyên nhân tại cảm biến từ bảng này.
-- Các constraint C1, C2, C4, C6, C7 là mô phỏng theo mô tả hàm MATLAB của đề bài, chưa đối chiếu với video ban tổ chức tạo bằng MATLAB.
-- MCD chỉ có 34 người được chạy dưới các constraint mô phỏng, vì giới hạn tính toán.
-
----
-
-## Nguồn và giấy phép
-
-- POS: Wang et al., *Algorithmic principles of remote PPG*, IEEE TBME 2017. CHROM: de Haan & Jeanne, IEEE TBME 2013.
-- EfficientPhys / rPPG-Toolbox: giữ [giấy phép upstream](ops/deep_hr/TOOLBOX_LICENSE.txt) và [thông tin nguồn](THIRD_PARTY_NOTICES.md).
-- Mô hình huấn luyện sẵn qua gói **open-rppg 0.1.1** (mã MIT):
-  - FacePhys (arXiv 2512.06275), trọng số học trên RLAP;
-  - ME-rPPG (arXiv 2504.01774), trọng số học trên PURE.
-
-  Trọng số CNN dùng nguyên, không huấn luyện thêm. Reader nhỏ được fit trên BTC dev theo người như mô tả ở trên.
-- MediaPipe FaceMesh: Apache 2.0 ([giấy phép](ops/deep_hr/assets/MEDIAPIPE_LICENSE)).
-
-Dữ liệu thuộc điều kiện sử dụng riêng của từng bộ. Repo **không** chứa video, nhãn, ảnh mặt người hay dữ liệu cá nhân, và không cấp quyền phân phối lại chúng.
+| `predict.py`, `runtime/` | Video đơn → PR của nhánh BTC, không fit lúc suy luận |
+| `models/` | Reader BTC deploy + 5 fold, tham số public P4m; không chứa nhãn hay phổ cá nhân |
+| `environments/`, `tools/bootstrap_video.py` | Dependency đã khóa và cài môi trường |
+| `configs/`, `tools/repro.py` | Khai báo đường dẫn riêng và chuẩn bị tái lập nghiên cứu |
+| `reports/`, `ops/` | Mã thí nghiệm, bản gốc giữ hash; tài sản cá nhân không kèm repo |
+| `docs/RESULTS.md`, `docs/SOURCE_MANIFEST.json` | Bảng mới và nguồn/hash |
+| `submission/` | Mã đóng gói; không đồng nghĩa đã nộp bài |
+
+[GETTING_STARTED](docs/GETTING_STARTED.md) hướng dẫn môi trường nghiên cứu và `tools/repro.py init/doctor/prepare/plan`; [ASSETS](docs/ASSETS.md) liệt kê cache/checkpoint riêng cần có để lặp bảng. Chạy video mới không đòi các tài sản riêng này. Public/P4m vẫn là đường nghiên cứu, chưa gộp vào lệnh `predict.py`.
+
+Không huấn luyện lại, không mở rộng lưới và không mở holdout trong R1. Gói này không bảo đảm MAE dev cho video bất kỳ. [Nguồn và giấy phép bên thứ ba](THIRD_PARTY_NOTICES.md).

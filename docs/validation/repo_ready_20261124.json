@@ -1,0 +1,266 @@
+{
+  "date": "2026-11-24",
+  "fresh_clone": true,
+  "fresh_environments": [
+    "core",
+    "frontend",
+    "experts"
+  ],
+  "raw_validation": {
+    "checks": [
+      {
+        "case": "deploy",
+        "delta_bpm": 0.0,
+        "seconds": 196.78182477402152,
+        "passed": true
+      },
+      {
+        "case": "fold",
+        "delta_bpm": 0.0,
+        "seconds": 195.7634546129848,
+        "passed": true
+      },
+      {
+        "case": "static",
+        "seconds": 16.088547497987747,
+        "passed": true
+      },
+      {
+        "case": "no_face",
+        "seconds": 7.081031545007136,
+        "passed": true
+      },
+      {
+        "case": "short",
+        "seconds": 1.0659047609951813,
+        "passed": true
+      }
+    ],
+    "seconds": 416.8125312740158,
+    "fresh_environments": true,
+    "holdout_reads": 0,
+    "refit": false
+  },
+  "replay": {
+    "rows": [
+      {
+        "dataset": "BTC",
+        "condition": "native",
+        "samples": 218,
+        "people": 158,
+        "mae": 8.33326843025463,
+        "max_prediction_delta": 0.0
+      },
+      {
+        "dataset": "UBFC2",
+        "condition": "aidtrack_c1_g25gv01",
+        "samples": 184,
+        "people": 35,
+        "mae": 13.449986049107142,
+        "max_prediction_delta": 0.0
+      },
+      {
+        "dataset": "MCD",
+        "condition": "aidtrack_c1_g25gv01",
+        "samples": 592,
+        "people": 34,
+        "mae": 10.434518052201653,
+        "max_prediction_delta": 0.0
+      },
+      {
+        "dataset": "UBFC2",
+        "condition": "c1_g12p",
+        "samples": 186,
+        "people": 34,
+        "mae": 2.5641228170955883,
+        "max_prediction_delta": 0.0
+      },
+      {
+        "dataset": "MCD",
+        "condition": "c1_g12p",
+        "samples": 616,
+        "people": 34,
+        "mae": 3.0560537604760043,
+        "max_prediction_delta": 0.0
+      },
+      {
+        "dataset": "UBFC2",
+        "condition": "c1_g25gv001",
+        "samples": 192,
+        "people": 35,
+        "mae": 3.08203125,
+        "max_prediction_delta": 0.0
+      },
+      {
+        "dataset": "MCD",
+        "condition": "c1_g25gv001",
+        "samples": 616,
+        "people": 34,
+        "mae": 4.139063900642775,
+        "max_prediction_delta": 0.0
+      },
+      {
+        "dataset": "UBFC2",
+        "condition": "c1_g50p",
+        "samples": 193,
+        "people": 35,
+        "mae": 0.9816545758928571,
+        "max_prediction_delta": 0.0
+      },
+      {
+        "dataset": "MCD",
+        "condition": "c1_g50p",
+        "samples": 618,
+        "people": 34,
+        "mae": 1.869386171628113,
+        "max_prediction_delta": 0.0
+      },
+      {
+        "dataset": "UBFC2",
+        "condition": "c2_vit",
+        "samples": 193,
+        "people": 35,
+        "mae": 0.7497907366071429,
+        "max_prediction_delta": 0.0
+      },
+      {
+        "dataset": "MCD",
+        "condition": "c2_vit",
+        "samples": 618,
+        "people": 34,
+        "mae": 1.7338868080640073,
+        "max_prediction_delta": 0.0
+      },
+      {
+        "dataset": "UBFC2",
+        "condition": "c4_qvga",
+        "samples": 193,
+        "people": 35,
+        "mae": 0.7269810267857143,
+        "max_prediction_delta": 0.0
+      },
+      {
+        "dataset": "MCD",
+        "condition": "c4_qvga",
+        "samples": 618,
+        "people": 34,
+        "mae": 1.5196366508974075,
+        "max_prediction_delta": 0.0
+      },
+      {
+        "dataset": "UBFC2",
+        "condition": "c5_split10",
+        "samples": 179,
+        "people": 35,
+        "mae": 0.6464146205357143,
+        "max_prediction_delta": 0.0
+      },
+      {
+        "dataset": "MCD",
+        "condition": "c5_split10",
+        "samples": 1929,
+        "people": 60,
+        "mae": 1.7039169799553284,
+        "max_prediction_delta": 0.0
+      },
+      {
+        "dataset": "UBFC2",
+        "condition": "c6_us1",
+        "samples": 193,
+        "people": 35,
+        "mae": 0.7315848214285714,
+        "max_prediction_delta": 0.0
+      },
+      {
+        "dataset": "MCD",
+        "condition": "c6_us1",
+        "samples": 618,
+        "people": 34,
+        "mae": 1.6409182224526888,
+        "max_prediction_delta": 0.0
+      },
+      {
+        "dataset": "UBFC2",
+        "condition": "c7_white",
+        "samples": 176,
+        "people": 33,
+        "mae": 1.1536754261363635,
+        "max_prediction_delta": 0.0
+      },
+      {
+        "dataset": "MCD",
+        "condition": "c7_white",
+        "samples": 614,
+        "people": 34,
+        "mae": 3.6015270482534465,
+        "max_prediction_delta": 0.0
+      },
+      {
+        "dataset": "UBFC2",
+        "condition": "native",
+        "samples": 193,
+        "people": 35,
+        "mae": 0.7464425223214286,
+        "max_prediction_delta": 0.0
+      },
+      {
+        "dataset": "MCD",
+        "condition": "native",
+        "samples": 1959,
+        "people": 60,
+        "mae": 1.5108697696470246,
+        "max_prediction_delta": 0.0
+      },
+      {
+        "dataset": "UBFC2",
+        "condition": "track_c1_g25p",
+        "samples": 193,
+        "people": 35,
+        "mae": 1.5318080357142858,
+        "max_prediction_delta": 0.0
+      },
+      {
+        "dataset": "MCD",
+        "condition": "track_c1_g25p",
+        "samples": 618,
+        "people": 34,
+        "mae": 2.4430838745650374,
+        "max_prediction_delta": 0.0
+      },
+      {
+        "dataset": "UBFC2",
+        "condition": "track_c7_blue",
+        "samples": 192,
+        "people": 35,
+        "mae": 1.4468470982142858,
+        "max_prediction_delta": 0.0
+      },
+      {
+        "dataset": "MCD",
+        "condition": "track_c7_blue",
+        "samples": 618,
+        "people": 34,
+        "mae": 2.972294714983931,
+        "max_prediction_delta": 0.0
+      }
+    ],
+    "holdout_reads": 0,
+    "refit": false,
+    "raw_video_inference": false,
+    "scope": "BTC native reader and public all-condition readout replay from frozen pre-reader evidence; not raw frontend/CNN rerun",
+    "manifest_sha256": "7cbbb06d58ab690930f12810a56e901a013576dc4bff9cb4ec4abf4e74b91d2a"
+  },
+  "checkpoint_strict_load_folds": 5,
+  "checkpoint_synthetic_static_pass": 5,
+  "tools_unit_tests": 16,
+  "scorer_unit_tests": 10,
+  "source_hashes_verified": 1141,
+  "release_sha256": "6686cc7ed058bc5ce6a58f67513c2713d953aef3aa774ece55386f9505f77f06",
+  "holdout_reads": 0,
+  "optional_historical_mat_tests": {
+    "status": "separate_dependency_profile",
+    "after_schema_restore_passed": 4,
+    "blocked": 1,
+    "reason": "h5py absent from core/hr environments; install submission/requirements.txt in a separate environment. Not a PR video CLI dependency."
+  }
+}

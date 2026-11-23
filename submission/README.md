@@ -16,3 +16,5 @@ Các tham số dưới đây trích tĩnh từ code, không phải lệnh tự �
 | [repair_bundle_v2.py](repair_bundle_v2.py) | `artifact`, `--source` |
 | [run_e2e.py](run_e2e.py) | `--dataset`, `--root`, `--audit-dir`, `--recording`, `--out`, `--roi-cache` |
 | [test_submission.py](test_submission.py) | Không có argparse; đọc source/config |
+
+MAT/HDF5 packaging dùng `submission/requirements.txt` trong môi trường riêng, gồm h5py/hdf5storage/mat73. Môi trường `core` của CLI PR không cài các dependency này. Đây là nhánh đóng gói lịch sử, không phải `predict.py` hiện hành. [Schema lịch sử](SCHEMA.md).

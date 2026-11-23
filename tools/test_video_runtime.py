@@ -52,7 +52,7 @@ class VideoTests(unittest.TestCase):
         m=FakeStatefulExpert();t=np.arange(901)/30.;v=np.ones(901,bool);x=np.zeros((901,1,1,3),np.uint8)
         a,_=spectrum(m,x,t,v);b,_=spectrum(m,x,t,v)
         np.testing.assert_array_equal(a,b)
-        self.assertEqual(m.state,1)
+        self.assertEqual(m.state,2)
 
     def test_models_load_and_prior_is_not_a_measured_pr(self):
         for f in [None,0,1,2,3,4]:
