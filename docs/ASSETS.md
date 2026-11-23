@@ -15,8 +15,8 @@ Dataset trên server: [SERVER_DATASETS.md](SERVER_DATASETS.md).
 | BTC dev | Cổng dữ liệu của ban tổ chức theo quyền của đội; nhờ maintainer cấp **dev-only** bundle | 218 video được chấm, 158 người; nhãn PR, person/fold, activity, metadata nguồn và danh sách loại. Không kèm 72 video/41 người holdout |
 | AiPEX | Theo nguồn/điều khoản ban tổ chức; không cần cho inference reader_v4/P4m | Chỉ cần cho tái lập nhánh huấn luyện lịch sử, không thuộc quick start |
 | Ba expert | [open-rppg 0.1.1 trên PyPI](https://pypi.org/project/open-rppg/0.1.1/) | Cài profile experts; package chứa weights. So SHA bằng smoke test; không tải weights từ link lạ |
-| CNN padding-fixed của đội | [Release inference-assets-20261123](https://github.com/Khangle-2006/SPS_Challange/releases/tag/inference-assets-20261123) | 5 bản xuất chỉ giữ model/epoch, đúng fold 0–4 seed 2027; tensor giữ nguyên, SHA file xuất và nguồn có trong manifest |
-| Reader và cache nghiên cứu | Reader BTC cho CLI nằm trong `models/`; Release lịch sử chứa fit cũ và P4m; split/cache vẫn xin maintainer | Chỉ tham số được công khai; per-video predictions/labels giữ riêng. Không trộn model CLI với phổ expert chưa reset của lượt cũ |
+| CNN padding-fixed của đội | [Release inference-assets-r1-20261124](https://github.com/Khangle-2006/SPS_Challange/releases/tag/inference-assets-r1-20261124) | 5 bản xuất chỉ giữ model/epoch, đúng fold 0–4 seed 2027; tensor giữ nguyên, SHA file xuất và nguồn có trong manifest |
+| Reader và cache nghiên cứu | Reader BTC cho CLI nằm trong `models/`; Release R1 chứa đúng deploy/fold/P4m hiện hành; split/cache vẫn xin maintainer | Chỉ tham số được công khai; per-video predictions/labels giữ riêng. Không trộn model CLI với phổ expert chưa reset của lượt cũ |
 
 Không thay checkpoint fold0 cho tất cả fold. Các file readout đóng băng có thể
 chứa cả nhãn và dự đoán từng cửa sổ (ví dụ `z14_p4m_frozen.npz`); **không** đưa

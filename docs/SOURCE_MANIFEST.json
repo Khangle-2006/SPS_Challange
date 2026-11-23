@@ -1,5 +1,5 @@
 {
-  "date": "2026-11-23",
+  "date": "2026-11-24",
   "files": [
     {
       "path": "ops/a100/audit_label_values.py",
@@ -5665,6 +5665,51 @@
       "path": "tools/test_video_runtime.py",
       "sha256": "170b4736df830332ee1aa83547ab63a8a0048796c39fd0ab712cb570a3f7438d",
       "bytes": 3189
+    },
+    {
+      "path": "tools/build_r1_assets.py",
+      "bytes": 3541,
+      "sha256": "6d43e36c1fe3a3bb13383146e811263621a723746afe57adf2c4875c4db3d20e"
+    },
+    {
+      "path": "tools/fetch_inference_assets.py",
+      "bytes": 2045,
+      "sha256": "12d6abb91ee353c8e3125219482b5f70c0c43e22670f0e2a630aae2465be5a9d"
+    },
+    {
+      "path": "tools/reproduce_r1.py",
+      "bytes": 5252,
+      "sha256": "f8ac0257dc95f0eaae2a3f5022ff55b6a527850a6e44c9e57770548e6be9a115"
+    },
+    {
+      "path": "tools/bootstrap_video.py",
+      "bytes": 2111,
+      "sha256": "a3f6b4f595e262bc5c9b044f4114168128d87d2252bbc11e89f082af9c9c7c81"
+    },
+    {
+      "path": "tools/check_inference_assets.py",
+      "bytes": 3344,
+      "sha256": "621adbf8a3de6fbf0ed8b61703f78474192ec360a2392a4bbca2d4555a566594"
+    },
+    {
+      "path": "configs/inference-assets-r1-20261124.json",
+      "bytes": 532,
+      "sha256": "1aa5a6121f5d31b9697ddb7fe6e195357676846ad43531a758a38e650ad44e5d"
+    },
+    {
+      "path": "configs/server-replay-r1.json",
+      "bytes": 385,
+      "sha256": "4ccd577decbaeadb1662b49bdf06d2c568a2f784a7865c23b90ed330d32cdb2d"
+    },
+    {
+      "path": "submission/SCHEMA.md",
+      "bytes": 6013,
+      "sha256": "3b3e5f3362a38f92f48483f2e349adc53294c56bc9071e354786de2956dbcb2e"
+    },
+    {
+      "path": "docs/validation/repo_ready_20261124.json",
+      "bytes": 6633,
+      "sha256": "9a2db59239a5f3d856e27eaa223b5bf3dfb04e1524ea00f78dcd7b40c2afd50c"
     }
   ],
   "excluded_helpers": [

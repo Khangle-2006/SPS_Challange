@@ -13,11 +13,21 @@ python3.12 tools/bootstrap_video.py
 python3.12 predict.py --video /path/video.mp4 --activity Resting --output output/my_video
 ```
 
-Nếu kiểm bản R1 **trước khi PR được merge**, sau clone cần checkout nhánh `codex/r1-selfwarm-rerun`; `main` chưa tự nhận thay đổi của PR.
+Bootstrap tự cài ba môi trường đã khóa, tải đủ 5 checkpoint public và kiểm reader/weights bằng SHA256. Cần Internet khi cài lần đầu; không cần chép file từ thư mục riêng của tác giả.
 
 Đọc `output/my_video/result.json` hoặc `result.csv`. `--activity` là `Resting`, `Task` hoặc `Walking`, lấy từ hoạt động lúc quay. Mặc định `reference` dành cho video một người. Nếu không đủ bằng chứng, `abstain=true`, `pr_bpm=null`; prior dự phòng **không phải số đo mạch**. Thư mục output phải mới.
 
 Cài gói hệ thống, xử lý bitrate nguồn, video HDR, tùy chọn fold và bộ gác nhiều mặt: **[RUN_VIDEO.md](docs/RUN_VIDEO.md)**. Lệnh này chạy CPU, không cần nhãn PR, dataset của đội hoặc checkpoint CNN của đội. Bootstrap tạo ba môi trường đã khóa phiên bản; ba expert nằm trong `open-rppg==0.1.1`, reader nhẹ có sẵn trong `models/`.
+
+## Lặp số trên server P100
+
+Sau bootstrap, chạy trong clone mới:
+
+```bash
+.venv/core/bin/python tools/reproduce_r1.py --output output/r1_replay
+```
+
+Lệnh kiểm hash cache dev được cấp quyền, chạy lại reader từ bằng chứng phổ với đúng model fold, rồi đối chiếu từng dự đoán; không fit lại, không đọc holdout. Kỳ vọng BTC native **8,333268**, UBFC2 native **0,746443**, MCD native **1,510870 bpm**. Có đủ 24 hàng public native/constraint. Đây là replay readout từ cache, **không phải chạy lại CNN/frontend từ video gốc**. Chạy một video mới dùng lệnh `predict.py` ở trên; chấm dev phải thêm `--fold` đúng người. [Hướng dẫn từng bước và phạm vi](docs/REPRODUCE_SERVER.md).
 
 ## Kết quả hiện hành
 
@@ -64,7 +74,7 @@ Dataset đã có trên **P100**, cần tài khoản và quyền truy cập:
 
 [Quyền, split và đường dữ liệu](docs/SERVER_DATASETS.md). Chỉ dùng manifest dev được cấp quyền; **holdout BTC 72 video/41 người và 7 người test UBFC2 vẫn khóa**. Không quét cả root để chấm.
 
-[Release checkpoint CNN và tài sản lịch sử](https://github.com/Khangle-2006/SPS_Challange/releases/tag/inference-assets-20261123) giữ nguyên để kiểm toán; reader/P4m trong ZIP cũ không phải tham số R1. **CLI dùng `models/` đi cùng code hiện hành**, kiểm SHA256 qua `models/MANIFEST.json`. [Hướng dẫn tài sản](docs/INFERENCE_ASSETS.md).
+[Release R1 hiện hành: checkpoint + reader](https://github.com/Khangle-2006/SPS_Challange/releases/tag/inference-assets-r1-20261124) được bootstrap tự tải và kiểm. **CLI dùng `models/` đi cùng code**, gói tải phải trùng tham số đó. Release cũ được giữ riêng để tra cứu. [Chi tiết](docs/INFERENCE_ASSETS.md).
 
 ## Cấu trúc code và tái lập
 

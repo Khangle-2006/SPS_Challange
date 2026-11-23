@@ -46,3 +46,28 @@ mọi CNN riêng lẻ đều qua kiểm âm nếu bỏ lớp đó.
 
 Holdout BTC và 7 người test UBFC2 không được mở. Không huấn luyện lại.
 [Bản kiểm reset 9,130 và lịch sử lỗi được giữ ở commit cũ](history/R1_STATE_BUG_20261123.md).
+
+
+## Clone sạch và tài sản R1 — 24/11/2026
+
+Đã clone riêng và tạo mới cả ba môi trường từ lock (không dùng venv nghiên cứu).
+Bootstrap kiểm pins/pip check, weights expert và reader. Release R1 tự tải qua
+GitHub, kiểm SHA256 ZIP và 17 file, reader trùng từng byte với checkout.
+
+Một video dev cố định được chạy từ raw ở cả hai chế độ: deployment và đúng fold
+OOF. Cả hai trùng kết quả server **0 bpm**, lần lượt 196,78 và 195,76 giây.
+Ảnh tĩnh/không mặt abstain; video ngắn báo lỗi, không đệm. Đây là hai lượt trên
+một video, không phải chạy raw lại toàn bộ dev.
+
+Lệnh `tools/reproduce_r1.py` chạy lại BTC native reader trên đủ 218 video và
+public readout trên 24 hàng từ bằng chứng trước reader; không fit và không dùng
+dự đoán lưu sẵn làm output. So từng dự đoán với reference đã khóa; metric public
+chỉ dùng cửa sổ ghép được với native như bảng R1. [Hướng dẫn](REPRODUCE_SERVER.md).
+
+Các lỗi đóng gói tìm trong kiểm thử được giữ ở hồ sơ riêng: SHA cấu hình chép
+thừa ký tự (đã thay bằng receipt gốc); replay ban đầu chấm thêm một cửa sổ MCD
+không có cặp native (đã giữ đúng mask chấm R1). Không đổi model hoặc kết quả
+nghiên cứu để sửa lỗi. Mã MAT lịch sử cần dependency riêng ở
+`submission/requirements.txt`; không phải dependency của CLI PR.
+
+[Receipt clone sạch và 25 hàng replay](validation/repo_ready_20261124.json). 16 test tools và 10 test scorer PASS. Schema MAT lịch sử đã bổ sung; test MAT/HDF5 còn cần profile dependency riêng, không được tính vào 26 test CLI/scorer.

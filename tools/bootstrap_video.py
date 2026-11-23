@@ -31,6 +31,7 @@ def main():
     env=dict(os.environ,CUDA_VISIBLE_DEVICES='',JAX_PLATFORMS='cpu',KERAS_BACKEND='jax',PYTHONNOUSERSITE='1')
     env.pop('PYTHONPATH',None);env.pop('PYTHONHOME',None)
     subprocess.run([str(ROOT/'.venv/experts/bin/python'),str(ROOT/'runtime/check_install.py')],env=env,check=True)
+    subprocess.run([sys.executable,str(ROOT/'tools/fetch_inference_assets.py')],check=True)
     print('\nReady. Run: python3.12 predict.py --video /path/video.mp4 --activity Resting --output output/my_video')
 
 

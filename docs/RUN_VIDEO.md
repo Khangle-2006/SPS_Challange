@@ -23,7 +23,7 @@ Bootstrap tạo ba môi trường riêng (`core`, `frontend`, `experts`), kiểm
 phiên bản đã khóa và SHA256 hai file trọng số cùng trạng thái khởi tạo của ba
 expert trong open-rppg. Trạng thái được reset trước mỗi video, rồi expert xử lý chính video đó hai lượt và lấy lượt hai (self-warm). Video chạy trước không được ảnh hưởng video chạy sau.
 Cấu hình reader nhẹ nằm sẵn trong `models/`; không cần tải checkpoint CNN của
-đội cho nhánh BTC này. Môi trường sai phiên bản sẽ báo lỗi, không sửa ngầm.
+đội để tính PR của nhánh BTC. Bootstrap vẫn tự tải đủ gói R1 để có sẵn 5 checkpoint public; kiểm hash và reader đúng checkout. Môi trường sai phiên bản sẽ báo lỗi, không sửa ngầm.
 
 ## Chạy video của bạn
 
