@@ -21,8 +21,7 @@ python3.12 tools/bootstrap_video.py
 
 Bootstrap tạo ba môi trường riêng (`core`, `frontend`, `experts`), kiểm đúng
 phiên bản đã khóa và SHA256 hai file trọng số cùng trạng thái khởi tạo của ba
-expert trong open-rppg. Trạng thái được reset trước mỗi video; video chạy trước
-không được ảnh hưởng video chạy sau.
+expert trong open-rppg. Trạng thái được reset trước mỗi video, rồi expert xử lý chính video đó hai lượt và lấy lượt hai (self-warm). Video chạy trước không được ảnh hưởng video chạy sau.
 Cấu hình reader nhẹ nằm sẵn trong `models/`; không cần tải checkpoint CNN của
 đội cho nhánh BTC này. Môi trường sai phiên bản sẽ báo lỗi, không sửa ngầm.
 
@@ -106,7 +105,7 @@ Nó không cung cấp bộ gác nhiều người. Không chọn chế độ theo
 đặt chung cho mọi video một mặt. Bộ gác khôi phục/loại một số frame nên có thể đổi dự đoán; cổng
 khớp từng video của lần tích hợp 22/11 còn chưa đạt. Không đổi ngưỡng đó trong
 bản đóng gói này. Số MAE lịch sử 8,350 còn dùng expert giữ trạng thái từ video
-trước; không phải kết quả của CLI đã reset trạng thái. Điểm dev sau sửa vẫn
+trước; không phải kết quả của CLI R1 self-warm. Điểm dev R1 là 8,333 bpm; con số này vẫn
 không phải cam kết sai số cho video mới hoặc điểm trên toàn bộ frontend guarded.
 
 Runner này phục vụ **nhánh BTC reader_v4**. P4m/public và các bảng constraint

@@ -1,25 +1,28 @@
 {
-  "schema": 2,
+  "schema": 3,
   "sha256": {
-    "btc_reader_v4_deploy.json": "07b1df48bdf7b8469ac11e4cdb65ca9ba6e0fb5de86102706b97a64693d28f33",
-    "btc_reader_v4_folds.json": "cd9c2000a3e26303ccb15b4e749714c1b6d3936a8c88dd3c4101aa5cb9b853f9"
+    "btc_reader_v4_deploy.json": "a6c82b5957de8af399ea3e37537c9deb5641d84271fe4467804023a3885370e2",
+    "btc_reader_v4_folds.json": "76870e838613fd24739fcecc725a2fb1b9dd9da6c22668dc359eb1eedb95dafe"
   },
   "dev_videos": 218,
   "dev_people": 158,
   "holdout_reads": 0,
-  "expert_state": "reset to initial state before every video",
-  "fit": "Unchanged fitG/beta grid/offsets, fit once on independent dev spectra. No hyperparameter search.",
+  "expert_state": "restore initial state before every video; process same video twice and use second pass",
+  "expert_mode": "selfwarm",
+  "fit": "Unchanged fitG and fixed reader grids, once on all dev. Deployment fit is not OOF.",
   "deployment_fit_is_not_oof": true,
-  "oof_reference_mae": 9.130137933212104,
+  "oof_reference_mae": 8.33326843025463,
   "historical_stateful_oof_mae": 8.350176695910013,
+  "historical_stateful_valid": false,
   "spectra_sha256": {
-    "FacePhys.rlap": "b32ba23a59f2b264dfeb8b9bf394e35faf97f08f342129192616029d596ff413",
-    "ME-chunk.pure": "baa6774b6fc4b85757127d107883e08ce9e41beafd3671f3a6387e861f4e49c8",
-    "ME-flow.pure": "719e3015701c55883f3bd579ddba0074a22cb368f9271e412f1742378ef432ba"
+    "FacePhys.rlap": "a5cbda6f575ab9d7806f4f67f5e1790b0b264b83a9947a77a537cb523a36dca0",
+    "ME-chunk.pure": "e8859cfa23d73fde9301e706116b389d23e9a74b7a2574e7a8ec3e15ed119f62",
+    "ME-flow.pure": "2b49057b6068ac72d1d76b56507ceb1a0b6ba5085d547c357039dc3f295545af"
   },
   "source_sha256": {
     "reader_v4.py": "b65a8404cb050fe5dadbb7cf5be31997efffeb2518598307a8fe6c507e0cab40",
     "btc_spectral_math.py": "f1fd898a23d0d257faa4b1521ff90360836318d045c4953513ee11e0948cf6ae"
   },
-  "frontend_limitation": "OOF uses historical native crops; guarded frontend recovers/rejects frames and is not an exact full-cohort reproduction claim."
+  "selection_limitation": "Three of 17 experts were selected on historical stateful spectra; that selection was not repeated in R1.",
+  "frontend_limitation": "Reference single-face crops reproduce the fixed dev route. Guarded frontend remains experimental."
 }

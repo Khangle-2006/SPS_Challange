@@ -1,0 +1,41 @@
+{
+  "date": "2026-11-23",
+  "mode": "selfwarm",
+  "raw_video_count": 3,
+  "max_abs_cli_oof_bpm": 0.0,
+  "raw_video_seconds": [
+    206.78638542699628,
+    184.77345193500514,
+    173.2574056640151
+  ],
+  "negative_controls": [
+    {
+      "case": "static_face",
+      "exit": 0,
+      "passed": true,
+      "seconds": 16.096562654012814
+    },
+    {
+      "case": "no_face",
+      "exit": 0,
+      "passed": true,
+      "seconds": 7.081783025001641
+    },
+    {
+      "case": "short",
+      "exit": 1,
+      "passed": true,
+      "seconds": 1.0742221029940993
+    }
+  ],
+  "total_validation_seconds": 589.1329573459807,
+  "holdout_reads": 0,
+  "unit_tests": {
+    "tools": 16,
+    "score_round1": 10,
+    "all_pass": true
+  },
+  "environment": "Existing isolated NC core/frontend/experts environments; no fresh R1 installation claim",
+  "deploy_model_sha256": "a6c82b5957de8af399ea3e37537c9deb5641d84271fe4467804023a3885370e2",
+  "fold_models_sha256": "76870e838613fd24739fcecc725a2fb1b9dd9da6c22668dc359eb1eedb95dafe"
+}

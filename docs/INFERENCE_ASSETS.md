@@ -6,7 +6,7 @@ kết quả đã qua toàn bộ cổng tích hợp.
 
 > Bản ZIP này giữ nguyên để tái lập lịch sử. Reader bên trong fit từ expert có
 > thể mang trạng thái giữa video; không dùng thay cho `models/` của CLI mới.
-> `predict.py` dùng tham số đã tính lại với trạng thái reset, có sẵn trong repo.
+> `predict.py` dùng tham số R1 đã tính lại với self-warm tách riêng từng video, có sẵn trong repo.
 
 ## Tải về
 

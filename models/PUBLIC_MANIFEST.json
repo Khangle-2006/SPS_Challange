@@ -1,0 +1,10 @@
+{
+  "sha256": {
+    "public_p4m_r1.json": "80f746aff3b9926af96f5f5878c966e486d32e39f29f6389133de294e51c22c5"
+  },
+  "frozen_source_sha256": "a75d4deb6199f7016a5a8736c27a84ebcfccd4352e6a51345a2be9eb68b4c787",
+  "contains_predictions_or_labels": false,
+  "mode": "selfwarm",
+  "max_z13_mae_delta": 0.0,
+  "holdout_reads": 0
+}

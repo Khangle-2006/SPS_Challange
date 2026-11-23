@@ -1,5 +1,5 @@
 {
-  "date": "2026-11-22",
+  "date": "2026-11-23",
   "files": [
     {
       "path": "ops/a100/audit_label_values.py",
@@ -5485,6 +5485,186 @@
       "path": "reports/w2_btc_20261116/train_w2.py",
       "sha256": "a760c566a31c8c29626fe0a29de7f5d64ec797d685ce1a03c086dfa87169f0dd",
       "bytes": 10340
+    },
+    {
+      "path": "models/MANIFEST.json",
+      "sha256": "14193299240fb9342a5c4ffa9b984499dd2d9c2382daa30550bd280922ad6be0",
+      "bytes": 1462
+    },
+    {
+      "path": "models/PUBLIC_MANIFEST.json",
+      "sha256": "323b5519b5da893a3d37096cab3b5afbd7321cf6fcd141a5ecdace0088f250e9",
+      "bytes": 324
+    },
+    {
+      "path": "models/btc_reader_v4_deploy.json",
+      "sha256": "a6c82b5957de8af399ea3e37537c9deb5641d84271fe4467804023a3885370e2",
+      "bytes": 7563
+    },
+    {
+      "path": "models/btc_reader_v4_folds.json",
+      "sha256": "76870e838613fd24739fcecc725a2fb1b9dd9da6c22668dc359eb1eedb95dafe",
+      "bytes": 40745
+    },
+    {
+      "path": "models/public_p4m_r1.json",
+      "sha256": "80f746aff3b9926af96f5f5878c966e486d32e39f29f6389133de294e51c22c5",
+      "bytes": 1786
+    },
+    {
+      "path": "reports/rerun_stateless_20261123/CLI_VALIDATION_AGGREGATE.json",
+      "sha256": "2f3ef5a77a764928582add4a7ff6ab72b8af9ac830a5e325031dcc56ab3f42c0",
+      "bytes": 1021
+    },
+    {
+      "path": "reports/rerun_stateless_20261123/P4M_DEFINITION_rerun.txt",
+      "sha256": "b7fdd986ad11ebd4d5110b4f91cac7ef81f45f361da480b99e7ba12a5ca28000",
+      "bytes": 2562
+    },
+    {
+      "path": "reports/rerun_stateless_20261123/PRECHECK_AGGREGATE.json",
+      "sha256": "dc855ba246109dbc282e7edc426da3455259502b763fa350ec3c45a34f665e12",
+      "bytes": 581
+    },
+    {
+      "path": "reports/rerun_stateless_20261123/PUBLIC_FITS.json",
+      "sha256": "baf6c57b03f6274d9744b0d3fea66874f8bef962d77c5c92cfa2d459ab187ad2",
+      "bytes": 6229
+    },
+    {
+      "path": "reports/rerun_stateless_20261123/PUBLIC_PAIRED_COMPARISONS.json",
+      "sha256": "ea267e934e094b2f77d592235e05aca1458747823d704f1bbc2be96c71d9e909",
+      "bytes": 12973
+    },
+    {
+      "path": "reports/rerun_stateless_20261123/README.md",
+      "sha256": "abdb75fa1fef1e2016f67b408224a6366ac85bb39a82224354e1b011c5f67cc1",
+      "bytes": 1814
+    },
+    {
+      "path": "reports/rerun_stateless_20261123/btc_v4_conditions.csv",
+      "sha256": "9cd1bb94185cbf8c635bc22c6bcb273ca9aa9b077e180ee15bd96f80b0b0dedb",
+      "bytes": 3795
+    },
+    {
+      "path": "reports/rerun_stateless_20261123/code/expert_spectrum.py",
+      "sha256": "84dbf454ff96f0a5a686b271c4b5ab907da14b1c5f965073b627f3efb00b0bc7",
+      "bytes": 4469
+    },
+    {
+      "path": "reports/rerun_stateless_20261123/code/gate.py",
+      "sha256": "7b80195c748c03cadbf823b4beab85ab433f7240bf1e562c55a0e3089f5bce86",
+      "bytes": 2440
+    },
+    {
+      "path": "reports/rerun_stateless_20261123/code/gate_reset_pre.py",
+      "sha256": "e94dca2e458fad1e8e93e43da123918d8dca095d3e5c5ac4a38338d4bbea523d",
+      "bytes": 1481
+    },
+    {
+      "path": "reports/rerun_stateless_20261123/code/prepare.py",
+      "sha256": "12f4d6f498f77e7cdae6280ca2d479178917e8beb9888b33078289d855a1894b",
+      "bytes": 3496
+    },
+    {
+      "path": "reports/rerun_stateless_20261123/code/public_freeze_wrapper.py",
+      "sha256": "fce290f381a6b4b4c520683e7cdf76eb7f9d8ad37c328230cb88e7dc507b4f5b",
+      "bytes": 739
+    },
+    {
+      "path": "reports/rerun_stateless_20261123/code/public_score_wrapper.py",
+      "sha256": "b7d035da4e200cf458004caae13e5da784ef4af692008eac04aa36ef4e7cfc28",
+      "bytes": 1354
+    },
+    {
+      "path": "reports/rerun_stateless_20261123/code/report.py",
+      "sha256": "8e240b22a412dc1534b80432f10faedce332a76cc24e0e3af29c4f50f6502958",
+      "bytes": 7895
+    },
+    {
+      "path": "reports/rerun_stateless_20261123/code/score_btc.py",
+      "sha256": "ad785780d0ce93453e1a5725e6680cda0b55c31ca6fa35818e90aeccb11a9b7a",
+      "bytes": 4080
+    },
+    {
+      "path": "reports/rerun_stateless_20261123/code/worker.py",
+      "sha256": "2b82bbdc6dc4d5979a74ca5bd99690b33e460ab593a2a0f82d9f1d242e6f9081",
+      "bytes": 4675
+    },
+    {
+      "path": "reports/rerun_stateless_20261123/code/z13_public_p4_prefilter.py",
+      "sha256": "739b3813052cc30a76b5a62b91855d5c287213bb383af0cddb508bc5e2d6610c",
+      "bytes": 10636
+    },
+    {
+      "path": "reports/rerun_stateless_20261123/code/z14_p4m_freeze.py",
+      "sha256": "feb9112e9bb39465b53891a5f25aefc55e794165112c66ac88bf7ec7d68b7c3b",
+      "bytes": 11025
+    },
+    {
+      "path": "reports/rerun_stateless_20261123/z13_public_rerun.csv",
+      "sha256": "b735f5ec74672ecd25d5a7619594e0c922b8ad9d257293fe194bc5114ce2e67d",
+      "bytes": 10284
+    },
+    {
+      "path": "runtime/btc_spectral_math.py",
+      "sha256": "f1fd898a23d0d257faa4b1521ff90360836318d045c4953513ee11e0948cf6ae",
+      "bytes": 3409
+    },
+    {
+      "path": "runtime/check_install.py",
+      "sha256": "56280599cb4998b5e61d24c8a6b0a4987176cb359267c9835fe7c813fa94d1b2",
+      "bytes": 354
+    },
+    {
+      "path": "runtime/common.py",
+      "sha256": "1e7c33b8ad221415b0feed7c65a7d1c772e43f2d6134ce6dfa66cf5c990b01d4",
+      "bytes": 1700
+    },
+    {
+      "path": "runtime/frontend_guard_v2.py",
+      "sha256": "1df69bce0a794c3bb9fb69e3907749f594b7f1380809056461ae17095cc3cc6d",
+      "bytes": 4640
+    },
+    {
+      "path": "runtime/primitives.py",
+      "sha256": "d1cd30ce4c10d13d218ea1f6b70e96555db7f93f71ecd3a5debd3de235f0645e",
+      "bytes": 8543
+    },
+    {
+      "path": "runtime/reader_models_fixed.py",
+      "sha256": "11ba28da9df97be1e2a64314b1046117b0c51c3b87dbde4a5b33c263b66faaab",
+      "bytes": 3211
+    },
+    {
+      "path": "runtime/reader_v4.py",
+      "sha256": "b65a8404cb050fe5dadbb7cf5be31997efffeb2518598307a8fe6c507e0cab40",
+      "bytes": 2153
+    },
+    {
+      "path": "runtime/target_lock.py",
+      "sha256": "744bb9fc8d460e872dc0fa2d0dc7c8ece5ad3549f984147eea4ea266dc98035f",
+      "bytes": 10470
+    },
+    {
+      "path": "runtime/video_core.py",
+      "sha256": "8650d795462c73e63c71a8a57cac711859cb319c876e932519c9c2693f10e260",
+      "bytes": 2518
+    },
+    {
+      "path": "runtime/video_experts.py",
+      "sha256": "6b37ce28689e6a4aa398cca3700eea0c17032b11721080b0112f4b19e36c099a",
+      "bytes": 2433
+    },
+    {
+      "path": "runtime/video_frontend.py",
+      "sha256": "099d90482be454577ac250fcc79463c3312cd5a9fffacae7be5168c0a842992f",
+      "bytes": 4359
+    },
+    {
+      "path": "tools/test_video_runtime.py",
+      "sha256": "170b4736df830332ee1aa83547ab63a8a0048796c39fd0ab712cb570a3f7438d",
+      "bytes": 3189
     }
   ],
   "excluded_helpers": [
@@ -5576,5 +5756,6 @@
       "path": "reports/round1_execution_20261110/v5_multiview_20261112/inventory_keeper_v3.py",
       "reason": "site authentication/transfer/monitor helper"
     }
-  ]
+  ],
+  "r1_note": "Original 1097 archived source hashes retained; R1 source, aggregate tables, runtime and model artifacts added. No individual labels/media/spectra."
 }

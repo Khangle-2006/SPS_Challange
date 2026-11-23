@@ -1,81 +1,48 @@
-# Kiểm CLI video thật — 23/11/2026
+# Kiểm CLI video thật — R1, 23/11/2026
 
-## Kết quả sau sửa trạng thái expert
+## Code và model hiện hành
 
-Đủ 218 video dev / 158 người, cùng 5 fold theo người. Ba CNN huấn luyện sẵn
-không đổi trọng số. Chạy lại suy luận, đặt lại trạng thái ban đầu trước từng video;
-fit lại reader bằng đúng hàm, grid beta và offset cũ, không tìm tham số mới.
-Đây là kiểm OOF trên crop native lịch sử, không phải toàn bộ frontend guarded.
+Ba expert chạy **self-warm**: reset về bản sao trạng thái ngay sau khởi tạo,
+chạy cùng video hai lượt, lấy lượt thứ hai. Không mang trạng thái giữa video.
+Reader deploy được fit lại một lần trên 218 video dev; 5 model fold khớp đủ
+218 dự đoán OOF mới với sai khác 0. Model deploy không được dùng để chấm dev.
 
-| Nhóm | Video / người | Reader reset | Hằng số | Hiệu chỉnh cũ |
-|---|---:|---:|---:|---:|
-| all | 218 / 158 | 9.130 | 12.071 | 11.374 |
-| Normal-Resting | 62 / 62 | 8.224 | 8.661 | 9.182 |
-| Abnormal-Resting | 76 / 76 | 9.807 | 14.197 | 12.708 |
-| Task | 75 / 19 | 10.323 | 14.798 | 12.950 |
-| Walking | 5 / 5 | 2.989 | 12.400 | 10.760 |
+BTC native đạt **8,33327 bpm**, CI95 [7,08958; 9,65911], trên 218 video/158 người.
+So reader_v3: Δ −1,25379 [−2,28246; −0,28346]. Đây là kết quả dev sau nhiều
+thử nghiệm. Việc chọn 3/17 expert trên phổ lịch sử không được chạy lại.
+[Bảng đầy đủ](RESULTS.md).
 
-MAE tính theo người; bootstrap ghép cặp theo người 10.000 lần, seed 0.
-Reader reset đạt **9,13014 bpm**, bias −0,03669, Spearman 0,57215.
-So hằng số: Δ −2,94054 [−4,11441; −1,78768].
-So hiệu chỉnh cũ: Δ −2,24371 [−3,23840; −1,25786].
-So reader_v3: Δ −0,45692 [−1,27597; +0,31198], **chưa chứng minh tốt hơn v3**.
-Đạt tiêu chí số học dev cũ (≤10 và giảm ≥1 so hiệu chỉnh với CI loại 0), nhưng
-đã có nhiều thử nghiệm trên dev; không phải bằng chứng tổng quát hóa độc lập.
-Holdout chưa mở. [Số đầy đủ](validation/video_cli_dev_20261123.json).
+## Các kiểm đã chạy
 
-## Lỗi được tìm bằng kiểm từ file gốc
+| Kiểm | Kết quả |
+|---|---|
+| Reset so tham chiếu, 2 video × 3 expert | Sai khác phổ 0,0 |
+| Self-warm so tham chiếu, 2 video × 3 expert | Sai khác phổ 0,0 |
+| A → B → A, cả 3 expert | Sai khác phổ A bằng 0,0 |
+| 63 lượt suy luận BTC/public | Đủ; số đầu ra và mask cửa sổ khớp bản cũ |
+| 3 video dev gốc, CLI reference với fold đúng người | 3/3 PASS, sai khác PR so OOF **0 bpm** |
+| Ảnh mặt lặp | `abstain=true`, `pr_bpm=null` |
+| Video không mặt | `abstain=true`, không báo prior là số đo |
+| Video quá ngắn | Exit 1; không đệm thành kết quả giả |
+| Unit test runtime/tools | 16/16 PASS |
+| Unit test scorer | 10/10 PASS |
 
-open-rppg 0.1.1 xóa buffer khi bắt đầu video nhưng giữ `model.state`. Script
-nghiên cứu cũ tái sử dụng đối tượng Model. Thử A → B → A làm phổ của A thay đổi
-0,0054915 ở phần tử lệch lớn nhất; reset state trước A cho sai khác 0.
-Cùng video, môi trường expert cũ và môi trường mới cho phổ reset giống hệt.
-Crop, PTS và phổ POS/CHROM cũng khớp, nên không quy lỗi này cho phiên bản môi trường.
+Ba lượt raw mất lần lượt **206,79 / 184,77 / 173,26 giây**; cả bộ raw và kiểm âm
+mất 589,13 giây trên máy thử. Đây không phải SLA cho mọi video hoặc máy.
+[Receipt tổng hợp, không có ID/nhãn/dự đoán cá nhân](../reports/rerun_stateless_20261123/CLI_VALIDATION_AGGREGATE.json).
 
-Lượt cũ 8,35018 bpm được giữ dưới nhãn **lịch sử có trạng thái liên video**.
-Không sử dụng nó để quảng bá sai số của CLI mới. P4m/public và các bảng constraint
-chưa được chấm lại sau sửa này. ZIP Release cũ không bị ghi đè; `models/` trong
-repo chứa fit mới và SHA256. Fit toàn-dev phục vụ triển khai; 5 fit fold dùng OOF.
+Lượt R1 dùng lại ba môi trường core/frontend/experts cô lập đã cài từ lock trên
+clone NC trong lượt kiểm trước; **không tuyên bố đã cài lại môi trường mới cho R1**.
+Source/config/model được kiểm bằng `tools/verify_source.py` trước khi push.
+Lệnh và dependency: [RUN_VIDEO.md](RUN_VIDEO.md).
 
-## Kiểm raw video → kết quả
+## Giới hạn được giữ nguyên
 
-Ba video dev đã định trước, mỗi video chạy cả `reference` và `guarded`:
+CLI mặc định là `reference` cho video một người. Frontend `guarded` từng thay
+đổi một khung và làm lệch PR; cổng tương đương trước đó chưa đạt. R1 chỉ sửa
+trạng thái expert, không thay detector, landmark hoặc nâng `guarded` lên mặc định.
+Kiểm ảnh tĩnh ở đây kiểm toàn đường CLI có lớp từ chối đầu vào; không suy ra
+mọi CNN riêng lẻ đều qua kiểm âm nếu bỏ lớp đó.
 
-- 6/6 lượt kết thúc thành công. Thời gian khoảng 176–205 s/video trên máy thử,
-  khi hai lượt cùng chạy CPU; không phải SLA trên mọi máy/video.
-- Reference: crop72, PTS, valid trùng cache; phổ cả ba expert và PR theo fold
-  trùng kết quả state-isolated ở cả 3/3 video, sai khác PR **0 bpm**.
-- Guarded: 2/3 video cùng PR; 1/3 phục hồi một frame và đổi PR **+22 bpm**.
-  Vì vậy mặc định CLI là reference cho video một người. Guarded chỉ là tùy chọn
-  thử nghiệm; cổng tương đương 22/11 vẫn FAIL, không thay ngưỡng.
-- Video lặp một ảnh mặt thật: `abstain=true`, `pr_bpm=null`.
-- Video không mặt: `abstain=true`, không báo prior là mạch đo được.
-- Video 1 s: exit khác 0, báo lỗi, không đệm thành kết quả giả.
-
-Ảnh/crop/ID/nhãn cá nhân chỉ nằm trong bằng chứng riêng trên server, không đưa vào repo.
-Kiểm âm trên dữ liệu và unit test tách riêng: kiểm tĩnh đầu vào không phải chứng
-minh tất cả CNN luôn qua kiểm âm nếu bỏ lớp kiểm đầu vào.
-
-## Môi trường sạch và cách chạy
-
-Linux x86_64, Python 3.12.3. Ba venv mới được cài từ lock trên clone riêng:
-`core`, `frontend`, `experts`; không dùng môi trường nghiên cứu cũ.
-`bootstrap_video.py` kiểm pins, pip check, SHA256 reader, hai weights và state.pkl.
-Lệnh sử dụng và giới hạn: [RUN_VIDEO.md](RUN_VIDEO.md).
-
-Không cần bảng nhãn, đường dẫn riêng của đội hoặc bundle private-assets khi
-chạy video mới. Cần cung cấp video và cờ hoạt động đã biết; cần ≥15 GiB RAM
-còn trống. P4m/public vẫn là pipeline nghiên cứu riêng, không phải nhánh CLI này.
-
-### Kiểm cuối từ clone GitHub riêng
-
-Commit code đã kiểm: `b1079ef6ea0b54c3a547e540e018e518bcdab129`.
-Từ clone riêng đã cài ba venv mới, chạy lại bootstrap, 16 test runtime/tools,
-10 test scorer và 1.097 hash archive: tất cả PASS. Chạy lệnh `predict.py` mặc định
-trên một video dev đã định trước: **exit 0, 186,76 giây**, xuất JSON/CSV,
-model deployment đúng SHA. Sau đó ảnh mặt lặp, không mặt và clip 1 s đều cho
-hành vi mong đợi trên cùng code/model cuối. Không cần nhãn hoặc cache riêng để
-chạy lệnh; chỉ truyền đường dẫn video và hoạt động.
-
-[Receipt tổng hợp, không có ID hay PR cá nhân](validation/video_cli_acceptance_20261123.json).
-Các commit sau kiểm này chỉ bổ sung tài liệu/receipt, không đổi code hoặc model.
+Holdout BTC và 7 người test UBFC2 không được mở. Không huấn luyện lại.
+[Bản kiểm reset 9,130 và lịch sử lỗi được giữ ở commit cũ](history/R1_STATE_BUG_20261123.md).

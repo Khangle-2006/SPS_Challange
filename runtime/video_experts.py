@@ -16,7 +16,9 @@ def spectrum(model, crops, t, valid):
         model._facevitals_initial_state=copy.deepcopy(model.state)
     model.state=copy.deepcopy(model._facevitals_initial_state)
     fps=(len(t)-1)/(t[-1]-t[0])
-    model.process_faces_tensor(np.ascontiguousarray(crops),fps=float(fps))
+    # Warm only on this same video after reset; keep only the second pass.
+    for _ in range(2):
+        model.process_faces_tensor(np.ascontiguousarray(crops),fps=float(fps))
     bvp,ts=model.bvp(raw=True)
     if len(bvp)<300: return None,0
     bvp=np.asarray(bvp,float);ts=np.asarray(ts,float);ts-=ts[0];powers=[]
@@ -39,7 +41,9 @@ def main(out):
     crops=np.load(out/'crop72.npy',mmap_mode='r');spectra={};counts={}
     for name in MODELS:
         print('model',name,flush=True)
-        model=rppg.Model(name);s,n=spectrum(model,crops,t,valid);counts[name]=n
+        model=rppg.Model(name)
+        model._facevitals_initial_state=copy.deepcopy(model.state)
+        s,n=spectrum(model,crops,t,valid);counts[name]=n
         spectra[name]=s if s is not None else np.full(len(GRID),np.nan)
         del model
     np.savez_compressed(out/'experts.npz',**spectra)
