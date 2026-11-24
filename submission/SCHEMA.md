@@ -41,3 +41,7 @@ CSV generic cần `timestamps_s,ppg` trên clock video, có thể thêm `--video
 6. Unknown metadata có được ghi NA không? Thứ tự tọa độ, mask, padding và convention má trái/phải cần theo subject hay ảnh?
 7. RGB đã giải mã và lossless MP4 đóng gói có được chấp nhận cùng clock timestamp riêng không, nhất là video constraint VFR/drop-frame?
 8. Ban tổ chức yêu cầu LoA đo lặp lại, coverage/abstain và mẫu số như thế nào? Một video/một người không đủ ước lượng thành phần giữa người.
+
+## S1 public P4m representation (24 November)
+
+The six top-level variables are unchanged. S1 uses `roi_type=oval36_actual_frontend`, `oval_points [T,36,2]`, boxes, valid flags and acquisition times, because P4m uses the whole oval. No distinct forehead/cheek/periocular masks are claimed. `processed_signal.rppg` is the CNN cumsum waveform per accepted window with an explicit source label; HR is the P4m spectral-fusion result. Separate NPZ files preserve all source waveforms privately. `params.pipeline=P4m R1`, matching fold/checkpoint/reader/code SHA, and source/target SHA replace the historical Haar36 identity. No change is made to the six-variable contract or MATLAB axis order.

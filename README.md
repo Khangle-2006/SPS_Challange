@@ -41,7 +41,25 @@ MAE là sai số tuyệt đối: tính trong từng người rồi trung bình g
 
 BTC reader_v3 đạt 9,587. Delta reader_v4 − v3 **−1,254 [−2,282; −0,283] bpm**. Bản reset một lượt đạt 9,130; self-warm giảm **−0,797 [−1,632; −0,076] bpm**. Việc chọn 3/17 expert được thực hiện trên phổ cũ và **không làm lại** trong R1; không gọi các CI này là kiểm định holdout độc lập.
 
-[Bảng đầy đủ: 9 hàng BTC, 24 hàng public, P4/P4m, cả số xấu, độ phủ và CI](docs/RESULTS.md). Trường hợp thiếu sáng kèm nhiễu mạnh `aidtrack_c1_g25gv01` không chứng minh thắng hằng số ở cả BTC, UBFC2 và MCD. C5 ở đây là **luồng crop tách ≤10 fps**, khác thử nghiệm nén video toàn khung trước đây.
+[Bảng đầy đủ: 9 hàng BTC, 24 hàng public, P4/P4m, cả số xấu, độ phủ và CI](docs/RESULTS.md). Trường hợp thiếu sáng kèm nhiễu mạnh `aidtrack_c1_g25gv01` không chứng minh thắng hằng số ở cả BTC, UBFC2 và MCD. C5 ở đây là **luồng crop tách**, khác nén video toàn khung; giới hạn fps/giây cuối của phép đo được ghi dưới đây.
+
+## Bảy constraint — số đã chạy, không thêm thử nghiệm
+
+MAE bpm; public cột UBFC2 / MCD. `abc` là ba cổng thống kê định nghĩa trong [RESULTS](docs/RESULTS.md), không phải chứng nhận đáp ứng mọi đặc tả vật lý.
+
+| Constraint | Cách xử lý | Điều kiện mô phỏng | BTC | UBFC2 / MCD | Cổng |
+|---|---|---|---:|---|---|
+| C1 thiếu sáng | Template; trợ sáng detector cho nhiễu mạnh | Gain0,25+Poisson / Gaussian var0,01 | 9,672 / 12,258 | 1,532 / 2,443; nhiễu mạnh 13,450 / 10,435 | Poisson abc; mạnh ab− cả ba bộ; lux chưa đo |
+| C2 da | RGB đa nguồn + fusion | `c2_vit`, tám mảng mất sắc tố | 8,832 | 0,750 / 1,734 | abc; chưa chứng nhận toàn Fitzpatrick |
+| C3 nhiều mặt | Gác danh tính + template | Hai bố cục ghép UBFC2 | Chưa có số R1 C3 | 0,775 / 0,771 (hai bố cục UBFC2, trước R1); MCD chưa có | C3 PASS, 0 khung lấy nhầm; exact-R1 chưa PASS |
+| C4 độ phân giải | Chạy lại frontend | VGA / QVGA | 9,101 / 9,443 | QVGA 0,727 / 1,520 | abc |
+| C5 băng thông | Frontend tại thiết bị + WebP lossless | `split10` / `c5_split10` | 9,480 | 0,646 / 1,704 | abc hiệu năng; chứng nhận mọi giây chưa đủ |
+| C6 da lão hóa | Tiền lọc CNN + fusion | Unsharp một lượt `c6_us1` | 8,444 | 0,732 / 1,641 | abc trên mô phỏng; không thay kiểm nhóm tuổi |
+| C7 che mặt | Template phần trên mặt | Khẩu trang xanh `track_c7_blue` | 10,457 | 1,447 / 2,972 | abc trên mô phỏng |
+
+C5: timestamp+cờ, crop hộp 36×36 WebP lossless và block RGB (BTC) / oval36 (public). Log đo BTC **202,517 / 252,584 kbps**, public **311,115 / 469,312 kbps** (trung bình / cực đại giây được báo); giải mã khớp bit. Log bỏ giây cuối và BTC có `fps_sent=10,002`; **chưa đủ để khẳng định ≤10 fps và ≤500 kbps ở mọi giây**. [Bằng chứng và SHA](docs/C5_TRANSPORT_EVIDENCE.json).
+
+C3: 35 người UBFC2, hai bố cục, 0/67.764 khung hợp lệ đọc nhầm ở mỗi bố cục. ΔMAE +0,0201 [−0,0105; +0,0523] và +0,0161 [−0,0172; +0,0494]. Cổng native reader_v3 PASS, nhưng exact reader_v4/P4m FAIL là các phép kiểm khác nhau. Đây là bằng chứng frontend trước R1, không phải số C3 R1 đã chạy lại. [Chi tiết](docs/RESULTS.md#c3--phân-biệt-cổng-danh-tính-và-cổng-tái-lập).
 
 ## Lỗi trạng thái 23/11
 
@@ -53,9 +71,9 @@ Bản hiện hành sao chép trạng thái khởi tạo ngay sau khi tạo model
 
 | Bước | Xử lý |
 |---|---|
-| Frontend | PTS thật, FaceMesh một mặt, oval 36×36 cho tín hiệu màu và crop hộp 72×72 cho expert. `guarded` là tùy chọn thử nghiệm, chưa đạt cổng tương đương toàn cohort. |
+| Frontend | PTS thật, FaceMesh một mặt, oval 36×36 cho tín hiệu màu và crop hộp 72×72 cho expert. `guarded` qua C3 và native reader_v3; chưa qua tái lập chính xác reader_v4/P4m R1. |
 | Tín hiệu | POS + CHROM; FacePhys.rlap, ME-chunk.pure, ME-flow.pure, trọng số giữ nguyên và self-warm riêng từng video. Nhánh public thêm CNN padding-fixed được lọc đầu vào 0,1 s. |
-| Phổ | Cửa sổ 10 s, bước 5 s, nội suy 30 Hz, detrend λ=100, Butterworth 0,7–3 Hz, Hann periodogram nfft=4096. Giữ toán tử BTC/public tương ứng đã khóa. |
+| Phổ | Cửa sổ 10 s; BTC bước 5 s, public R1 bước 10 s; nội suy 30 Hz, detrend λ=100, Butterworth 0,7–3 Hz, Hann periodogram nfft=4096. Giữ toán tử BTC/public tương ứng đã khóa. |
 | BTC | Gộp bằng chứng hai phương pháp cổ điển và ba expert; prior + beta + offset theo lớp bitrate nguồn và cờ Task. |
 | Public | P4m gộp bốn kênh và readout theo thời gian; fit gộp native + 6 điều kiện trên fold train. Trọng số/readout theo fold, không dùng fit deploy để chấm dev. |
 
@@ -80,7 +98,7 @@ Dataset đã có trên **P100**, cần tài khoản và quyền truy cập:
 
 | Thư mục / file | Vai trò |
 |---|---|
-| `predict.py`, `runtime/` | Video đơn → PR của nhánh BTC, không fit lúc suy luận |
+| `predict.py`, `predict_public.py`, `runtime/` | Video đơn → BTC PR hoặc public P4m HR, không fit lúc suy luận |
 | `models/` | Reader BTC deploy + 5 fold, tham số public P4m; không chứa nhãn hay phổ cá nhân |
 | `environments/`, `tools/bootstrap_video.py` | Dependency đã khóa và cài môi trường |
 | `configs/`, `tools/repro.py` | Khai báo đường dẫn riêng và chuẩn bị tái lập nghiên cứu |
@@ -88,6 +106,6 @@ Dataset đã có trên **P100**, cần tài khoản và quyền truy cập:
 | `docs/RESULTS.md`, `docs/SOURCE_MANIFEST.json` | Bảng mới và nguồn/hash |
 | `submission/` | Mã đóng gói; không đồng nghĩa đã nộp bài |
 
-[GETTING_STARTED](docs/GETTING_STARTED.md) hướng dẫn môi trường nghiên cứu và `tools/repro.py init/doctor/prepare/plan`; [ASSETS](docs/ASSETS.md) liệt kê cache/checkpoint riêng cần có để lặp bảng. Chạy video mới không đòi các tài sản riêng này. Public/P4m vẫn là đường nghiên cứu, chưa gộp vào lệnh `predict.py`.
+[GETTING_STARTED](docs/GETTING_STARTED.md) hướng dẫn môi trường nghiên cứu và `tools/repro.py init/doctor/prepare/plan`; [ASSETS](docs/ASSETS.md) liệt kê cache/checkpoint riêng cần có để lặp bảng. Chạy video mới không đòi các tài sản riêng này. Public/P4m có lệnh riêng `predict_public.py`; đã kiểm từ video gốc trên 3 bản ghi, 26 cửa sổ khớp R1 0,000 bpm. [Gói Round 1 và giới hạn](docs/SUBMISSION_ROUND1.md).
 
 Không huấn luyện lại, không mở rộng lưới và không mở holdout trong R1. Gói này không bảo đảm MAE dev cho video bất kỳ. [Nguồn và giấy phép bên thứ ba](THIRD_PARTY_NOTICES.md).

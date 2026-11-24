@@ -110,8 +110,43 @@ Kiểm đóng gói CLI được ghi riêng trong [VIDEO_CLI_VALIDATION.md](VIDEO
 
 ## Phạm vi các mã điều kiện
 
-`native`: video gốc; `split10`/`c5_split10`: luồng crop tách còn ≤10 fps, không phải video toàn khung nén ≤500 kbps; `c4_vga`/`c4_qvga`: giảm độ phân giải; `track_c1_g25p`: giảm sáng gain 0,25 theo simulator đã khóa; `aidtrack_c1_g25gv01`: giảm sáng kèm nhiễu mạnh và trợ giúp tracking; `c2_vit`: biến thể C2 đã khóa; `c6_us1`: biến thể C6 đã khóa; `track_c7_blue`: ánh sáng xanh kèm tracking. Công thức simulator và codec không đổi trong R1.
+Đọc trực tiếp `constraint_ops.py`, `x01_extract.py`, `x09_followup.py`; không suy diễn tên điều kiện:
 
-Cohort điều kiện khác nhau: chỉ dùng delta ghép cặp trên cùng người/video/cửa sổ, không xếp hạng bằng cách trừ hai trung bình ở hai tập khác nhau.
+| Mã | Phép biến đổi và frontend |
+|---|---|
+| `native` | Video gốc, không mô phỏng suy giảm. |
+| `c1_g50p`, `c1_g12p` | RGB uint8 ×0,50 / ×0,12, làm tròn; sau đó nhiễu Poisson với trung bình bằng giá trị pixel. Không có phép đo lux tương ứng. |
+| `track_c1_g25p` | Gain 0,25 + Poisson; FaceMesh mất mặt thì giữ oval qua template phần trên mặt, NCC≥0,6. |
+| `c1_g25gv001` | Gain 0,25 + Gaussian phương sai 0,001 trên thang [0,1], clip về [0,1]; không phải Poisson. |
+| `aidtrack_c1_g25gv01` | Gain 0,25 + Gaussian phương sai 0,01. Detector nhìn bản thu nhỏ/làm mờ/tăng sáng; crop tín hiệu vẫn lấy từ ảnh đã suy giảm; template fallback. |
+| `c2_vit` | Tám mảng giả lập mất sắc tố bám landmark, mỗi mảng là hull 25 điểm; nhân RGB (1,25; 1,5; 1,6), mép mềm và bão hòa. Không thay thế kiểm bệnh lý thật hay phân tầng Fitzpatrick I–VI. |
+| `c4_vga`, `c4_qvga` | Bicubic có antialias, giữ tỉ lệ khung trong 640×480 / 320×240; chạy lại frontend. |
+| `c6_us1` | Một lần unsharp kernel α=0,2, replicate border, **toàn khung** trong x01/x09. Đây là mô phỏng tăng chi tiết, không phải chứng cứ độ bền trên người 60–70+. |
+| `track_c7_blue` | Polygon khẩu trang phẫu thuật màu xanh RGB (167,199,231) che phần dưới mặt, fit standard; template tracking. **Không phải ánh sáng xanh.** |
+| `c7_white` | Cùng polygon phần dưới mặt, màu trắng (235,235,235), frontend chuẩn. |
+| `split10`, `c5_split10` | Truyền crop tách như phần C5 dưới đây; không phải nén toàn video. |
 
-[Lịch sử và các báo cáo trước R1](history/R1_STATE_BUG_20261123.md).
+Cohort khác nhau; chỉ diễn giải delta ghép cặp trên giao video/người/cửa sổ. Simulator Python mô phỏng các thao tác đã mô tả; chưa chứng minh tương đương bit với MATLAB.
+
+## C5 — bằng chứng truyền tải
+
+Frontend chạy tại thiết bị, lấy mỗi khung thứ `k=ceil(fps/10−0,001)` theo mã đã khóa. Mỗi gói gồm timestamp+cờ 9 byte, crop hộp 36×36 WebP lossless; BTC thêm trung bình RGB 6×6 khối float32 (432 byte), public thêm oval 36×36 WebP lossless. Crop 72×72 của expert được INTER_AREA về 36×36 trước khi truyền, đúng kích thước đầu vào expert. Đây là **truyền ROI đã xử lý trên thiết bị**, không phải nén video toàn khung bằng H.264/VideoWriter.
+
+Log `W/logs/z08_split_lossless.json`: BTC 218 bản ghi, trung bình **202,517 kbps**, cực đại giây được báo **252,584 kbps**; public 152 bản ghi có oval, trung bình **311,115 kbps**, cực đại **469,312 kbps**. Mọi kiểm giải mã trong log đều khớp bit. [Số tổng hợp và SHA nguồn](C5_TRANSPORT_EVIDENCE.json).
+
+**Giới hạn bằng chứng:** mã bỏ giây cuối khi tính cực đại; `fps_sent` là trung bình bản ghi làm tròn, BTC cao nhất **10,002 fps**. Vì vậy log hiện có chưa chứng minh yêu cầu “≤10 fps và ≤500 kbps ở mọi giây”. Không đổi frame-skip hoặc tham số để sửa số. Dòng MAE tương ứng là `split10` (BTC) / `c5_split10` (public); không dùng hàng nén toàn video thay cho nó.
+
+## C3 — phân biệt cổng danh tính và cổng tái lập
+
+Nguồn: `SI/RESULTS_22NOV_VI.md`, `SI/guard_v2/` (22/11, **trước sửa trạng thái R1**). Hai bố cục UBFC2 gồm 35 người, 193 cửa sổ chung; mỗi bố cục có 67.764 khung hợp lệ và **0 khung lấy từ người ngoài**, theo vị trí canvas trong giao thức x07.
+
+| Bố cục C3 | MAE một mặt | MAE ghép | Δ [CI95] bpm | Cổng trung bình |Δ|≤0,05 |
+|---|---:|---:|---|---|
+| Cạnh nhau | 0,75502232 | 0,77511161 | +0,02008929 [−0,01046317; +0,05231585] | PASS |
+| Người ngoài lớn hơn | 0,75502232 | 0,77113560 | +0,01611328 [−0,01715960; +0,04938616] | PASS |
+
+CI dùng 10.000 bootstrap theo người, seed 0. Cổng kiểm chênh trung bình, không yêu cầu cả CI nằm trong ±0,05. Không diễn giải thành số P4m R1 đã chạy lại.
+
+Cổng native **reader_v3** cũng PASS: 218 video/158 người, 9,58705844 → 9,55601786 (Δ −0,03104058). 185.446 khung đi nhánh native khớp từng pixel; 18 video có nhánh khác, 6 video đổi dự đoán. Nhưng cổng **tái lập chính xác reader_v4** dừng ở ca đầu lệch 1,00 bpm; P4m route mới lệch >0,01 ở 25/193 cửa sổ, tối đa 1,318359375. Vì vậy `guarded` chưa thay thế frontend của kết quả R1. C3 PASS không đồng nghĩa toàn pipeline R1 đã được tái lập qua guard.
+
+[Lịch sử](history/R1_STATE_BUG_20261123.md).

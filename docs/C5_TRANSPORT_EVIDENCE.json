@@ -1,0 +1,35 @@
+{
+  "source": "W/logs/z08_split_lossless.json",
+  "source_sha256": "abc155c7b19bc0451fb38a880bc49d1b600eb82bc2061d1fdf5e03e801864323",
+  "groups": {
+    "BTC": {
+      "recordings": 218,
+      "mean_kbps": 202.51703818081035,
+      "maximum_reported_second_kbps": 252.584,
+      "max_reported_fps": 10.002,
+      "lossless": true
+    },
+    "UBFC2": {
+      "recordings": 33,
+      "mean_kbps": 310.3359914204516,
+      "maximum_reported_second_kbps": 377.88,
+      "max_reported_fps": 9.991,
+      "lossless": true
+    },
+    "MCD": {
+      "recordings": 119,
+      "mean_kbps": 311.3307161717624,
+      "maximum_reported_second_kbps": 469.312,
+      "max_reported_fps": 9.997,
+      "lossless": true
+    },
+    "public": {
+      "recordings": 152,
+      "mean_kbps": 311.1147561928594,
+      "maximum_reported_second_kbps": 469.312,
+      "max_reported_fps": 9.997,
+      "lossless": true
+    }
+  },
+  "limitation": "Per-second bitrate maxima exclude final partial second; fps_sent is rounded recording average, not maximum frames in any one-second interval. k=ceil(fps/10-1e-3) can yield >10 fps. No strict every-second certification."
+}
