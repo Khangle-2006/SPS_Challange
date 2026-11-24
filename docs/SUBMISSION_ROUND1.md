@@ -61,3 +61,11 @@ Real holdout requires the exact user message **MỞ HOLDOUT S1**, its recorded a
 After authorization, person-first MAE/RMSE, person-mean Pearson and Bland–Altman, paired cohort counts/coverage and 10,000 seed-0 person bootstrap are reported overall and by original/recompressed file type. A missing/abstained prediction remains in coverage. No retry, refit or selection after outcomes.
 
 Historical Haar36 packaging is preserved in [submission/historical](../submission/historical/); top-level compatibility modules remain for existing tests. It is not the P4m estimator. Current private artifact completion, wrapper checks and hashes are recorded in the S1 delivery receipt, not assumed from this documentation.
+
+## Completed validation — 24 November 2026
+
+The private baseline contains all **1,547 raw RGB frames**, with MAT shape **480 × 640 × 3 × 1,547**, `uint8`. Full `mat73` readback verified all six required variables. Octave independently loaded the video array and reproduced its decoded-frame SHA256; the source video, lossless MP4 and MAT have identical decoded frames. The real `.m` wrapper ran the Python pipeline from the bundled MP4: all five window decisions (four accepted, one abstained) matched, with **0 bpm maximum difference** on accepted windows. Real MATLAB has not been tested.
+
+The prediction/seal/scoring workflow completed on **three DEV videos from two people** with no holdout access. This checks execution and sealing only: DEPLOY models were fitted on dev, so these dry-run scores are not OOF or generalization estimates. The score file is private. All 15 submission/scoring tests, all 18 maintained tools tests, and all 1,161 source hashes passed. See [the aggregate validation receipt](validation/s1_20261124.json).
+
+Two reporting limitations remain explicit: C5 logs do not certify every second or an exact ≤10 fps bound (maximum rounded BTC average is 10.002 fps); the available C3 identity-guard experiment predates the R1 model-state repair. Neither is relabelled as a stronger R1 compliance result. The private ZIP is not a public repository asset and has not been submitted. Holdout is still CLOSED.

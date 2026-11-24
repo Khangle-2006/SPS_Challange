@@ -1,0 +1,51 @@
+{
+  "date": "2026-11-24",
+  "tested_inference_commit": "b73019b779c02fc31a3d5c84475fbfd5eb21d0b9",
+  "a1": {
+    "recordings": 3,
+    "ubfc2_recordings": 2,
+    "mcd_recordings": 1,
+    "accepted_windows": 26,
+    "max_absolute_difference_bpm": 0,
+    "threshold_bpm": 0.01,
+    "missing_or_extra_accepted_windows": 0
+  },
+  "baseline": {
+    "frames": 1547,
+    "mat_shape": [
+      480,
+      640,
+      3,
+      1547
+    ],
+    "dtype": "uint8",
+    "decoded_rgb_sha256": "501d03ec42921a6c0281a859a2d02758d824d1603e09294de4bfa3cb11a22de1",
+    "mat73_all_six_fields": true,
+    "octave_readback": true,
+    "octave_wrapper_pass": true,
+    "accepted_windows": 4,
+    "all_window_decisions": 5,
+    "max_hr_difference_bpm": 0.0,
+    "real_matlab_tested": false
+  },
+  "dry_run": {
+    "videos": 3,
+    "people": 2,
+    "predictions_sealed_before_labels": true,
+    "score_completed": true,
+    "performance_evidence": false,
+    "scope": "DEV only, deployment model; execution check, not OOF"
+  },
+  "tests": {
+    "submission_and_scoring": 15,
+    "tools": 18,
+    "source_hashes": 1161,
+    "all_pass": true
+  },
+  "holdout": {
+    "predictions": 0,
+    "label_reads": 0,
+    "status": "CLOSED; explicit future MỞ HOLDOUT S1 required"
+  },
+  "private_media_in_repository": false
+}
