@@ -11,6 +11,22 @@ ROOT=Path(__file__).resolve().parents[1]
 
 
 class SealingTests(unittest.TestCase):
+    def test_utf8_authorization_reaches_activity_guard(self):
+        with tempfile.TemporaryDirectory() as d:
+            p=Path(d);auth=p/'authorization.txt'
+            auth.write_text('M\u1ede HOLDOUT S1',encoding='utf-8')
+            r=subprocess.run([sys.executable,str(ROOT/'submission/run_holdout.py'),'--repo',str(ROOT),'--manifest',str(p/'holdout_NOT_PRESENT.json'),'--output',str(p/'out'),'--authorization-file',str(auth)],capture_output=True,text=True)
+            self.assertNotEqual(r.returncode,0);self.assertIn('Frozen activity lock missing/changed',r.stderr)
+            self.assertFalse((p/'out').exists())
+
+    def test_locked_activity_normalization(self):
+        import importlib.util
+        spec=importlib.util.spec_from_file_location('s1_runner',ROOT/'submission/run_holdout.py')
+        module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
+        self.assertEqual([module.cli_activity(x) for x in ['Task1','Task2','Task3','Task','Resting','Walking']],
+                         ['Task','Task','Task','Task','Resting','Walking'])
+        with self.assertRaises(ValueError):module.cli_activity('unknown')
+
     def test_holdout_denied_before_opening_manifest(self):
         with tempfile.TemporaryDirectory() as d:
             r=subprocess.run([sys.executable,str(ROOT/'submission/run_holdout.py'),'--repo',str(ROOT),'--manifest',str(Path(d)/'holdout_NOT_PRESENT.json'),'--output',str(Path(d)/'out')],capture_output=True,text=True)

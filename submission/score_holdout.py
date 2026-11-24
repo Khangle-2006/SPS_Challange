@@ -29,7 +29,7 @@ def metrics(rows,labels):
 def main():
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--predictions',type=Path,required=True);p.add_argument('--labels',type=Path,required=True);p.add_argument('--authorization-file',type=Path);a=p.parse_args()
     root=a.predictions;seal=json.loads((root/'SEALED.json').read_text())
-    if seal['scope']!='dev_dryrun' and (not a.authorization_file or a.authorization_file.read_text(encoding='utf-8').strip()!='Má»ž HOLDOUT S1'):p.error('Holdout scoring not authorized')
+    if seal['scope']!='dev_dryrun' and (not a.authorization_file or a.authorization_file.read_text(encoding='utf-8').strip()!='M\u1ede HOLDOUT S1'):p.error('Holdout scoring not authorized')
     if sha(root/'PREDICTIONS.json')!=seal['predictions_sha256'] or sha(root/'PRE_RUN.json')!=seal['pre_run_sha256']:p.error('Prediction seal changed')
     rows=json.loads((root/'PREDICTIONS.json').read_text())
     if len(rows)!=seal['videos']:p.error('Incomplete prediction set')

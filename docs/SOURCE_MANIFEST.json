@@ -5811,20 +5811,20 @@
     },
     {
       "path": "submission/run_holdout.py",
-      "sha256": "7620a743900bf91c26855e93e8f65252f676d140f4ff57ae039a8e4e5b82ba9c",
-      "bytes": 4475,
+      "sha256": "ae750bd926067b7ebba01881338ed7e99a2ffeab5cdc8d0c8af8f8b5e95e8c24",
+      "bytes": 4834,
       "provenance": "S1 packaging 24 Nov 2026; frozen inference parameters unchanged"
     },
     {
       "path": "submission/score_holdout.py",
-      "sha256": "1d154b3a196242ee8f776d81a9b850db3fb20771e5ceb01becdd3a66bff15ffe",
+      "sha256": "151ad4fc022f93e7639f23ff2a6c34ad7c0847789a62161f5fe5b290bd7c31c6",
       "bytes": 3594,
       "provenance": "S1 packaging 24 Nov 2026; frozen inference parameters unchanged"
     },
     {
       "path": "tools/test_s1_sealing.py",
-      "sha256": "1df02033f972ca06887a98d2149889dbb20466226da08a3ae3dca53bf99e8f07",
-      "bytes": 1455,
+      "sha256": "47a81817e78754b1db17b7ebc4b92f19c3a4df2190fcc6840c5d2e30ae0b378e",
+      "bytes": 2608,
       "provenance": "S1 packaging 24 Nov 2026; frozen inference parameters unchanged"
     }
   ],

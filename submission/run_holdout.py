@@ -11,6 +11,13 @@ import sys
 def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
 
 
+def cli_activity(activity):
+    """Normalize locked protocol values, never infer activity from the video ID."""
+    if activity in {'Task1','Task2','Task3','Task'}: return 'Task'
+    if activity in {'Resting','Walking'}: return activity
+    raise ValueError(f'Unknown locked activity: {activity!r}')
+
+
 def fingerprint(repo):
     files=[repo/'predict.py']+sorted((repo/'runtime').glob('*.py'))+sorted((repo/'models').glob('*.json'))
     return {str(p.relative_to(repo)):sha(p) for p in files}
@@ -26,8 +33,8 @@ def main():
     # is not even opened until explicit authorization is supplied.
     allowed=a.manifest.name.startswith('dev_')
     if not allowed:
-        if not a.authorization_file or a.authorization_file.read_text(encoding='utf-8').strip()!='Má»ž HOLDOUT S1':
-            p.error('Holdout CLOSED. Requires the explicit user message Má»ž HOLDOUT S1 and its saved authorization receipt.')
+        if not a.authorization_file or a.authorization_file.read_text(encoding='utf-8').strip()!='M\u1ede HOLDOUT S1':
+            p.error('Holdout CLOSED. Requires the explicit user message M\u1ede HOLDOUT S1 and its saved authorization receipt.')
         if not a.activity_lock or sha(a.activity_lock)!='a0f58cc5b87888aa591ec07de6957d197a954909f85a7db6dfd95d78a664cd76':p.error('Frozen activity lock missing/changed')
     doc=json.loads(a.manifest.read_text());rows=doc['videos'];scope=doc['scope']
     if allowed and (scope!='dev_dryrun' or len(rows)!=3):p.error('Dry-run requires exactly 3 explicitly declared DEV videos')
@@ -43,6 +50,7 @@ def main():
         headers=set(locked[0]);idcol=next((k for k in ('recording','id','video_id') if k in headers),None);actcol=next((k for k in ('activity','PROTOCOL') if k in headers),None)
         if not idcol or not actcol or headers!={idcol,actcol}:p.error('Unexpected activity lock schema')
         if {(r['id'],r['activity']) for r in rows}!={(r[idcol],r[actcol]) for r in locked}:p.error('Holdout IDs/activity differ from lock')
+    activities=[cli_activity(r['activity']) for r in rows]
     a.output.mkdir(parents=True,exist_ok=False)
     before=fingerprint(repo)
     pre=dict(scope=scope,manifest_sha256=sha(a.manifest),code_model_sha256=before,fold=None,expected_videos=len(rows),labels_read=False)
@@ -51,7 +59,7 @@ def main():
     results=[]
     for i,row in enumerate(rows):
         dest=a.output/('video_%03d'%i)
-        cmd=['nice','-n','19',sys.executable,str(repo/'predict.py'),'--video',row['video'],'--activity',row['activity'],'--output',str(dest)]
+        cmd=['nice','-n','19',sys.executable,str(repo/'predict.py'),'--video',row['video'],'--activity',activities[i],'--output',str(dest)]
         if row.get('source_bitrate') is not None:cmd+=['--source-bitrate',str(row['source_bitrate'])]
         with (a.output/('video_%03d.log'%i)).open('w') as log:subprocess.run(cmd,env=env,stdout=log,stderr=subprocess.STDOUT,check=True)
         r=json.loads((dest/'result.json').read_text())
