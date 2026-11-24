@@ -1,20 +1,11 @@
-# submission
+# Round 1 packaging — current P4m R1
 
-Historical frozen checkpoint Python export, không coi là selected calibrated implementation.
+Use [`predict_public.py`](../predict_public.py) for raw public video and [`docs/SUBMISSION_ROUND1.md`](../docs/SUBMISSION_ROUND1.md) for the checked package workflow. Install the locked frontend/experts/core environments plus `torch-cpu`. DEV uses the matching `--fold`; deployment uses the fixed convention documented there.
 
-[Hướng dẫn chạy](../docs/REPRODUCING.md) · [Kết quả](../docs/RESULTS.md) · [Experiment map](../docs/EXPERIMENTS.md)
+`build_public_baseline.py` requires all three raw-video parity gates to pass, exports the six-variable MAT and verifies decoded frames with mat73. `process_public_round1.py` and `.m` are installed in the private bundle as `process_round1.py` / `process_round1.m`. The `.m` wrapper invokes Python, using relative package paths and an explicit repository location; it does not claim a native MATLAB implementation.
 
-Các tham số dưới đây trích tĩnh từ code, không phải lệnh tự động launch. Với script không có CLI, đọc hằng số/path và dependency ở đầu file. Controller/site runner cần receipt và môi trường gốc; không bỏ qua guard.
+MAT dependencies: `h5py==3.11.0`, `hdf5storage==0.2.2`, `mat73==0.65` in addition to numpy/scipy/OpenCV. `requirements.txt` documents the historical full environment; do not overwrite an existing locked runtime environment to install packaging dependencies.
 
-| File | Tham số CLI được khai báo |
-|---|---|
-| [__init__.py](__init__.py) | Không có argparse; đọc source/config |
-| [export_score_inputs.py](export_score_inputs.py) | Không có argparse; đọc source/config |
-| [mat_writer.py](mat_writer.py) | Không có argparse; đọc source/config |
-| [metrics.py](metrics.py) | Không có argparse; đọc source/config |
-| [process_round1.py](process_round1.py) | `--constraints`, `--constraint-manifest`, `--dataset`, `--root`, `--recording`, `--audit-dir`, `--subject-id`, `--reference-clock-shared`, `--video-timestamps`, `--checkpoint`, `--roi-cache`, `--external-video-reference`, `--protocol` |
-| [repair_bundle_v2.py](repair_bundle_v2.py) | `artifact`, `--source` |
-| [run_e2e.py](run_e2e.py) | `--dataset`, `--root`, `--audit-dir`, `--recording`, `--out`, `--roi-cache` |
-| [test_submission.py](test_submission.py) | Không có argparse; đọc source/config |
+`run_holdout.py` and `score_holdout.py` are separate, sealed stages. Only 3 explicitly DEV inputs are permitted without the future exact user confirmation `MỞ HOLDOUT S1`. Holdout has not been opened.
 
-MAT/HDF5 packaging dùng `submission/requirements.txt` trong môi trường riêng, gồm h5py/hdf5storage/mat73. Môi trường `core` của CLI PR không cài các dependency này. Đây là nhánh đóng gói lịch sử, không phải `predict.py` hiện hành. [Schema lịch sử](SCHEMA.md).
+Historical checkpoint/Haar36 code is copied intact to [historical/](historical/). The old top-level `process_round1.py`, `run_e2e.py` and support modules remain for compatibility and existing tests; they are **not** the current P4m bundle entry point. See [SCHEMA](SCHEMA.md) for representation details and limitations. No media, MAT, personal labels or spectra are distributed in this repository.

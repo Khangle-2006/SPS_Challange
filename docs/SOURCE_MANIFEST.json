@@ -5703,13 +5703,129 @@
     },
     {
       "path": "submission/SCHEMA.md",
-      "bytes": 6013,
-      "sha256": "3b3e5f3362a38f92f48483f2e349adc53294c56bc9071e354786de2956dbcb2e"
+      "bytes": 6702,
+      "sha256": "5bf32dd8764187f2a10a3a8608f66c47bbf6c3fe55ab5a3dc814e911baef3c2b",
+      "previous_sha256": "3b3e5f3362a38f92f48483f2e349adc53294c56bc9071e354786de2956dbcb2e",
+      "previous_bytes_preserved_at": "submission/historical/SCHEMA.md"
     },
     {
       "path": "docs/validation/repo_ready_20261124.json",
       "bytes": 6633,
       "sha256": "9a2db59239a5f3d856e27eaa223b5bf3dfb04e1524ea00f78dcd7b40c2afd50c"
+    },
+    {
+      "path": "docs/C5_TRANSPORT_EVIDENCE.json",
+      "sha256": "ca1bba9cbde86a81173d82c9557542ce0f8db86ff178442e964565067ccf376a",
+      "bytes": 1141,
+      "provenance": "S1 packaging 24 Nov 2026; frozen inference parameters unchanged"
+    },
+    {
+      "path": "predict_public.py",
+      "sha256": "fc5450e41a3e1578d98d4af82ba07943afe60fbff4a1f261997389f84d8f9dae",
+      "bytes": 3723,
+      "provenance": "S1 packaging 24 Nov 2026; frozen inference parameters unchanged"
+    },
+    {
+      "path": "runtime/public_core.py",
+      "sha256": "84a8b1b09f544c2f461934b326ae7eee241c544dfef019b885f828401706debc",
+      "bytes": 5978,
+      "provenance": "S1 packaging 24 Nov 2026; frozen inference parameters unchanged"
+    },
+    {
+      "path": "runtime/public_experts.py",
+      "sha256": "37e2439332041ff59c345c8aced2f92d6fdc593abf362f114f4c8e6b85c53c80",
+      "bytes": 1234,
+      "provenance": "S1 packaging 24 Nov 2026; frozen inference parameters unchanged"
+    },
+    {
+      "path": "runtime/public_frontend.py",
+      "sha256": "3ba039280f40259dbc193c3636ac2b663e4ace128c0b863c62c743a86bd0b136",
+      "bytes": 3418,
+      "provenance": "S1 packaging 24 Nov 2026; frozen inference parameters unchanged"
+    },
+    {
+      "path": "submission/build_public_baseline.py",
+      "sha256": "bdfbb9c63a526cfbbde78cbeedbf0b8eed327ebcd7b47392266dfca0b622aa40",
+      "bytes": 9376,
+      "provenance": "S1 packaging 24 Nov 2026; frozen inference parameters unchanged"
+    },
+    {
+      "path": "submission/historical/__init__.py",
+      "sha256": "b5c3613d4d75fef1ac4cac06fd4f4c24d2e1dec9ebd755d10908bbc32385c41e",
+      "bytes": 60,
+      "provenance": "S1 packaging 24 Nov 2026; frozen inference parameters unchanged"
+    },
+    {
+      "path": "submission/historical/export_score_inputs.py",
+      "sha256": "2df58dbf26d55f60c4862b52ce00bc6159ac3bbe9fee317a8368ab6af276fa9e",
+      "bytes": 3174,
+      "provenance": "S1 packaging 24 Nov 2026; frozen inference parameters unchanged"
+    },
+    {
+      "path": "submission/historical/mat_writer.py",
+      "sha256": "d9c7de6d69ab8e1772c573c0b2fd468e882192e9896b99cd8b2d8a39ac673578",
+      "bytes": 3729,
+      "provenance": "S1 packaging 24 Nov 2026; frozen inference parameters unchanged"
+    },
+    {
+      "path": "submission/historical/metrics.py",
+      "sha256": "4b6f121a00d86970cff94321d77d74f451845de6e079c05a8a78b6f3833c0732",
+      "bytes": 2136,
+      "provenance": "S1 packaging 24 Nov 2026; frozen inference parameters unchanged"
+    },
+    {
+      "path": "submission/historical/process_round1.py",
+      "sha256": "06c2fe581357098c4e28a58f3b7d336fa28c5696cba297899de92bf9bb5d359e",
+      "bytes": 15844,
+      "provenance": "S1 packaging 24 Nov 2026; frozen inference parameters unchanged"
+    },
+    {
+      "path": "submission/historical/repair_bundle_v2.py",
+      "sha256": "e09515cac1a0e0cad294daf54bf203db3345d8a035922610fdd79c1826c1d8c3",
+      "bytes": 2188,
+      "provenance": "S1 packaging 24 Nov 2026; frozen inference parameters unchanged"
+    },
+    {
+      "path": "submission/historical/run_e2e.py",
+      "sha256": "45f2d831b7de480038074cd203c33100134d51b81345611c38931d0c222c03e1",
+      "bytes": 1605,
+      "provenance": "S1 packaging 24 Nov 2026; frozen inference parameters unchanged"
+    },
+    {
+      "path": "submission/historical/test_submission.py",
+      "sha256": "e48ce2b9ee73f27c2581c7d31a63b88eb85b502d0a5bc1bdec88e99fd013d490",
+      "bytes": 3441,
+      "provenance": "S1 packaging 24 Nov 2026; frozen inference parameters unchanged"
+    },
+    {
+      "path": "submission/process_public_round1.m",
+      "sha256": "1ba9428ad8cd479bb7de8cd2bc5a01879fc2f672aa999ffcd5bff84c449d068a",
+      "bytes": 1434,
+      "provenance": "S1 packaging 24 Nov 2026; frozen inference parameters unchanged"
+    },
+    {
+      "path": "submission/process_public_round1.py",
+      "sha256": "1e28547cacef965a35faf5f615a7c9a84dfe51913c10ffdcf5fd83fa7dc7eedf",
+      "bytes": 1080,
+      "provenance": "S1 packaging 24 Nov 2026; frozen inference parameters unchanged"
+    },
+    {
+      "path": "submission/run_holdout.py",
+      "sha256": "7620a743900bf91c26855e93e8f65252f676d140f4ff57ae039a8e4e5b82ba9c",
+      "bytes": 4475,
+      "provenance": "S1 packaging 24 Nov 2026; frozen inference parameters unchanged"
+    },
+    {
+      "path": "submission/score_holdout.py",
+      "sha256": "1d154b3a196242ee8f776d81a9b850db3fb20771e5ceb01becdd3a66bff15ffe",
+      "bytes": 3594,
+      "provenance": "S1 packaging 24 Nov 2026; frozen inference parameters unchanged"
+    },
+    {
+      "path": "tools/test_s1_sealing.py",
+      "sha256": "1df02033f972ca06887a98d2149889dbb20466226da08a3ae3dca53bf99e8f07",
+      "bytes": 1455,
+      "provenance": "S1 packaging 24 Nov 2026; frozen inference parameters unchanged"
     }
   ],
   "excluded_helpers": [

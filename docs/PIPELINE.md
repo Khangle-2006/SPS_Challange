@@ -1,10 +1,14 @@
 # Pipeline hiện hành — R1 ngày 23/11/2026
 
-Hai nhánh dùng cùng nguyên tắc tách trạng thái, nhưng đầu ra và bộ đọc khác nhau. `predict.py` hiện triển khai nhánh BTC. Nhánh P4m/public được tái lập bằng mã nghiên cứu và checkpoint ngoài fold.
+Hai nhánh dùng cùng nguyên tắc tách trạng thái, nhưng đầu ra và bộ đọc khác nhau. `predict.py` hiện triển khai nhánh BTC. Nhánh P4m/public chạy bằng `predict_public.py` và checkpoint ngoài fold khi chấm dev; 3 bản ghi/26 cửa sổ A1 đã khớp R1. Xem [gói nộp](SUBMISSION_ROUND1.md).
 
 ## 1. Video và frontend
 
-Giải mã bằng timestamp thật; xử lý xoay metadata một lần, dùng chuỗi HDR→SDR đã khóa. FaceMesh một mặt + template fallback tạo oval 36×36 và crop hộp không che 72×72. Không đổi detector, template hay cách resize trong R1. Bộ gác nhiều mặt `guarded` vẫn là thử nghiệm: có thể thay số frame hợp lệ, chưa qua cổng tương đương toàn cohort.
+Giải mã bằng timestamp thật; xử lý xoay metadata một lần, dùng chuỗi HDR→SDR đã khóa. FaceMesh một mặt + template fallback tạo oval 36×36 và crop hộp không che 72×72. Không đổi detector, template hay cách resize trong R1. Bộ gác `guarded` qua cổng C3 và native reader_v3 ngày 22/11, nhưng chưa qua tái lập từng dự đoán reader_v4/P4m; không thay frontend R1. Xem [các cổng riêng](RESULTS.md#c3--phân-biệt-cổng-danh-tính-và-cổng-tái-lập).
+
+![Pipeline](figures/pipeline.png)
+
+*Sơ đồ kiến trúc 22/11 được giữ nguyên theo yêu cầu. Các số 8,35 / 0,75 / 1,59 in trong hình đã bị loại; dùng bảng R1 trong RESULTS. Nhãn bước 5 s chỉ áp BTC, public đã khóa bước 10 s; giới hạn C5 được kiểm riêng bên dưới.*
 
 ## 2. Ba expert độc lập giữa video
 
@@ -16,7 +20,11 @@ MODE `selfwarm` lấy từ quyết định z18 đã ghi trước: chỉ chọn k
 
 POS/CHROM lấy thống kê RGB của oval. CNN public là padding-fixed, đầu vào được trung bình trượt 0,1 s theo cờ valid. CNN không nằm trong reader_v4 BTC.
 
-Giữ cửa sổ 10 s, bước 5 s và luật support theo PTS; nội suy lên 30 Hz. Detrend smoothness-prior λ=100, Butterworth 0,7–3 Hz, periodogram Hann nfft=4096. Không đổi toán tử riêng của script BTC/public: lưới và cách chuẩn hóa phổ phải theo đúng nhánh, không thay lẫn nhau.
+BTC dùng cửa sổ 10 s, bước 5 s; public R1 dùng cửa sổ 10 s, bước 10 s và đồng hồ thu đã khóa (không thay bằng PTS container). Giữ luật support; nội suy lên 30 Hz. Detrend smoothness-prior λ=100, Butterworth 0,7–3 Hz, periodogram Hann nfft=4096. Không đổi toán tử riêng của script BTC/public: lưới và cách chuẩn hóa phổ phải theo đúng nhánh, không thay lẫn nhau.
+
+![Các sóng](figures/waves.png)
+
+*Minh họa các tín hiệu mạch; không dùng một ví dụ để suy rộng sai số toàn bộ.*
 
 ## 4. Reader BTC
 
@@ -40,9 +48,21 @@ Readout forward–backward dùng trọng số chất lượng cửa sổ; thông
 
 Native P4m: **UBFC2 0,746 bpm** (193 cửa sổ/35 người), **MCD 1,511 bpm** (1.959 cửa sổ/60 người). Nhóm mô phỏng MCD dùng 34 người; không trừ trực tiếp trung bình trên hai cohort khác nhau.
 
+![Readout R1](figures/readout.png)
+
+*POS và readout P4m theo cửa sổ 10 giây, hình R1 đã sửa trạng thái.*
+
+![Bằng chứng R1](figures/evidence.png)
+
+*Ví dụ R1: CNN + 0,5·POS + trung bình ba expert; trọng số riêng fold 2 khác như bảng trên.*
+
 ## 6. C5 tách luồng
 
-Frontend chạy ở thiết bị; giữ mỗi khung thứ `ceil(fps/10)`, gửi crop và dữ liệu màu. Điều kiện `split10/c5_split10` giữ đúng logic script gốc. Đây không phải điều kiện nén toàn video bằng MPEG-4/VideoWriter. R1 không mã hóa lại crop hoặc thay protocol truyền tải.
+Frontend chạy tại thiết bị, lấy mỗi khung thứ `k=ceil(fps/10−0,001)` theo mã đã khóa. Mỗi gói gồm timestamp+cờ 9 byte, crop hộp 36×36 WebP lossless; BTC thêm trung bình RGB 6×6 khối float32 (432 byte), public thêm oval 36×36 WebP lossless. Crop 72×72 của expert được INTER_AREA về 36×36 trước khi truyền, đúng kích thước đầu vào expert. Đây là **truyền ROI đã xử lý trên thiết bị**, không phải nén video toàn khung bằng H.264/VideoWriter.
+
+Log `W/logs/z08_split_lossless.json`: BTC 218 bản ghi, trung bình **202,517 kbps**, cực đại giây được báo **252,584 kbps**; public 152 bản ghi có oval, trung bình **311,115 kbps**, cực đại **469,312 kbps**. Mọi kiểm giải mã trong log đều khớp bit. [Số tổng hợp và SHA nguồn](C5_TRANSPORT_EVIDENCE.json).
+
+**Giới hạn bằng chứng:** mã bỏ giây cuối khi tính cực đại; `fps_sent` là trung bình bản ghi làm tròn, BTC cao nhất **10,002 fps**. Vì vậy log hiện có chưa chứng minh yêu cầu “≤10 fps và ≤500 kbps ở mọi giây”. Không đổi frame-skip hoặc tham số để sửa số. Dòng MAE tương ứng là `split10` (BTC) / `c5_split10` (public); không dùng hàng nén toàn video thay cho nó.
 
 ## 7. Giới hạn và lịch sử
 
