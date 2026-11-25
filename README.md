@@ -1,6 +1,6 @@
 # FaceVitals — SP Cup 2027, Round 1
 
-Ước lượng **nhịp mạch PR (bpm) từ video RGB khuôn mặt**. Bản R1 ngày 23/11/2026 dùng ba expert **self-warm, tách trạng thái giữa video**. BTC dùng reader_v4; bộ công khai dùng P4m. Các số dưới đây là kiểm chéo theo người trên **dev**, chưa phải holdout.
+Ước lượng nhịp mạch (PR, bpm) từ video khuôn mặt. Trên BTC, `predict.py` mặc định dùng **BTC joint**, đạt **MAE 8,020 bpm** trên 218 video dev của 158 người. Trên UBFC2 và MCD, dùng **P4m** qua `predict_public.py`.
 
 ## Clone và chạy một video
 
@@ -15,11 +15,19 @@ python3.12 predict.py --video /path/video.mp4 --activity Resting --output output
 
 Bootstrap tự cài ba môi trường đã khóa, tải đủ 5 checkpoint public và kiểm reader/weights bằng SHA256. Cần Internet khi cài lần đầu; không cần chép file từ thư mục riêng của tác giả.
 
-Đọc `output/my_video/result.json` hoặc `result.csv`. `--activity` là `Resting`, `Task` hoặc `Walking`, lấy từ hoạt động lúc quay. Mặc định `reference` dành cho video một người. Nếu không đủ bằng chứng, `abstain=true`, `pr_bpm=null`; prior dự phòng **không phải số đo mạch**. Thư mục output phải mới.
+Đọc `output/my_video/result.json` hoặc `result.csv`. `--activity` là `Resting`, `Task` hoặc `Walking`, lấy từ hoạt động lúc quay. Mặc định `reference` dành cho video một người. Nếu không đủ bằng chứng, `abstain=true`, `pr_bpm=null`; xem lý do trong trường `reason`. Thư mục output phải mới.
 
 Cài gói hệ thống, xử lý bitrate nguồn, video HDR, tùy chọn fold và bộ gác nhiều mặt: **[RUN_VIDEO.md](docs/RUN_VIDEO.md)**. Lệnh này chạy CPU, không cần nhãn PR, dataset của đội hoặc checkpoint CNN của đội. Bootstrap tạo ba môi trường đã khóa phiên bản; ba expert nằm trong `open-rppg==0.1.1`, reader nhẹ có sẵn trong `models/`.
 
-## Lặp số trên server P100
+## Tái lập BTC joint trên dev
+
+Với dữ liệu dự án được cấp quyền, lệnh sau chạy lại bộ đọc trên trace RGB và phổ ba expert theo đúng fold người, kiểm từng dự đoán của cả 218 video. Video mới dùng tham số triển khai trong `models/btc_joint/`.
+
+```bash
+.venv/core/bin/python tools/reproduce_btc_joint.py --reports /path/to/facevitals/reports
+```
+
+## Tái lập phiên bản R1 ngày 23/11 trên P100
 
 Sau bootstrap, chạy trong clone mới:
 
@@ -27,7 +35,7 @@ Sau bootstrap, chạy trong clone mới:
 .venv/core/bin/python tools/reproduce_r1.py --output output/r1_replay
 ```
 
-Lệnh kiểm hash cache dev được cấp quyền, chạy lại reader từ bằng chứng phổ với đúng model fold, rồi đối chiếu từng dự đoán; không fit lại, không đọc holdout. Kỳ vọng BTC native **8,333268**, UBFC2 native **0,746443**, MCD native **1,510870 bpm**. Có đủ 24 hàng public native/constraint. Đây là replay readout từ cache, **không phải chạy lại CNN/frontend từ video gốc**. Chạy một video mới dùng lệnh `predict.py` ở trên; chấm dev phải thêm `--fold` đúng người. [Hướng dẫn từng bước và phạm vi](docs/REPRODUCE_SERVER.md).
+Lệnh kiểm hash cache dev được cấp quyền, chạy lại reader từ bằng chứng phổ với đúng model fold, rồi đối chiếu từng dự đoán; không fit lại, không đọc holdout. Kỳ vọng BTC native **8,333268**, UBFC2 native **0,746443**, MCD native **1,510870 bpm**. Có đủ 24 hàng public native/constraint. Đây là replay readout từ cache, **không phải chạy lại CNN/frontend từ video gốc**. Khi chạy BTC R1 trên video mới, thêm `--reader r1` vào lệnh `predict.py`; chấm dev R1 thêm `--fold` đúng người. [Hướng dẫn từng bước và phạm vi](docs/REPRODUCE_SERVER.md).
 
 ## Kết quả hiện hành
 
@@ -35,9 +43,23 @@ MAE là sai số tuyệt đối: tính trong từng người rồi trung bình g
 
 | Nhánh / video gốc | Phạm vi dev | MAE mới [CI95], bpm | Hằng số train-fold |
 |---|---|---:|---:|
-| BTC reader_v4 self-warm | 218 video / 158 người | **8,333 [7,090; 9,659]** | 12,071 |
+| **BTC joint (mặc định)** | 218 video / 158 người | **8,020 [6,790; 9,350]** | 12,071 |
+| BTC reader_v4 self-warm (R1) | 218 video / 158 người | **8,333 [7,090; 9,659]** | 12,071 |
 | Public P4m — UBFC2 | 193 cửa sổ / 35 người | **0,746 [0,516; 1,051]** | 14,592 |
 | Public P4m — MCD | 1.959 cửa sổ / 60 người | **1,511 [1,247; 1,820]** | 11,684 |
+
+**Holdout BTC cũ.** BTC joint đạt **9,704 bpm** và R1 đạt **10,017 bpm** trên cùng 71 video có dự đoán của 40 người (72 video, 41 người được đưa vào). Tập này đã được xem trong các lượt nghiên cứu trước.
+
+### P4m khi chấm một PR cho mỗi video như BTC
+
+Hai hàng P4m ở bảng trên chấm từng cửa sổ 10 giây. Để chấm cấp video, lấy trung vị PR dự đoán và trung vị PR tham chiếu từ sóng PPG đầu ngón tay trên cùng các cửa sổ hợp lệ. Tính sai số trong từng người rồi lấy trung bình giữa người. Cùng các dự đoán P4m cho kết quả sau.
+
+| Tập dev, video gốc | Video / người | MAE từng cửa sổ | MAE một PR/video [CI 95%], bpm |
+|---|---:|---:|---:|
+| UBFC2 | 35 / 35 | 0,746 | **0,515 [0,352; 0,716]** |
+| MCD FullHD | 119 / 60 | 1,511 | **0,648 [0,522; 0,784]** |
+
+Áp hai cấu hình P4m đã khóa lên BTC dev (218/218 video, 158 người, 586 cửa sổ hợp lệ), MAE cấp video là **11,342 bpm** với cấu hình UBFC2 và **11,743 bpm** với cấu hình MCD. BTC joint đạt **8,020 bpm** trên cùng người.
 
 BTC reader_v3 đạt 9,587. Delta reader_v4 − v3 **−1,254 [−2,282; −0,283] bpm**. Bản reset một lượt đạt 9,130; self-warm giảm **−0,797 [−1,632; −0,076] bpm**. Việc chọn 3/17 expert được thực hiện trên phổ cũ và **không làm lại** trong R1; không gọi các CI này là kiểm định holdout độc lập.
 
@@ -46,6 +68,8 @@ BTC reader_v3 đạt 9,587. Delta reader_v4 − v3 **−1,254 [−2,282; −0,28
 ## Bảy constraint — số đã chạy, không thêm thử nghiệm
 
 MAE bpm; public cột UBFC2 / MCD. `abc` là ba cổng thống kê định nghĩa trong [RESULTS](docs/RESULTS.md), không phải chứng nhận đáp ứng mọi đặc tả vật lý.
+
+Các số BTC theo ràng buộc trong bảng bên dưới thuộc reader_v4 R1. BTC joint được kiểm trên video gốc.
 
 | Constraint | Cách xử lý | Điều kiện mô phỏng | BTC | UBFC2 / MCD | Cổng |
 |---|---|---|---:|---|---|
@@ -73,8 +97,8 @@ Bản hiện hành sao chép trạng thái khởi tạo ngay sau khi tạo model
 |---|---|
 | Frontend | PTS thật, FaceMesh một mặt, oval 36×36 cho tín hiệu màu và crop hộp 72×72 cho expert. `guarded` qua C3 và native reader_v3; chưa qua tái lập chính xác reader_v4/P4m R1. |
 | Tín hiệu | POS + CHROM; FacePhys.rlap, ME-chunk.pure, ME-flow.pure, trọng số giữ nguyên và self-warm riêng từng video. Nhánh public thêm CNN padding-fixed được lọc đầu vào 0,1 s. |
-| Phổ | Cửa sổ 10 s; BTC bước 5 s, public R1 bước 10 s; nội suy 30 Hz, detrend λ=100, Butterworth 0,7–3 Hz, Hann periodogram nfft=4096. Giữ toán tử BTC/public tương ứng đã khóa. |
-| BTC | Gộp bằng chứng hai phương pháp cổ điển và ba expert; prior + beta + offset theo lớp bitrate nguồn và cờ Task. |
+| Phổ | Cửa sổ 10 s; BTC joint bước 2,5 s cho POS/CHROM, 5 s cho ba expert; BTC R1 bước 5 s, public R1 bước 10 s; nội suy 30 Hz, detrend λ=100, Butterworth 0,7–3 Hz, Hann periodogram nfft=4096. Giữ toán tử BTC/public tương ứng đã khóa. |
+| BTC | BTC joint chọn giữa PR hợp nhất và năm PR riêng theo chất lượng phổ, mức đồng thuận, bitrate và cờ Task. Khi bitrate dưới 4 Mb/s và beta của nhánh thấp bằng 0, dùng bộ bù từ thông tin nguồn quay, chuyển động hộp mặt và tín hiệu màu/phổ. |
 | Public | P4m gộp bốn kênh và readout theo thời gian; fit gộp native + 6 điều kiện trên fold train. Trọng số/readout theo fold, không dùng fit deploy để chấm dev. |
 
 [Chi tiết kiến trúc và tham số](docs/PIPELINE.md). [Kiểm CLI từ video gốc](docs/VIDEO_CLI_VALIDATION.md).
@@ -92,7 +116,7 @@ Dataset đã có trên **P100**, cần tài khoản và quyền truy cập:
 
 [Quyền, split và đường dữ liệu](docs/SERVER_DATASETS.md). Chỉ dùng manifest dev được cấp quyền; **holdout BTC 72 video/41 người và 7 người test UBFC2 vẫn khóa**. Không quét cả root để chấm.
 
-[Release R1 hiện hành: checkpoint + reader](https://github.com/Khangle-2006/SPS_Challange/releases/tag/inference-assets-r1-20261124) được bootstrap tự tải và kiểm. **CLI dùng `models/` đi cùng code**, gói tải phải trùng tham số đó. Release cũ được giữ riêng để tra cứu. [Chi tiết](docs/INFERENCE_ASSETS.md).
+[Release R1 hiện hành: checkpoint + reader](https://github.com/Khangle-2006/SPS_Challange/releases/tag/inference-assets-r1-20261124) được bootstrap tự tải và kiểm. **BTC joint** có sẵn trong `models/btc_joint/` cùng repo. Gói R1 cung cấp checkpoint public và các tham số R1. Release cũ được giữ riêng để tra cứu. [Chi tiết](docs/INFERENCE_ASSETS.md).
 
 ## Cấu trúc code và tái lập
 

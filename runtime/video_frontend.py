@@ -67,6 +67,8 @@ def main(out):
     crops.flush()
     np.savez_compressed(out/'trace.npz',t=t,valid=valid,rgb_mean=rgb,boxes=boxes)
     save(out/'frontend.json',dict(frames=n,valid_frames=int(valid.sum()),duration_seconds=float(t[-1]),
+        source_width=int(stream["width"]), source_height=int(stream["height"]),
+        source_codec=stream["codec_name"], source_avg_frame_rate=stream.get("avg_frame_rate"),
         source_bitrate=bitrate,capture_class_low=bool(bitrate<4e6),hdr=video.hdr,
         display_size=[video.w,video.h],branches=dict(branches),static_input=bool(repeated),
         video_sha256=sha(path),frontend=req['frontend']))

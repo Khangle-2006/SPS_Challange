@@ -59,7 +59,8 @@ def main():
     results=[]
     for i,row in enumerate(rows):
         dest=a.output/('video_%03d'%i)
-        cmd=['nice','-n','19',sys.executable,str(repo/'predict.py'),'--video',row['video'],'--activity',activities[i],'--output',str(dest)]
+        reader_args = ['--reader', 'r1'] if (repo/'runtime/joint_core.py').is_file() else []
+        cmd=['nice','-n','19',sys.executable,str(repo/'predict.py'),*reader_args,'--video',row['video'],'--activity',activities[i],'--output',str(dest)]
         if row.get('source_bitrate') is not None:cmd+=['--source-bitrate',str(row['source_bitrate'])]
         with (a.output/('video_%03d.log'%i)).open('w') as log:subprocess.run(cmd,env=env,stdout=log,stderr=subprocess.STDOUT,check=True)
         r=json.loads((dest/'result.json').read_text())

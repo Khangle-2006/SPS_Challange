@@ -2,6 +2,8 @@
 
 Hai nhánh dùng cùng nguyên tắc tách trạng thái, nhưng đầu ra và bộ đọc khác nhau. `predict.py` hiện triển khai nhánh BTC. Nhánh P4m/public chạy bằng `predict_public.py` và checkpoint ngoài fold khi chấm dev; 3 bản ghi/26 cửa sổ A1 đã khớp R1. Xem [gói nộp](SUBMISSION_ROUND1.md).
 
+**Cập nhật 25/11.** BTC mặc định dùng bộ chọn nguồn và bộ bù bitrate thấp. Xem [README](../README.md) cho lệnh tái lập 8,020 bpm. Phần mô tả reader_v4 bên dưới áp dụng cho `--reader r1`.
+
 ## 1. Video và frontend
 
 Giải mã bằng timestamp thật; xử lý xoay metadata một lần, dùng chuỗi HDR→SDR đã khóa. FaceMesh một mặt + template fallback tạo oval 36×36 và crop hộp không che 72×72. Không đổi detector, template hay cách resize trong R1. Bộ gác `guarded` qua cổng C3 và native reader_v3 ngày 22/11, nhưng chưa qua tái lập từng dự đoán reader_v4/P4m; không thay frontend R1. Xem [các cổng riêng](RESULTS.md#c3--phân-biệt-cổng-danh-tính-và-cổng-tái-lập).

@@ -21,6 +21,8 @@ def main():
                    help='A new directory for result.json, result.csv and processing evidence.')
     p.add_argument('--frontend', choices=['guarded', 'reference'], default='reference',
                    help='reference (default) is the validated single-face route; guarded is experimental multi-face identity guarding.')
+    p.add_argument('--reader', choices=['joint', 'r1'], default='joint',
+                   help='BTC joint reader (default), or the archived R1 reader_v4.')
     p.add_argument('--fold', type=int, choices=range(5),
                    help='Research only: use the matching held-out dev fold instead of the deployment fit.')
     p.add_argument('--source-bitrate', type=float,
@@ -55,14 +57,15 @@ def main():
     out = a.output.resolve()
     (out/'.gitignore').write_text('*\n', encoding='utf-8')
     request = dict(video=str(a.video.resolve()), activity=a.activity, frontend=a.frontend,
-                   fold=a.fold, source_bitrate=a.source_bitrate, seed_box=a.seed_box)
+                   reader=a.reader, fold=a.fold, source_bitrate=a.source_bitrate, seed_box=a.seed_box)
     (out/'request.json').write_text(json.dumps(request, indent=2)+'\n')
     started = time.monotonic()
     try:
         for stage in ['frontend', 'experts', 'core']:
             check_ram()
             print(f'[{stage}] processing; log: {out / (stage+".log")}', flush=True)
-            cmd = [str(interpreters[stage]), str(ROOT/'runtime'/('video_'+stage+'.py')), str(out)]
+            script = 'joint_core.py' if stage == 'core' and a.reader == 'joint' else 'video_'+stage+'.py'
+            cmd = [str(interpreters[stage]), str(ROOT/'runtime'/script), str(out)]
             if shutil.which('nice'): cmd = ['nice', '-n', '10'] + cmd
             with (out/(stage+'.log')).open('w') as log:
                 child=subprocess.Popen(cmd, env=env, stdout=log, stderr=subprocess.STDOUT, start_new_session=True)

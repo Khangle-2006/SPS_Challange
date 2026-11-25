@@ -1,7 +1,7 @@
 # Chọn video và lấy PR
 
 Lệnh mới `predict.py` nối video → FaceMesh/crop → POS + CHROM + ba expert
-→ reader_v4 → JSON/CSV. Nó không cần `private-assets/assets.json`, nhãn PR,
+→ BTC joint → JSON/CSV. Nó không cần `private-assets/assets.json`, nhãn PR,
 dataset của đội, GPU hay đường dẫn `/mnt/...` cố định.
 
 ## Cài một lần
@@ -81,13 +81,7 @@ mạch đo được.
 - `trace.npz`, `crop72.npy`: dữ liệu trung gian **riêng tư**. Mỗi thư mục kết quả
   có `.gitignore` riêng; không đưa chúng lên GitHub.
 
-Nếu `abstain=true`, `pr_bpm=null`; `fallback_prior_bpm` chỉ là prior + offset,
-**không phải số đo mạch**. Nếu chương trình lỗi thì exit code khác 0 và có
-`ERROR.json`; không xuất kết quả thành công giả. Không ghi đè output cũ.
-
-Nếu `uses_spectral_evidence=false` dù video hợp lệ, beta của lớp nguồn bằng 0:
-ước lượng chỉ dựa trên prior và offset đã học, không dùng phổ để chọn PR. Cờ
-này giúp phân biệt dự đoán thống kê với ước lượng có sử dụng tín hiệu video.
+Khi `abstain=true`, `pr_bpm=null`. Trường `branch` cho biết nguồn tạo PR hoặc nhánh bù bitrate thấp. Dùng `--reader r1` để chạy reader_v4 lịch sử.
 
 ## Tái lập kết quả nghiên cứu khác với chạy video mới
 
@@ -108,9 +102,7 @@ bản đóng gói này. Số MAE lịch sử 8,350 còn dùng expert giữ trạ
 trước; không phải kết quả của CLI R1 self-warm. Điểm dev R1 là 8,333 bpm; con số này vẫn
 không phải cam kết sai số cho video mới hoặc điểm trên toàn bộ frontend guarded.
 
-Runner này phục vụ **nhánh BTC reader_v4**. P4m/public và các bảng constraint
-vẫn có mã nghiên cứu trong repo; chưa được gộp thành lệnh video mới này. Không
-gọi kết quả reader_v4 trên webcam bất kỳ là kết quả P4m.
+BTC joint mặc định đạt 8,020 bpm trên dev ngoài fold. Trên video public dùng `predict_public.py`.
 
 Dataset trên server: [SERVER_DATASETS.md](SERVER_DATASETS.md). Chỉ dùng video
 dev trong split đã cấp quyền khi tái lập; **holdout vẫn khóa**. CLI không tải
