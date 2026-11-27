@@ -1,0 +1,100 @@
+{
+  "recipe": "Frozen BTC joint; no new grid/penalty/model selection",
+  "sources": [
+    {
+      "destination": "training/btc_joint/calibrate.py",
+      "source": "reports/post_s1_improvement/dev_fusion/calibrate.py",
+      "source_sha256": "9717665f5b4ae744ecc737426c8abacc08e58299d99f580eaba16eb9e35db759",
+      "functions": [
+        "weighted_median",
+        "determine_offsets",
+        "posterior",
+        "distribution",
+        "fit_beta_varpriors",
+        "fit",
+        "predict"
+      ],
+      "adaptations": []
+    },
+    {
+      "destination": "training/btc_joint/fusion.py",
+      "source": "reports/post_s1_improvement/dev_fusion/fusion.py",
+      "source_sha256": "46ba95090e5bf222668fc78e184c0b7b44ce99ac08dd747b4ad2f1565ef622c5",
+      "functions": [
+        "median_prob",
+        "posterior"
+      ],
+      "adaptations": []
+    },
+    {
+      "destination": "training/btc_joint/conditional_reader.py",
+      "source": "reports/post_s1_round2/conditional/conditional_reader.py",
+      "source_sha256": "cb5e9b9b923a37f19469477567cc33d6ffd23c0308d9dc9e9f75fcc77d0e863e",
+      "functions": [
+        "evidence",
+        "posterior_median",
+        "median_offsets",
+        "child_density",
+        "conditional_density",
+        "fit",
+        "predict"
+      ],
+      "adaptations": []
+    },
+    {
+      "destination": "training/btc_joint/fallback_reader.py",
+      "source": "reports/post_s1_round2/fallback/fallback_reader.py",
+      "source_sha256": "e9a24781d27d396270c247f90d639d606fd3fdb45d8844a7a9b26179d4d7c3cf",
+      "functions": [
+        "capture_features",
+        "trace_features",
+        "local_pulse_features",
+        "fit",
+        "predict"
+      ],
+      "adaptations": []
+    },
+    {
+      "destination": "training/btc_joint/router_fit.py",
+      "source": "reports/post_s1_gradient_20261124/headroom/run_dev.py",
+      "source_sha256": "8f3af2fc3e889e633aa8a230f7b9b49dceae317ce3cdb531292c04327dd42642",
+      "functions": [
+        "fit_router",
+        "choose"
+      ],
+      "adaptations": []
+    },
+    {
+      "destination": "training/btc_joint/router.py",
+      "source": "reports/post_s1_gradient_20261124/joint_reader.py",
+      "source_sha256": "18d58002207ef1d4f1355b46871db6203c38294b389e5d4d39eef4c6b7e355c3",
+      "functions": [
+        "sources",
+        "evidence",
+        "features",
+        "route"
+      ],
+      "adaptations": [
+        [
+          "prev.evidence(",
+          "legacy.evidence("
+        ]
+      ]
+    }
+  ],
+  "orchestration_sources": [
+    {
+      "path": "reports/post_s1_gradient_20261124/joint_reader.py",
+      "sha256": "18d58002207ef1d4f1355b46871db6203c38294b389e5d4d39eef4c6b7e355c3"
+    },
+    {
+      "path": "reports/post_s1_round2/fallback/run_dev.py",
+      "sha256": "0ddc42f625eabed5ba5647804aa30e881d90a8809e113c42aba457f316908579"
+    },
+    {
+      "path": "tmp/export_btc_joint_25.py",
+      "sha256": "7da790a70429f55f5cdfd72dafa6b9a511307513dc428f3324c0f7b0f40db0ca"
+    }
+  ],
+  "note": "Only named functions are published. Site imports, dataset I/O and old main blocks are replaced by the manifest-checked CLI. Existing runtime and model files are unchanged."
+}

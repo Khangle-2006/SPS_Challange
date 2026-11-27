@@ -1,5 +1,9 @@
 # Từ clone mới đến PR và số dev R1
 
+BTC joint hiện là mặc định của `predict.py`. Để fit/export hoặc replay số
+8,020 bpm của nhánh này, dùng [BTC_JOINT_REPRODUCING.md](BTC_JOINT_REPRODUCING.md).
+Lệnh `reproduce_r1.py` bên dưới vẫn kiểm reader_v4 R1 và P4m, không đổi thành joint.
+
 ## 1. Điều kiện máy
 
 Linux x86_64, Python 3.12, ffmpeg/ffprobe, ít nhất 15 GiB RAM available, khoảng 3 GiB cho ba môi trường và thêm chỗ cho output video. Cài gói hệ thống nếu chưa có:

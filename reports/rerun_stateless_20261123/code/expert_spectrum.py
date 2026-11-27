@@ -3,7 +3,7 @@ import os, sys
 from pathlib import Path
 OUT=Path(__file__).resolve().parents[1]
 W=OUT.parent/'claude_research_20261119_constraints'
-NC=OUT.parent.parent/'git_push_20261122/newcomer_20261123'
+NC=OUT.parent.parent  # checkout root, also valid in a prepared reproduction workspace
 for k in ('OMP_NUM_THREADS','OPENBLAS_NUM_THREADS','MKL_NUM_THREADS'): os.environ[k]='2'
 os.environ.update(CUDA_VISIBLE_DEVICES='',JAX_PLATFORMS='cpu',KERAS_BACKEND='jax',PYTHONDONTWRITEBYTECODE='1',
  XLA_FLAGS='--xla_cpu_multi_thread_eigen=false intra_op_parallelism_threads=2',

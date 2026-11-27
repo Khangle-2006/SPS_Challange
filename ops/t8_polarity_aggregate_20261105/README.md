@@ -1,13 +1,13 @@
 # ops/t8_polarity_aggregate_20261105
 
-Ghép15joint+15control; raw-reference hash/sign/time/HR/failure parity.
+Pair 15 joint runs with 15 control runs; check raw-reference hash, sign, time, HR, and failure parity.
 
-[Hướng dẫn chạy](../../docs/REPRODUCING.md) · [Kết quả](../../docs/RESULTS.md) · [Experiment map](../../docs/EXPERIMENTS.md)
+[Reproduction guide](../../docs/REPRODUCING.md) · [Results](../../docs/RESULTS.md) · [Experiment map](../../docs/EXPERIMENTS.md)
 
-Các tham số dưới đây trích tĩnh từ code, không phải lệnh tự động launch. Với script không có CLI, đọc hằng số/path và dependency ở đầu file. Controller/site runner cần receipt và môi trường gốc; không bỏ qua guard.
+The parameters below were extracted statically from the code; they are not commands that automatically launch a run. For scripts without a CLI, check the constants, paths, and dependencies at the top of the file. Controllers and site runners require the original receipts and environments; do not bypass their guards.
 
-| File | Tham số CLI được khai báo |
+| File | Declared CLI parameters |
 |---|---|
-| [aggregate.py](aggregate.py) | Không có argparse; đọc source/config |
-| [make_report.py](make_report.py) | Không có argparse; đọc source/config |
-| [supplement.py](supplement.py) | Không có argparse; đọc source/config |
+| [aggregate.py](aggregate.py) | No argparse interface; read the source/config |
+| [make_report.py](make_report.py) | No argparse interface; read the source/config |
+| [supplement.py](supplement.py) | No argparse interface; read the source/config |

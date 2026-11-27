@@ -19,7 +19,9 @@ def run(profile):
     out={'profile':profile,'python':sys.version.split()[0],'prefix':sys.prefix,
          'base_prefix':sys.base_prefix,'synthetic_only':True}
     assert sys.prefix != sys.base_prefix, 'Use a fresh venv'
-    if profile=='core':
+    if profile in ('core', 'joint-fit'):
+        if profile == 'joint-fit':
+            assert (metadata.version('numpy'), metadata.version('scipy')) == ('2.5.4', '1.18.1'), 'Use the frozen joint-fit pins'
         path=ROOT/'reports/claude_research_20261118/code/lib_btc.py'
         spec=importlib.util.spec_from_file_location('smoke_lib_btc',path)
         lib=importlib.util.module_from_spec(spec);spec.loader.exec_module(lib)
@@ -75,7 +77,7 @@ def run(profile):
 
 if __name__=='__main__':
     p=argparse.ArgumentParser(description=__doc__)
-    p.add_argument('profile',choices=['core','frontend','torch-cpu','experts'])
+    p.add_argument('profile',choices=['core','frontend','torch-cpu','experts','joint-fit'])
     p.add_argument('--receipt',type=Path)
     a=p.parse_args();r=run(a.profile)
     if a.receipt:

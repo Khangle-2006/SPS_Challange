@@ -6,6 +6,11 @@ dataset. Không có tự động download nhãn, bảng nhân khẩu học hoặ
 **Có gói tải:** [checkpoint + cấu hình reader](INFERENCE_ASSETS.md).
 Dataset trên server: [SERVER_DATASETS.md](SERVER_DATASETS.md).
 
+**BTC joint hiện hành:** danh mục riêng cho fit/replay, schema mảng và lệnh tạo
+manifest SHA256 nằm ở [BTC_JOINT_REPRODUCING.md](BTC_JOINT_REPRODUCING.md).
+Các mục `numeric_dev` và `reader_v3` bên dưới thuộc archive; chúng không thay thế
+bundle `export_extracted`/native/shifted/reference mà lệnh BTC joint yêu cầu.
+
 ## Lấy từ đâu
 
 | Tài sản | Nguồn / cách yêu cầu | Cần nhận và kiểm |

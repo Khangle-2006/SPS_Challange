@@ -1,22 +1,22 @@
 # reports/round1_execution_20261110/visual_diagnostics_20261112/local_vendor/umap
 
-Snapshot mã nghiên cứu; xem root README để xác định vai trò và kết quả.
+Research code snapshot; see the root README for its role and results.
 
-[Hướng dẫn chạy](../../../../../docs/REPRODUCING.md) · [Kết quả](../../../../../docs/RESULTS.md) · [Experiment map](../../../../../docs/EXPERIMENTS.md)
+[Reproduction guide](../../../../../docs/REPRODUCING.md) · [Results](../../../../../docs/RESULTS.md) · [Experiment map](../../../../../docs/EXPERIMENTS.md)
 
-Các tham số dưới đây trích tĩnh từ code, không phải lệnh tự động launch. Với script không có CLI, đọc hằng số/path và dependency ở đầu file. Controller/site runner cần receipt và môi trường gốc; không bỏ qua guard.
+The parameters below were extracted statically from the code; they are not commands that automatically launch a run. For scripts without a CLI, check the constants, paths, and dependencies at the top of the file. Controllers and site runners require the original receipts and environments; do not bypass their guards.
 
-| File | Tham số CLI được khai báo |
+| File | Declared CLI parameters |
 |---|---|
-| [__init__.py](__init__.py) | Không có argparse; đọc source/config |
-| [aligned_umap.py](aligned_umap.py) | Không có argparse; đọc source/config |
-| [distances.py](distances.py) | Không có argparse; đọc source/config |
-| [label_prop.py](label_prop.py) | Không có argparse; đọc source/config |
-| [layouts.py](layouts.py) | Không có argparse; đọc source/config |
-| [parametric_umap.py](parametric_umap.py) | Không có argparse; đọc source/config |
-| [plot.py](plot.py) | Không có argparse; đọc source/config |
-| [sparse.py](sparse.py) | Không có argparse; đọc source/config |
-| [spectral.py](spectral.py) | Không có argparse; đọc source/config |
-| [umap_.py](umap_.py) | Không có argparse; đọc source/config |
-| [utils.py](utils.py) | Không có argparse; đọc source/config |
-| [validation.py](validation.py) | Không có argparse; đọc source/config |
+| [__init__.py](__init__.py) | No argparse interface; read the source/config |
+| [aligned_umap.py](aligned_umap.py) | No argparse interface; read the source/config |
+| [distances.py](distances.py) | No argparse interface; read the source/config |
+| [label_prop.py](label_prop.py) | No argparse interface; read the source/config |
+| [layouts.py](layouts.py) | No argparse interface; read the source/config |
+| [parametric_umap.py](parametric_umap.py) | No argparse interface; read the source/config |
+| [plot.py](plot.py) | No argparse interface; read the source/config |
+| [sparse.py](sparse.py) | No argparse interface; read the source/config |
+| [spectral.py](spectral.py) | No argparse interface; read the source/config |
+| [umap_.py](umap_.py) | No argparse interface; read the source/config |
+| [utils.py](utils.py) | No argparse interface; read the source/config |
+| [validation.py](validation.py) | No argparse interface; read the source/config |

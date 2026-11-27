@@ -6,6 +6,6 @@ Use [`predict_public.py`](../predict_public.py) for raw public video and [`docs/
 
 MAT dependencies: `h5py==3.11.0`, `hdf5storage==0.2.2`, `mat73==0.65` in addition to numpy/scipy/OpenCV. `requirements.txt` documents the historical full environment; do not overwrite an existing locked runtime environment to install packaging dependencies.
 
-`run_holdout.py` and `score_holdout.py` are separate, sealed stages. Only 3 explicitly DEV inputs are permitted without the future exact user confirmation `MỞ HOLDOUT S1`. Holdout has not been opened.
+`run_holdout.py` and `score_holdout.py` are separate, sealed stages. Only 3 explicitly DEV inputs are permitted without the exact user confirmation token enforced by the stage runner. This historical package records the holdout as unopened.
 
 Historical checkpoint/Haar36 code is copied intact to [historical/](historical/). The old top-level `process_round1.py`, `run_e2e.py` and support modules remain for compatibility and existing tests; they are **not** the current P4m bundle entry point. See [SCHEMA](SCHEMA.md) for representation details and limitations. No media, MAT, personal labels or spectra are distributed in this repository.

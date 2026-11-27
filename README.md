@@ -1,10 +1,10 @@
 # FaceVitals — SP Cup 2027, Round 1
 
-Ước lượng nhịp mạch (PR, bpm) từ video khuôn mặt. Trên BTC, `predict.py` mặc định dùng **BTC joint**. Trên UBFC2 và MCD, dùng **P4m** qua `predict_public.py`.
+Estimate pulse rate (PR, bpm) from face videos. For BTC, `predict.py` uses **BTC joint** by default. For UBFC2 and MCD, use **P4m** through `predict_public.py`.
 
-## Clone và chạy một video
+## Clone and run a video
 
-Trên Linux x86_64, Python 3.12, có `ffmpeg`/`ffprobe` và ít nhất **15 GiB RAM còn trống**:
+Requires Linux x86_64, Python 3.12, `ffmpeg`/`ffprobe`, and at least **15 GiB of available RAM**:
 
 ```bash
 git clone https://github.com/Khangle-2006/SPS_Challange.git
@@ -13,140 +13,146 @@ python3.12 tools/bootstrap_video.py
 python3.12 predict.py --video /path/video.mp4 --activity Resting --output output/my_video
 ```
 
-Bootstrap tự cài ba môi trường đã khóa, tải đủ 5 checkpoint public và kiểm reader/weights bằng SHA256. Cần Internet khi cài lần đầu; không cần chép file từ thư mục riêng của tác giả.
+Bootstrap installs three environments with pinned dependencies, downloads all five public checkpoints, and verifies the readers and weights with SHA256. Internet access is required for the initial setup; no files need to be copied from the authors' private directories.
 
-Đọc `output/my_video/result.json` hoặc `result.csv`. `--activity` là `Resting`, `Task` hoặc `Walking`, lấy từ hoạt động lúc quay. Mặc định `reference` dành cho video một người. Nếu không đủ bằng chứng, `abstain=true`, `pr_bpm=null`; xem lý do trong trường `reason`. Thư mục output phải mới.
+Read `output/my_video/result.json` or `result.csv`. Set `--activity` to `Resting`, `Task`, or `Walking`, according to the activity during recording. The default `reference` mode is intended for single-person videos. If there is insufficient evidence, the output contains `abstain=true` and `pr_bpm=null`; see the `reason` field for details. The output directory must be new.
 
-Cài gói hệ thống, xử lý bitrate nguồn, video HDR, tùy chọn fold và bộ gác nhiều mặt: **[RUN_VIDEO.md](docs/RUN_VIDEO.md)**. Lệnh này chạy CPU, không cần nhãn PR, dataset của đội hoặc checkpoint CNN của đội. Bootstrap tạo ba môi trường đã khóa phiên bản; ba expert nằm trong `open-rppg==0.1.1`, reader nhẹ có sẵn trong `models/`.
+See **[RUN_VIDEO.md](docs/RUN_VIDEO.md)** for system packages, source bitrate handling, HDR videos, fold selection, and the multiple-face guard. This command runs on CPU and does not require PR labels, the team's dataset, or the team's CNN checkpoints. Bootstrap creates three environments with pinned versions; the three experts are supplied by `open-rppg==0.1.1`, and the lightweight readers are included in `models/`.
 
-## Tái lập BTC joint trên dev
+## Reproduce BTC joint on dev
 
-Với dữ liệu dự án được cấp quyền, lệnh sau chạy lại bộ đọc trên trace RGB và phổ ba expert theo đúng fold người, kiểm từng dự đoán của cả 218 video. Video mới dùng tham số triển khai trong `models/btc_joint/`.
+With authorized project data, the following commands replay the reader on RGB traces and three expert spectra using the correct person folds, checking every prediction across all 218 videos. New videos use the deployment parameters in `models/btc_joint/`.
 
 ```bash
-.venv/core/bin/python tools/reproduce_btc_joint.py --reports /path/to/facevitals/reports
+.venv/core/bin/python tools/btc_joint_assets.py create --reports /path/to/facevitals/reports --manifest output/joint_assets/assets.local.json --purpose both
+.venv/core/bin/python tools/reproduce_btc_joint.py --reports /path/to/facevitals/reports --assets-manifest output/joint_assets/assets.local.json
 ```
 
-## Kết quả BTC joint
+The code to fit and export the router and low-bitrate fallback is in `training/btc_joint/`.
+The `tools/fit_btc_joint.py --verify-shipped` command checks the models and 436 OOF/deployment predictions
+before exporting to a new directory. See the [input inventory and complete fit/replay commands](docs/BTC_JOINT_REPRODUCING.md).
 
-Mỗi video có một dự đoán nhịp mạch. MAE là sai số tuyệt đối trung bình, tính trong từng người rồi lấy trung bình giữa các người. Đơn vị là nhịp/phút (bpm), càng thấp càng tốt.
+## BTC joint results
 
-| Tập BTC | Video có dự đoán / tổng | Người được chấm / tổng | MAE (bpm) |
+Each video produces one pulse-rate estimate. Mean absolute error (MAE) is computed within each person and then averaged across people. Values are in beats per minute (bpm); lower is better.
+
+| BTC split | Videos with predictions / total | People scored / total | MAE (bpm) |
 |---|---:|---:|---:|
-| Dev, kiểm chéo theo người | 218/218 | 158/158 | **8,020** |
-| Holdout đã đánh giá trước đây | 71/72 | 40/41 | **9,704** |
+| Dev, person-disjoint cross-validation | 218/218 | 158/158 | **8.020** |
+| Previously evaluated holdout | 71/72 | 40/41 | **9.704** |
 
-Khoảng tin cậy 95% của MAE trên dev là 6,790–9,350 bpm. Một video holdout thiếu cửa sổ hợp lệ để trả về PR.
+The 95% confidence interval for dev MAE is 6.790–9.350 bpm. One holdout video lacked valid windows to produce a PR estimate.
 
-### BTC dev dưới bảy ràng buộc C1–C7
+### BTC dev under the seven constraints C1–C7
 
-Mỗi hàng so BTC joint với bản BTC R1 trên cùng video có dự đoán, trong tổng số 218 video dev. Δ là MAE của joint trừ MAE của R1 (bpm). Khoảng tin cậy 95% được tính bằng 10.000 lần bootstrap ghép cặp theo người, seed 0.
+Each row compares BTC joint with BTC R1 on the same videos with predictions, out of 218 dev videos. Δ is joint MAE minus R1 MAE (bpm). The 95% confidence intervals use 10,000 paired bootstrap samples at the person level, with seed 0.
 
-| Điều kiện | Video được chấm | BTC joint | BTC R1 | Δ joint − R1 [CI95] |
+| Condition | Videos scored | BTC joint | BTC R1 | Δ joint − R1 [CI95] |
 |---|---:|---:|---:|---:|
-| C1 · Giảm sáng, nhiễu Poisson | 200 | 9,49 | 9,67 | −0,18 [−0,55; +0,16] |
-| C1 · Giảm sáng, nhiễu Gaussian | 197 | 12,28 | 12,26 | +0,02 [−0,57; +0,57] |
-| C2 · Mảng giảm sắc tố mô phỏng | 199 | 8,91 | 8,83 | +0,08 [−0,37; +0,61] |
-| C3 · Hai mặt cạnh nhau | 216 | 9,03 | — | — |
-| C3 · Người bên cạnh lớn hơn 1,3 lần | 212 | 9,05 | — | — |
-| C4 · VGA | 200 | 8,73 | 9,10 | −0,37 [−0,73; −0,03] |
-| C4 · QVGA | 200 | 9,12 | 9,44 | −0,32 [−0,88; +0,17] |
-| C5 · Truyền crop `split10` | 218 | 9,30 | 9,48 | −0,18 [−0,50; +0,13] |
-| C6 · Làm nét | 197 | 8,36 | 8,44 | −0,09 [−0,40; +0,23] |
-| C7 · Khẩu trang xanh | 197 | 10,51 | 10,46 | +0,06 [−0,35; +0,46] |
+| C1 · Reduced light, Poisson noise | 200 | 9.49 | 9.67 | −0.18 [−0.55; +0.16] |
+| C1 · Reduced light, Gaussian noise | 197 | 12.28 | 12.26 | +0.02 [−0.57; +0.57] |
+| C2 · Simulated hypopigmented patches | 199 | 8.91 | 8.83 | +0.08 [−0.37; +0.61] |
+| C3 · Two faces side by side | 216 | 9.03 | — | — |
+| C3 · Neighboring face scaled to 1.3× | 212 | 9.05 | — | — |
+| C4 · VGA | 200 | 8.73 | 9.10 | −0.37 [−0.73; −0.03] |
+| C4 · QVGA | 200 | 9.12 | 9.44 | −0.32 [−0.88; +0.17] |
+| C5 · Crop transmission, `split10` | 218 | 9.30 | 9.48 | −0.18 [−0.50; +0.13] |
+| C6 · Sharpening | 197 | 8.36 | 8.44 | −0.09 [−0.40; +0.23] |
+| C7 · Blue mask | 197 | 10.51 | 10.46 | +0.06 [−0.35; +0.46] |
 
-BTC joint có MAE thấp hơn R1 ở 5/8 cấu hình có số ghép cặp. Chỉ C4 VGA có CI95 của chênh lệch nằm hoàn toàn dưới 0. C1 với nhiễu Gaussian cho sai số lớn nhất (12,28 bpm), gần mốc đoán hằng số 12,61 bpm trên cùng 197 video.
+BTC joint has lower MAE than R1 in 5 of the 8 configurations with paired results. Only C4 VGA has a difference CI95 entirely below zero. C1 with Gaussian noise has the largest error (12.28 bpm), close to the constant-prediction baseline of 12.61 bpm on the same 197 videos.
 
-Hai bố cục C3 là phép thử mới trên BTC. Bộ gác danh tính chọn sang phía người bên cạnh ở **0/365.426 khung hợp lệ**. Khi bật cùng bộ gác trên cả video một mặt và hai mặt, sai số tăng 0,84 bpm ở bố cục cạnh nhau (215 video ghép cặp) và 1,02 bpm khi người bên cạnh lớn hơn (211 video). Cả hai đều vượt ngưỡng 0,05 bpm.
+The two C3 layouts are new tests on BTC. The identity guard switched to the neighboring person in **0/365,426 valid frames**. With the same guard enabled for both single-face and two-face videos, error increased by 0.84 bpm for the side-by-side layout (215 paired videos) and 1.02 bpm for the larger neighboring face (211 videos). Both exceed the 0.05 bpm threshold.
 
 <details>
-<summary>Mốc hằng số và bản hiệu chỉnh cũ trên cùng video BTC (MAE, bpm)</summary>
+<summary>Constant baseline and earlier calibration on the same BTC videos (MAE, bpm)</summary>
 
-| Điều kiện | Hằng số theo fold train | Bản hiệu chỉnh native |
+| Condition | Training-fold constant | Native calibration |
 |---|---:|---:|
-| C1 · Giảm sáng, nhiễu Poisson | 12,50 | 11,58 |
-| C1 · Giảm sáng, nhiễu Gaussian | 12,61 | 11,73 |
-| C2 · Mảng giảm sắc tố mô phỏng | 12,43 | 11,46 |
-| C3 · Hai mặt cạnh nhau | 12,12 | 11,45 |
-| C3 · Người bên cạnh lớn hơn 1,3 lần | 11,96 | 11,38 |
-| C4 · VGA | 12,50 | 11,58 |
-| C4 · QVGA | 12,50 | 11,58 |
-| C5 · Truyền crop `split10` | 12,07 | 11,37 |
-| C6 · Làm nét | 12,53 | 11,55 |
-| C7 · Khẩu trang xanh | 12,69 | 11,74 |
+| C1 · Reduced light, Poisson noise | 12.50 | 11.58 |
+| C1 · Reduced light, Gaussian noise | 12.61 | 11.73 |
+| C2 · Simulated hypopigmented patches | 12.43 | 11.46 |
+| C3 · Two faces side by side | 12.12 | 11.45 |
+| C3 · Neighboring face scaled to 1.3× | 11.96 | 11.38 |
+| C4 · VGA | 12.50 | 11.58 |
+| C4 · QVGA | 12.50 | 11.58 |
+| C5 · Crop transmission, `split10` | 12.07 | 11.37 |
+| C6 · Sharpening | 12.53 | 11.55 |
+| C7 · Blue mask | 12.69 | 11.74 |
 
 </details>
 
-## P4m trên UBFC2 và MCD
+## P4m on UBFC2 and MCD
 
-P4m ước lượng nhịp mạch theo cửa sổ 10 giây. Khi chấm một PR cho mỗi video như BTC, lấy trung vị các dự đoán và trung vị nhịp tham chiếu từ PPG đầu ngón tay trên cùng các cửa sổ hợp lệ.
+P4m estimates pulse rate in 10-second windows. For one PR score per video, as in BTC, take the median predictions and the median fingertip-PPG reference rates over the same valid windows.
 
-| Tập dev, video gốc | Video / người | MAE theo cửa sổ (bpm) | MAE theo video (bpm) |
+| Dev dataset, original videos | Videos / people | Window MAE (bpm) | Video MAE (bpm) |
 |---|---:|---:|---:|
-| UBFC2 | 35 / 35 | 0,746 | **0,515** |
-| MCD FullHD | 119 / 60 | 1,511 | **0,648** |
+| UBFC2 | 35 / 35 | 0.746 | **0.515** |
+| MCD FullHD | 119 / 60 | 1.511 | **0.648** |
 
-### UBFC2 và MCD dưới các ràng buộc
+### UBFC2 and MCD under the constraints
 
-Bảng dưới dùng kết quả **P4m đã chấm ở R1**. Mỗi ô ghi **MAE (bpm) · số cửa sổ 10 giây được chấm**. P4m tính sai số trên từng cửa sổ rồi tổng hợp theo người. Bảng BTC phía trên chấm một dự đoán cho mỗi video.
+The table below uses **P4m results evaluated in R1**. Each cell shows **MAE (bpm) · number of scored 10-second windows**. P4m computes errors per window and then aggregates them by person. The BTC table above scores one prediction per video.
 
-| Điều kiện | UBFC2 | MCD FullHD |
+| Condition | UBFC2 | MCD FullHD |
 |---|---:|---:|
-| C1 · Giảm sáng, Poisson, gain 0,50 | 0,982 · 193 | 1,869 · 618 |
-| C1 · Giảm sáng, Poisson, gain 0,25 | 1,532 · 193 | 2,443 · 618 |
-| C1 · Giảm sáng, Poisson, gain 0,12 | 2,564 · 186 | 3,056 · 616 |
-| C1 · Giảm sáng, Gaussian, gain 0,25, phương sai 0,001 | 3,082 · 192 | 4,139 · 616 |
-| C1 · Giảm sáng, Gaussian, gain 0,25, phương sai 0,01 | 13,450 · 184 | 10,435 · 592 |
-| C2 · Mảng giảm sắc tố mô phỏng | 0,750 · 193 | 1,734 · 618 |
-| C4 · QVGA | 0,727 · 193 | 1,520 · 618 |
-| C5 · Truyền crop `split10` | 0,646 · 179 | 1,704 · 1.929 |
-| C6 · Làm nét | 0,732 · 193 | 1,641 · 618 |
-| C7 · Khẩu trang xanh | 1,447 · 192 | 2,972 · 618 |
-| C7 · Khẩu trang trắng | 1,154 · 176 | 3,602 · 614 |
+| C1 · Reduced light, Poisson, gain 0.50 | 0.982 · 193 | 1.869 · 618 |
+| C1 · Reduced light, Poisson, gain 0.25 | 1.532 · 193 | 2.443 · 618 |
+| C1 · Reduced light, Poisson, gain 0.12 | 2.564 · 186 | 3.056 · 616 |
+| C1 · Reduced light, Gaussian, gain 0.25, variance 0.001 | 3.082 · 192 | 4.139 · 616 |
+| C1 · Reduced light, Gaussian, gain 0.25, variance 0.01 | 13.450 · 184 | 10.435 · 592 |
+| C2 · Simulated hypopigmented patches | 0.750 · 193 | 1.734 · 618 |
+| C4 · QVGA | 0.727 · 193 | 1.520 · 618 |
+| C5 · Crop transmission, `split10` | 0.646 · 179 | 1.704 · 1,929 |
+| C6 · Sharpening | 0.732 · 193 | 1.641 · 618 |
+| C7 · Blue mask | 1.447 · 192 | 2.972 · 618 |
+| C7 · White mask | 1.154 · 176 | 3.602 · 614 |
 
-**C3 trên UBFC2** được chấm trước khi sửa trạng thái mô hình ở R1. Trên 193 cửa sổ ghép cặp của 35 người, MAE một mặt là **0,755 bpm**. Với hai mặt cạnh nhau, MAE là **0,775** (Δ +0,020). Với người bên cạnh lớn hơn 1,3 lần, MAE là **0,771** (Δ +0,016). Cả hai đạt ngưỡng chênh lệch 0,05 bpm. Báo cáo cũ chỉ có C3 cho UBFC2.
+**C3 on UBFC2** was evaluated before the R1 model-state repair. Across 193 paired windows from 35 people, single-face MAE was **0.755 bpm**. With two faces side by side, MAE was **0.775** (Δ +0.020). With the neighboring face scaled to 1.3×, MAE was **0.771** (Δ +0.016). Both meet the 0.05 bpm difference threshold. The earlier report only includes C3 for UBFC2.
 
-[Khoảng tin cậy, định nghĩa các ràng buộc và giới hạn kiểm chứng C5](docs/RESULTS.md) · [Hướng dẫn tái lập trên server](docs/REPRODUCE_SERVER.md).
+[Confidence intervals, constraint definitions, and C5 validation limits](docs/RESULTS.md) · [Server reproduction guide](docs/REPRODUCE_SERVER.md).
 
 ## Pipeline
 
-| Bước | Xử lý |
+| Stage | Processing |
 |---|---|
-| Frontend | PTS thật, FaceMesh một mặt, oval 36×36 cho tín hiệu màu và crop hộp 72×72 cho expert. Với nhiều mặt, chế độ `guarded` bám người mục tiêu. Kết quả C3 theo từng bộ ở các bảng trên. |
-| Tín hiệu | POS + CHROM; FacePhys.rlap, ME-chunk.pure, ME-flow.pure, trọng số giữ nguyên và self-warm riêng từng video. Nhánh public thêm CNN padding-fixed được lọc đầu vào 0,1 s. |
-| Phổ | Cửa sổ 10 s; BTC joint bước 2,5 s cho POS/CHROM, 5 s cho ba expert; BTC R1 bước 5 s, public R1 bước 10 s; nội suy 30 Hz, detrend λ=100, Butterworth 0,7–3 Hz, Hann periodogram nfft=4096. Giữ toán tử BTC/public tương ứng đã khóa. |
-| BTC | BTC joint chọn giữa PR hợp nhất và năm PR riêng theo chất lượng phổ, mức đồng thuận, bitrate và cờ Task. Khi bitrate dưới 4 Mb/s và beta của nhánh thấp bằng 0, dùng bộ bù từ thông tin nguồn quay, chuyển động hộp mặt và tín hiệu màu/phổ. |
-| Public | P4m gộp bốn kênh và readout theo thời gian; fit gộp native + 6 điều kiện trên fold train. Trọng số/readout theo fold, không dùng fit deploy để chấm dev. |
+| Frontend | Actual presentation timestamps (PTS), single-face FaceMesh, a 36×36 oval crop for color signals, and a 72×72 bounding-box crop for the experts. For multiple faces, `guarded` mode tracks the target person. Dataset-specific C3 results are listed above. |
+| Signals | POS + CHROM; FacePhys.rlap, ME-chunk.pure, and ME-flow.pure with fixed weights and separate self-warm initialization for each video. The public branch adds the CNN with corrected padding and a 0.1 s input prefilter. |
+| Spectra | 10 s windows; BTC joint uses a 2.5 s stride for POS/CHROM and 5 s for the three experts; BTC R1 uses a 5 s stride, and public R1 uses 10 s. Interpolation at 30 Hz, detrending with λ=100, a 0.7–3 Hz Butterworth filter, and a Hann periodogram with nfft=4096. The respective frozen BTC/public operators are preserved. |
+| BTC | BTC joint chooses among the fused PR and five individual PR estimates using spectral quality, agreement, bitrate, and the Task flag. When bitrate is below 4 Mb/s and the low-bitrate branch beta is zero, it uses a correction based on capture metadata, face-box motion, and color/spectral signals. |
+| Public | P4m combines four channels with a temporal readout; fitting pools native data and six conditions within the training folds. Weights and readout are fold-specific; deployment fits are not used to score dev. |
 
-[Chi tiết kiến trúc và tham số](docs/PIPELINE.md). [Kiểm CLI từ video gốc](docs/VIDEO_CLI_VALIDATION.md).
+[Architecture and parameter details](docs/PIPELINE.md). [Raw-video CLI validation](docs/VIDEO_CLI_VALIDATION.md).
 
-## Dataset và checkpoint
+## Datasets and checkpoints
 
-Dataset đã có trên **P100**, cần tài khoản và quyền truy cập:
+The datasets are available on **P100** and require an account with access permission:
 
-| Bộ | Đường dẫn |
+| Dataset | Path |
 |---|---|
 | BTC | `/mnt/samsung_t5/khangle/facevitals/datasets/FaceVitals_BTC_20261107` |
 | UBFC-rPPG | `/data_pool/khangle/facevitals/datasets/UBFC-rPPG` |
 | MCD-rPPG | `/mnt/samsung_t5/khangle/facevitals/datasets/MCD-rPPG` |
 | AiPEX | `/data_pool/khangle/facevitals/datasets/AiPEX` |
 
-[Quyền, split và đường dữ liệu](docs/SERVER_DATASETS.md). Chỉ dùng manifest dev được cấp quyền; **holdout BTC 72 video/41 người và 7 người test UBFC2 vẫn khóa**. Không quét cả root để chấm.
+[Permissions, splits, and data paths](docs/SERVER_DATASETS.md). Use only authorized dev manifests; **the BTC holdout of 72 videos/41 people and the 7 UBFC2 test participants remain locked**. Do not scan an entire dataset root for scoring.
 
-[Release R1 hiện hành: checkpoint + reader](https://github.com/Khangle-2006/SPS_Challange/releases/tag/inference-assets-r1-20261124) được bootstrap tự tải và kiểm. **BTC joint** có sẵn trong `models/btc_joint/` cùng repo. Gói R1 cung cấp checkpoint public và các tham số R1. Release cũ được giữ riêng để tra cứu. [Chi tiết](docs/INFERENCE_ASSETS.md).
+Bootstrap automatically downloads and verifies the [current R1 release: checkpoints and readers](https://github.com/Khangle-2006/SPS_Challange/releases/tag/inference-assets-r1-20261124). **BTC joint** is included in the repository under `models/btc_joint/`. The R1 package supplies the public checkpoints and R1 parameters. Older releases are retained separately for reference. See [details](docs/INFERENCE_ASSETS.md).
 
-## Cấu trúc code và tái lập
+## Code structure and reproduction
 
-| Thư mục / file | Vai trò |
+| Directory / file | Role |
 |---|---|
-| `predict.py`, `predict_public.py`, `runtime/` | Video đơn → BTC PR hoặc public P4m HR, không fit lúc suy luận |
-| `models/` | Reader BTC deploy + 5 fold, tham số public P4m; không chứa nhãn hay phổ cá nhân |
-| `environments/`, `tools/bootstrap_video.py` | Dependency đã khóa và cài môi trường |
-| `configs/`, `tools/repro.py` | Khai báo đường dẫn riêng và chuẩn bị tái lập nghiên cứu |
-| `reports/`, `ops/` | Mã thí nghiệm, bản gốc giữ hash; tài sản cá nhân không kèm repo |
-| `docs/RESULTS.md`, `docs/SOURCE_MANIFEST.json` | Bảng mới và nguồn/hash |
-| `submission/` | Mã đóng gói; không đồng nghĩa đã nộp bài |
+| `predict.py`, `predict_public.py`, `runtime/` | Single video → BTC PR or public P4m HR; no fitting during inference |
+| `models/` | BTC deployment and five-fold readers, plus public P4m parameters; no individual labels or spectra |
+| `training/btc_joint/`, `tools/fit_btc_joint.py` | Frozen BTC joint fitting recipe, separate export, and parity checks against released models |
+| `environments/`, `tools/bootstrap_video.py` | Pinned dependencies and environment setup |
+| `configs/`, `tools/repro.py` | Private path configuration and preparation for research reproduction |
+| `reports/`, `ops/` | Experiment code with original source hashes preserved; individual data assets are not included |
+| `docs/RESULTS.md`, `docs/SOURCE_MANIFEST.json` | Updated results and source/hash inventory |
+| `submission/` | Packaging code; its presence does not mean a submission has been made |
 
-[GETTING_STARTED](docs/GETTING_STARTED.md) hướng dẫn môi trường nghiên cứu và `tools/repro.py init/doctor/prepare/plan`; [ASSETS](docs/ASSETS.md) liệt kê cache/checkpoint riêng cần có để lặp bảng. Chạy video mới không đòi các tài sản riêng này. Public/P4m có lệnh riêng `predict_public.py`; đã kiểm từ video gốc trên 3 bản ghi, 26 cửa sổ khớp R1 0,000 bpm. [Gói Round 1 và giới hạn](docs/SUBMISSION_ROUND1.md).
+[GETTING_STARTED](docs/GETTING_STARTED.md) covers the research environments and `tools/repro.py init/doctor/prepare/plan`; [ASSETS](docs/ASSETS.md) lists the private caches/checkpoints required to reproduce the tables. Running a new video does not require those private assets. Public/P4m uses the separate `predict_public.py` command; raw-video validation on 3 recordings produced 26 windows matching R1 with a 0.000 bpm difference. See the [Round 1 package and limitations](docs/SUBMISSION_ROUND1.md).
 
-Không huấn luyện lại, không mở rộng lưới và không mở holdout trong R1. Gói này không bảo đảm MAE dev cho video bất kỳ. [Nguồn và giấy phép bên thứ ba](THIRD_PARTY_NOTICES.md).
+The R1 protocol excludes retraining, grid expansion, and opening the holdout. This package does not guarantee dev-level MAE on arbitrary videos. See [third-party sources and licenses](THIRD_PARTY_NOTICES.md).

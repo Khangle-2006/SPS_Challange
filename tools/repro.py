@@ -161,7 +161,7 @@ def prepare(c):
         if sha(ROOT / row['path']) != row['sha256']:
             raise ValueError(f'Archived source hash mismatch: {row["path"]}')
     tracked = subprocess.check_output(['git', '-C', str(ROOT), 'ls-files', '-z']).decode().split('\0')
-    copies = [p for p in tracked if p and p.startswith(('reports/', 'ops/'))]
+    copies = [p for p in tracked if p and p.startswith(('reports/', 'ops/', 'runtime/'))]
     if any(row['destination'] in copies for row in a['files']):
         raise ValueError('Asset bundle must not overwrite archived code/docs')
     mapping = mappings(c)

@@ -1,0 +1,35 @@
+{
+  "date": "2026-11-27",
+  "base_commit": "6c20fba7cbc477c3cd27700d3e47e6ad881147c4",
+  "platform": "Linux x86_64, Ubuntu WSL, Python 3.12.3",
+  "source_manifest": {"entries": 1174, "hashes_passed": true, "python_syntax_passed": true},
+  "tests": {"tools": 29, "round1_scorer": 10, "failures": 0},
+  "core_environment": {"numpy": "1.26.4", "scipy": "1.15.3"},
+  "joint_fit_environment": {"numpy": "2.5.4", "scipy": "1.18.1", "pip_check_passed": true, "synthetic_smoke_passed": true},
+  "private_dev_inventory": {"files": 224, "videos": 218, "people": 158, "purposes": ["fit", "replay"], "hashes_passed": true},
+  "refit": {
+    "model_files": 12,
+    "max_parameter_delta": 3.1086244689504383e-15,
+    "inference_comparisons": 436,
+    "max_prediction_delta_bpm": 1.4210854715202004e-14,
+    "branch_changes": 0,
+    "oof_person_mae_bpm": 8.020099853710835,
+    "deploy_scores_used_for_evaluation": false,
+    "shipped_models_overwritten": false
+  },
+  "core_replay": {
+    "videos": 218,
+    "people": 158,
+    "oof_person_mae_bpm_rounded": 8.020099854,
+    "max_reference_delta_bpm_rounded": 8.53e-14
+  },
+  "holdout_reads": 0,
+  "new_model_selection": false,
+  "raw_video_end_to_end_run": false,
+  "notes": [
+    "These are aggregate checks of packaging, cached-reader fitting and replay; no private labels or predictions are published.",
+    "The older core inference pins do not reproduce frozen fit parameters. Use the dedicated joint-fit environment; strict model comparison was retained.",
+    "Inference runtime and released model files are unchanged. Two stale source hashes were reconciled against their existing Git commit; see source_manifest_repair_20261127.json.",
+    "Raw-video inference still requires the documented frontend, expert/checkpoint assets, system tools and available memory. This receipt does not claim a new raw-video end-to-end validation."
+  ]
+}

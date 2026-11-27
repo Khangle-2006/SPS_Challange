@@ -1,25 +1,25 @@
 # reports/round1_execution_20261110/visual_diagnostics_20261112/local_vendor/pynndescent
 
-Snapshot mã nghiên cứu; xem root README để xác định vai trò và kết quả.
+Research code snapshot; see the root README for its role and results.
 
-[Hướng dẫn chạy](../../../../../docs/REPRODUCING.md) · [Kết quả](../../../../../docs/RESULTS.md) · [Experiment map](../../../../../docs/EXPERIMENTS.md)
+[Reproduction guide](../../../../../docs/REPRODUCING.md) · [Results](../../../../../docs/RESULTS.md) · [Experiment map](../../../../../docs/EXPERIMENTS.md)
 
-Các tham số dưới đây trích tĩnh từ code, không phải lệnh tự động launch. Với script không có CLI, đọc hằng số/path và dependency ở đầu file. Controller/site runner cần receipt và môi trường gốc; không bỏ qua guard.
+The parameters below were extracted statically from the code; they are not commands that automatically launch a run. For scripts without a CLI, check the constants, paths, and dependencies at the top of the file. Controllers and site runners require the original receipts and environments; do not bypass their guards.
 
-| File | Tham số CLI được khai báo |
+| File | Declared CLI parameters |
 |---|---|
-| [__init__.py](__init__.py) | Không có argparse; đọc source/config |
-| [distances.py](distances.py) | Không có argparse; đọc source/config |
-| [graph_utils.py](graph_utils.py) | Không có argparse; đọc source/config |
-| [hub_tree.py](hub_tree.py) | Không có argparse; đọc source/config |
-| [hybrid_forest.py](hybrid_forest.py) | Không có argparse; đọc source/config |
-| [kernels.py](kernels.py) | Không có argparse; đọc source/config |
-| [optimal_transport.py](optimal_transport.py) | Không có argparse; đọc source/config |
-| [pynndescent_.py](pynndescent_.py) | Không có argparse; đọc source/config |
-| [rp_trees.py](rp_trees.py) | Không có argparse; đọc source/config |
-| [search.py](search.py) | Không có argparse; đọc source/config |
-| [search_graph.py](search_graph.py) | Không có argparse; đọc source/config |
-| [sparse.py](sparse.py) | Không có argparse; đọc source/config |
-| [sparse_nndescent.py](sparse_nndescent.py) | Không có argparse; đọc source/config |
-| [threaded_rp_trees.py](threaded_rp_trees.py) | Không có argparse; đọc source/config |
-| [utils.py](utils.py) | Không có argparse; đọc source/config |
+| [__init__.py](__init__.py) | No argparse interface; read the source/config |
+| [distances.py](distances.py) | No argparse interface; read the source/config |
+| [graph_utils.py](graph_utils.py) | No argparse interface; read the source/config |
+| [hub_tree.py](hub_tree.py) | No argparse interface; read the source/config |
+| [hybrid_forest.py](hybrid_forest.py) | No argparse interface; read the source/config |
+| [kernels.py](kernels.py) | No argparse interface; read the source/config |
+| [optimal_transport.py](optimal_transport.py) | No argparse interface; read the source/config |
+| [pynndescent_.py](pynndescent_.py) | No argparse interface; read the source/config |
+| [rp_trees.py](rp_trees.py) | No argparse interface; read the source/config |
+| [search.py](search.py) | No argparse interface; read the source/config |
+| [search_graph.py](search_graph.py) | No argparse interface; read the source/config |
+| [sparse.py](sparse.py) | No argparse interface; read the source/config |
+| [sparse_nndescent.py](sparse_nndescent.py) | No argparse interface; read the source/config |
+| [threaded_rp_trees.py](threaded_rp_trees.py) | No argparse interface; read the source/config |
+| [utils.py](utils.py) | No argparse interface; read the source/config |

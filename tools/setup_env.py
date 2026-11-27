@@ -9,7 +9,7 @@ import sys
 import venv
 
 ROOT = Path(__file__).resolve().parents[1]
-PROFILES = ('core', 'frontend', 'torch-cpu', 'experts')
+PROFILES = ('core', 'frontend', 'torch-cpu', 'experts', 'joint-fit')
 
 def main():
     p = argparse.ArgumentParser(description=__doc__)
@@ -21,7 +21,9 @@ def main():
     target = (a.destination or ROOT / '.venv' / a.profile).resolve()
     if target.exists():
         p.error(f'Refusing to modify existing environment: {target}')
-    if sys.platform == 'linux':
+    # The numerical-only joint fit does not allocate video crops or neural models.
+    # Keep the established resource guard for the original runtime profiles.
+    if sys.platform == 'linux' and a.profile != 'joint-fit':
         mem = dict(line.split(':', 1) for line in Path('/proc/meminfo').read_text().splitlines())
         if int(mem['MemAvailable'].split()[0]) < 15 * 1024**2:
             p.error('Need at least 15 GiB available RAM; retry later.')

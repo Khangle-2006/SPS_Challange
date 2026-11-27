@@ -104,6 +104,16 @@ không phải cam kết sai số cho video mới hoặc điểm trên toàn bộ
 
 BTC joint mặc định đạt 8,020 bpm trên dev ngoài fold. Trên video public dùng `predict_public.py`.
 
+Nhánh public/P4m cần cài thêm môi trường CNN sau bootstrap:
+
+```bash
+python3.12 tools/setup_env.py torch-cpu
+python3.12 predict_public.py --video /path/video.mp4 --dataset UBFC2 --output output/public_video
+```
+
+Chọn `--dataset MCD` nếu dùng readout MCD. Khi tái lập benchmark cần đúng fold
+và acquisition clock như [SUBMISSION_ROUND1.md](SUBMISSION_ROUND1.md).
+
 Dataset trên server: [SERVER_DATASETS.md](SERVER_DATASETS.md). Chỉ dùng video
 dev trong split đã cấp quyền khi tái lập; **holdout vẫn khóa**. CLI không tải
 dataset, đọc Excel nhãn, quét root dữ liệu hoặc tự chấm holdout.

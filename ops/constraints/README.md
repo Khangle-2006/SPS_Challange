@@ -1,14 +1,14 @@
 # ops/constraints
 
-C1–C5, frame/codec support, kiểm bitrate.
+C1–C5, frame/codec support, and bitrate checks.
 
-[Hướng dẫn chạy](../../docs/REPRODUCING.md) · [Kết quả](../../docs/RESULTS.md) · [Experiment map](../../docs/EXPERIMENTS.md)
+[Reproduction guide](../../docs/REPRODUCING.md) · [Results](../../docs/RESULTS.md) · [Experiment map](../../docs/EXPERIMENTS.md)
 
-Các tham số dưới đây trích tĩnh từ code, không phải lệnh tự động launch. Với script không có CLI, đọc hằng số/path và dependency ở đầu file. Controller/site runner cần receipt và môi trường gốc; không bỏ qua guard.
+The parameters below were extracted statically from the code; they are not commands that automatically launch a run. For scripts without a CLI, check the constants, paths, and dependencies at the top of the file. Controllers and site runners require the original receipts and environments; do not bypass their guards.
 
-| File | Tham số CLI được khai báo |
+| File | Declared CLI parameters |
 |---|---|
 | [report_t5.py](report_t5.py) | `root` |
 | [run_t5.py](run_t5.py) | `--dataset`, `--root`, `--audit`, `--output`, `--shared`, `--limit`, `--budget-gb` |
-| [simulate.py](simulate.py) | Không có argparse; đọc source/config |
-| [test_simulate.py](test_simulate.py) | Không có argparse; đọc source/config |
+| [simulate.py](simulate.py) | No argparse interface; read the source/config |
+| [test_simulate.py](test_simulate.py) | No argparse interface; read the source/config |

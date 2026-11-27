@@ -48,10 +48,12 @@ class ReproductionSetupTests(unittest.TestCase):
             base=Path(d);repo=base/'checkout';repo.mkdir();(repo/'reports').mkdir();(repo/'docs').mkdir()
             script=repo/'reports/example.py';before=b"ROOT = '/data_pool/khangle/facevitals/data'\n"
             script.write_bytes(before)
+            (repo/'runtime').mkdir()
+            (repo/'runtime/helper.py').write_text('VALUE = 1\n')
             (repo/'docs/SOURCE_MANIFEST.json').write_text(json.dumps({'files':[
                 {'path':'reports/example.py','sha256':hashlib.sha256(before).hexdigest()}]}))
             subprocess.run(['git','init','-q',str(repo)],check=True)
-            subprocess.run(['git','-C',str(repo),'add','reports/example.py'],check=True)
+            subprocess.run(['git','-C',str(repo),'add','reports/example.py','runtime/helper.py'],check=True)
             raw=base/'input.bin';raw.write_bytes(b'unchanged binary')
             manifest=base/'assets.json';manifest.write_text(json.dumps({'schema_version':1,'scope':'dev-only',
                 'complete_for':['btc-reader-v3'],'files':[{'source':'input.bin','destination':'data/a.bin',
@@ -63,6 +65,7 @@ class ReproductionSetupTests(unittest.TestCase):
                 self.assertEqual(script.read_bytes(),before)
                 self.assertEqual(raw.read_bytes(),b'unchanged binary')
                 self.assertEqual((c['workspace']/'data/a.bin').read_bytes(),raw.read_bytes())
+                self.assertEqual((c['workspace']/'runtime/helper.py').read_text(),'VALUE = 1\n')
                 self.assertNotIn('/data_pool/',(c['workspace']/'reports/example.py').read_text())
                 self.assertEqual(repro.doctor(c,'btc-reader-v3',prepared=True),[])
                 with self.assertRaisesRegex(ValueError,'already exists'):repro.prepare(c)
