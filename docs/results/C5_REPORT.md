@@ -1,16 +1,16 @@
 > Archived aggregate report. Historical pending/status sentences describe its creation date, not current status. See the root README for the 15 November disposition. Private artifacts named here are not bundled.
 
-# Đối chiếu C5 cũ và C5′
+# Comparison of old C5 and C5′
 
-Trạng thái toàn bộ C5′: hoàn tất. Không chọn phương pháp từ bảng partial.
+All C5′ runs are complete. Do not select methods from partial tables.
 
-C5′ là mô phỏng ffmpeg, chưa xác minh tương đương MATLAB VideoWriter. `default` giữ GOP/B-frame mặc định; `bf0` tắt B-frame. Mỗi hàng tính lỗi trong từng người trước, rồi trung bình người; CI bootstrap người 10.000 lần, seed 0. Δ hiệu chỉnh âm là tốt hơn. P95_person_MAE là phân vị 95% của MAE từng người; khác P95 lỗi từng cửa sổ.
+C5′ is an ffmpeg simulation without validated MATLAB VideoWriter equivalence. `default` retains default GOP/B-frames; `bf0` disables B-frames. Errors are averaged within each person, then across people; CIs use 10,000 person bootstraps, seed 0. Negative calibration deltas are better. P95_person_MAE is the 95th percentile of person MAEs, not window-error P95.
 
-## UBFC/MCD — giao cùng cửa sổ giữa cả bốn điều kiện
+## UBFC/MCD — common windows across all four conditions
 
-V3/V4 dùng cùng fold, seed2027; không trộn với trung vị 15 checkpoint của BTC. Khi còn partial, giao này chỉ gồm bản ghi đã hoàn tất ở cả hai C5′.
+V3/V4 use matching folds and seed2027, not BTC's 15-checkpoint median. During partial runs, this intersection included only recordings completed in both C5′ conditions.
 
-| Dataset | Điều kiện | Phương pháp | Người/cửa sổ | MAE [CI95%] | Bias |
+| Dataset | Condition | Method | People/windows | MAE [CI95%] | Bias |
 |---|---|---|---:|---:|---:|
 | UBFC2 | native | POS | 35/180 | 1.441 [0.650; 2.521] | -0.612 |
 | UBFC2 | native | CHROM | 35/180 | 1.178 [0.649; 1.863] | -0.035 |
@@ -45,11 +45,11 @@ V3/V4 dùng cùng fold, seed2027; không trộn với trung vị 15 checkpoint c
 | MCD | c5prime_bf0 | V3 | 60/1929 | 5.071 [4.039; 6.175] | -1.860 |
 | MCD | c5prime_bf0 | V4 | 60/1929 | 4.559 [3.579; 5.616] | -0.489 |
 
-## BTC — cùng giao video trong mỗi điều kiện
+## BTC — common videos within each condition
 
-Mốc hiệu chỉnh native giữ nguyên dự đoán đã lưu (11,37 trên cohort cũ). Hiệu chỉnh C5′ là cùng công thức hai hệ số, fit lại bằng train-fold của điều kiện đó; không được gọi là MAE 11,37 trên C5′. Mọi bảng có cả hằng số và hiệu chỉnh. Chỉ fit C5′ khi toàn bộ đầu ra sẵn sàng.
+Native calibration preserves saved predictions (11.37 on the old cohort). C5′ calibration uses the same two-coefficient formula, refitted on that condition's training folds; it must not be called 11.37 MAE on C5′. All tables include constant and calibrated baselines. Fit C5′ only after all outputs are available.
 
-| Điều kiện | Nhóm | Phương pháp | Video/người | MAE [CI95%] | Δ hiệu chỉnh [CI95%] |
+| Condition | Group | Method | Videos/people | MAE [CI95%] | Δ calibration [CI95%] |
 |---|---|---|---:|---:|---:|
 | c5 | all | constant | 217/157 | 12.097 [10.595; 13.716] | -0.151 [-0.387; +0.086] |
 | c5 | all | calibrated | 217/157 | 12.248 [10.755; 13.865] | +0.000 [+0.000; +0.000] |
@@ -172,6 +172,6 @@ Mốc hiệu chỉnh native giữ nguyên dự đoán đã lưu (11,37 trên coh
 | native | Walking | V3 | 5/5 | 18.519 [5.159; 38.093] | +7.759 [-1.655; +20.628] |
 | native | Walking | V4 | 5/5 | 18.871 [6.653; 37.280] | +8.111 [-0.107; +19.398] |
 
-Độ phủ và lỗi từng cửa sổ nằm trong C5_PUBLIC_COVERAGE.json và C5_BTC_COVERAGE.json. Không có cửa sổ mới của phương pháp hằng/hiệu chỉnh vì đây là dự đoán cấp video; các số cửa sổ bằng 0 ở hai hàng này nghĩa là không áp dụng, không phải tỉ lệ lỗi 0%. Các bảng old/native ở đây không tải lại waveform và không tính lại boundary-window statistics.
+Coverage/window failures are in C5_PUBLIC_COVERAGE.json and C5_BTC_COVERAGE.json. Constant/calibrated methods have video-level predictions, not new windows; zero window counts mean not applicable, not 0% failure. Old/native tables here do not reload waveforms or recompute boundary-window statistics.
 
-Không mở holdout; không thay ngưỡng, reference hoặc checkpoint theo điểm số.
+No holdout access; thresholds, references, and checkpoints are not changed based on scores.

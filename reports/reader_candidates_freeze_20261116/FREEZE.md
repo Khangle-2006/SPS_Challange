@@ -1,47 +1,47 @@
-# Đóng băng hai ứng viên reader — 16/11/2026
+# Freeze two reader candidates — November 16, 2026
 
-**reader_v1 và reader_v2 được đóng băng mã, model JSON/MAT và SHA256.** Đây là khóa hai ứng viên để chờ chọn cấu hình cuối, không phải tuyên bố đã qua cổng và không cấp quyền chạy holdout.
+**reader_v1 and reader_v2 have frozen code, JSON/MAT models, and SHA256 hashes.** This locks two candidates pending final configuration selection; it does not claim that the gate has passed or authorize holdout evaluation.
 
-Người dùng xác nhận kiểm tra dữ liệu dev qua snapshot đã khóa là đủ, không cần chờ tìm lại XLSX gốc. Cơ sở là **218/218 dòng dev khớp ID video, mã người suy từ ID, hoạt động và PR**; nhãn truth trong các bảng kết quả cũng khớp manifest khóa. Không dùng bảng mới để thay nhãn dev.
+The user confirmed that verifying dev data against the locked snapshot was sufficient, without waiting to recover the original XLSX. **All 218/218 dev rows match in video ID, subject ID derived from the video ID, activity, and PR**; truth labels in the result tables also match the locked manifest. No new table replaces dev labels.
 
-## Xuất xứ bảng
+## Table provenance
 
-- Đã tải lại trực tiếp từ cổng Google Sheets BTC lúc **18:59:46 ICT ngày 16/11/2026** (11:59:46 UTC), không chỉnh nội dung.
-- Hash bản hiện hành của BTC: `284392dabe6cef27a181766d0f4d19f04a06af84a0b34efc8c945a07bc8a661f` — trùng bản đang có và lần tải 18:51:10 ICT cùng ngày. Receipt ở FREEZE_FETCH.json và hồ sơ audit trước đó.
-- Hash XLSX gốc ghi ban đầu: `e52a9b190bf91f8a5d6d476b8374b8904f47328a668bfbe7cd60f3c14fafc49a`. Ngày tạo/tải chính xác của file gốc chưa xác minh lại được vì không tìm lại file; không suy ngày tải từ tên thư mục. Hồ sơ trích dữ liệu/split đã có trước lần khóa hash ngày 12/11.
-- Manifest dev giữ nguyên hash `8a6d1a7db588d71c9cfad420ec6d667efdaad4b0faa8188f940aafe5159a2f7c`, khớp hồ sơ ngày 12/11.
+- Downloaded again directly from the organizers' Google Sheets portal at **18:59:46 ICT on November 16, 2026** (11:59:46 UTC), without content changes.
+- Hash of the organizers' current file: `284392dabe6cef27a181766d0f4d19f04a06af84a0b34efc8c945a07bc8a661f` — matches the existing copy and the download at 18:51:10 ICT that day. See FREEZE_FETCH.json and the earlier audit records.
+- Originally recorded XLSX hash: `e52a9b190bf91f8a5d6d476b8374b8904f47328a668bfbe7cd60f3c14fafc49a`. The original file could not be recovered, so its exact creation/download date remains unverified; do not infer a download date from folder names. Data extraction/split records predate the November 12 hash lock.
+- The dev manifest retains hash `8a6d1a7db588d71c9cfad420ec6d667efdaad4b0faa8188f940aafe5159a2f7c`, matching the November 12 record.
 
-Không có bản XLSX gốc để so byte. Điều này **không làm thay đổi nhãn đã dùng tính số liệu dev**: giá trị phục vụ tính điểm vẫn là snapshot khóa, đã kiểm đối chiếu từng dòng. Không suy luận các ô ngoài 218 dòng dev giống nhau, và không khẳng định nguyên nhân hash toàn file khác. Phạm vi audit này đã được người dùng chấp nhận để đóng băng.
+The original XLSX is unavailable for byte comparison. This **does not change the labels used for dev metrics**: scoring still uses the locked snapshot, verified row by row. This audit does not establish equality outside the 218 dev rows or explain the whole-file hash difference. The user accepted this audit scope for freezing.
 
-## Khóa hoạt động holdout
+## Holdout activity lock
 
-`HOLDOUT_ACTIVITY_LOCK.csv` có đúng **72 dòng, hai cột `recording,activity`**. SHA256:
+`HOLDOUT_ACTIVITY_LOCK.csv` contains exactly **72 rows and two columns, `recording,activity`**. SHA256:
 
 `a0f58cc5b87888aa591ec07de6957d197a954909f85a7db6dfd95d78a664cd76`
 
-Chỉ đọc ID và hoạt động, **không đọc PR, không mở media, không suy luận holdout**. Khi được cho phép đánh giá, bắt buộc kiểm hash file này và dùng cờ đã khóa: Task1/2/3 = Task; Resting/Walking = không-Task. ID/cờ không có trong danh sách phải báo lỗi, không tự đoán hoặc cập nhật. Cờ được khóa trước kết quả holdout.
+Only IDs and activity were read: **no PR labels, media access, or holdout inference**. When evaluation is authorized, verify this file's hash and use the locked flags: Task1/2/3 = Task; Resting/Walking = non-Task. Unknown IDs/flags must raise an error rather than be guessed or updated. Flags were locked before holdout results.
 
-## Ứng viên và cổng
+## Candidates and gates
 
-|Ứng viên|MAE native dev, bpm|Ghi chú|
+| Candidate | Native dev MAE, bpm | Notes |
 |---|---:|---|
-|reader_v1|10,57015|Không offset hoạt động|
-|reader_v2|10,25048|Hai offset đã fit trong train-fold khi đánh giá OOF; model toàn dev chỉ để triển khai|
+| reader_v1 | 10.57015 | No activity offset |
+| reader_v2 | 10.25048 | Two offsets fitted within each training fold for OOF evaluation; the full-dev model is for deployment only |
 
-**Cổng đã ghi trước chưa đạt: 10,25048 > 10 bpm.** Reader_v2 là bản có điểm native dev tốt nhất trong hai ứng viên, không phải bản đã qua cổng. Delta v2−v1 −0,31967, CI95 [−0,85733; +0,22855] vẫn chứa 0. Không chọn lại offset, beta, bandwidth hoặc bất kỳ biến thể nào trên dev.
+**The preregistered gate was not met: 10.25048 > 10 bpm.** Reader_v2 has the best native dev score of the two candidates, but has not passed the gate. The v2−v1 difference is −0.31967, with CI95 [−0.85733; +0.22855], which includes 0. Do not reselect offsets, beta, bandwidth, or any variant on dev.
 
-Mỗi thư mục ứng viên chứa mã, JSON/MAT và receipt static/Octave. JSON và MAT đã kiểm các giá trị prior, beta, grid, offset (nếu có) trùng tuyệt đối. Receipt Octave trên năm ROI thật được giữ; chưa chạy MATLAB thật. Giữ hai thư mục cạnh nhau vì v2 dùng frontend v1 cố định.
+Each candidate directory contains code, JSON/MAT files, and static/Octave receipts. Prior, beta, grid, and offset values (where applicable) match exactly between JSON and MAT. Octave receipts for five real ROIs are retained; actual MATLAB has not been run. Keep both directories together because v2 uses the fixed v1 frontend.
 
-## Cách dùng và xác minh
+## Usage and verification
 
-Chạy `python verify_frozen.py` tại root gói để kiểm SHA256 trước khi dùng. Không sửa nội dung gói; thay đổi được cho phép sau này phải tạo phiên bản riêng.
+Run `python verify_frozen.py` at the package root to verify SHA256 hashes before use. Do not edit package contents; any subsequently authorized change requires a separate version.
 
 Python v1: `python reader_v1_20261116/reader_v1.py --meta <meta.npz> --model reader_v1_20261116/reader_model_dev218.json --out <prediction.json>`.
 
-Python v2: `python reader_v2_20261116/reader_v2.py --meta <meta.npz> --model reader_v2_20261116/reader_model_dev218_v2.json --task task --out <prediction.json>`; dùng `non-task` khi cờ khóa là Resting/Walking. Cần NumPy/SciPy; dữ liệu đầu vào t/valid/rgb_mean theo frontend đã kiểm.
+Python v2: `python reader_v2_20261116/reader_v2.py --meta <meta.npz> --model reader_v2_20261116/reader_model_dev218_v2.json --task task --out <prediction.json>`; use `non-task` for locked Resting/Walking flags. Requires NumPy/SciPy and t/valid/rgb_mean inputs from the verified frontend.
 
-Octave/MATLAB: v1 `process_round1(roiPath, outputPrefix, modelPath)`; v2 thêm đối số thứ tư `isTask`. Ảnh tĩnh trả prior (v2 cộng offset) kèm abstain, không được diễn giải số dự phòng là mạch đo được.
+Octave/MATLAB: v1 `process_round1(roiPath, outputPrefix, modelPath)`; v2 adds a fourth argument, `isTask`. Static images return the prior (plus offset in v2) with abstention; this fallback value must not be interpreted as a measured pulse.
 
-## Việc tiếp theo
+## Next steps
 
-C1/C4 reader_v1 tiếp tục nguyên cấu hình đang chạy; không khởi động lại. Chưa chạy reader_v2 C1/C4; nếu được yêu cầu sau này, dùng đúng offset đã đóng băng, không fit lại. W2/W2b đã đóng theo cổng, hồ sơ T1/T2 được giữ. **Holdout vẫn khóa và chỉ mở khi người dùng xác nhận**, không tự mở vào ngày dự kiến. Chưa có quyết định chọn cấu hình cuối hoặc nộp bài.
+C1/C4 reader_v1 continues with its running configuration; do not restart it. Reader_v2 C1/C4 has not been run; if later requested, use the frozen offsets without refitting. W2/W2b are closed under their gates, and T1/T2 records are retained. **The holdout remains locked until explicit user confirmation**, and must not open automatically on a planned date. No final configuration or submission decision has been made.

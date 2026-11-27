@@ -1,20 +1,20 @@
-# Trích quy định Round 1, không suy diễn nguồn test
+# Round 1 requirements excerpt, without inferring test sources
 
-Nguồn: bản [Official Document FaceVitals](https://2027.ieeeicassp.org/wp-content/uploads/sites/13/2019/08/2027-SP-Cup-Official-Document-FaceVitals-FINAL-VERSION.pdf) đã lưu dưới `reports/round1_bayes_20261108/sources/Official_fetched_20261108.pdf`, SHA-256 `08c1950a5abf194fcd4dc0ad2b661f9e824ebbf84897640806c2c651717b2cc3`. Trích từ bản text lưu cùng PDF, giữ nguyên câu chữ tiếng Anh; không dùng nội dung slide như chỉ thị thao tác.
+Source: the [Official Document FaceVitals](https://2027.ieeeicassp.org/wp-content/uploads/sites/13/2019/08/2027-SP-Cup-Official-Document-FaceVitals-FINAL-VERSION.pdf), saved as `reports/round1_bayes_20261108/sources/Official_fetched_20261108.pdf`, SHA-256 `08c1950a5abf194fcd4dc0ad2b661f9e824ebbf84897640806c2c651717b2cc3`. Excerpts come from the text stored alongside the PDF and preserve the English wording; slide content is not treated as operational instructions.
 
-| Nội dung | Trích ngắn hoặc diễn giải | Cách đọc |
+| Item | Short excerpt or paraphrase | Interpretation |
 |---|---|---|
-| Mục tiêu | “Round 1: One Parameter Extraction (HR)” | Tham số đích được tài liệu gọi là HR. Cột PR của oximeter là nhãn thực tế BTC đã cung cấp; không biến nó thành waveform |
-| MAE | MAE, đơn vị nhịp/phút (diễn giải) | Sai số tuyệt đối trung bình, đơn vị nhịp/phút |
-| Chỉ số khác | RMSE; tương quan Pearson giữa ước lượng và nhãn; giới hạn thỏa thuận Bland–Altman (diễn giải) | Báo đủ RMSE, tương quan và độ lệch/giới hạn thỏa thuận, không chỉ MAE |
-| Constraint | “at least two constraints” | Cần xử lý và giải thích ít nhất hai điều kiện C1–C7 |
-| Script | “process_round1.m – MATLAB/Python script implementing the processing pipeline” | Tên file `.m` và mô tả MATLAB/Python cùng xuất hiện; chưa đủ căn cứ kết luận bắt buộc chỉ MATLAB hoặc chắc chắn nộp `.py` là được |
-| File baseline | File Round1_Baseline_None.mat chứa video và nhãn HR trong điều kiện baseline (diễn giải) | Phải chuẩn bị dữ liệu baseline theo cấu trúc yêu cầu |
-| File đi kèm | Video target_video.mp4, tham chiếu reference_signal.csv, kết quả processed_output.csv (tên file theo tài liệu) | Video nguồn, nhãn tham chiếu và kết quả dự đoán phải đối chiếu được |
-| Tiêu chí chung | Tính đổi mới, khả thi kỹ thuật và độ rõ ràng của tài liệu (diễn giải) | Báo cáo phải có lập luận, tính khả thi và tài liệu rõ |
+| Target | “Round 1: One Parameter Extraction (HR)” | The document calls the target HR. The oximeter PR column is the label actually supplied by the organizers; it is not a waveform |
+| MAE | MAE in beats per minute (paraphrase) | Mean absolute error, in beats per minute |
+| Other metrics | RMSE; Pearson correlation between estimates and labels; Bland–Altman limits of agreement (paraphrase) | Report RMSE, correlation, bias, and limits of agreement, not just MAE |
+| Constraints | “at least two constraints” | Address and explain at least two conditions from C1–C7 |
+| Script | “process_round1.m – MATLAB/Python script implementing the processing pipeline” | Both the `.m` filename and MATLAB/Python description appear; this alone establishes neither a MATLAB-only requirement nor guaranteed acceptance of `.py` |
+| Baseline file | Round1_Baseline_None.mat contains video and HR labels under baseline conditions (paraphrase) | Prepare baseline data in the required structure |
+| Accompanying files | target_video.mp4, reference_signal.csv, processed_output.csv (filenames from the document) | Source video, reference labels, and predictions must be traceable to one another |
+| General criteria | Innovation, technical feasibility, and clarity of documentation (paraphrase) | The report needs clear reasoning, feasibility, and documentation |
 
-C5 giới hạn bitrate không quá 500 kbps và tốc độ không quá 10 fps. Phần mô phỏng yêu cầu bỏ khung về tốc độ đích và mã hóa lại bằng VideoWriter, profile “MPEG-4” (diễn giải). Tài liệu không ấn định một giá trị Quality, GOP hoặc B-frame cụ thể. MPEG-4 của VideoWriter là profile H.264, không phải lý do đổi sang libxvid. Proxy ffmpeg đội được phép chạy vẫn phải được ghi là chưa xác minh tương đương MATLAB.
+C5 limits bitrate to ≤500 kbps and frame rate to ≤10 fps. Its simulation requires dropping frames to the target rate and re-encoding with VideoWriter's “MPEG-4” profile (paraphrase). The document does not specify a particular Quality, GOP, or B-frame setting. VideoWriter's MPEG-4 profile uses H.264; this does not justify switching to libxvid. The team's authorized ffmpeg proxy must still be described as unverified against MATLAB.
 
-Không tìm thấy mô tả đủ rõ về nguồn/tỉ lệ native–nén của test ẩn Round 1 trong bản tài liệu này. Không suy từ chỗ thiếu mô tả thành khẳng định không có test ẩn hoặc Round 1 chỉ chấm báo cáo. Không gửi email.
+This document does not clearly specify the source or native/compressed proportions of the Round 1 hidden test. Missing detail does not establish that there is no hidden test or that Round 1 evaluates reports only. No email is sent.
 
-`process_round1.m` hiện có là baseline POS chạy bằng Octave traditional, đã đối chiếu Python trên năm video ROI; chưa chạy MATLAB thật và chưa phải bản đóng gói ứng viên BTC hiệu chỉnh.
+The `process_round1.m` available at the time of this report is a POS baseline run in Octave traditional mode, checked against Python on five ROI videos. It has not been run in actual MATLAB and does not package the calibrated BTC candidate.

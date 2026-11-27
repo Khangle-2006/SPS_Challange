@@ -1,23 +1,23 @@
 # Reproduction guide
 
-**Cài mới:** dùng [GETTING_STARTED.md](GETTING_STARTED.md), [ASSETS.md](ASSETS.md) và [kết quả kiểm môi trường mới](CLEAN_ENV_VALIDATION.md). Các phần dưới giữ bối cảnh snapshot lịch sử; requirements-research.txt không thay thế bốn profile mới.
+**Fresh setup:** use [GETTING_STARTED.md](GETTING_STARTED.md), [ASSETS.md](ASSETS.md), and [clean-environment validation](CLEAN_ENV_VALIDATION.md). Sections below preserve historical snapshot context; requirements-research.txt does not replace the four new profiles.
 
-## 1. Chọn mức tái lập
+## 1. Choose a reproduction level
 
-| Mức | Có thể làm từ repo này? | Cần thêm |
+| Level | Available from this repository? | Additional requirements |
 |---|---|---|
-| Kiểm source/hash/syntax và scorer tổng hợp | Có | Python, NumPy, SciPy |
-| POS baseline từ RGB CSV của bạn | Có | Timestamp và valid mask đúng; không cần nhãn |
-| POS MATLAB/Octave từ ROI MAT | Có code | Octave hoặc MATLAB; `roi_data` theo schema bên dưới |
-| CPU/GPU inference checkpoint public | Có code lịch sử | Checkpoint, cache/source, receipt frontend, môi trường PyTorch |
-| Lặp đúng bảng BTC/public của đội | Có thuật toán/report code, **không phải gói chạy một lệnh** | Dữ liệu được cấp quyền, split/manifest/reference, các checkpoint, các receipt hash gốc |
-| Huấn luyện lại các sweep | Có snapshot code | Tất cả mục trên + Linux/FFmpeg/GPU, preregistration và budget riêng |
+| Source/hash/syntax and synthetic scorer checks | Yes | Python, NumPy, SciPy |
+| POS baseline from your RGB CSV | Yes | Correct timestamps and valid mask; no labels needed |
+| MATLAB/Octave POS from ROI MAT | Code available | Octave or MATLAB; `roi_data` as specified below |
+| CPU/GPU public-checkpoint inference | Historical code available | Checkpoints, cache/source, frontend receipts, PyTorch environment |
+| Exact BTC/public table reproduction | Algorithms/report code available, **not a one-command package** | Authorized data, splits/manifests/references, checkpoints, original hash receipts |
+| Retrain sweeps | Code snapshots available | All above plus Linux/FFmpeg/GPU, preregistration, and a separate budget |
 
-Không tự chạy lại controller trong project gốc. Các thí nghiệm của đội đã kết thúc; tài liệu này hướng dẫn người có quyền tạo một môi trường tái lập riêng. Không tắt assertion để vượt manifest/hash/split không khớp.
+Do not rerun controllers in the original project. Team experiments have ended; authorized users should create isolated reproduction environments. Do not disable assertions to bypass manifest/hash/split mismatches.
 
-## 2. Môi trường
+## 2. Environment
 
-Quick start trong README chỉ dùng NumPy/SciPy. Môi trường research chủ yếu Linux (có `fcntl`, `taskset`, `nice`, `du`, FFmpeg/ffprobe); Windows chạy được baseline nhưng không tự chạy được mọi controller Linux.
+The historical README quick start uses only NumPy/SciPy. Research environments are mainly Linux (`fcntl`, `taskset`, `nice`, `du`, FFmpeg/ffprobe); Windows can run the baseline but not every Linux controller automatically.
 
 ```bash
 python -m venv .venv
@@ -28,28 +28,28 @@ ffprobe -version
 python -c "import torch, cv2, av, mediapipe; print(torch.__version__)"
 ```
 
-`requirements-research.txt` là danh sách khởi điểm, **chưa kiểm một môi trường sạch chạy đủ mọi nhánh**. Các `requirements*.txt` gốc được giữ tại thư mục tương ứng; chọn bản khớp thí nghiệm. Bản `submission/requirements.txt` dùng wheel torch CPU; GPU cần wheel phù hợp CUDA và driver, không thay âm thầm rồi tuyên bố bitwise parity.
+`requirements-research.txt` is a starting list, **not a clean environment validated across all branches**. Original `requirements*.txt` files remain in their directories; select the experiment-matched version. `submission/requirements.txt` uses CPU Torch wheels; GPU requires CUDA/driver-compatible wheels. Do not silently substitute and claim bitwise parity.
 
-## 3. Chuẩn bị tài sản được cấp quyền
+## 3. Prepare authorized assets
 
-Không tải dữ liệu bằng script trong repo. Lấy dữ liệu từ chủ sở hữu theo điều kiện sử dụng. Giữ raw immutable và lưu output ở thư mục riêng.
+Repository scripts do not download data. Obtain data from owners under their terms. Keep raw inputs immutable and outputs separate.
 
-| Tài sản | Nội dung cần có | Script tiêu thụ |
+| Asset | Required contents | Consumer |
 |---|---|---|
 | UBFC2 | `subject*/vid.avi`, `ground_truth.txt` | `ops/deep_hr/data_adapters.py` |
-| MCD | Video các camera, PPG gốc, bảng ánh xạ và receipt đồng hồ | Cùng adapter; không suy timestamp chỉ từ FPS container |
-| BTC dev | Video, bảng PR, person mapping và `btc_split.json` được khóa | `reports/round1_v4_20261105/btc_zeroshot/` |
-| AiPEX | ROI và HR trung bình đúng người/lần quay | `ops/aipex_diagnostic_20261031/`, `aipex_data.py` |
-| T8 oval cache | `crop/rgb.npy`, `meta.npz`, `manifest.json`, `windows.json`, receipt mỗi condition | `ops/t8_oval_20261031/prepare_t8_cache.py` |
-| Training index | Fold theo người, hash cache, eligibility, schedule | `ops/t8_oval_training_20261031/t8_plan.py` |
-| Checkpoint | `final.pt` cuối epoch + config/provenance/frontend hashes | Evaluator tương ứng với chính phiên bản model |
+| MCD | Camera videos, original PPG, mapping tables, clock receipts | Same adapter; do not infer timestamps from container FPS alone |
+| BTC dev | Videos, PR table, person mapping, frozen `btc_split.json` | `reports/round1_v4_20261105/btc_zeroshot/` |
+| AiPEX | ROI and mean HR for the correct person/recording | `ops/aipex_diagnostic_20261031/`, `aipex_data.py` |
+| T8 oval cache | `crop/rgb.npy`, `meta.npz`, `manifest.json`, `windows.json`, per-condition receipts | `ops/t8_oval_20261031/prepare_t8_cache.py` |
+| Training index | Person folds, cache hashes, eligibility, schedule | `ops/t8_oval_training_20261031/t8_plan.py` |
+| Checkpoint | Final-epoch `final.pt` + configuration/provenance/frontend hashes | Evaluator matching the exact model version |
 | Evaluation artifacts | Reference canonical + raw copy, prediction CSV, failure/support masks | `t8_evaluate.py`, aggregate/report code |
 
-Checkpoint không có trong Git. Không có link download công khai đã xác minh. Yêu cầu maintainer cấp asset bundle đúng quyền trước khi chạy full reproduction. Không tự dùng checkpoint fold0 cho mọi fold; không dùng fold hoặc label validation trong fit/calibration/prior.
+Checkpoints are absent from Git. This historical snapshot had no verified public download. Obtain an authorized asset bundle from the maintainer before full reproduction. Do not reuse fold 0 across folds or include validation folds/labels in fitting/calibration/priors.
 
-Snapshot legacy dùng các root `/mnt/samsung_t5/khangle/facevitals`, `/data_pool/khangle/facevitals` và `/data/khangle/facevitals`. Trên máy tái lập, đặt bản sao vào layout tương ứng trong một môi trường cô lập hoặc tạo một **phiên bản cấu hình mới được ghi rõ**. `code/t8_oval_20261031` là bundle training của `ops/t8_oval_training_20261031`; `code/t8_polarity_v3_20261102` tương ứng `ops/t8_polarity_v3_20261102`. Root reports phải giữ quan hệ thư mục hiện có. Không đổi code/đường dẫn rồi vẫn dùng hash frozen cũ như thể không thay gì.
+Legacy snapshots use `/mnt/samsung_t5/khangle/facevitals`, `/data_pool/khangle/facevitals`, and `/data/khangle/facevitals`. On a reproduction machine, use the corresponding layout in isolation or create an **explicitly documented new configuration**. `code/t8_oval_20261031` is the training bundle for `ops/t8_oval_training_20261031`; `code/t8_polarity_v3_20261102` corresponds to `ops/t8_polarity_v3_20261102`. Preserve report-directory relationships. Do not change code/paths while presenting old frozen hashes as unchanged.
 
-## 4. Chạy baseline và scorer độc lập
+## 4. Run the standalone baseline and scorer
 
 ```bash
 python tools/pos_trace.py --input /path/to/rgb.csv --output output/prediction.csv
@@ -59,7 +59,7 @@ python -m unittest test_score_round1
 python -m unittest discover -s tools -p 'test_*.py'
 ```
 
-Scorer là công cụ nội bộ, không phải file `app.py` của ban tổ chức. Input scorer:
+The scorer is an internal tool, not the organizers' `app.py`. Scorer inputs:
 
 ```text
 reference_signal.csv:
@@ -69,13 +69,13 @@ processed_output.csv:
   subject_id,recording_id,window_start_s,hr_bpm,abstain
 ```
 
-Reference manifest tạo độc lập với prediction. Cửa sổ thiếu/không hợp lệ phải được báo, không chọn giao thuận lợi để làm đẹp số. Scorer public waveform không trực tiếp là scorer nhãn PR cấp video BTC.
+Create reference manifests independently of predictions. Report missing/invalid windows; do not select favorable intersections. The public waveform scorer is not directly a BTC video-level PR-label scorer.
 
 ## 5. T8 / V3 / padding-fixed
 
-Luồng: raw + PPG → adapter/clock → canonical windows → encode toàn frame → oval crop36 → cache/index → train theo fold người → final checkpoint → inference → cumsum/detrend/filter/HR → aggregate.
+Flow: raw + PPG → adapter/clock → canonical windows → full-frame encoding → oval crop36 → cache/index → person-fold training → final checkpoint → inference → cumsum/detrend/filter/HR → aggregation.
 
-Ví dụ CLI có thật trong code (chỉ chạy sau khi chuẩn bị input và các guard):
+Actual CLI examples from the code (run only after preparing inputs and guards):
 
 ```bash
 python ops/t8_oval_20261031/prepare_t8_cache.py --dataset UBFC2 \
@@ -86,14 +86,14 @@ python ops/t8_oval_training_20261031/t8_plan.py \
   --folds /authorized/folds_frozen.json --output /scratch/training_index.json
 ```
 
-Đây là lệnh theo schema, **chưa phải xác nhận các path ví dụ tồn tại**. MCD cần `--audit` trỏ receipt hợp lệ. Bản T8 `t8_run.py` gốc chứa queue cũ, không dùng để thay V3 đã sửa dấu hoặc final padding-fixed. Tra [index thí nghiệm](EXPERIMENTS.md) để chọn đúng runner.
+These commands illustrate the schema; **example paths are not confirmed to exist**. MCD needs `--audit` pointing to valid receipts. Original T8 `t8_run.py` contains an old queue; do not substitute it for polarity-corrected V3 or final padding-fixed runs. Use the [experiment index](EXPERIMENTS.md) to select the correct runner.
 
-- V3: `ops/t8_polarity_v3_20261102/`; reuse 15 control, train 15 joint sửa dấu. Các source tests nằm cùng folder. Cần raw/canonical reference hash và parity, không bỏ qua mismatch.
-- Padding implementation và regression: `reports/round1_v4_20261105/tsm_padding/replicate_tsm.py`, `test_static_tsm.py`; pilot repair ở `padding_pilot_20261107/`; final folds ở `reports/round1_execution_20261110/final_priorities_20261111/`.
-- V5: `v5_multiview_20261112/`; không đồng nhất với 5-run adaptation sweep thất bại trước đó.
-- Evaluation phải dùng đúng model frontend và final epoch. Không chọn checkpoint theo outer validation.
+- V3: `ops/t8_polarity_v3_20261102/`; reuse 15 controls and train 15 polarity-corrected joint runs. Source tests are in the same folder. Raw/canonical reference hashes and parity are required; do not ignore mismatches.
+- Padding implementation/regression: `reports/round1_v4_20261105/tsm_padding/replicate_tsm.py`, `test_static_tsm.py`; pilot repair in `padding_pilot_20261107/`; final folds in `reports/round1_execution_20261110/final_priorities_20261111/`.
+- V5: `v5_multiview_20261112/`; distinct from the earlier failed five-run adaptation sweep.
+- Evaluation must use the matching model frontend and final epoch. Do not select checkpoints using outer validation.
 
-Ví dụ kiểm ảnh tĩnh (đọc implementation của checkpoint trước khi chọn `--padding`):
+Example static-input check (inspect checkpoint implementation before selecting `--padding`):
 
 ```bash
 cd reports/round1_v4_20261105/tsm_padding
@@ -101,30 +101,30 @@ python test_static_tsm.py
 python check_checkpoint_static.py /authorized/final.pt --padding replicate
 ```
 
-Một số bài test import thư viện hoặc frozen artifact gốc; nếu thiếu, báo dependency thiếu, không tự coi test skip là PASS.
+Some tests import original libraries or frozen artifacts; report missing dependencies rather than counting skipped tests as PASS.
 
-## 6. BTC zero-shot, calibration, C5′ và audit
+## 6. BTC zero-shot, calibration, C5′, and audits
 
-`btc_zeroshot/` giữ preprocessing/inference/report. `round1_bayes_20261108/` giữ model nhiều ROI, fitted prior, calibration và report; `round1_execution_20261110/` giữ C5′, AdaBN, adaptation, PBV/G và các audit cuối.
+`btc_zeroshot/` retains preprocessing/inference/reports. `round1_bayes_20261108/` retains multi-ROI models, fitted priors, calibration, and reports; `round1_execution_20261110/` retains C5′, AdaBN, adaptation, PBV/G, and final audits.
 
-Đọc mỗi `README.md` thư mục và `docs/ENTRYPOINTS.json`: đây là index được lấy bằng AST, không import/launch worker. Nhiều file dùng constants thay vì CLI; sửa root phải tạo revision riêng. Các controller yêu cầu receipt approval/budget/frozen/source index đã tồn tại; bản công bố **không dựng receipt phê duyệt giả** để chạy được.
+Read each directory's `README.md` and `docs/ENTRYPOINTS.json`: this AST-derived index does not import/launch workers. Many files use constants instead of CLIs; root changes require a separate revision. Controllers require existing approval/budget/frozen/source-index receipts; this release **does not fabricate authorization receipts** to enable execution.
 
-Thứ tự để tái lập bảng: khóa person split → export dev-only manifest → preprocessing + support → prediction từng checkpoint/condition → join chính xác key người/video/cửa sổ → calibration bằng train-fold → person-first metrics → paired bootstrap → coverage/failure/static gates. Chỉ chạy report khi đủ dependency. Mỗi BTC table cần constant train-fold và saved calibrated comparator trên cùng video.
+Table reproduction order: lock person splits → export dev-only manifests → preprocessing/support → per-checkpoint/condition predictions → exact person/video/window-key joins → train-fold calibration → person-first metrics → paired bootstrap → coverage/failure/static gates. Run reports only with complete dependencies. Each BTC table needs a training-fold constant and saved calibrated comparator on identical videos.
 
-C5′: dùng `c5prime_v2.py`/phiên bản được caller hiện tại import; `-bf 0` là condition riêng. C5 cũ, C5′default và C5′bf0 là ba recipe khác nhau. Giữ hash bitstream, command, frame mapping/PTS và bitrate đo, không chỉ cấu hình mục tiêu. Muốn đọc đúng revision cuối xem import trong `common_repair.py` và `ladder_physical_v3.py`; output container-clock lỗi ban đầu không là kết quả PPG chính.
+C5′: use `c5prime_v2.py` or the version imported by the current caller; `-bf 0` is a separate condition. Old C5, C5′default, and C5′bf0 are distinct recipes. Retain bitstream hashes, commands, frame mappings/PTS, and measured bitrate, not only target settings. See imports in `common_repair.py` and `ladder_physical_v3.py` for the final revision; initial faulty container-clock output is not the primary PPG result.
 
 ## 7. MATLAB / Octave baseline
 
-MAT input cần `roi_data.t` (N×1 giây, tăng), `roi_data.rgb` (N×3), `roi_data.valid` (N×1). Không đọc video trong script .m; ROI phải được xuất trước.
+MAT input requires `roi_data.t` (N×1, increasing seconds), `roi_data.rgb` (N×3), and `roi_data.valid` (N×1). The .m script reads no video; export ROI first.
 
 ```bash
 octave --traditional --quiet --eval "addpath('reports/round1_execution_20261110'); process_round1('roi_data.mat','output/processed_output');"
 ```
 
-Tạo thư mục output trước, dùng prefix chưa tồn tại. Script sinh CSV và `.mat -v7`. Đây là POS baseline đã kiểm Octave, không phải estimator BTC cuối hoặc MATLAB E2E pass.
+Create the output directory first and use a new prefix. The script writes CSV and `.mat -v7`. This is an Octave-validated POS baseline, not the final BTC estimator or a MATLAB end-to-end PASS.
 
-## 8. Phạm vi công bố
+## 8. Release scope
 
-`SOURCE_MANIFEST.json` kiểm **từng file source đã phát hành**, không giả làm manifest hoàn chỉnh của máy chủ. Các helper SSH/auth/monitor không phát hành. Những frozen bundle cũ có hash tính trên cả directory sẽ cần asset bundle gốc để replay y hệt; không tái tạo một hash khác rồi gọi là hash cũ.
+`SOURCE_MANIFEST.json` checks **each released source file**, not a complete server inventory. SSH/authentication/monitoring helpers are excluded. Old frozen bundles hashed as entire directories need original asset bundles for exact replay; do not generate a different hash and call it the old one.
 
-Không có job nào tự chạy lúc clone/import quick-start. Không mở holdout. Không có token trong repo. Đọc `VALIDATION.md` để biết chính xác những kiểm tra phát hành đã chạy.
+Cloning/importing the quick start launches no jobs. Holdout is not opened. The repository contains no tokens. See `VALIDATION.md` for the exact release checks performed.

@@ -1,10 +1,10 @@
-# Reader dưới C1/C4
+# Reader under C1/C4
 
-Full-frame simulate.py cố định; C1 gồm nhiễu và codec lưu trữ x264, không phải phép thử nhiễu cô lập. Không có holdout. Mỗi điều kiện fit prior/beta trên train-fold; beta chỉ được giữ khi giảm MAE train ít nhất 0,5 bpm.
+The full-frame simulate.py is fixed; C1 includes noise and the x264 storage codec, so it is not an isolated noise test. No holdout is used. Each condition fits prior/beta on training folds; beta is retained only if it reduces training MAE by at least 0.5 bpm.
 
-MAE theo người; CI bootstrap ghép cặp 10.000 lần, seed 0. Hàng calibrated là dự đoán native lịch sử trên cùng video, không phải bản fit lại theo điều kiện.
+MAE is subject-level; CIs use 10,000 paired bootstrap samples, seed 0. Calibrated rows are historical native predictions on the same videos, not condition-specific refits.
 
-|Điều kiện|Nhóm|Phương pháp|Video/người|MAE|Bias|Spearman|Δ hằng số [CI95]|Δ reader native [CI95]|
+| Condition | Group | Method | Videos/subjects | MAE | Bias | Spearman | Δ constant [CI95] | Δ native reader [CI95] |
 |---|---|---|---:|---:|---:|---:|---|---|
 |c1_050|all|constant|218/158|12.07068|1.01793|None|0.00000 [0.0, 0.0]|1.50053 [0.19144251054852318, 2.792747890295358]|
 |c1_050|all|calibrated|218/158|11.37385|-0.00991|0.3661857698127134|-0.69682 [-1.5101615578280057, 0.14547014401483466]|0.80370 [-0.22308020458485964, 1.8291818017587096]|
@@ -107,7 +107,7 @@ MAE theo người; CI bootstrap ghép cặp 10.000 lần, seed 0. Hàng calibrat
 |c4_VGA|Walking|reader_native|5/5|9.60000|-8.40000|0.8999999999999998|-2.80000 [-10.7, 3.9]|0.00000 [0.0, 0.0]|
 |c4_VGA|Walking|reader_gated|5/5|8.80000|-8.40000|0.8999999999999998|-3.60000 [-11.5, 4.1]|-0.80000 [-3.0, 1.2]|
 
-## Độ phủ và phổ hợp lệ
+## Coverage and valid spectra
 ```json
 {
   "c1_050": {

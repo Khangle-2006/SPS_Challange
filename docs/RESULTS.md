@@ -1,26 +1,26 @@
-# R1 — chạy lại sau sửa trạng thái open-rppg
+# R1 — rerun after open-rppg state isolation repair
 
-**MODE: selfwarm**. Quyết định được lấy nguyên từ z18: `ADOPT self-warm`; không chọn lại dựa trên lượt R1.
+**MODE: selfwarm**. The decision is preserved from z18: `ADOPT self-warm`, not reselected from R1 results.
 
-Ba mô hình giữ nguyên trọng số. Trạng thái khởi tạo được sao chép ngay khi tạo Model, khôi phục trước mỗi video/bản ghi/điều kiện. Selfwarm (nếu được chọn) chỉ dùng lần 2 của chính video đó. Không huấn luyện CNN, không mở holdout, không thêm lưới tham số.
+All three models retain their weights. Initial state is copied immediately after Model construction and restored before every video/recording/condition. Selfwarm, when selected, uses only pass 2 of that same video. No CNN training, holdout access, or parameter-grid expansion.
 
-## Kiểm trước chạy lớn
+## Checks before the full run
 
-| Mô hình | Reset: 2 video | Selfwarm: 2 video | A → B → A (hai MODE) | Self-warm gate, thời gian (s) |
+| Model | Reset: 2 videos | Selfwarm: 2 videos | A → B → A (both MODEs) | Self-warm gate, time (s) |
 |---|---|---|---|---:|
-| FacePhys.rlap | lệch 0,0 | lệch 0,0 | lệch 0,0 | 91.8 |
-| ME-chunk.pure | lệch 0,0 | lệch 0,0 | lệch 0,0 | 51.6 |
-| ME-flow.pure | lệch 0,0 | lệch 0,0 | lệch 0,0 | 111.8 |
+| FacePhys.rlap | difference 0.0 | difference 0.0 | difference 0.0 | 91.8 |
+| ME-chunk.pure | difference 0.0 | difference 0.0 | difference 0.0 | 51.6 |
+| ME-flow.pure | difference 0.0 | difference 0.0 | difference 0.0 | 111.8 |
 
-## Cách đọc cổng và khoảng tin cậy
+## Interpreting gates and confidence intervals
 
-Giữ nguyên cổng của script: `a` = độ phủ ≥90%; `b` = cận dưới CI95 của ΔMAE so hằng số ≤0 (chưa chứng minh tệ hơn hằng số); `c` = cận trên CI95 đó <0 (thắng hằng số). Dấu `-` là chưa đạt. `b` riêng lẻ không phải kiểm định tương đương hay không-thua-kém có biên đã định. Các cổng này khác tiêu chí thành công BTC native ≤10 bpm đã ghi trước. CI và delta đều ghép cặp theo người, 10.000 bootstrap, seed 0.
+Preserve script gates: `a` = coverage ≥90%; `b` = lower CI95 bound for ΔMAE versus constant ≤0 (not demonstrated worse); `c` = upper bound <0 (better than constant). `-` means not passed. Gate `b` alone is not an equivalence or margin-based noninferiority test. These gates differ from preregistered BTC native success ≤10 bpm. Deltas/CIs are paired by person, with 10,000 bootstraps, seed 0.
 
 ## BTC dev
 
-Mốc cũ 8,350 bị loại; reset độc lập 9,130. Cột cũ chỉ để kiểm toán, không phải baseline hợp lệ để quảng bá hiệu năng. File z18 ghi 8,390 ở hàng historical vì mã z18 dùng phổ reset thay 17 hàng heavy; đây không phải chính lượt lịch sử 8,350.
+The old 8.350 result is invalidated; independent reset is 9.130. Old columns are audit records, not valid performance baselines. z18 reports 8.390 as historical because it replaced 17 heavy rows with reset spectra; this is not the original 8.350 run.
 
-| Điều kiện | Video | V4 mới [CI95] | V4 cũ | Dịch MAE | Hằng số | Hiệu chỉnh native cũ | V3 cùng điều kiện | Δ V4−V3 [CI95] | Δ V4−hằng số [CI95] | Cổng |
+| Condition | Videos | New V4 [CI95] | Old V4 | MAE shift | Constant | Old native calibration | V3, same condition | Δ V4−V3 [CI95] | Δ V4−constant [CI95] | Gates |
 |---|---:|---|---:|---:|---:|---:|---:|---|---|---|
 | native | 218 | 8.333 [7.090; 9.659] | 8.350 | -0.017 | 12.071 | 11.374 | 9.587 | -1.254 [-2.282; -0.283] | -3.737 [-5.095; -2.406] | abc |
 | split10 | 218 | 9.480 [8.041; 11.019] | 9.815 | -0.335 | 12.071 | 11.374 | 10.053 | -0.572 [-1.601; +0.426] | -2.590 [-4.002; -1.185] | abc |
@@ -32,11 +32,11 @@ Mốc cũ 8,350 bị loại; reset độc lập 9,130. Cột cũ chỉ để ki�
 | c6_us1 | 197 | 8.444 [6.892; 10.134] | 8.461 | -0.017 | 12.534 | 11.554 | 10.133 | -1.688 [-2.830; -0.745] | -4.090 [-5.641; -2.554] | abc |
 | track_c7_blue | 197 | 10.457 [8.785; 12.236] | 9.959 | +0.498 | 12.687 | 11.739 | 10.506 | -0.050 [-1.147; +1.020] | -2.231 [-3.510; -0.967] | abc |
 
-Giữ logic y11: với mỗi điều kiện, fit trên các video native thuộc tập so ghép cặp và fold train, rồi áp phổ điều kiện mà không fit nhãn điều kiện. Mốc hiệu chỉnh là cấu hình native lịch sử áp lại trên đúng video, không phải fit riêng từng điều kiện. Heavy chỉ là 17 video native đã có: tái sử dụng, không suy luận lại.
+Preserve y11 logic: for each condition, fit native videos from its paired cohort within training folds, then apply condition spectra without fitting condition labels. The calibrated comparator is the historical native configuration reapplied to identical videos, not separately fitted per condition. Heavy contains only 17 existing native videos: reused, not rerun.
 
-## Công khai — P4m và P4
+## Public — P4m and P4
 
-| Điều kiện | Bộ | Cửa sổ | P4 mới [CI95] / cũ | P4m mới [CI95] / cũ | Δ P4m mới−cũ [CI95] | Hằng số | Cổng P4 / P4m |
+| Condition | Dataset | Windows | New P4 [CI95] / old | New P4m [CI95] / old | Δ new−old P4m [CI95] | Constant | P4 / P4m gates |
 |---|---|---:|---|---|---|---:|---|
 | native | UBFC2 | 193 | 0.722 [+0.494; +1.024] / 0.710 | 0.746 [0.516; 1.051] / 0.754 | -0.007 [-0.036; +0.021] | 14.592 | abc / abc |
 | native | MCD | 1959 | 1.908 [+1.481; +2.547] / 1.835 | 1.511 [1.247; 1.820] / 1.586 | -0.075 [-0.122; -0.029] | 11.684 | abc / abc |
@@ -63,11 +63,11 @@ Giữ logic y11: với mỗi điều kiện, fit trên các video native thuộc
 | c5_split10 | UBFC2 | 179 | 0.659 [+0.515; +0.849] / 0.637 | 0.646 [0.496; 0.845] / 0.655 | -0.009 [-0.038; +0.018] | 14.656 | abc / abc |
 | c5_split10 | MCD | 1929 | 1.761 [+1.486; +2.083] / 1.765 | 1.704 [1.435; 2.022] / 1.768 | -0.064 [-0.112; -0.023] | 11.690 | abc / abc |
 
-Tất cả so sánh old/new dùng đúng giao cửa sổ và ghép cặp theo người; 10.000 bootstrap, seed 0. Cổng a: coverage ≥0,9; b: CI không chứng minh tệ hơn hằng số; c: CI chứng minh tốt hơn hằng số. Không kết luận cải thiện khi CI chứa 0.
+All old/new comparisons use the same window intersection and person pairing; 10,000 bootstraps, seed 0. Gate a: coverage ≥0.9; b: CI does not establish worse-than-constant performance; c: CI establishes better-than-constant performance. Do not claim improvement when the CI includes 0.
 
-## Tham số P4m
+## P4m parameters
 
-| Fold | Trọng số mới (CNN, POS, CHROM, experts) | Trọng số cũ |
+| Fold | New weights (CNN, POS, CHROM, experts) | Old weights |
 |---|---|---|
 | fold0 | (1.0, 0.5, 0.0, 1.0) | (1.0, 0.0, 0.25, 1.0) |
 | fold1 | (1.0, 0.5, 0.0, 1.0) | (1.0, 0.0, 0.25, 1.0) |
@@ -76,7 +76,7 @@ Tất cả so sánh old/new dùng đúng giao cửa sổ và ghép cặp theo ng
 | fold4 | (1.0, 0.5, 0.0, 1.0) | (1.0, 0.0, 0.25, 1.0) |
 | deploy | (1.0, 0.5, 0.0, 1.0) | (1.0, 0.0, 0.25, 1.0) |
 
-Tham số readout đầy đủ (gamma, sigma, tau, estimator, ref, hằng số train):
+Complete readout parameters (gamma, sigma, tau, estimator, ref, training constant):
 
 ```text
 P4m public reader, frozen 2026-11-23 21:49:16 (team decision 22 Nov 2026: P4m, documented deviation from the z13 rule)
@@ -96,57 +96,57 @@ P4m public reader, frozen 2026-11-23 21:49:16 (team decision 22 Nov 2026: P4m, d
   sha256  : a75d4deb6199f7016a5a8736c27a84ebcfccd4352e6a51345a2be9eb68b4c787  out/z14_p4m_frozen.npz
 ```
 
-## Giới hạn và thời gian
+## Limitations and timing
 
-**Việc chọn ba mô hình trong nhóm 17 đã làm trên phổ kiểu cũ; không làm lại lựa chọn/nested selection trong R1.** Mọi kết quả vẫn là dev sau nhiều quyết định nghiên cứu, không phải kiểm định holdout độc lập. Không lấy tham số deploy để báo OOF.
+**The three-of-17 model selection used old-style spectra; selection/nested selection was not repeated in R1.** All results remain dev outcomes after many research decisions, not independent holdout validation. Do not report OOF using deployment parameters.
 
-- Reset reference gate: 91,48 giây.
-- Self-warm + order-independence gates: 129,75 giây.
-- inference: 56687.7 giây.
-- score: 265.3 giây.
-- freeze_public: 104.3 giây.
+- Reset reference gate: 91.48 seconds.
+- Self-warm + order-independence gates: 129.75 seconds.
+- inference: 56687.7 seconds.
+- score: 265.3 seconds.
+- freeze_public: 104.3 seconds.
 
-Kiểm đóng gói CLI được ghi riêng trong [VIDEO_CLI_VALIDATION.md](VIDEO_CLI_VALIDATION.md). PR R1 không tự merge.
+CLI packaging checks are documented separately in [VIDEO_CLI_VALIDATION.md](VIDEO_CLI_VALIDATION.md). The R1 PR did not merge automatically.
 
-## Phạm vi các mã điều kiện
+## Condition-code definitions
 
-Đọc trực tiếp `constraint_ops.py`, `x01_extract.py`, `x09_followup.py`; không suy diễn tên điều kiện:
+Read `constraint_ops.py`, `x01_extract.py`, and `x09_followup.py` directly; do not infer operations from condition names:
 
-| Mã | Phép biến đổi và frontend |
+| Code | Transformation and frontend |
 |---|---|
-| `native` | Video gốc, không mô phỏng suy giảm. |
-| `c1_g50p`, `c1_g12p` | RGB uint8 ×0,50 / ×0,12, làm tròn; sau đó nhiễu Poisson với trung bình bằng giá trị pixel. Không có phép đo lux tương ứng. |
-| `track_c1_g25p` | Gain 0,25 + Poisson; FaceMesh mất mặt thì giữ oval qua template phần trên mặt, NCC≥0,6. |
-| `c1_g25gv001` | Gain 0,25 + Gaussian phương sai 0,001 trên thang [0,1], clip về [0,1]; không phải Poisson. |
-| `aidtrack_c1_g25gv01` | Gain 0,25 + Gaussian phương sai 0,01. Detector nhìn bản thu nhỏ/làm mờ/tăng sáng; crop tín hiệu vẫn lấy từ ảnh đã suy giảm; template fallback. |
-| `c2_vit` | Tám mảng giả lập mất sắc tố bám landmark, mỗi mảng là hull 25 điểm; nhân RGB (1,25; 1,5; 1,6), mép mềm và bão hòa. Không thay thế kiểm bệnh lý thật hay phân tầng Fitzpatrick I–VI. |
-| `c4_vga`, `c4_qvga` | Bicubic có antialias, giữ tỉ lệ khung trong 640×480 / 320×240; chạy lại frontend. |
-| `c6_us1` | Một lần unsharp kernel α=0,2, replicate border, **toàn khung** trong x01/x09. Đây là mô phỏng tăng chi tiết, không phải chứng cứ độ bền trên người 60–70+. |
-| `track_c7_blue` | Polygon khẩu trang phẫu thuật màu xanh RGB (167,199,231) che phần dưới mặt, fit standard; template tracking. **Không phải ánh sáng xanh.** |
-| `c7_white` | Cùng polygon phần dưới mặt, màu trắng (235,235,235), frontend chuẩn. |
-| `split10`, `c5_split10` | Truyền crop tách như phần C5 dưới đây; không phải nén toàn video. |
+| `native` | Original video without simulated degradation. |
+| `c1_g50p`, `c1_g12p` | RGB uint8 ×0.50 / ×0.12, rounded, then Poisson noise with pixel-value mean. No corresponding lux measurement. |
+| `track_c1_g25p` | Gain 0.25 + Poisson; if FaceMesh loses the face, retain the oval using an upper-face template, NCC≥0.6. |
+| `c1_g25gv001` | Gain 0.25 + Gaussian variance 0.001 on [0,1], clipped to [0,1]; not Poisson. |
+| `aidtrack_c1_g25gv01` | Gain 0.25 + Gaussian variance 0.01. Detector sees a downsampled/blurred/brightened copy; signal crops still use degraded images; template fallback. |
+| `c2_vit` | Eight landmark-aligned simulated depigmentation patches, each a 25-point hull; RGB multiplied by (1.25; 1.5; 1.6), soft edges and saturation. Not a substitute for actual pathology or Fitzpatrick I–VI stratification. |
+| `c4_vga`, `c4_qvga` | Antialiased bicubic resizing, preserving aspect ratio within 640×480 / 320×240; rerun frontend. |
+| `c6_us1` | One unsharp kernel α=0.2, replicate border, **full frame** in x01/x09. Simulates extra detail; not evidence of robustness for people aged 60–70+. |
+| `track_c7_blue` | Blue surgical-mask polygon, RGB (167,199,231), covering the lower face, standard fit; template tracking. **Not blue lighting.** |
+| `c7_white` | Same lower-face polygon, white (235,235,235), standard frontend. |
+| `split10`, `c5_split10` | Split-crop transmission described below; not full-video compression. |
 
-Cohort khác nhau; chỉ diễn giải delta ghép cặp trên giao video/người/cửa sổ. Simulator Python mô phỏng các thao tác đã mô tả; chưa chứng minh tương đương bit với MATLAB.
+Cohorts differ; interpret only paired deltas on the intersection of videos/people/windows. Python simulators implement the described operations but have no established bitwise MATLAB equivalence.
 
-## C5 — bằng chứng truyền tải
+## C5 — transport evidence
 
-Frontend chạy tại thiết bị, lấy mỗi khung thứ `k=ceil(fps/10−0,001)` theo mã đã khóa. Mỗi gói gồm timestamp+cờ 9 byte, crop hộp 36×36 WebP lossless; BTC thêm trung bình RGB 6×6 khối float32 (432 byte), public thêm oval 36×36 WebP lossless. Crop 72×72 của expert được INTER_AREA về 36×36 trước khi truyền, đúng kích thước đầu vào expert. Đây là **truyền ROI đã xử lý trên thiết bị**, không phải nén video toàn khung bằng H.264/VideoWriter.
+The frontend runs on-device and retains every `k=ceil(fps/10−0.001)`-th frame as in the frozen code. Packets include a 9-byte timestamp/flag and a 36×36 lossless WebP box crop; BTC adds 6×6 RGB block means as float32 (432 bytes), public adds a 36×36 lossless WebP oval. Expert 72×72 crops are reduced with INTER_AREA to 36×36 before transmission, matching expert inputs. This is **on-device ROI transmission**, not full-frame H.264/VideoWriter compression.
 
-Log `W/logs/z08_split_lossless.json`: BTC 218 bản ghi, trung bình **202,517 kbps**, cực đại giây được báo **252,584 kbps**; public 152 bản ghi có oval, trung bình **311,115 kbps**, cực đại **469,312 kbps**. Mọi kiểm giải mã trong log đều khớp bit. [Số tổng hợp và SHA nguồn](C5_TRANSPORT_EVIDENCE.json).
+Log `W/logs/z08_split_lossless.json`: BTC 218 recordings, mean **202.517 kbps**, reported peak second **252.584 kbps**; public 152 recordings with ovals, mean **311.115 kbps**, maximum **469.312 kbps**. All logged decode checks are bit-exact. See [aggregates and source SHA](C5_TRANSPORT_EVIDENCE.json).
 
-**Giới hạn bằng chứng:** mã bỏ giây cuối khi tính cực đại; `fps_sent` là trung bình bản ghi làm tròn, BTC cao nhất **10,002 fps**. Vì vậy log hiện có chưa chứng minh yêu cầu “≤10 fps và ≤500 kbps ở mọi giây”. Không đổi frame-skip hoặc tham số để sửa số. Dòng MAE tương ứng là `split10` (BTC) / `c5_split10` (public); không dùng hàng nén toàn video thay cho nó.
+**Evidence limits:** the code omits the final second from peak calculations; `fps_sent` is the rounded recording average, reaching **10.002 fps** on BTC. Existing logs therefore do not establish “≤10 fps and ≤500 kbps in every second.” Frame-skip and parameters are not changed to repair results. Corresponding MAE rows are `split10` (BTC) / `c5_split10` (public), not full-video compression rows.
 
-## C3 — phân biệt cổng danh tính và cổng tái lập
+## C3 — identity and reproduction gates
 
-Nguồn: `SI/RESULTS_22NOV_VI.md`, `SI/guard_v2/` (22/11, **trước sửa trạng thái R1**). Hai bố cục UBFC2 gồm 35 người, 193 cửa sổ chung; mỗi bố cục có 67.764 khung hợp lệ và **0 khung lấy từ người ngoài**, theo vị trí canvas trong giao thức x07.
+Source: `SI/RESULTS_22NOV_VI.md`, `SI/guard_v2/` (22 November, **before the R1 state repair**). Two UBFC2 layouts include 35 people and 193 common windows; each has 67,764 valid frames and **0 frames from bystanders**, based on canvas position in protocol x07.
 
-| Bố cục C3 | MAE một mặt | MAE ghép | Δ [CI95] bpm | Cổng trung bình |Δ|≤0,05 |
+| C3 layout | Single-face MAE | Composite MAE | Δ [CI95] bpm | Mean gate \|Δ\|≤0.05 |
 |---|---:|---:|---|---|
-| Cạnh nhau | 0,75502232 | 0,77511161 | +0,02008929 [−0,01046317; +0,05231585] | PASS |
-| Người ngoài lớn hơn | 0,75502232 | 0,77113560 | +0,01611328 [−0,01715960; +0,04938616] | PASS |
+| Side by side | 0.75502232 | 0.77511161 | +0.02008929 [−0.01046317; +0.05231585] | PASS |
+| Larger bystander | 0.75502232 | 0.77113560 | +0.01611328 [−0.01715960; +0.04938616] | PASS |
 
-CI dùng 10.000 bootstrap theo người, seed 0. Cổng kiểm chênh trung bình, không yêu cầu cả CI nằm trong ±0,05. Không diễn giải thành số P4m R1 đã chạy lại.
+CI uses 10,000 person bootstraps, seed 0. The gate checks mean differences, not whether the entire CI lies within ±0.05. These are not rerun P4m R1 results.
 
-Cổng native **reader_v3** cũng PASS: 218 video/158 người, 9,58705844 → 9,55601786 (Δ −0,03104058). 185.446 khung đi nhánh native khớp từng pixel; 18 video có nhánh khác, 6 video đổi dự đoán. Nhưng cổng **tái lập chính xác reader_v4** dừng ở ca đầu lệch 1,00 bpm; P4m route mới lệch >0,01 ở 25/193 cửa sổ, tối đa 1,318359375. Vì vậy `guarded` chưa thay thế frontend của kết quả R1. C3 PASS không đồng nghĩa toàn pipeline R1 đã được tái lập qua guard.
+Native **reader_v3** also passed: 218 videos/158 people, 9.58705844 → 9.55601786 (Δ −0.03104058). All 185,446 native-branch frames match pixel-for-pixel; 18 videos use another branch, and 6 predictions change. However, **exact reader_v4 reproduction** stopped at the first 1.00 bpm mismatch; the new P4m route differs by >0.01 on 25/193 windows, maximum 1.318359375. Thus `guarded` has not replaced the R1-results frontend. C3 PASS does not establish full R1 reproduction through the guard.
 
-[Lịch sử](history/R1_STATE_BUG_20261123.md).
+[History](history/R1_STATE_BUG_20261123.md).

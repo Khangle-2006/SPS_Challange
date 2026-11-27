@@ -1,9 +1,9 @@
-# Checkpoint và reader R1 — 24/11/2026
+# R1 checkpoints and readers — 24 November 2026
 
-Gói hiện hành: [inference-assets-r1-20261124](https://github.com/Khangle-2006/SPS_Challange/releases/tag/inference-assets-r1-20261124).
-`python3.12 tools/bootstrap_video.py` cài môi trường và tự tải gói này, kiểm SHA256 ZIP, mọi file, và đối chiếu reader với checkout. Không phải tự tìm checkpoint.
+Current package: [inference-assets-r1-20261124](https://github.com/Khangle-2006/SPS_Challange/releases/tag/inference-assets-r1-20261124).
+`python3.12 tools/bootstrap_video.py` installs environments, downloads this package, checks the ZIP and every file's SHA256, and compares readers against the checkout. No manual checkpoint search is needed.
 
-## Lệnh tải riêng
+## Standalone download
 
 ```bash
 python3.12 tools/fetch_inference_assets.py
@@ -11,24 +11,24 @@ python3.12 tools/check_inference_assets.py checkpoints/r1/facevitals-inference-a
   --archive checkpoints/r1/facevitals-inference-assets-r1-20261124.zip
 ```
 
-Có thể dùng `--destination /path/new-folder` cho lệnh tải riêng. Bootstrap và lệnh replay mặc định dùng `checkpoints/r1/`. Gói đã có và hash đúng sẽ được dùng lại; file sai hash hoặc bản tải dở được giữ để kiểm tra, không ghi đè. Khi tải dở, chọn thư mục mới để thử lại.
+Use `--destination /path/new-folder` for a standalone download. Bootstrap and replay default to `checkpoints/r1/`. Existing valid assets are reused; incorrect hashes and partial downloads are retained for inspection, not overwritten. Retry partial downloads in a new directory.
 
-## Thành phần
+## Contents
 
-| Thành phần | Vai trò |
+| Component | Role |
 |---|---|
-| `checkpoints/padding_fixed_fold0..4_seed2027.pt` | Đủ 5 checkpoint public, epoch 30, giữ nguyên bytes từ gói đã kiểm tensor; không dùng fold0 cho mọi người |
-| `readers/btc_reader_v4_deploy.json` | Cấu hình chạy video mới, đã fit một lần trên dev |
-| `readers/btc_reader_v4_folds.json` | Đúng 5 cấu hình theo fold để chấm dev OOF |
-| `readers/public_p4m_r1.json` | Trọng số fusion và readout public R1, từng fold và deploy |
-| `code/` | Kiến trúc EfficientPhys/padding và toán reader cần để nạp đúng |
-| `MANIFEST.json`, `CONFIG.json` | SHA256 từng file, nguồn gốc và quy tắc self-warm |
+| `checkpoints/padding_fixed_fold0..4_seed2027.pt` | All five public checkpoints, epoch 30; bytes preserved from tensor-verified exports; do not use fold 0 for everyone |
+| `readers/btc_reader_v4_deploy.json` | New-video configuration, fitted once on dev |
+| `readers/btc_reader_v4_folds.json` | Five matching fold configurations for OOF dev scoring |
+| `readers/public_p4m_r1.json` | Public R1 fusion weights and readouts, per fold and deployment |
+| `code/` | EfficientPhys/padding architecture and reader mathematics needed for correct loading |
+| `MANIFEST.json`, `CONFIG.json` | Per-file SHA256, provenance, and self-warm rules |
 
-Ba expert FacePhys.rlap, ME-chunk.pure, ME-flow.pure được cài cùng `open-rppg==0.1.1`; package chứa weights. Bootstrap kiểm hai file weights và `state.pkl` theo hash đã khóa. Không cần tải chúng ở nơi khác. Nhánh BTC không dùng CNN padding-fixed; vẫn tải đủ checkpoint để dùng nhánh public/nghiên cứu.
+FacePhys.rlap, ME-chunk.pure, and ME-flow.pure are installed with `open-rppg==0.1.1`, which includes weights. Bootstrap checks both weight files and `state.pkl` against frozen hashes. No other download is needed. BTC does not use the padding-fixed CNN; all checkpoints are nevertheless downloaded for public/research workflows.
 
-CLI sử dụng reader trong `models/`, không chép đè từ Release. Downloader bắt buộc reader trong ZIP trùng từng byte với `models/`. Trước mỗi video, expert reset trạng thái rồi chạy chính video hai lượt, chỉ lấy lượt hai.
+The CLI uses readers in `models/`, without overwriting them from the Release. The downloader requires ZIP readers to match `models/` byte-for-byte. Before each video, experts reset state, process that video twice, and retain only pass 2.
 
-## Nạp và kiểm CNN public (tùy chọn)
+## Load and validate public CNNs (optional)
 
 ```bash
 python3.12 tools/setup_env.py torch-cpu
@@ -36,8 +36,8 @@ python3.12 tools/setup_env.py torch-cpu
   checkpoints/r1/facevitals-inference-assets-r1-20261124 --smoke
 ```
 
-Đây là môi trường bổ sung, không cần cho lệnh BTC `predict.py` hoặc replay readout. Kiểm smoke nạp strict đủ 5 checkpoint, đầu ra hữu hạn và sóng phẳng trên đầu vào tĩnh; không thay cho kiểm video thật.
+This additional environment is unnecessary for BTC `predict.py` or readout replay. Smoke tests strictly load all five checkpoints, check finite output and flat waveforms for static inputs; they do not replace real-video validation.
 
-Checkpoint nhận `[batch,301,3,36,36]`, trả 300 sai phân; cần cumsum trước readout. Public P4m dùng crop lọc trước CNN và tham số theo đúng fold. Chạy BTC CLI trên webcam không tương đương chạy P4m. [Pipeline](PIPELINE.md) và [tái lập server](REPRODUCE_SERVER.md).
+Checkpoints accept `[batch,301,3,36,36]` and output 300 differences; cumsum is required before readout. Public P4m uses prefiltered crops and matching fold parameters. Running BTC CLI on webcam input is not equivalent to P4m. See [Pipeline](PIPELINE.md) and [server reproduction](REPRODUCE_SERVER.md).
 
-Gói không chứa ảnh mặt, video, nhãn cá nhân, split có ID, optimizer, thông tin đăng nhập hoặc holdout. Dữ liệu có quyền truy cập vẫn nằm trên server. Gói cũ `inference-assets-20261123` giữ nguyên để kiểm toán; **không dùng reader/P4m của gói cũ cho R1**. [Mô tả lịch sử](history/INFERENCE_ASSETS_20261123.md).
+The package excludes faces, videos, individual labels, ID-bearing splits, optimizer state, credentials, and holdout. Access-controlled data remain on the server. The older `inference-assets-20261123` package is retained for auditing; **do not use its reader/P4m parameters for R1**. See [historical description](history/INFERENCE_ASSETS_20261123.md).

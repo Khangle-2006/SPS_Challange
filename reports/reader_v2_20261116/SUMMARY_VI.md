@@ -1,23 +1,23 @@
-# Reader_v2: thêm hai offset theo hoạt động
+# Reader_v2: two activity-specific offsets
 
-Kết quả trên **218 video dev / 158 người**: MAE **10,25048 bpm**, bias **+0,18085 bpm**, Spearman **0,49133**. MAE tính trong từng người rồi lấy trung bình; số thấp hơn tốt hơn. Bias dương nghĩa là dự đoán cao hơn nhãn. Spearman mô tả mức đồng biến giữa dự đoán trung bình và nhãn trung bình theo người, không phải độ chính xác tuyệt đối.
+Results on **218 dev videos / 158 subjects**: MAE **10.25048 bpm**, bias **+0.18085 bpm**, Spearman **0.49133**. MAE is averaged within each subject, then across subjects; lower is better. Positive bias means predictions exceed labels. Spearman describes agreement in rank between subject-average predictions and labels, not absolute accuracy.
 
-|Đối chứng trên cùng video|MAE (bpm)|Reader_v2 trừ đối chứng [CI95]|
+| Control on the same videos | MAE (bpm) | Reader_v2 minus control [CI95] |
 |---|---:|---|
-|Hằng số train-fold|12,07068|−1,82020 [−3,03373; −0,59080]|
-|Hiệu chỉnh đã lưu|11,37385|−1,12337 [−2,08414; −0,18328]|
+| Training-fold constant | 12.07068 | −1.82020 [−3.03373; −0.59080] |
+| Saved calibration | 11.37385 | −1.12337 [−2.08414; −0.18328] |
 |Reader_v1|10,57015|−0,31967 [−0,85733; +0,22855]|
 |Reader_v2|10,25048|—|
 
-CI bootstrap ghép cặp theo người, 10.000 lần, seed 0. Reader_v2 hơn hai mốc đầu với CI không chứa 0. So với reader_v1, CI còn chứa 0: mức giảm 0,320 bpm chưa đủ để khẳng định cải thiện chắc chắn. Cổng MAE ≤10 bpm vẫn chưa đạt. Không tự đổi ứng viên hoặc đóng băng cấu hình; chờ người dùng chốt cùng C1/C4.
+CIs use 10,000 paired subject bootstrap samples, seed 0. Reader_v2 beats the first two baselines with CIs excluding 0. Against reader_v1, the CI still includes 0: the 0.320 bpm reduction is not conclusive evidence of improvement. The MAE ≤10 bpm gate remains unmet. Do not change the candidate or freeze a configuration automatically; await the user's decision alongside C1/C4.
 
-## Bảng chú thích và cách fit
+## Annotation table and fitting procedure
 
-Bản bảng BTC hiện có cột **PROTOCOL** ở cả Normal và Abnormal. Đã xác nhận thông tin hoạt động hợp lệ cho đủ **72/72 video holdout**, chỉ đọc cột ID và hoạt động. Không đọc PR, mở video hoặc đánh giá holdout. File bảng hiện tại có hash khác bản gốc đã khóa; kiểm tra này chỉ xác nhận metadata có sẵn, không thay nguồn nhãn dev hoặc xác nhận giao diện test ẩn.
+The available organizers' table has a **PROTOCOL** column in both Normal and Abnormal. Valid activity metadata was confirmed for **72/72 holdout videos**, reading only ID and activity columns. No PR labels, video access, or holdout evaluation occurred. Its hash differs from the original locked file; this check confirms metadata availability only, without replacing dev labels or confirming the hidden-test interface.
 
-Với mỗi fold, reader và hai offset đều học từ bốn fold train. Đầu tiên dùng reader vừa fit để dự đoán chính video train; sau đó tính trung bình có trọng số của `(PR − dự đoán)`, riêng nhóm Task và nhóm không-Task. Mỗi người có tổng trọng số bằng nhau trong từng nhóm. Offset chỉ được cộng vào dự đoán fold validation sau khi đã fit xong. Không fit offset trên kết quả OOF, không cắt ngưỡng dự đoán, không tìm biến thể mới. Đây là offset từ residual train in-sample theo yêu cầu, không phải residual inner-OOF.
+For each fold, the reader and both offsets are learned from the four training folds. First, the fitted reader predicts those same training videos; then the weighted mean of `(PR − prediction)` is computed separately for Task and non-Task groups. Each subject has equal total weight within a group. Offsets are added to validation-fold predictions only after fitting. Offsets are not fitted on OOF results; predictions are not clipped and no new variants are searched. These are offsets from in-sample training residuals, as requested, not inner-OOF residuals.
 
-|Fold validation|Beta|Offset Task (bpm)|Offset không-Task (bpm)|
+| Validation fold | Beta | Task offset (bpm) | Non-Task offset (bpm) |
 |---:|---:|---:|---:|
 |0|3|+13,42157|+3,28409|
 |1|2|+12,09375|+2,49773|
@@ -25,19 +25,19 @@ Với mỗi fold, reader và hai offset đều học từ bốn fold train. Đ�
 |3|3|+11,88095|+3,05752|
 |4|3|+7,71795|+3,99779|
 
-Tên `offset_rest` trong mã nghĩa là **không-Task**, gồm cả Resting và Walking. Task1/2/3 cùng dùng một cờ Task. Bảng theo Normal-Resting / Abnormal-Resting / Task / Walking, gồm đầy đủ MAE, bias, Spearman và các CI, nằm trong REPORT.md.
+The code name `offset_rest` means **non-Task**, covering both Resting and Walking. Task1/2/3 share one Task flag. REPORT.md contains Normal-Resting / Abnormal-Resting / Task / Walking tables with full MAE, bias, Spearman, and CIs.
 
-## Đối chứng
+## Controls
 
-- **Xáo nhãn theo người, 20 lần:** MAE 12,03634 trong cả 20 lần; beta đều bằng 0. Giữ nguyên chính sách xáo block người trong cùng số video, như reader_v1. Có 13–25 block người-fold giữ nguyên mỗi lần. Null không kiểm tra mọi kiểu hoán vị; độ phân tán bằng 0 không phải bằng chứng độc lập rất mạnh. Không chỉnh mã để ép null ra khoảng 12.
-- **Xáo cờ Task, 20 lần:** MAE trung bình 10,60673; phân vị 5–95 là [10,42577; 10,72989], toàn khoảng [10,37530; 10,74075]. Lợi ích bổ sung so với reader_v1 mất đi ở mức trung bình, không phải mọi phép xáo đều cho số tệ hơn reader_v1. Cờ được xáo riêng trong train và validation mỗi fold; reader nền giữ nguyên.
-- **Ảnh tĩnh: 20/20 PASS.** Không có phổ, trả prior trung vị cộng offset đã fit theo cờ, kèm `abstain=true`. Giá trị đó là dự đoán dự phòng theo hoạt động, không được gọi là đo được mạch trên ảnh tĩnh. Chi tiết STATIC.json.
-- **Octave: 5/5 ROI thật PASS**, kiểm cả hai cờ trên mỗi ROI (10 lần đối chiếu), sai khác Python dưới ngưỡng 0,5 bpm. Chưa chạy MATLAB thật. Chi tiết OCTAVE_PARITY.json.
+- **Subject-level label shuffling, 20 runs:** MAE 12.03634 in all runs; beta was always 0. The subject-block shuffle policy within equal video counts is unchanged from reader_v1. Each run retained 13–25 unchanged subject-fold blocks. This null does not test every permutation scheme; zero dispersion is not strong independent evidence. The code was not adjusted to force a null result near 12.
+- **Task-flag shuffling, 20 runs:** mean MAE 10.60673; 5th–95th percentiles [10.42577; 10.72989], full range [10.37530; 10.74075]. The extra benefit over reader_v1 disappears on average, but not every shuffle performs worse than reader_v1. Flags are shuffled separately in training and validation within each fold; the base reader is unchanged.
+- **Static images: 20/20 PASS.** With no spectrum, return the prior median plus the fitted flag-specific offset and `abstain=true`. This is an activity-based fallback, not a pulse measurement from a static image. See STATIC.json.
+- **Octave: 5/5 real ROIs PASS**, checking both flags per ROI (10 comparisons), with Python differences below 0.5 bpm. Actual MATLAB has not been run. See OCTAVE_PARITY.json.
 
-C1/C4 tiếp tục chạy nguyên cấu hình reader_v1 với cổng beta đã khóa; lần này không đổi worker hoặc tự chạy thêm C1/C4 cho reader_v2. Không dùng kết quả này để mở holdout.
+C1/C4 continues with the unchanged reader_v1 configuration and locked beta gate; this run does not modify workers or add reader_v2 C1/C4 runs. These results do not authorize opening the holdout.
 
-## Chạy lại và triển khai
+## Rerunning and deployment
 
-`python reports/reader_v2_20261116/run_reader_v2.py` dùng native_spectra.npz và PREDICTIONS.json đã lưu ở reader_v1_20261116. Mã không truy cập media holdout hoặc nhãn holdout. `check_schema.py` chỉ kiểm tra hai cột metadata theo phạm vi đã duyệt.
+`python reports/reader_v2_20261116/run_reader_v2.py` uses native_spectra.npz and PREDICTIONS.json saved under reader_v1_20261116. The code does not access holdout media or labels. `check_schema.py` checks only the two metadata columns within the approved scope.
 
-Bản `process_round1.m` được lưu riêng trong thư mục reader_v2_20261116; không ghi đè bản v1. Gọi `process_round1(roiPath, outputPrefix, modelPath, isTask)` với cờ hoạt động tường minh. `reader_model_dev218_v2.json`/MAT là bản fit toàn dev để đóng gói, không dùng tính số OOF trên đây. Octave kiểm năm ROI thật, cả hai nhánh cờ trên mỗi ROI; không thay thế kiểm chứng MATLAB thật.
+`process_round1.m` is stored separately under reader_v2_20261116, without overwriting v1. Call `process_round1(roiPath, outputPrefix, modelPath, isTask)` with an explicit activity flag. `reader_model_dev218_v2.json`/MAT are fitted on all dev data for packaging and are not used for the OOF metrics above. Octave checks five real ROIs with both flags per ROI; this does not replace validation in actual MATLAB.
