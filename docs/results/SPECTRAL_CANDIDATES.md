@@ -1,87 +1,87 @@
 > Archived aggregate report. Historical pending/status sentences describe its creation date, not current status. See the root README for the 15 November disposition. Private artifacts named here are not bundled.
 
-# Phép thử ba đỉnh phổ trên BTC dev
+# Three-spectral-peak test on BTC dev
 
-## Câu hỏi và cách đọc
+## Question and interpretation
 
-Có phải nhịp gần số PR thật vẫn nằm ở đỉnh thứ hai hoặc thứ ba, nhưng bước chọn đỉnh mạnh nhất đã bỏ qua? Mỗi video được giữ tối đa ba đỉnh, chọn hoàn toàn từ tín hiệu, cách nhau ít nhất 6 bpm. Sau khi khóa danh sách này mới đối chiếu với PR.
+Could a peak near true PR remain as the second or third peak, missed by strongest-peak selection? Retain up to three peaks per video, chosen from signals alone and separated by at least 6 bpm. Compare against PR only after freezing this list.
 
-**Oracle** nghĩa là dùng đáp án PR để chọn ứng viên gần nhất. Đây là phép thử khả năng của tập ứng viên, không phải mô hình có thể dùng khi chưa biết đáp án. MAE là sai lệch tuyệt đối trung bình, đơn vị bpm; tính trung bình từng người trước để người có nhiều video không lấn át.
+**Oracle** uses reference PR to select the closest candidate. This tests the candidate set, not an inference method without labels. MAE is mean absolute error in bpm, averaged within people first so those with more videos do not dominate.
 
-**Xáo nhãn** là đổi nguyên khối PR giữa những người có cùng số video, lặp 100 lần. Cột trong ngoặc là phân vị 5–95 của 100 kết quả, không phải khoảng tin cậy 95% của mô hình. Cùng danh sách đỉnh được dùng cho nhãn thật và nhãn xáo.
+**Label shuffling** exchanges entire PR blocks among people with equal video counts, repeated 100 times. Brackets show the 5th–95th percentiles of those results, not a model's 95% confidence interval. True and shuffled labels use identical peak lists.
 
-## 1. Sai số oracle
+## 1. Oracle error
 
-|Nhóm|Video / người|Video có ứng viên|Oracle thật (bpm)|Oracle xáo: trung bình [P5–P95] (bpm)|
+|Group|Videos / people|Videos with candidates|True oracle (bpm)|Shuffled oracle: mean [P5–P95] (bpm)|
 |---|---:|---:|---:|---|
-|Toàn bộ|218 / 158|218|7.55|8.23 [7.74; 8.83]|
-|Normal — nghỉ|62 / 62|62|6.83|7.52 [6.52; 8.79]|
-|Abnormal — nghỉ|76 / 76|76|7.53|7.90 [6.78; 8.97]|
-|Làm nhiệm vụ|75 / 19|75|10.71|12.01 [10.64; 13.41]|
-|Đi bộ|5 / 5|5|2.00|6.75 [2.50; 11.81]|
+|All|218 / 158|218|7.55|8.23 [7.74; 8.83]|
+|Normal — resting|62 / 62|62|6.83|7.52 [6.52; 8.79]|
+|Abnormal — resting|76 / 76|76|7.53|7.90 [6.78; 8.97]|
+|Task|75 / 19|75|10.71|12.01 [10.64; 13.41]|
+|Walking|5 / 5|5|2.00|6.75 [2.50; 11.81]|
 
-## 2. Bao nhiêu video có một đỉnh gần PR?
+## 2. How many videos have a peak near PR?
 
-Phủ ±5 bpm nghĩa là có ít nhất một ứng viên lệch PR không quá 5 bpm. Video không có ứng viên được tính là không phủ. Các con số dưới đây là phần trăm video.
+Coverage ±5 bpm means at least one candidate within 5 bpm of PR. Videos without candidates count as uncovered. Values below are percentages of videos.
 
-|Nhóm|Phủ±5 thật (%)|Phủ±5 xáo: TB [P5–P95] (%)|Phủ±10 thật (%)|Phủ±10 xáo: TB [P5–P95] (%)|
+|Group|True ±5 coverage (%)|Shuffled ±5: mean [P5–P95] (%)|True ±10 coverage (%)|Shuffled ±10: mean [P5–P95] (%)|
 |---|---:|---|---:|---|
-|Toàn bộ|47.71|40.79 [35.78; 46.38]|75.69|69.59 [65.11; 73.90]|
-|Normal — nghỉ|46.77|43.81 [32.26; 54.84]|85.48|75.90 [69.27; 83.87]|
-|Abnormal — nghỉ|53.95|43.89 [35.53; 52.63]|77.63|74.46 [65.79; 81.58]|
-|Làm nhiệm vụ|38.67|34.92 [26.67; 42.67]|64.00|58.52 [52.00; 65.33]|
-|Đi bộ|100.00|44.40 [19.00; 100.00]|100.00|83.40 [60.00; 100.00]|
+|All|47.71|40.79 [35.78; 46.38]|75.69|69.59 [65.11; 73.90]|
+|Normal — resting|46.77|43.81 [32.26; 54.84]|85.48|75.90 [69.27; 83.87]|
+|Abnormal — resting|53.95|43.89 [35.53; 52.63]|77.63|74.46 [65.79; 81.58]|
+|Task|38.67|34.92 [26.67; 42.67]|64.00|58.52 [52.00; 65.33]|
+|Walking|100.00|44.40 [19.00; 100.00]|100.00|83.40 [60.00; 100.00]|
 
-## 3. Hai mốc thực tế trên cùng video có ứng viên
+## 3. Two practical baselines on the same videos with candidates
 
-Hằng số là trung vị PR ở bốn fold train, không dùng PR của người đang chấm. Trung vị hiệu chỉnh là phương án đang giữ, đã lưu từ trước. Oracle được phép nhìn đáp án nên không thể đem nó làm kết quả thắng hai phương pháp này.
+The constant is median PR from four training folds, excluding the evaluated person's PR. The calibrated median is the retained, previously saved method. The oracle sees labels and cannot be claimed as an inference-method win over these baselines.
 
-|Nhóm|Phương pháp|Video / người|MAE (bpm)|CI95 bootstrap theo người|
+|Group|Method|Videos / people|MAE (bpm)|Person-bootstrap CI95|
 |---|---|---:|---:|---|
-|Toàn bộ|Hằng số train-fold|218 / 158|12.07|[10.58; 13.68]|
-|Toàn bộ|Trung vị hiệu chỉnh|218 / 158|11.37|[9.92; 12.89]|
-|Normal — nghỉ|Hằng số train-fold|62 / 62|8.66|[7.05; 10.39]|
-|Normal — nghỉ|Trung vị hiệu chỉnh|62 / 62|9.18|[7.51; 10.90]|
-|Abnormal — nghỉ|Hằng số train-fold|76 / 76|14.20|[11.83; 16.75]|
-|Abnormal — nghỉ|Trung vị hiệu chỉnh|76 / 76|12.71|[10.41; 15.12]|
-|Làm nhiệm vụ|Hằng số train-fold|75 / 19|14.80|[10.23; 20.29]|
-|Làm nhiệm vụ|Trung vị hiệu chỉnh|75 / 19|12.95|[8.74; 18.10]|
-|Đi bộ|Hằng số train-fold|5 / 5|12.40|[6.00; 19.20]|
-|Đi bộ|Trung vị hiệu chỉnh|5 / 5|10.76|[4.66; 18.13]|
+|All|Training-fold constant|218 / 158|12.07|[10.58; 13.68]|
+|All|Calibrated median|218 / 158|11.37|[9.92; 12.89]|
+|Normal — resting|Training-fold constant|62 / 62|8.66|[7.05; 10.39]|
+|Normal — resting|Calibrated median|62 / 62|9.18|[7.51; 10.90]|
+|Abnormal — resting|Training-fold constant|76 / 76|14.20|[11.83; 16.75]|
+|Abnormal — resting|Calibrated median|76 / 76|12.71|[10.41; 15.12]|
+|Task|Training-fold constant|75 / 19|14.80|[10.23; 20.29]|
+|Task|Calibrated median|75 / 19|12.95|[8.74; 18.10]|
+|Walking|Training-fold constant|5 / 5|12.40|[6.00; 19.20]|
+|Walking|Calibrated median|5 / 5|10.76|[4.66; 18.13]|
 
-## 4. Cổng đã ghi trước
+## 4. Preregistered gates
 
-|Điều kiện|Yêu cầu|Đo được|
+|Condition|Requirement|Measured|
 |---|---:|---:|
-|Oracle tốt hơn trung bình xáo|Ít nhất 4 bpm|0.69 bpm|
-|Phủ±5 cao hơn xáo|Ít nhất 15 điểm phần trăm|6.91 điểm phần trăm|
+|Oracle improvement over shuffled mean|At least 4 bpm|0.69 bpm|
+|±5 coverage improvement over shuffled|At least 15 percentage points|6.91 percentage points|
 
-**Kết quả: KHÔNG ĐẠT**. Phải đạt đồng thời cả hai điều kiện.
+**Result: FAIL**. Both conditions must pass.
 
-Không triển khai bộ đọc theo nhánh điều kiện này. Giữ bộ chọn và ngưỡng đã khóa; chờ V5 có kết luận cuối trước khi đóng băng.
+Do not implement a reader under this conditional branch. Retain the frozen selector/thresholds and wait for V5's final disposition before freezing.
 
-## 5. Giới hạn cần giữ trong báo cáo
+## 5. Limitations to retain in reporting
 
-Phân tầng số video/người: {'1': 135, '2': 4, '6': 6, '3': 13}. Tỷ lệ người đổi khối nhãn trung bình: 97.34%. Nếu một tầng chỉ có một người, khối đó không thể đổi; không giả vờ rằng mọi người đều được xáo.
+Videos-per-person strata: {'1': 135, '2': 4, '6': 6, '3': 13}. Mean proportion of people whose label blocks change: 97.34%. Singleton strata cannot exchange blocks; do not claim everyone was shuffled.
 
-Phổ được tính từ trace RGB đa ROI đã lưu, không đọc lại video và không dùng holdout. Bộ trích đa ROI này khác canonical oval đã sửa trên public. Kết luận chỉ áp dụng cho tối đa ba đỉnh và cách gộp phổ đã khóa. Không chứng minh mọi thông tin nhịp đã mất, không xác định nguyên nhân do nhãn hay codec. Một oracle thấp cũng không chứng minh có bộ đọc học được cách chọn đúng đỉnh.
+Spectra use saved multi-ROI RGB traces, without video rereading or holdout. This extractor differs from the public canonical oval repair. Conclusions apply only to the frozen three-peak limit and spectral aggregation. They neither establish loss of all pulse information nor identify labels/codecs as the cause. Low oracle error does not establish a learnable peak selector.
 
-V5 và sao lưu P100 tiếp tục độc lập. Không mở thêm GPU hoặc holdout. Định nghĩa, hash, danh sách ứng viên và 100 lần hoán vị nằm trong GATES.md, PREREGISTRATION.json, CANDIDATES_FROZEN.json, RESULTS.json và PERMUTATIONS.json.
+V5 and P100 backup continue independently. No additional GPU or holdout access. Definitions, hashes, candidates, and 100 permutations are in GATES.md, PREREGISTRATION.json, CANDIDATES_FROZEN.json, RESULTS.json, and PERMUTATIONS.json.
 
-## 6. Diễn giải và kiểm tra độc lập
+## 6. Interpretation and independent checks
 
-Trên 218 video của 158 người, cả 218 video đều có đủ ba ứng viên. Oracle thật đạt 7,55 bpm (CI95% bootstrap theo người: 6,44–8,75), so với 8,23 bpm khi xáo nhãn. Độ phủ ±5 bpm là 47,71% so với 40,79%; độ phủ ±10 bpm là 75,69% so với 69,59%. Như vậy có một lợi thế nhỏ so với khớp tình cờ, nhưng chưa đạt kích thước hiệu quả đã yêu cầu để xây bộ đọc.
+All 218 videos from 158 people have three candidates. True oracle MAE is 7.55 bpm (person-bootstrap CI95%: 6.44–8.75), versus shuffled 8.23 bpm. Coverage ±5: 47.71% versus 40.79%; ±10: 75.69% versus 69.59%. This is a small advantage over chance matching, below the required effect size for developing a reader.
 
-Các p-value hoán vị mô tả là 0,0396 cho oracle và 0,0297 cho phủ ±5. Chúng không thay thế hai ngưỡng hiệu quả đã khóa, không dùng để mở cổng sau khi thấy kết quả. Không nên viết rằng tín hiệu hoàn toàn bằng không hoặc mọi thông tin nhịp đã mất.
+Descriptive permutation p-values are 0.0396 for oracle and 0.0297 for ±5 coverage. They do not replace frozen effect-size thresholds or reopen the gate after results. Do not claim zero signal or loss of all pulse information.
 
-Nhóm Walking chỉ có 5 video / 5 người. Không chọn riêng nhóm tốt nhất để thay kết luận toàn bộ. Người xuất hiện ở nhiều loại tình huống được tính trong từng nhóm tương ứng; không cộng số người giữa các nhóm để suy ra tổng.
+Walking has only 5 videos/5 people. Do not select the best subgroup to replace the overall conclusion. People occurring in multiple activities count in each corresponding group; do not sum group person counts.
 
-Chỉ đọc các trace BTC dev đã lưu. Tiến trình chuẩn bị đọc PR để đối chiếu đúng cohort và giữ hai baseline; tiến trình trích đỉnh riêng không nhận PR. Danh sách ứng viên được khóa bằng SHA256 trước bước chấm với PR. Xem EXECUTION_CLARIFICATION.md để phân biệt điều này với tuyên bố mạnh hơn rằng không tiến trình nào từng mở nhãn trước khi trích.
+Only saved BTC dev traces were read. Preparation read PR to reconcile cohorts and retain two baselines; the separate peak extractor received no PR. Candidate SHA256 was frozen before scoring against PR. EXECUTION_CLARIFICATION.md distinguishes this from the stronger claim that no process opened labels before extraction.
 
-Phổ được lấy mẫu trên lưới 0,5 bpm để tính số; điều này không tạo độ phân giải vật lý 0,5 bpm. Cửa sổ 10 giây chỉ có độ phân giải tần số cơ bản khoảng 6 bpm.
+The numerical spectrum grid is 0.5 bpm; this does not provide physical resolution of 0.5 bpm. A 10-second window has fundamental frequency resolution of about 6 bpm.
 
-Đã kiểm lại SHA256 của gói kết quả, hash mã nguồn/gates đã khóa và tự tính lại MAE theo người cùng hai tỷ lệ phủ từ danh sách ứng viên. Tất cả khớp. Không tính lại phổ hoặc thay cách chọn đỉnh sau khi xem nhãn.
+Result-package SHA256 and frozen source/gate hashes were rechecked; person-level MAE and both coverage rates were independently recomputed from candidate lists. All match. Spectra/peak selection were not recomputed or changed after viewing labels.
 
-Hoàn tất lúc 07:32:56 ICT ngày 12/11/2026. Nhánh bộ đọc dừng theo cổng; V5 và sao lưu P100 vẫn là hai công việc riêng đang tiếp tục. Holdout: 0 lần đánh giá.
+Completed at 07:32:56 ICT on 12 November 2026. The reader branch stopped at its gate; V5 and P100 backup continued independently. Holdout evaluations: 0.
 
-Tệp tái lập: core.py (trích và thống kê), run.py (điều phối), GATES.md (quy tắc), PREREGISTRATION.json (hash trước chạy), CANDIDATES.json (ba đỉnh mỗi video), CANDIDATES_FROZEN.json (hash trước chấm), PERMUTATIONS.json (100 hoán vị), RESULTS.json và COMPLETION_REVIEW.json. render_report.py chỉ định dạng lại số đã lưu; không chạy lại phép thử.
+Reproduction files: core.py (extraction/statistics), run.py (orchestration), GATES.md (rules), PREREGISTRATION.json (pre-run hashes), CANDIDATES.json (three peaks/video), CANDIDATES_FROZEN.json (pre-scoring hash), PERMUTATIONS.json (100 permutations), RESULTS.json, and COMPLETION_REVIEW.json. render_report.py only reformats saved values; it does not rerun the test.

@@ -1,8 +1,8 @@
-# Lượt 3 — fold 2: BTC native validation
+# Run 3 — fold 2: BTC native validation
 
-Kết quả riêng fold, không phải toàn BTC dev. MAE theo người; CI ghép cặp10.000 bootstrap seed0. Hai baseline dùng đúng giao video.
+Fold-specific results, not the full BTC dev set. MAE is subject-level; CIs use 10,000 paired bootstrap samples, seed 0. Both baselines use exactly the same video intersection.
 
-| Nhóm | Phương pháp | Video/người | MAE | CI95% | Bias | SD dự đoán video | Spearman theo người | Δ hiệu chỉnh [CI95%] |
+| Group | Method | Videos/subjects | MAE | CI95% | Bias | Video prediction SD | Subject-level Spearman | Δ calibration [CI95%] |
 |---|---|---:|---:|---|---:|---:|---:|---|
 | all | constant | 42/32 | 9.682 | [7.484244791666667, 11.9375] | +1.214 | 0.0 | None | +0.265 [-1.6968313887090367, 2.1437023231705923] |
 | all | calibrated | 42/32 | 9.417 | [7.255604205762574, 11.641292476934668] | -1.074 | 5.807546928646353 | 0.2622741540004596 | +0.000 [0.0, 0.0] |
@@ -20,4 +20,4 @@ Kết quả riêng fold, không phải toàn BTC dev. MAE theo người; CI ghé
 | Walking | calibrated | 2/2 | 12.390 | [0.5851825434196769, 24.194607981409135] | -11.805 | 0.1557116131750779 | None | +0.000 [0.0, 0.0] |
 | Walking | fasttrack | 2/2 | 37.075 | [20.83984375, 53.310546875] | -37.075 | 5.282584839919032 | None | +24.685 [20.254661206580323, 29.115938893590865] |
 
-Đạt cổng native <12: False. Phép thử ảnh tĩnh/weak-collapse và độ phủ phải hợp lệ.
+Native <12 gate passed: False. Static-image/weak-collapse checks and coverage must also be valid.

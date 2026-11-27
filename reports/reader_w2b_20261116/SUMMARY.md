@@ -1,67 +1,67 @@
-# W2b và reader — cập nhật 16/11/2026
+# W2b and reader — November 16, 2026 update
 
-**W2 cũ đã dừng. Reader native 10,570 bpm là ứng viên BTC theo quyết định của người dùng.** Đây là kết quả dev, chưa phải holdout. Cổng thành công ≤10 bpm vẫn chưa đạt.
+**The old W2 run has stopped. The native reader at 10.570 bpm is the BTC candidate selected by the user.** This is a dev result, not a holdout result. The ≤10 bpm success gate remains unmet.
 
-## 1. Phép thử W2
+## 1. W2 tests
 
-Đã giữ nguyên các lượt hoàn tất và lượt dở; hủy hàng chờ W2 cũ và bước ghép phổ W2.
+Completed and partial runs were retained; the old W2 queue and W2 spectral-fusion step were canceled.
 
-T1 chỉ kiểm tra mô hình có học thuộc được 16 clip train cố định hay không. Không dùng nó làm bằng chứng tổng quát hóa. Batch hiệu dụng 16, chia hai microbatch 8 để giữ giới hạn VRAM.
+T1 only tests whether the model can memorize 16 fixed training clips. It is not evidence of generalization. The effective batch size is 16, split into two microbatches of eight to remain within the VRAM limit.
 
-|Bước|Weak-CE chế độ eval trên 16 clip|Weak-CE train của bước vừa chạy|MAE readout trên 16 clip (bpm)|
+| Step | Eval-mode weak CE on 16 clips | Training weak CE from the latest step | Readout MAE on 16 clips (bpm) |
 |---:|---:|---:|---:|
 |0|5,266863|—|19,403198|
 |100|3,423835|3,805221|0,876465|
 |200|3,260529|3,578791|0,618042|
 |400|3,198261|3,365320|0,389648|
 
-Phổ phẳng có CE 5,056246; phân bố đích lý tưởng có CE 3,157451. CE thấp hơn là tốt hơn. T1 qua điều kiện <4,0 bằng cả loss train và eval. Cặp W2b fold 2 nhãn thật/nhãn xáo đã hoàn tất; nhánh W2b đã đóng vì không qua cổng.
+A flat spectrum has CE 5.056246; the ideal target distribution has CE 3.157451. Lower CE is better. T1 passes <4.0 with both training and evaluation loss. The W2b fold 2 true/shuffled-label pair is complete; the W2b branch was closed because it failed the gate.
 
-T2, cùng trọng số/BN ban đầu trên một batch:
+T2, using the same initial weights/BN on one batch:
 
-|Phần mô hình|L2 gradient phase loss|L2 gradient weak CE|Tỉ số weak/phase|
+| Model component | Phase-loss gradient L2 | Weak-CE gradient L2 | Weak/phase ratio |
 |---|---:|---:|---:|
-|Toàn mô hình|3,179056|16,737888|5,265050|
+| Full model | 3.179056 | 16.737888 | 5.265050 |
 |final_dense_2|2,189098|15,949274|7,285775|
 
-Gradient weak CE không nhỏ hơn phase loss trong batch đã đo. Kết quả này không tự xác định nguyên nhân W2 không học. W2b cập nhật hai optimizer riêng theo yêu cầu, không thay các tham số khác.
+The weak-CE gradient is not smaller than the phase-loss gradient on the measured batch. This alone does not identify why W2 failed to learn. W2b updates two separate optimizers as requested, without changing other parameters.
 
-**Kết quả đã xác minh lúc 09:05 ICT ngày 16/11:**
+**Results verified at 09:05 ICT on November 16:**
 
-|Fold 2 — 42 video/32 người validation|Nhãn thật|Nhãn xáo|
+| Fold 2 — 42 validation videos/32 subjects | True labels | Shuffled labels |
 |---|---:|---:|
 |MAE validation (bpm)|17,432851|17,672521|
 |Weak-CE train epoch 1|5,308940|5,485891|
 |Weak-CE train epoch 10|5,262399|5,423419|
-|MAE 40 video train cố định, epoch 1|18,594813|20,178596|
-|MAE 40 video train cố định, epoch 10|18,727266|18,714513|
-|Kiểm tra ảnh tĩnh|10/10 PASS|10/10 PASS|
+| MAE on 40 fixed training videos, epoch 1 | 18.594813 | 20.178596 |
+| MAE on 40 fixed training videos, epoch 10 | 18.727266 | 18.714513 |
+| Static-image check | 10/10 PASS | 10/10 PASS |
 
-Nhãn thật chỉ tốt hơn nhãn xáo **0,239670 bpm**, thấp hơn ngưỡng 1 bpm. Chênh lệch thật trừ xáo −0,239670, CI95 [−2,044661; +1,458253]. Weak-CE nhãn thật chỉ giảm **0,046541**, thấp hơn ngưỡng 0,3. Cả hai điều kiện mở rộng đều trượt. Controller đã thoát; các fold 0/1/3/4 W2b không được khởi chạy. Không có kết quả W2b toàn bộ 218 video. Xem [W2B_REPORT.md](W2B_REPORT.md) cho bốn nhóm, baseline trên cùng video và đường loss từng epoch.
+True labels outperform shuffled labels by only **0.239670 bpm**, below the 1 bpm threshold. True minus shuffled is −0.239670, CI95 [−2.044661; +1.458253]. True-label weak CE decreases by only **0.046541**, below the 0.3 threshold. Both expansion gates fail. The controller has exited; W2b folds 0/1/3/4 were not launched. There is no W2b result for all 218 videos. See [W2B_REPORT.md](W2B_REPORT.md) for four groups, baselines on the same videos, and per-epoch losses.
 
-## 2. Reader với cổng beta
+## 2. Reader with a beta gate
 
-**Prior và beta được fit lại trong từng điều kiện, trên bốn fold train.** Không dùng lại beta native cho C5. Hàng calibrated ở báo cáo chi tiết là dự đoán native lịch sử trên cùng video, không phải bản hiệu chỉnh fit riêng cho điều kiện nén.
+**Prior and beta are refitted within each condition on the four training folds.** Native beta is not reused for C5. Calibrated rows in the detailed report are historical native predictions on the same videos, not calibration fitted specifically for compression.
 
-Chỉ giữ beta dương nếu MAE train theo người giảm ít nhất 0,5 bpm so với beta 0. Không đổi cửa sổ, bandwidth, lưới beta hoặc prior. Native giữ nguyên toàn bộ 218 dự đoán; beta từng fold vẫn là 3, 2, 2, 3, 3. Mức giảm trên train lần lượt 1,473; 1,130; 1,819; 1,719; 1,380 bpm.
+Positive beta is retained only if subject-level training MAE improves by at least 0.5 bpm over beta 0. Windowing, bandwidth, beta grid, and prior are unchanged. All 218 native predictions are preserved; fold betas remain 3, 2, 2, 3, 3. Training reductions are 1.473; 1.130; 1.819; 1.719; 1.380 bpm, respectively.
 
-|Điều kiện|Video/người|Reader sau cổng, MAE bpm|Δ so hằng số [CI95], bpm|Beta 5 fold|
+| Condition | Videos/subjects | Gated reader MAE, bpm | Δ constant [CI95], bpm | Beta across five folds |
 |---|---:|---:|---|---|
 |Native|218/158|10,570148|−1,500527 [−2,792748; −0,191443]|3 / 2 / 2 / 3 / 3|
-|C5 cũ|218/158|12,073840|+0,003165 [−0,280617; +0,290084]|0 / 0 / 0 / 0 / 0|
+| Historical C5 | 218/158 | 12.073840 | +0.003165 [−0.280617; +0.290084] | 0 / 0 / 0 / 0 / 0 |
 |C5′ default|161/109|12,951070|+0,146789 [−0,162080; +0,449541]|0 / 0 / 0 / 0 / 0|
 |C5′ bf0|158/106|13,278302|+0,205975 [−0,169851; +0,578616]|0 / 0 / 0 / 0 / 0|
 
-MAE tính trong từng người rồi trung bình. CI bootstrap ghép cặp theo người 10.000 lần, seed 0. Số âm của Δ nghĩa là reader tốt hơn. Các điều kiện nén đều dùng prior, không còn tin phổ. Prior KDE có trung vị hơi khác trung vị PR thô của predictor hằng; vì vậy hai dòng không nhất thiết bằng nhau. Không ép chúng bằng nhau bằng một thay đổi thuật toán mới.
+MAE is averaged within subjects, then across subjects. CIs use 10,000 paired subject bootstrap samples, seed 0. Negative Δ favors the reader. All compression conditions use the prior and no longer rely on spectra. The KDE prior median differs slightly from the raw PR median used by the constant predictor, so the two rows need not match. No new algorithm change is introduced to force equality.
 
-Đây là bằng chứng reader hiện tại không khai thác phổ hiệu quả trong các điều kiện nén đã thử; không chứng minh mọi thông tin mạch đều bị xóa. Các hàng có độ phủ khác nhau không được so trực tiếp để quy nguyên nhân codec. C5′ là bản ffmpeg mô phỏng, chưa xác minh tương đương MATLAB VideoWriter.
+This shows that the current reader does not exploit spectra effectively under the tested compression conditions; it does not prove that all pulse information is lost. Rows with different coverage cannot be directly compared to attribute codec effects. C5′ is an ffmpeg simulation, not verified as equivalent to MATLAB VideoWriter.
 
-MAE, bias, Spearman và bốn nhóm nằm trong [GATED_REPORT.md](GATED_REPORT.md). Dự đoán, beta và độ giảm train từng fold nằm trong GATED_RESULTS.json.
+MAE, bias, Spearman, and four-group results are in [GATED_REPORT.md](GATED_REPORT.md). Predictions, beta, and training reductions per fold are in GATED_RESULTS.json.
 
-## 3. C1/C4 đang chạy
+## 3. C1/C4 in progress
 
-218 video dev, năm điều kiện: C1 gain 0,5 / 0,25 / 0,125; C4 QVGA / VGA. Bốn shard CPU biến đổi toàn khung, dò mặt lại, giữ đồng hồ nguồn và dùng đúng cổng beta trên. Lúc 09:05 ICT đã có 24/1.090 mục video–điều kiện hoàn tất; cả bốn worker còn chạy, chưa ghi lỗi. Đây là tiến độ xử lý, chưa phải bảng đánh giá đầy đủ.
+There are 218 dev videos and five conditions: C1 gains 0.5 / 0.25 / 0.125; C4 QVGA / VGA. Four CPU shards transform full frames, rerun face detection, preserve source timing, and use the beta gate above. At 09:05 ICT, 24/1,090 video–condition items were complete; all four workers were running with no recorded errors. This is processing progress, not a complete evaluation table.
 
-C1 trong simulate.py còn có codec lưu trữ x264 CRF18; không được diễn giải là tác động nhiễu thuần túy. Kết quả C1/C4 chưa có. Bảng cuối C_REVIEWED_REPORT.md sẽ báo độ phủ, bias, Spearman và Δ ghép cặp với hằng số/reader native trên cùng video.
+C1 in simulate.py also includes the x264 CRF18 storage codec and must not be interpreted as an isolated noise effect. C1/C4 results are not yet available. The final C_REVIEWED_REPORT.md table will report coverage, bias, Spearman, and paired differences against the constant/native reader on the same videos.
 
-Holdout 72 video/41 người vẫn khóa, số lần đánh giá bằng 0. Không tinh chỉnh reader thêm.
+The 72-video/41-subject holdout remains locked, with zero evaluations. No further reader tuning.

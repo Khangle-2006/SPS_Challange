@@ -1,10 +1,10 @@
-# W2b — kết quả đã hoàn tất
+# W2b — completed results
 
-Chỉ dùng epoch cuối. MAE tính trong từng người rồi trung bình; bootstrap ghép cặp theo người 10.000 lần, seed 0. Kết quả một fold không phải kết quả toàn bộ BTC dev.
+Only the final epoch is used. MAE is averaged within subjects, then across subjects; paired subject bootstrap uses 10,000 samples, seed 0. A single-fold result does not represent the full BTC dev set.
 
-Hoàn tất: fold2, fold2_shuffle
+Completed: fold2, fold2_shuffle
 
-|Nhóm|Phương pháp|Video/người|MAE|Bias|Spearman|Δ hằng số [CI95]|Δ hiệu chỉnh [CI95]|
+| Group | Method | Videos/subjects | MAE | Bias | Spearman | Δ constant [CI95] | Δ calibration [CI95] |
 |---|---|---:|---:|---:|---:|---|---|
 |all|constant|42/32|9.68229|1.21354|None|0.00000 [0.0, 0.0]|0.26488 [-1.6968313887090367, 2.1437023231705923]|
 |all|calibrated|42/32|9.41741|-1.07420|0.2622741540004596|-0.26488 [-2.1437023231705927, 1.6968313887090358]|0.00000 [0.0, 0.0]|
@@ -47,8 +47,8 @@ Hoàn tất: fold2, fold2_shuffle
 |Walking|reader_v1|2/2|15.00000|-15.00000|None|2.50000 [2.5, 2.5]|2.61010 [2.305392018590865, 2.914817456580323]|
 |Walking|W2b_shuffle|2/2|36.63574|-36.63574|None|24.13574 [19.83984375, 28.431640625]|24.24585 [20.254661206580323, 28.237032643590865]|
 
-## Học trên 40 video train cố định
-|Lượt|Epoch|Weak CE train|MAE train40|Ảnh tĩnh|
+## Learning on 40 fixed training videos
+| Run | Epoch | Training weak CE | Train40 MAE | Static images |
 |---|---:|---:|---:|---|
 |fold2|1|5.308940|18.594812729779413|True|
 |fold2|2|5.304267|19.40586224724265|True|
@@ -71,10 +71,10 @@ Hoàn tất: fold2, fold2_shuffle
 |fold2_shuffle|9|5.480793|19.40603458180147|True|
 |fold2_shuffle|10|5.423419|18.714513442095587|True|
 
-SD dự đoán cấp video nằm trong W2B_REPORT.json (video_SD).
+Video-level prediction SD is in W2B_REPORT.json (video_SD).
 
-## Fold 2: nhãn thật trừ nhãn xáo
-Số âm: nhãn thật tốt hơn. Chỉ giao video validation chung.
+## Fold 2: true labels minus shuffled labels
+Negative values favor true labels. Only the shared validation-video intersection is used.
 ```json
 {
   "all": {
@@ -125,7 +125,7 @@ Số âm: nhãn thật tốt hơn. Chỉ giao video validation chung.
 }
 ```
 
-## Cổng mở rộng
+## Expansion gate
 ```json
 {
   "passed": false,
@@ -136,4 +136,4 @@ Số âm: nhãn thật tốt hơn. Chỉ giao video validation chung.
 }
 ```
 
-Trạng thái: {"state": "closed_after_pair", "no_extra_training": true}
+Status: {"state": "closed_after_pair", "no_extra_training": true}

@@ -1,20 +1,20 @@
-# Từ clone mới đến PR và số dev R1
+# From a fresh clone to PR and R1 dev results
 
-BTC joint hiện là mặc định của `predict.py`. Để fit/export hoặc replay số
-8,020 bpm của nhánh này, dùng [BTC_JOINT_REPRODUCING.md](BTC_JOINT_REPRODUCING.md).
-Lệnh `reproduce_r1.py` bên dưới vẫn kiểm reader_v4 R1 và P4m, không đổi thành joint.
+BTC joint is now the `predict.py` default. To fit/export or replay its
+8.020 bpm result, use [BTC_JOINT_REPRODUCING.md](BTC_JOINT_REPRODUCING.md).
+The `reproduce_r1.py` command below still checks reader_v4 R1 and P4m, not joint.
 
-## 1. Điều kiện máy
+## 1. Machine requirements
 
-Linux x86_64, Python 3.12, ffmpeg/ffprobe, ít nhất 15 GiB RAM available, khoảng 3 GiB cho ba môi trường và thêm chỗ cho output video. Cài gói hệ thống nếu chưa có:
+Linux x86_64, Python 3.12, ffmpeg/ffprobe, at least 15 GiB available RAM, about 3 GiB for three environments, plus video-output space. Install missing system packages:
 
 ```bash
 sudo apt-get install git ffmpeg python3.12-venv libgl1 libegl1 libglib2.0-0t64
 ```
 
-Lệnh apt ở trên dành cho Ubuntu 24.04. Nếu máy không có Python 3.12 trong kho hệ điều hành, nhờ quản trị viên cài đúng phiên bản trước; không thay lock bằng phiên bản ngẫu nhiên. Không cần GPU. Cài lần đầu cần Internet đến GitHub/PyPI.
+The apt command targets Ubuntu 24.04. If Python 3.12 is unavailable in OS repositories, ask an administrator to install it; do not substitute arbitrary versions in locks. No GPU is required. Initial setup needs GitHub/PyPI Internet access.
 
-## 2. Clone và lấy đủ tài sản
+## 2. Clone and obtain all assets
 
 ```bash
 git clone https://github.com/Khangle-2006/SPS_Challange.git
@@ -22,34 +22,34 @@ cd SPS_Challange
 python3.12 tools/bootstrap_video.py
 ```
 
-Bootstrap tạo `core`, `frontend`, `experts`, kiểm pins/pip check, weights và reader; tự tải Release R1 gồm đủ 5 checkpoint public. Không tự quét dataset hoặc mở holdout.
+Bootstrap creates `core`, `frontend`, and `experts`, checks pins/pip compatibility, weights, and readers, and downloads the R1 Release with all five public checkpoints. It does not scan datasets or open holdout.
 
-## 3. Chọn video và ra PR
+## 3. Select a video and obtain PR
 
 ```bash
 python3.12 predict.py --video /absolute/path/video.mp4 --activity Resting --output output/video_001
 ```
 
-Hoạt động lấy từ lúc quay: Resting/Task/Walking. Đọc `output/video_001/result.json` hoặc CSV. `pr_bpm` là dự đoán; `abstain=true` nghĩa không báo số đo. Mỗi lượt cần một thư mục output mới. Nếu file không có stream bitrate, truyền `--source-bitrate` bằng bitrate **nguồn**; không dùng bitrate bản đã nén/resize để đổi loại nguồn. Ví dụ và giới hạn frontend: [RUN_VIDEO](RUN_VIDEO.md).
+Use the recorded activity: Resting/Task/Walking. Read `output/video_001/result.json` or CSV. `pr_bpm` is the prediction; `abstain=true` means no measurement is reported. Every run requires a new output directory. If stream bitrate is unavailable, supply `--source-bitrate` using the **source** bitrate, not derivative bitrate after compression/resizing. Examples and frontend limits: [RUN_VIDEO](RUN_VIDEO.md).
 
-## 4. Lặp đúng các số dev trên P100
+## 4. Reproduce dev results on P100
 
 ```bash
 .venv/core/bin/python tools/reproduce_r1.py --output output/r1_replay
 ```
 
-Mặc định server-root là `/mnt/samsung_t5/khangle/facevitals`. Máy khác có bản sao được cấp quyền dùng `--server-root /path/copy`. Private cache là `reports/repo_ready_20261124/dev_replay`; cấu hình công khai chỉ chứa hash/danh mục, không chứa nhãn. Cần quyền đọc cache. Nếu thiếu, chương trình dừng và chỉ rõ đường thiếu, không tải dataset hay quét sang holdout.
+Default server-root is `/mnt/samsung_t5/khangle/facevitals`; authorized copies elsewhere use `--server-root /path/copy`. The private cache is `reports/repo_ready_20261124/dev_replay`. Public configurations contain hashes/inventories, not labels. Read permission is required. Missing paths stop execution with an explicit error; no dataset download or holdout scan occurs.
 
-Replay dùng code reader trong clone và tham số đã khóa, từ phổ/tensor bằng chứng trước reader, không dùng mảng dự đoán lưu sẵn làm đầu ra. Dự đoán lưu sẵn chỉ để assert parity. Không fit lại. BTC: đủ 218 video/158 người native. Public: 24 hàng của 12 điều kiện × 2 bộ. `RESULTS.csv` và `REPLAY_COMPLETE.json` ghi MAE theo người và sai khác dự đoán. Đây là kiểm tái lập reader/readout; không phải tái mã hóa và suy luận CNN lại mọi video.
+Replay uses readers in the clone and frozen parameters, starting from spectra/evidence tensors before the reader. Saved predictions are only parity assertions, not outputs. No refitting. BTC includes all 218 native videos/158 people; public includes 24 rows from 12 conditions × 2 datasets. `RESULTS.csv` and `REPLAY_COMPLETE.json` record person-level MAE and prediction differences. This checks reader/readout reproduction, not re-encoding and rerunning CNNs on every video.
 
-| Native | MAE phải tái lập, bpm |
+| Native | Required reproduced MAE, bpm |
 |---|---:|
 | BTC reader_v4 | 8,333268430 |
 | UBFC2 P4m | 0,746442522 |
 | MCD P4m | 1,510869770 |
 
-Muốn chấm một video BTC dev từ file gốc, dùng `predict.py --fold N` đúng fold người; nếu không có `--fold`, CLI dùng deployment model nên **không được** so số đó với OOF. Dataset raw/mapping/clock có quyền truy cập nằm ở [SERVER_DATASETS](SERVER_DATASETS.md). Các script R1 và bảng 9 hàng BTC constraint được giữ trong `reports/rerun_stateless_20261123`; lệnh replay gọn này không tái chạy 8 điều kiện BTC hoặc toàn frontend public.
+To score an original BTC dev video, use `predict.py --fold N` with its person fold. Without `--fold`, deployment parameters are used and **must not** be compared as OOF. Authorized raw data/mapping/clocks are in [SERVER_DATASETS](SERVER_DATASETS.md). R1 scripts and nine BTC condition rows are retained in `reports/rerun_stateless_20261123`; this compact replay does not rerun eight BTC conditions or the full public frontend.
 
-## 5. Phạm vi chứng minh
+## 5. Evidence scope
 
-Kết quả là dev sau nhiều thử nghiệm. Số cũ 8,350 đã bị loại vì mang trạng thái giữa video; không dùng làm mốc hiện hành. Chọn 3/17 expert trên phổ cũ chưa được làm lại. Frontend guarded vẫn thử nghiệm. Chạy một video bất kỳ không bảo đảm sai số bằng trung bình dev. Holdout BTC và 7 người test UBFC2 vẫn khóa.
+These are dev results after many experiments. The old 8.350 result was invalidated by cross-video state and is not a current baseline. Selection of 3/17 experts on older spectra has not been repeated. The guarded frontend remains experimental. Arbitrary-video error is not guaranteed to match dev means. BTC holdout and 7 UBFC2 test people remain locked.

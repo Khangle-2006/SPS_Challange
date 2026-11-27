@@ -56,7 +56,7 @@ It creates `Round1_Baseline/`: lossless raw RGB MP4, acquisition timestamps, PPG
 
 `submission/run_holdout.py` predicts only, in fresh processes with DEPLOY parameters and no fold. It seals every result plus code/model/manifest hashes before `submission/score_holdout.py` may open labels. Output directories and score locks are exclusive. A 3-DEV-video dry-run is independent of holdout evaluation.
 
-Real holdout requires the exact user message **MỞ HOLDOUT S1**, its recorded authorization file, and the previously locked ID/activity file with SHA256 `a0f58cc5b87888aa591ec07de6957d197a954909f85a7db6dfd95d78a664cd76`. No authorization file is supplied by this repository. Dates alone never authorize a run. Prediction manifests must contain metadata only; the separate score file contains only the matching person/PR pairs.
+Real holdout requires the exact user authorization message enforced by `submission/run_holdout.py`, its recorded authorization file, and the previously locked ID/activity file with SHA256 `a0f58cc5b87888aa591ec07de6957d197a954909f85a7db6dfd95d78a664cd76`. No authorization file is supplied by this repository. Dates alone never authorize a run. Prediction manifests must contain metadata only; the separate score file contains only the matching person/PR pairs.
 
 After authorization, person-first MAE/RMSE, person-mean Pearson and Bland–Altman, paired cohort counts/coverage and 10,000 seed-0 person bootstrap are reported overall and by original/recompressed file type. A missing/abstained prediction remains in coverage. No retry, refit or selection after outcomes.
 

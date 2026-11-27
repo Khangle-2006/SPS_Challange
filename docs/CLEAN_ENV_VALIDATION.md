@@ -1,44 +1,44 @@
-# Kiểm trên môi trường mới — 22/11/2026
+# Clean-environment validation — 22 November 2026
 
-Cập nhật 23/11: kiểm từ video thật của CLI mới nằm ở
-[VIDEO_CLI_VALIDATION.md](VIDEO_CLI_VALIDATION.md). Trang này giữ bằng chứng
-cài đặt/demo của lần trước, không thay cho kiểm video mới.
+Update on 23 November: real-video validation of the new CLI is in
+[VIDEO_CLI_VALIDATION.md](VIDEO_CLI_VALIDATION.md). This page preserves earlier
+installation/demo evidence and does not replace the new video checks.
 
-Đã tạo **bốn venv mới**, không dùng `site-packages` hệ thống hay môi trường thí
-nghiệm cũ, trên Linux x86_64/Python 3.12.3. Chạy CPU, nice 19; không đọc video,
-nhãn người tham gia hoặc holdout. Đây là kiểm cài đặt và chức năng, **chưa phải
-tái lập MAE BTC/public hoặc kiểm end-to-end pipeline đã chọn**.
+**Four new venvs** were created without system `site-packages` or previous experiment
+environments on Linux x86_64/Python 3.12.3. Runs used CPU and nice 19, with no participant videos,
+labels, or holdout reads. These are installation and functional checks, **not
+BTC/public MAE reproduction or end-to-end validation of the selected pipeline**.
 
-Receipt đã bỏ đường dẫn riêng: [clean_env_20261122.json](validation/clean_env_20261122.json).
-Lock dependency đầy đủ: [environments/locks](../environments/locks).
+Receipt with private paths removed: [clean_env_20261122.json](validation/clean_env_20261122.json).
+Complete dependency locks: [environments/locks](../environments/locks).
 
-## Kết quả thực đo
+## Measured results
 
-| Môi trường / kiểm | Kết quả |
+| Environment / check | Result |
 |---|---|
-| Cài mới và `pip check` | PASS cả 4 profile; không lỗi dependency |
-| core: POS + CHROM trên RGB tổng hợp 90 bpm | Hai đỉnh đều 90,0 bpm; tín hiệu tĩnh trả không có phổ hợp lệ |
-| frontend: MediaPipe 0.10.21, OpenCV 4.11.0, PyAV 14.2.0 | Import và FaceMesh trên ảnh đen PASS; 0 mặt |
-| torch-cpu: PyTorch 2.5.1+cpu | Phép tính tensor CPU PASS; CUDA runtime không có |
-| experts: open-rppg 0.1.1 / JAX 0.12.1 / Keras 3.15.1 | FacePhys.rlap, ME-chunk.pure, ME-flow.pure đều trả 360 mẫu BVP hữu hạn từ tensor màu tổng hợp |
-| Hai file weights expert | SHA256 khớp các giá trị trong [ASSETS.md](ASSETS.md) |
-| Kiểm demo và bộ công cụ setup | 7/7 unit test PASS |
+| Fresh installation and `pip check` | All 4 profiles PASS; no dependency conflicts |
+| core: POS + CHROM on synthetic 90 bpm RGB | Both peaks at 90.0 bpm; static input produces no valid spectrum |
+| frontend: MediaPipe 0.10.21, OpenCV 4.11.0, PyAV 14.2.0 | Imports and FaceMesh on a black image PASS; 0 faces |
+| torch-cpu: PyTorch 2.5.1+cpu | CPU tensor computation PASS; no CUDA runtime |
+| experts: open-rppg 0.1.1 / JAX 0.12.1 / Keras 3.15.1 | FacePhys.rlap, ME-chunk.pure, ME-flow.pure each return 360 finite BVP samples from synthetic color tensors |
+| Two expert weight files | SHA256 matches [ASSETS.md](ASSETS.md) |
+| Demo and setup tools | 7/7 unit tests PASS |
 | `test_score_round1` | 10/10 unit test PASS |
-| `verify_source.py` | 1.020 hash file archive khớp; mã Python parse được |
-| Cài thêm một venv core từ lock cuối cùng | PASS; smoke POS/CHROM và static PASS |
-| `doctor` khi chưa cấp bundle riêng | Exit 2 đúng thiết kế, báo thiếu asset manifest |
+| `verify_source.py` | 1,020 archived file hashes match; Python source parses |
+| Additional core venv from the final lock | PASS; POS/CHROM and static smoke checks PASS |
+| `doctor` without a private bundle | Exit 2 as designed, reporting a missing asset manifest |
 
-Ba expert chạy tuần tự trong cùng phép kiểm: tổng thời gian **1 phút 45,37 giây**,
-RSS cực đại **2.713.808 KiB** theo `/usr/bin/time -v`. Đây không phải benchmark
-thời gian trên video người thật. BVP hữu hạn không chứng minh mô hình đo đúng mạch.
+The three experts ran sequentially in one check: total time **1 minute 45.37 seconds**,
+peak RSS **2,713,808 KiB** from `/usr/bin/time -v`. This is not a
+real-video runtime benchmark. Finite BVP does not demonstrate accurate pulse measurement.
 
-Các test setup kiểm thay prefix không thay lặp, từ chối đường dẫn vượt workspace,
-bundle sai scope/hash hoặc trùng đích; tạo workspace riêng, giữ nguyên nguồn,
-từ chối ghi đè và phát hiện tài sản đã bị sửa sau prepare.
+Setup tests cover nonrecursive prefix replacement, rejection of paths outside the workspace,
+wrong bundle scope/hash or duplicate destinations, isolated workspace creation, source preservation,
+overwrite refusal, and detection of assets modified after prepare.
 
-## Lệnh kiểm
+## Validation commands
 
-Sau các lệnh cài ở [GETTING_STARTED.md](GETTING_STARTED.md):
+After the installation steps in [GETTING_STARTED.md](GETTING_STARTED.md):
 
 ```bash
 .venv/core/bin/python -m unittest discover -s tools -p 'test_*.py'
@@ -50,22 +50,22 @@ Sau các lệnh cài ở [GETTING_STARTED.md](GETTING_STARTED.md):
 .venv/experts/bin/python tools/smoke_environment.py experts
 ```
 
-## Giới hạn còn lại
+## Remaining limitations
 
-- Chưa chạy lại các bảng nghiên cứu với bundle riêng trong các môi trường mới.
-  Các phiên bản NumPy/SciPy và runtime có thể khác môi trường lịch sử; phải kiểm
-  số thực trước khi tuyên bố tái lập các MAE trong README.
-- Chưa nạp năm checkpoint CNN riêng của đội vào môi trường mới. Torch CPU
-  smoke là kiểm runtime; expert smoke chỉ nạp weights upstream đã kiểm hash.
-- FaceMesh ảnh đen chưa kiểm decoder, timestamp, ROI, target lock hay frontend
-  trên video thật. Không thay thế các kiểm C3 hoặc parity 218 video.
-- Launcher được kiểm với bundle tổng hợp nhỏ. Chưa kiểm đầy đủ mọi dependency
-  của các script lịch sử sau relocation; hash assertion còn lại phải được xử
-  lý bằng receipt đúng phiên bản, không bỏ assertion.
-- Windows/WSL2 chưa được kiểm thực tế trong lượt này. Lock môi trường này dành
-  cho Linux x86_64/Python 3.12; các nền tảng khác chưa được xác nhận.
-- Không phát hành dữ liệu cá nhân, private checkpoint, nhãn holdout hoặc cache
-  thí nghiệm. Cách xin đúng tài sản được ghi trong [ASSETS.md](ASSETS.md).
+- Research tables have not been rerun with private bundles in the new environments.
+  NumPy/SciPy and runtime versions may differ from historical environments; numerical
+  parity must be checked before claiming reproduction of README MAEs.
+- The team's five private CNN checkpoints have not been loaded into the new environment. Torch CPU
+  smoke tests check runtime; expert smoke tests load only hash-verified upstream weights.
+- FaceMesh on a black image does not validate decoding, timestamps, ROI, target locking, or
+  the real-video frontend. It does not replace C3 checks or 218-video parity.
+- The launcher was tested with a small synthetic bundle. Not every historical dependency
+  has been validated after relocation; remaining hash assertions require
+  version-matched receipts, not removal.
+- Windows/WSL2 was not tested in this run. These environment locks target
+  Linux x86_64/Python 3.12; other platforms remain unverified.
+- No personal data, private checkpoints, holdout labels, or experiment caches
+  are released. Asset request procedures are in [ASSETS.md](ASSETS.md).
 
-PR này bổ sung khả năng cài đặt, kiểm tài sản và chuẩn bị workspace; không thay
-thuật toán, không huấn luyện, không mở holdout và không tự merge.
+This historical PR added installation, asset checking, and workspace preparation; it did not change
+algorithms, train models, open holdout, or merge automatically.
