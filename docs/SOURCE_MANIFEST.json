@@ -1,5 +1,5 @@
 {
-  "date": "2026-11-24",
+  "date": "2026-11-27",
   "files": [
     {
       "path": "ops/a100/audit_label_values.py",
@@ -5548,8 +5548,9 @@
     },
     {
       "path": "reports/rerun_stateless_20261123/code/expert_spectrum.py",
-      "sha256": "84dbf454ff96f0a5a686b271c4b5ab907da14b1c5f965073b627f3efb00b0bc7",
-      "bytes": 4469
+      "sha256": "889c3a939c9ce9847293c04a6e2f98da2e93da613f6ce1ee69f9da23a8f3c848",
+      "bytes": 4497,
+      "provenance": "Packaging correction 27 Nov 2026; see docs/validation/source_manifest_repair_20261127.json"
     },
     {
       "path": "reports/rerun_stateless_20261123/code/gate.py",
@@ -5658,8 +5659,9 @@
     },
     {
       "path": "runtime/video_frontend.py",
-      "sha256": "099d90482be454577ac250fcc79463c3312cd5a9fffacae7be5168c0a842992f",
-      "bytes": 4359
+      "sha256": "45bc87b6501e09acd82f6ec4ce4d6c226c3b849b8e44e61c870dba1aee94fe3f",
+      "bytes": 4534,
+      "provenance": "Packaging correction 27 Nov 2026; see docs/validation/source_manifest_repair_20261127.json"
     },
     {
       "path": "tools/test_video_runtime.py",
@@ -5811,9 +5813,9 @@
     },
     {
       "path": "submission/run_holdout.py",
-      "sha256": "ae750bd926067b7ebba01881338ed7e99a2ffeab5cdc8d0c8af8f8b5e95e8c24",
-      "bytes": 4834,
-      "provenance": "S1 packaging 24 Nov 2026; frozen inference parameters unchanged"
+      "sha256": "b00185ead1143f39bf64fae5c02958f0aa3e4eeca450c8c869a969309992d3d4",
+      "bytes": 4940,
+      "provenance": "Packaging correction 27 Nov 2026; see docs/validation/source_manifest_repair_20261127.json"
     },
     {
       "path": "submission/score_holdout.py",
@@ -5826,6 +5828,84 @@
       "sha256": "47a81817e78754b1db17b7ebc4b92f19c3a4df2190fcc6840c5d2e30ae0b378e",
       "bytes": 2608,
       "provenance": "S1 packaging 24 Nov 2026; frozen inference parameters unchanged"
+    },
+    {
+      "path": "tools/btc_joint_assets.py",
+      "sha256": "7e64d6aa460f9c52c920b9a3030e7ef22bf2b903467e79e651dafc90e56738b7",
+      "bytes": 1349,
+      "provenance": "Portable frozen BTC joint fitting and asset checks; see BTC_JOINT_TRAINING_SOURCES.json"
+    },
+    {
+      "path": "tools/fit_btc_joint.py",
+      "sha256": "819cb4031340514a804feca7f61d8dc46d9015d4f5dcdf303503a251f6f1a8a8",
+      "bytes": 7918,
+      "provenance": "Portable frozen BTC joint fitting and asset checks; see BTC_JOINT_TRAINING_SOURCES.json"
+    },
+    {
+      "path": "tools/test_joint_training.py",
+      "sha256": "7078fdaa93b0309636e8b998c21792d1467489d7fb8ed494b01e210fcc3b0fe9",
+      "bytes": 4912,
+      "provenance": "Portable frozen BTC joint fitting and asset checks; see BTC_JOINT_TRAINING_SOURCES.json"
+    },
+    {
+      "path": "training/__init__.py",
+      "sha256": "dedfbffb6d37a105b8802b70671d596cf84caa1c35de88996c5570211a0b92ef",
+      "bytes": 70,
+      "provenance": "Portable frozen BTC joint fitting and asset checks; see BTC_JOINT_TRAINING_SOURCES.json"
+    },
+    {
+      "path": "training/btc_joint/__init__.py",
+      "sha256": "746828efed9f943714a48ee864683baa77cf24b9765367399123752b90280bf8",
+      "bytes": 74,
+      "provenance": "Portable frozen BTC joint fitting and asset checks; see BTC_JOINT_TRAINING_SOURCES.json"
+    },
+    {
+      "path": "training/btc_joint/assets.py",
+      "sha256": "8ae73599c44b45fbf9c02a1112a94c178befcfb6aa8b1e166a15b5fbc4b62a69",
+      "bytes": 7707,
+      "provenance": "Portable frozen BTC joint fitting and asset checks; see BTC_JOINT_TRAINING_SOURCES.json"
+    },
+    {
+      "path": "training/btc_joint/calibrate.py",
+      "sha256": "3175eb89c4cb9c0d8fa87157b7a30dac9510d421671f047e9b2057c9897310b5",
+      "bytes": 4816,
+      "provenance": "Portable frozen BTC joint fitting and asset checks; see BTC_JOINT_TRAINING_SOURCES.json"
+    },
+    {
+      "path": "training/btc_joint/conditional_reader.py",
+      "sha256": "784257d63923ce294830c2bba685f2dec33daa1ee088e1e06d346bd2a223a3ff",
+      "bytes": 3513,
+      "provenance": "Portable frozen BTC joint fitting and asset checks; see BTC_JOINT_TRAINING_SOURCES.json"
+    },
+    {
+      "path": "training/btc_joint/fallback_reader.py",
+      "sha256": "3ec46e6adecc38a47e0dff9550f9ecec0448aa9e497d40499c67cf222e626b93",
+      "bytes": 4701,
+      "provenance": "Portable frozen BTC joint fitting and asset checks; see BTC_JOINT_TRAINING_SOURCES.json"
+    },
+    {
+      "path": "training/btc_joint/fit.py",
+      "sha256": "ecea6fec27259bdd7826703141b9945c2da54e824ebaa410915c2883b070da1b",
+      "bytes": 3883,
+      "provenance": "Portable frozen BTC joint fitting and asset checks; see BTC_JOINT_TRAINING_SOURCES.json"
+    },
+    {
+      "path": "training/btc_joint/fusion.py",
+      "sha256": "6f9dc165d5e3ad53d0dcb86011ba27f3ea29fe19b10e1a5eb255b0aed9816965",
+      "bytes": 368,
+      "provenance": "Portable frozen BTC joint fitting and asset checks; see BTC_JOINT_TRAINING_SOURCES.json"
+    },
+    {
+      "path": "training/btc_joint/router.py",
+      "sha256": "3266a5a789fe34018e8cedec1086607a846f8ed2eabf367b600b72797ed308da",
+      "bytes": 1331,
+      "provenance": "Portable frozen BTC joint fitting and asset checks; see BTC_JOINT_TRAINING_SOURCES.json"
+    },
+    {
+      "path": "training/btc_joint/router_fit.py",
+      "sha256": "cfc76a30a0fe83c00cebbcc190ba3b4b374a8b7e80ed9952e865765d34b0cde4",
+      "bytes": 896,
+      "provenance": "Portable frozen BTC joint fitting and asset checks; see BTC_JOINT_TRAINING_SOURCES.json"
     }
   ],
   "excluded_helpers": [
@@ -5918,5 +5998,6 @@
       "reason": "site authentication/transfer/monitor helper"
     }
   ],
-  "r1_note": "Original 1097 archived source hashes retained; R1 source, aggregate tables, runtime and model artifacts added. No individual labels/media/spectra."
+  "r1_note": "Original 1097 archived source hashes retained; R1 source, aggregate tables, runtime and model artifacts added. No individual labels/media/spectra.",
+  "packaging_note": "Corrected two stale committed-source hashes; relocated R1 runtime import; added portable joint fit source. Existing inference algorithms and released model bytes are unchanged."
 }

@@ -7,11 +7,14 @@ from pathlib import Path
 
 import numpy as np
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "runtime"))
+ROOT = Path(__file__).resolve().parents[1]
+sys.path[:0] = [str(ROOT), str(ROOT / 'runtime')]
 from joint_core import MODELS, load_fit, read_spectra, windows
+from training.btc_joint.assets import verify
 
 
-def replay(reports):
+def replay(reports, assets_manifest):
+    verify(reports, assets_manifest, 'replay')
     bundle = reports / "w2_btc_20261116"
     videos = json.loads((bundle / "export_extracted/VIDEOS.json").read_bytes())
     with (bundle / "delivery/claude_server_20261118/dev_video_meta.csv").open() as f:
@@ -55,4 +58,9 @@ def replay(reports):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--reports", type=Path, required=True, help="FaceVitals project reports directory")
-    replay(parser.parse_args().reports)
+    parser.add_argument('--assets-manifest', type=Path, required=True, help='Verified dev bundle; create with tools/btc_joint_assets.py')
+    args = parser.parse_args()
+    try:
+        replay(args.reports, args.assets_manifest)
+    except (ValueError, KeyError, OSError) as exc:
+        parser.exit(2, f'BLOCKED: {exc}\nSee docs/BTC_JOINT_REPRODUCING.md.\n')

@@ -24,8 +24,13 @@ Cài gói hệ thống, xử lý bitrate nguồn, video HDR, tùy chọn fold v�
 Với dữ liệu dự án được cấp quyền, lệnh sau chạy lại bộ đọc trên trace RGB và phổ ba expert theo đúng fold người, kiểm từng dự đoán của cả 218 video. Video mới dùng tham số triển khai trong `models/btc_joint/`.
 
 ```bash
-.venv/core/bin/python tools/reproduce_btc_joint.py --reports /path/to/facevitals/reports
+.venv/core/bin/python tools/btc_joint_assets.py create --reports /path/to/facevitals/reports --manifest output/joint_assets/assets.local.json --purpose both
+.venv/core/bin/python tools/reproduce_btc_joint.py --reports /path/to/facevitals/reports --assets-manifest output/joint_assets/assets.local.json
 ```
+
+Code fit/export router và nhánh bù bitrate thấp có trong `training/btc_joint/`.
+Lệnh `tools/fit_btc_joint.py --verify-shipped` kiểm model và 436 dự đoán OOF/deploy
+trước khi xuất vào thư mục mới. [Danh mục đầu vào và lệnh fit/replay đầy đủ](docs/BTC_JOINT_REPRODUCING.md).
 
 ## Kết quả BTC joint
 
@@ -141,6 +146,7 @@ Dataset đã có trên **P100**, cần tài khoản và quyền truy cập:
 |---|---|
 | `predict.py`, `predict_public.py`, `runtime/` | Video đơn → BTC PR hoặc public P4m HR, không fit lúc suy luận |
 | `models/` | Reader BTC deploy + 5 fold, tham số public P4m; không chứa nhãn hay phổ cá nhân |
+| `training/btc_joint/`, `tools/fit_btc_joint.py` | Công thức fit BTC joint đã đóng băng, xuất riêng và kiểm khớp model đang phát hành |
 | `environments/`, `tools/bootstrap_video.py` | Dependency đã khóa và cài môi trường |
 | `configs/`, `tools/repro.py` | Khai báo đường dẫn riêng và chuẩn bị tái lập nghiên cứu |
 | `reports/`, `ops/` | Mã thí nghiệm, bản gốc giữ hash; tài sản cá nhân không kèm repo |

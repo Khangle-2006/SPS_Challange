@@ -1,0 +1,27 @@
+{
+  "base_commit": "6c20fba7cbc477c3cd27700d3e47e6ad881147c4",
+  "changes": [
+    {
+      "path": "reports/rerun_stateless_20261123/code/expert_spectrum.py",
+      "previous_manifest_sha256": "84dbf454ff96f0a5a686b271c4b5ab907da14b1c5f965073b627f3efb00b0bc7",
+      "sha256": "889c3a939c9ce9847293c04a6e2f98da2e93da613f6ce1ee69f9da23a8f3c848",
+      "reason": "Reviewed packaging change in this patch"
+    },
+    {
+      "path": "runtime/video_frontend.py",
+      "previous_manifest_sha256": "099d90482be454577ac250fcc79463c3312cd5a9fffacae7be5168c0a842992f",
+      "sha256": "45bc87b6501e09acd82f6ec4ce4d6c226c3b849b8e44e61c870dba1aee94fe3f",
+      "reason": "Reviewed existing Git change omitted/misstated by the old manifest",
+      "source_commit": "df9146ea6375b2e51f44ac926710878f10d5b478"
+    },
+    {
+      "path": "submission/run_holdout.py",
+      "previous_manifest_sha256": "ae750bd926067b7ebba01881338ed7e99a2ffeab5cdc8d0c8af8f8b5e95e8c24",
+      "sha256": "b00185ead1143f39bf64fae5c02958f0aa3e4eeca450c8c869a969309992d3d4",
+      "reason": "Reviewed existing Git change omitted/misstated by the old manifest",
+      "source_commit": "df9146ea6375b2e51f44ac926710878f10d5b478"
+    }
+  ],
+  "added_files": 13,
+  "note": "No assertions disabled. Historical receipts remain dated to their original commits."
+}

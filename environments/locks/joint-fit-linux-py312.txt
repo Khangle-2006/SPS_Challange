@@ -1,0 +1,3 @@
+# Validated for frozen BTC joint fitting; see docs/validation/packaging_20261127.json.
+numpy==2.5.4
+scipy==1.18.1
