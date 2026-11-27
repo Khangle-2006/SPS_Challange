@@ -1,4 +1,4 @@
-# FaceVitals — SP Cup 2027, Round 1
+# FaceVitals: SP Cup 2027, Round 1
 
 Estimate pulse rate (PR, bpm) from face videos. For BTC, `predict.py` uses **BTC joint** by default. For UBFC2 and MCD, use **P4m** through `predict_public.py`.
 
