@@ -1,20 +1,20 @@
 # ops/t8_oval_20261031
 
-Fullframe encode trước crop; oval36 cache, clock/support.
+Full-frame encoding before cropping; oval36 cache and clock/support handling.
 
-[Hướng dẫn chạy](../../docs/REPRODUCING.md) · [Kết quả](../../docs/RESULTS.md) · [Experiment map](../../docs/EXPERIMENTS.md)
+[Reproduction guide](../../docs/REPRODUCING.md) · [Results](../../docs/RESULTS.md) · [Experiment map](../../docs/EXPERIMENTS.md)
 
-Các tham số dưới đây trích tĩnh từ code, không phải lệnh tự động launch. Với script không có CLI, đọc hằng số/path và dependency ở đầu file. Controller/site runner cần receipt và môi trường gốc; không bỏ qua guard.
+The parameters below were extracted statically from the code; they are not commands that automatically launch a run. For scripts without a CLI, check the constants, paths, and dependencies at the top of the file. Controllers and site runners require the original receipts and environments; do not bypass their guards.
 
-| File | Tham số CLI được khai báo |
+| File | Declared CLI parameters |
 |---|---|
-| [data_adapters.py](data_adapters.py) | Không có argparse; đọc source/config |
-| [oval_crop.py](oval_crop.py) | Không có argparse; đọc source/config |
-| [oval_frontend.py](oval_frontend.py) | Không có argparse; đọc source/config |
+| [data_adapters.py](data_adapters.py) | No argparse interface; read the source/config |
+| [oval_crop.py](oval_crop.py) | No argparse interface; read the source/config |
+| [oval_frontend.py](oval_frontend.py) | No argparse interface; read the source/config |
 | [prepare_recording.py](prepare_recording.py) | `--dataset`, `--root`, `--recording`, `--out`, `--manifest`, `--audit-dir`, `--sensor-offset-s` |
 | [prepare_t8_cache.py](prepare_t8_cache.py) | `--dataset`, `--audit`, `--budget-bytes`, `--smoke` |
-| [simulate.py](simulate.py) | Không có argparse; đọc source/config |
-| [t8_t1_loader.py](t8_t1_loader.py) | Không có argparse; đọc source/config |
-| [test_oval_cache.py](test_oval_cache.py) | Không có argparse; đọc source/config |
-| [video_roi_frontend.py](video_roi_frontend.py) | Không có argparse; đọc source/config |
-| [window_support.py](window_support.py) | Không có argparse; đọc source/config |
+| [simulate.py](simulate.py) | No argparse interface; read the source/config |
+| [t8_t1_loader.py](t8_t1_loader.py) | No argparse interface; read the source/config |
+| [test_oval_cache.py](test_oval_cache.py) | No argparse interface; read the source/config |
+| [video_roi_frontend.py](video_roi_frontend.py) | No argparse interface; read the source/config |
+| [window_support.py](window_support.py) | No argparse interface; read the source/config |

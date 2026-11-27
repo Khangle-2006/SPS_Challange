@@ -1,11 +1,11 @@
-# R1: tách trạng thái open-rppg, 23/11/2026
+# R1: isolate open-rppg state, 2026-11-23
 
-Code khoa học và bảng aggregate của lượt chạy 63 model-condition. [Báo cáo đọc được](../../docs/RESULTS.md). Các CSV không chứa nhãn hoặc dự đoán cá nhân. `PUBLIC_FITS.json` ghi toàn bộ weights/readout theo fold của P4, P4m, N4, N4m. Tham số P4m deploy nằm trong `models/public_p4m_r1.json` ở root repo.
+Scientific code and aggregate tables from the run covering 63 model-condition combinations. See the [results report](../../docs/RESULTS.md). The CSV files contain no individual labels or predictions. `PUBLIC_FITS.json` records all fold-specific weights/readouts for P4, P4m, N4, and N4m. P4m deployment parameters are in `models/public_p4m_r1.json` at the repository root.
 
-Các script là snapshot của lượt P100, cần private manifests/crop/cache tại các đường dẫn ghi trong code. **Không chạy chúng lên thư mục output đã có**. Không phải lệnh chạy một video mới; lệnh đó là `predict.py` ở root. Tài sản riêng không kèm GitHub và holdout không được đọc.
+These scripts are snapshots of the P100 run and require private manifests, crops, and caches at the paths specified in the code. **Do not run them against an existing output directory**. They are not commands for running a new video; use `predict.py` at the root for that purpose. Private assets are not included on GitHub, and the holdout must not be read.
 
-Trình tự đã chạy: `prepare.py` khóa cohort/hash → kiểm cả reset/self-warm/A-B-A → `worker.py` suy luận từng điều kiện → `score_btc.py` và `public_score_wrapper.py` → `public_freeze_wrapper.py` → `report.py`. Chỉ đổi đường phổ trong hai snapshot z13/z14; không mở rộng grid hoặc đổi toán tử. Native BTC tái sử dụng đủ 218 phổ z17 sau quyết định ADOPT self-warm.
+Execution order: `prepare.py` locks the cohort/hashes → check reset/self-warm/A-B-A behavior → `worker.py` runs inference for each condition → `score_btc.py` and `public_score_wrapper.py` → `public_freeze_wrapper.py` → `report.py`. Only the spectral paths in the z13/z14 snapshots were changed; the grid and operators were unchanged. Native BTC reused all 218 z17 spectra after the decision to ADOPT self-warm.
 
-Thư mục triển khai R1 gốc: `/mnt/samsung_t5/khangle/facevitals/reports/rerun_stateless_20261123`. Môi trường inference là `venv_orppg` của W, scoring là `/data_pool/khangle/facevitals/envs/hr`. CPU, nice19, hai luồng BLAS, kiểm RAM/dung lượng trước khởi chạy. Không huấn luyện hoặc mở holdout. Các script điều phối/receipt có PID, đường riêng và output cá nhân được giữ ngoài repo.
+Original R1 deployment directory: `/mnt/samsung_t5/khangle/facevitals/reports/rerun_stateless_20261123`. Inference uses W's `venv_orppg`; scoring uses `/data_pool/khangle/facevitals/envs/hr`. Runs use CPU, nice19, and two BLAS threads, with RAM/disk checks before launch. No training or holdout access. Orchestration scripts and receipts containing PIDs, private paths, or individual outputs are kept outside the repository.
 
-Các số cũ có trạng thái liên video chỉ là cột kiểm toán, không phải baseline hiệu năng hợp lệ. Chọn 3/17 mô hình trên phổ cũ chưa được làm lại.
+Earlier results with state carried across videos are audit columns only, not valid performance baselines. The selection of 3 out of 17 models using the old spectra has not been repeated.

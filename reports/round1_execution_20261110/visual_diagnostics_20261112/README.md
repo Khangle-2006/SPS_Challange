@@ -1,34 +1,34 @@
 # reports/round1_execution_20261110/visual_diagnostics_20261112
 
-Occlusion/gradient/pulse map/UMAP. Không kèm ảnh mặt.
+Occlusion/gradient/pulse map/UMAP. Face images are not included.
 
-[Hướng dẫn chạy](../../../docs/REPRODUCING.md) · [Kết quả](../../../docs/RESULTS.md) · [Experiment map](../../../docs/EXPERIMENTS.md)
+[Reproduction guide](../../../docs/REPRODUCING.md) · [Results](../../../docs/RESULTS.md) · [Experiment map](../../../docs/EXPERIMENTS.md)
 
-Các tham số dưới đây trích tĩnh từ code, không phải lệnh tự động launch. Với script không có CLI, đọc hằng số/path và dependency ở đầu file. Controller/site runner cần receipt và môi trường gốc; không bỏ qua guard.
+The parameters below were extracted statically from the code; they are not commands that automatically launch a run. For scripts without a CLI, check the constants, paths, and dependencies at the top of the file. Controllers and site runners require the original receipts and environments; do not bypass their guards.
 
-| File | Tham số CLI được khai báo |
+| File | Declared CLI parameters |
 |---|---|
-| [backup_visual.py](backup_visual.py) | Không có argparse; đọc source/config |
-| [codec_maps.py](codec_maps.py) | Không có argparse; đọc source/config |
-| [codec_maps_v2.py](codec_maps_v2.py) | Không có argparse; đọc source/config |
-| [codec_maps_v3.py](codec_maps_v3.py) | Không có argparse; đọc source/config |
-| [export_model_summary.py](export_model_summary.py) | Không có argparse; đọc source/config |
-| [final_review.py](final_review.py) | Không có argparse; đọc source/config |
-| [finalize_report.py](finalize_report.py) | Không có argparse; đọc source/config |
-| [freeze_selection.py](freeze_selection.py) | Không có argparse; đọc source/config |
-| [model_entry_v2.py](model_entry_v2.py) | Không có argparse; đọc source/config |
-| [model_maps.py](model_maps.py) | Không có argparse; đọc source/config |
-| [model_maps_attempt1.py](model_maps_attempt1.py) | Không có argparse; đọc source/config |
-| [model_maps_attempt2.py](model_maps_attempt2.py) | Không có argparse; đọc source/config |
-| [model_validate.py](model_validate.py) | Không có argparse; đọc source/config |
-| [package_report.py](package_report.py) | Không có argparse; đọc source/config |
+| [backup_visual.py](backup_visual.py) | No argparse interface; read the source/config |
+| [codec_maps.py](codec_maps.py) | No argparse interface; read the source/config |
+| [codec_maps_v2.py](codec_maps_v2.py) | No argparse interface; read the source/config |
+| [codec_maps_v3.py](codec_maps_v3.py) | No argparse interface; read the source/config |
+| [export_model_summary.py](export_model_summary.py) | No argparse interface; read the source/config |
+| [final_review.py](final_review.py) | No argparse interface; read the source/config |
+| [finalize_report.py](finalize_report.py) | No argparse interface; read the source/config |
+| [freeze_selection.py](freeze_selection.py) | No argparse interface; read the source/config |
+| [model_entry_v2.py](model_entry_v2.py) | No argparse interface; read the source/config |
+| [model_maps.py](model_maps.py) | No argparse interface; read the source/config |
+| [model_maps_attempt1.py](model_maps_attempt1.py) | No argparse interface; read the source/config |
+| [model_maps_attempt2.py](model_maps_attempt2.py) | No argparse interface; read the source/config |
+| [model_validate.py](model_validate.py) | No argparse interface; read the source/config |
+| [package_report.py](package_report.py) | No argparse interface; read the source/config |
 | [prepare.py](prepare.py) | `--shard` |
 | [prepare_v2.py](prepare_v2.py) | `--shard` |
-| [render_common_scale.py](render_common_scale.py) | Không có argparse; đọc source/config |
-| [render_iriun_review.py](render_iriun_review.py) | Không có argparse; đọc source/config |
-| [report_visual.py](report_visual.py) | Không có argparse; đọc source/config |
-| [review_tables.py](review_tables.py) | Không có argparse; đọc source/config |
-| [signal_maps.py](signal_maps.py) | Không có argparse; đọc source/config |
-| [umap_local.py](umap_local.py) | Không có argparse; đọc source/config |
-| [unpack_report.py](unpack_report.py) | Không có argparse; đọc source/config |
-| [vis_common.py](vis_common.py) | Không có argparse; đọc source/config |
+| [render_common_scale.py](render_common_scale.py) | No argparse interface; read the source/config |
+| [render_iriun_review.py](render_iriun_review.py) | No argparse interface; read the source/config |
+| [report_visual.py](report_visual.py) | No argparse interface; read the source/config |
+| [review_tables.py](review_tables.py) | No argparse interface; read the source/config |
+| [signal_maps.py](signal_maps.py) | No argparse interface; read the source/config |
+| [umap_local.py](umap_local.py) | No argparse interface; read the source/config |
+| [unpack_report.py](unpack_report.py) | No argparse interface; read the source/config |
+| [vis_common.py](vis_common.py) | No argparse interface; read the source/config |

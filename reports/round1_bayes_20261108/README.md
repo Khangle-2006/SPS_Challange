@@ -1,26 +1,26 @@
 # reports/round1_bayes_20261108
 
-Không qua cổng; public crosscheck và POS repair giữ nguyên.
+Did not pass the gate; the public cross-check and POS repair are preserved.
 
-[Hướng dẫn chạy](../../docs/REPRODUCING.md) · [Kết quả](../../docs/RESULTS.md) · [Experiment map](../../docs/EXPERIMENTS.md)
+[Reproduction guide](../../docs/REPRODUCING.md) · [Results](../../docs/RESULTS.md) · [Experiment map](../../docs/EXPERIMENTS.md)
 
-Các tham số dưới đây trích tĩnh từ code, không phải lệnh tự động launch. Với script không có CLI, đọc hằng số/path và dependency ở đầu file. Controller/site runner cần receipt và môi trường gốc; không bỏ qua guard.
+The parameters below were extracted statically from the code; they are not commands that automatically launch a run. For scripts without a CLI, check the constants, paths, and dependencies at the top of the file. Controllers and site runners require the original receipts and environments; do not bypass their guards.
 
-| File | Tham số CLI được khai báo |
+| File | Declared CLI parameters |
 |---|---|
-| [association_watch.py](association_watch.py) | Không có argparse; đọc source/config |
-| [bland_altman.py](bland_altman.py) | Không có argparse; đọc source/config |
-| [codec_association.py](codec_association.py) | Không có argparse; đọc source/config |
-| [codec_audit.py](codec_audit.py) | Không có argparse; đọc source/config |
-| [common.py](common.py) | Không có argparse; đọc source/config |
-| [common_public_budget_20261109.py](common_public_budget_20261109.py) | Không có argparse; đọc source/config |
-| [evaluate.py](evaluate.py) | Không có argparse; đọc source/config |
-| [pipeline.py](pipeline.py) | Không có argparse; đọc source/config |
-| [render_codec_report.py](render_codec_report.py) | Không có argparse; đọc source/config |
-| [report_association.py](report_association.py) | Không có argparse; đọc source/config |
-| [report_btc.py](report_btc.py) | Không có argparse; đọc source/config |
-| [supplement_v4.py](supplement_v4.py) | Không có argparse; đọc source/config |
-| [synthetic_codec.py](synthetic_codec.py) | Không có argparse; đọc source/config |
-| [test_metrics.py](test_metrics.py) | Không có argparse; đọc source/config |
-| [test_pipeline.py](test_pipeline.py) | Không có argparse; đọc source/config |
-| [trace_worker.py](trace_worker.py) | Không có argparse; đọc source/config |
+| [association_watch.py](association_watch.py) | No argparse interface; read the source/config |
+| [bland_altman.py](bland_altman.py) | No argparse interface; read the source/config |
+| [codec_association.py](codec_association.py) | No argparse interface; read the source/config |
+| [codec_audit.py](codec_audit.py) | No argparse interface; read the source/config |
+| [common.py](common.py) | No argparse interface; read the source/config |
+| [common_public_budget_20261109.py](common_public_budget_20261109.py) | No argparse interface; read the source/config |
+| [evaluate.py](evaluate.py) | No argparse interface; read the source/config |
+| [pipeline.py](pipeline.py) | No argparse interface; read the source/config |
+| [render_codec_report.py](render_codec_report.py) | No argparse interface; read the source/config |
+| [report_association.py](report_association.py) | No argparse interface; read the source/config |
+| [report_btc.py](report_btc.py) | No argparse interface; read the source/config |
+| [supplement_v4.py](supplement_v4.py) | No argparse interface; read the source/config |
+| [synthetic_codec.py](synthetic_codec.py) | No argparse interface; read the source/config |
+| [test_metrics.py](test_metrics.py) | No argparse interface; read the source/config |
+| [test_pipeline.py](test_pipeline.py) | No argparse interface; read the source/config |
+| [trace_worker.py](trace_worker.py) | No argparse interface; read the source/config |

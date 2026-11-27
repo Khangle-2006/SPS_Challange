@@ -1,18 +1,18 @@
 # reports/round1_v4_20261105/eda_three_datasets
 
-Snapshot mã nghiên cứu; xem root README để xác định vai trò và kết quả.
+Research code snapshot; see the root README for its role and results.
 
-[Hướng dẫn chạy](../../../docs/REPRODUCING.md) · [Kết quả](../../../docs/RESULTS.md) · [Experiment map](../../../docs/EXPERIMENTS.md)
+[Reproduction guide](../../../docs/REPRODUCING.md) · [Results](../../../docs/RESULTS.md) · [Experiment map](../../../docs/EXPERIMENTS.md)
 
-Các tham số dưới đây trích tĩnh từ code, không phải lệnh tự động launch. Với script không có CLI, đọc hằng số/path và dependency ở đầu file. Controller/site runner cần receipt và môi trường gốc; không bỏ qua guard.
+The parameters below were extracted statically from the code; they are not commands that automatically launch a run. For scripts without a CLI, check the constants, paths, and dependencies at the top of the file. Controllers and site runners require the original receipts and environments; do not bypass their guards.
 
-| File | Tham số CLI được khai báo |
+| File | Declared CLI parameters |
 |---|---|
-| [build_report.py](build_report.py) | Không có argparse; đọc source/config |
-| [extend_guide_20261108.py](extend_guide_20261108.py) | Không có argparse; đọc source/config |
-| [prepare_examples_20261108.py](prepare_examples_20261108.py) | Không có argparse; đọc source/config |
-| [probe_btc_clock.py](probe_btc_clock.py) | Không có argparse; đọc source/config |
-| [probe_media.py](probe_media.py) | Không có argparse; đọc source/config |
-| [reading_edition.py](reading_edition.py) | Không có argparse; đọc source/config |
-| [render_readable_20261108.py](render_readable_20261108.py) | Không có argparse; đọc source/config |
-| [sample_luma.py](sample_luma.py) | Không có argparse; đọc source/config |
+| [build_report.py](build_report.py) | No argparse interface; read the source/config |
+| [extend_guide_20261108.py](extend_guide_20261108.py) | No argparse interface; read the source/config |
+| [prepare_examples_20261108.py](prepare_examples_20261108.py) | No argparse interface; read the source/config |
+| [probe_btc_clock.py](probe_btc_clock.py) | No argparse interface; read the source/config |
+| [probe_media.py](probe_media.py) | No argparse interface; read the source/config |
+| [reading_edition.py](reading_edition.py) | No argparse interface; read the source/config |
+| [render_readable_20261108.py](render_readable_20261108.py) | No argparse interface; read the source/config |
+| [sample_luma.py](sample_luma.py) | No argparse interface; read the source/config |

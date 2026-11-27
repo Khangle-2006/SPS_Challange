@@ -1,19 +1,19 @@
 # ops/t8_oval_training_20261031
 
-Control reused; original joint obsolete sau polarity; không chạy queue này thay V3.
+The control is reused; the original joint run became obsolete after the polarity correction. Do not run this queue in place of V3.
 
-[Hướng dẫn chạy](../../docs/REPRODUCING.md) · [Kết quả](../../docs/RESULTS.md) · [Experiment map](../../docs/EXPERIMENTS.md)
+[Reproduction guide](../../docs/REPRODUCING.md) · [Results](../../docs/RESULTS.md) · [Experiment map](../../docs/EXPERIMENTS.md)
 
-Các tham số dưới đây trích tĩnh từ code, không phải lệnh tự động launch. Với script không có CLI, đọc hằng số/path và dependency ở đầu file. Controller/site runner cần receipt và môi trường gốc; không bỏ qua guard.
+The parameters below were extracted statically from the code; they are not commands that automatically launch a run. For scripts without a CLI, check the constants, paths, and dependencies at the top of the file. Controllers and site runners require the original receipts and environments; do not bypass their guards.
 
-| File | Tham số CLI được khai báo |
+| File | Declared CLI parameters |
 |---|---|
-| [EfficientPhys_fixed.py](EfficientPhys_fixed.py) | Không có argparse; đọc source/config |
+| [EfficientPhys_fixed.py](EfficientPhys_fixed.py) | No argparse interface; read the source/config |
 | [score_round1.py](score_round1.py) | `--reference`, `--output`, `--metrics` |
 | [t8_aggregate.py](t8_aggregate.py) | `--runs`, `--output` |
-| [t8_evaluate.py](t8_evaluate.py) | Không có argparse; đọc source/config |
+| [t8_evaluate.py](t8_evaluate.py) | No argparse interface; read the source/config |
 | [t8_plan.py](t8_plan.py) | `--ubfc`, `--mcd`, `--folds`, `--output` |
 | [t8_run.py](t8_run.py) | `--index`, `--output`, `--smoke-only` |
-| [t8_t1_loader.py](t8_t1_loader.py) | Không có argparse; đọc source/config |
-| [test_t8.py](test_t8.py) | Không có argparse; đọc source/config |
-| [window_support.py](window_support.py) | Không có argparse; đọc source/config |
+| [t8_t1_loader.py](t8_t1_loader.py) | No argparse interface; read the source/config |
+| [test_t8.py](test_t8.py) | No argparse interface; read the source/config |
+| [window_support.py](window_support.py) | No argparse interface; read the source/config |

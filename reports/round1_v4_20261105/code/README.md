@@ -1,21 +1,21 @@
 # reports/round1_v4_20261105/code
 
-Snapshot mã nghiên cứu; xem root README để xác định vai trò và kết quả.
+Research code snapshot; see the root README for its role and results.
 
-[Hướng dẫn chạy](../../../docs/REPRODUCING.md) · [Kết quả](../../../docs/RESULTS.md) · [Experiment map](../../../docs/EXPERIMENTS.md)
+[Reproduction guide](../../../docs/REPRODUCING.md) · [Results](../../../docs/RESULTS.md) · [Experiment map](../../../docs/EXPERIMENTS.md)
 
-Các tham số dưới đây trích tĩnh từ code, không phải lệnh tự động launch. Với script không có CLI, đọc hằng số/path và dependency ở đầu file. Controller/site runner cần receipt và môi trường gốc; không bỏ qua guard.
+The parameters below were extracted statically from the code; they are not commands that automatically launch a run. For scripts without a CLI, check the constants, paths, and dependencies at the top of the file. Controllers and site runners require the original receipts and environments; do not bypass their guards.
 
-| File | Tham số CLI được khai báo |
+| File | Declared CLI parameters |
 |---|---|
-| [cleanup_t9_regenerable.py](cleanup_t9_regenerable.py) | Không có argparse; đọc source/config |
-| [diagnostic_13_noise.py](diagnostic_13_noise.py) | Không có argparse; đọc source/config |
-| [diagnostics_11_12.py](diagnostics_11_12.py) | Không có argparse; đọc source/config |
-| [frozen_t3.py](frozen_t3.py) | Không có argparse; đọc source/config |
-| [organiser_trace_eval.py](organiser_trace_eval.py) | Không có argparse; đọc source/config |
-| [phase_evaluate.py](phase_evaluate.py) | Không có argparse; đọc source/config |
-| [phase_loss.py](phase_loss.py) | Không có argparse; đọc source/config |
+| [cleanup_t9_regenerable.py](cleanup_t9_regenerable.py) | No argparse interface; read the source/config |
+| [diagnostic_13_noise.py](diagnostic_13_noise.py) | No argparse interface; read the source/config |
+| [diagnostics_11_12.py](diagnostics_11_12.py) | No argparse interface; read the source/config |
+| [frozen_t3.py](frozen_t3.py) | No argparse interface; read the source/config |
+| [organiser_trace_eval.py](organiser_trace_eval.py) | No argparse interface; read the source/config |
+| [phase_evaluate.py](phase_evaluate.py) | No argparse interface; read the source/config |
+| [phase_loss.py](phase_loss.py) | No argparse interface; read the source/config |
 | [phase_train.py](phase_train.py) | `--receipt`, `--preflight-only` |
-| [pull_ubfc_direct.py](pull_ubfc_direct.py) | Không có argparse; đọc source/config |
-| [test_phase.py](test_phase.py) | Không có argparse; đọc source/config |
-| [validate_phase_cpu.py](validate_phase_cpu.py) | Không có argparse; đọc source/config |
+| [pull_ubfc_direct.py](pull_ubfc_direct.py) | No argparse interface; read the source/config |
+| [test_phase.py](test_phase.py) | No argparse interface; read the source/config |
+| [validate_phase_cpu.py](validate_phase_cpu.py) | No argparse interface; read the source/config |
